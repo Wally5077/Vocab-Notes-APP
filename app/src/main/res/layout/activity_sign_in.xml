@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainColor"
+    tools:context=".views.SignInActivity">
+
+    <ImageView
+        android:id="@+id/SignInLogo"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="23dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/SignInAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="37dp"
+        android:text="Vocabulary Notes"
+        android:textSize="12sp"
+        app:fontFamily="@font/marion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/SignInBorder"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/sign_in_border"
+        app:fontFamily="@font/avenirheavy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="Sign up To Vocabulary Note"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:fontFamily="@font/avenirheavy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/SignInBorder" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/input_border"
+        app:layout_constraintEnd_toEndOf="@+id/SignInBorder"
+        app:layout_constraintStart_toStartOf="@+id/SignInBorder"
+        app:layout_constraintTop_toTopOf="@+id/SignInBorder">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:theme="@style/disableUnderLineEditText"
+            android:hint="Email address"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="185dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/input_border"
+        app:layout_constraintEnd_toEndOf="@+id/SignInBorder"
+        app:layout_constraintStart_toStartOf="@+id/SignInBorder"
+        app:layout_constraintTop_toTopOf="@+id/SignInBorder">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:theme="@style/disableUnderLineEditText"
+            android:hint="Password"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don’t have an account yet?"
+        android:textColor="#c5ced1"
+        android:textSize="15sp"
+        android:textStyle="italic"
+        android:layout_marginTop="15dp"
+        app:fontFamily="@font/avenirbook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textStyle="italic"
+        android:textColor="#fcf9f9"
+        app:fontFamily="@font/avenirmedium"
+        android:onClick="onSignUpClick"
+        android:text="@string/signUp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:background="@drawable/bg_grey_round_button"
+        android:onClick="onSignInClick"
+        android:text="Sign In"
+        android:layout_marginTop="25dp"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        app:fontFamily="@font/avenirbook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,4 +5,9 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/mainColor</item>
     </style>
+
+    <style name="disableUnderLineEditText">
+        <item name="colorControlNormal">#00FFFFFF</item>
+        <item name="colorControlActivated">#00FFFFFF</item>
+    </style>
 </resources>

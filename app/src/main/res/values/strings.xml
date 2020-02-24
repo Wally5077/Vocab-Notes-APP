@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">EnglishNote</string>
-    <string name="signIn"><u>Sign In</u></string>
+    <string name="signIn"><u>Si</u>g<u>n In</u></string>
+    <string name="signUp"><u>Si</u>g<u>n Up</u></string>
 </resources>

@@ -8,16 +8,16 @@ import android.view.View;
 
 import com.home.englishnote.R;
 
-public class MainActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sign_in);
     }
 
     public void onSignInClick(View view) {
-        startActivity(new Intent(this, SignInActivity.class));
+
     }
 
     public void onSignUpClick(View view) {

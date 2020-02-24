@@ -2,6 +2,7 @@ package com.home.englishnote.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -46,5 +47,6 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void onSignInClick(View view) {
+        startActivity(new Intent(this, SignInActivity.class));
     }
 }
