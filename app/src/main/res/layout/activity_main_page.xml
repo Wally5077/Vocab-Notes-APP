@@ -13,7 +13,7 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="42.5dp"
-        android:background="#4e585a"
+        android:background="@color/bottomToolbarGrey"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"

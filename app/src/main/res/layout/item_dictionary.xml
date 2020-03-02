@@ -29,7 +29,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:text="description Excepteur sint occaecat  "
-        android:textColor="@color/publicDictionaryItemDescription"
+        android:textColor="@color/thirdColor"
         android:textSize="11sp"
         app:fontFamily="@font/avenirroman"
         app:layout_constraintStart_toStartOf="parent"

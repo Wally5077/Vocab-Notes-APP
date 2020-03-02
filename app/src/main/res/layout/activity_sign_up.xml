@@ -222,7 +222,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="18dp"
         android:onClick="onSignInLinkClick"
-        android:text="@string/signIn"
+        android:text="@string/signUpPageSignIn"
         android:textColor="#fcf9f9"
         android:textSize="16sp"
         app:fontFamily="@font/avenirmedium"

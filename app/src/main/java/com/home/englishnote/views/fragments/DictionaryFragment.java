@@ -19,21 +19,21 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Dictionary;
-import com.home.englishnote.presenters.MainPagePresenter;
-import com.home.englishnote.presenters.MainPagePresenter.MainPageView;
+import com.home.englishnote.presenters.DictionaryFragmentPresenter;
+import com.home.englishnote.presenters.DictionaryFragmentPresenter.DictionaryFragmentView;
 import com.home.englishnote.utils.Global;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DictionaryFragment extends BaseFragment implements MainPageView {
+public class DictionaryFragment extends BaseFragment implements DictionaryFragmentView {
 
     private RecyclerView dictionaryRecycler;
     private DictionaryAdapter dictionaryAdapter;
     private SwipeRefreshLayout dictionarySwipeRefreshLayout;
     private TextView userName;
     private ImageView userPic;
-    private MainPagePresenter mainPagePresenter;
+    private DictionaryFragmentPresenter dictionaryFragmentPresenter;
 
     @Nullable
     @Override
@@ -58,7 +58,7 @@ public class DictionaryFragment extends BaseFragment implements MainPageView {
     }
 
     private void init() {
-        mainPagePresenter = new MainPagePresenter(
+        dictionaryFragmentPresenter = new DictionaryFragmentPresenter(
                 this, Global.dictionaryRepository(), Global.threadExecutor());
         setDictionaryRecycler();
         setDictionarySwipeRefreshLayout();
@@ -107,7 +107,7 @@ public class DictionaryFragment extends BaseFragment implements MainPageView {
         dictionarySwipeRefreshLayout.measure(0, 0);
         dictionarySwipeRefreshLayout.setEnabled(true);
         dictionarySwipeRefreshLayout.setRefreshing(true);
-        mainPagePresenter.getDictionaries();
+        dictionaryFragmentPresenter.getDictionaries();
     }
 
     @Override

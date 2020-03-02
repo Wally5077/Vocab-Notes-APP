@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.home.englishnote.R;
 import com.home.englishnote.views.fragments.DictionaryFragment;
+import com.home.englishnote.views.fragments.UserProfileFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +37,9 @@ public class MainPageActivity extends AppCompatActivity {
 
     private void setFragment() {
         fragmentMap.put(R.layout.fragment_public_dictionary, new DictionaryFragment());
-        switchFragment(R.layout.fragment_public_dictionary);
+        fragmentMap.put(R.layout.fragment_user_profile, new UserProfileFragment());
+//        switchFragment(R.layout.fragment_public_dictionary);
+        switchFragment(R.layout.fragment_user_profile);
     }
 
     public void switchFragment(int fragmentId) {

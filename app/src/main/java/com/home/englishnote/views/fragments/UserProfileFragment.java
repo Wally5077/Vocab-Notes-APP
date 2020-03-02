@@ -19,4 +19,17 @@ public class UserProfileFragment extends BaseFragment {
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_user_profile, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        findViews(view);
+        init();
+    }
+
+    private void findViews(View view) {
+    }
+
+    private void init() {
+    }
 }

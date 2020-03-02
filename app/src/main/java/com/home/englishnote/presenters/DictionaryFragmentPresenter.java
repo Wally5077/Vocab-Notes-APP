@@ -6,16 +6,16 @@ import com.home.englishnote.utils.ThreadExecutor;
 
 import java.util.List;
 
-public class MainPagePresenter {
+public class DictionaryFragmentPresenter {
 
-    private MainPageView mainPageView;
+    private DictionaryFragmentView dictionaryFragmentView;
     private DictionaryRepository dictionaryRepository;
     private ThreadExecutor threadExecutor;
 
-    public MainPagePresenter(MainPageView mainPageView,
-                             DictionaryRepository dictionaryRepository,
-                             ThreadExecutor threadExecutor) {
-        this.mainPageView = mainPageView;
+    public DictionaryFragmentPresenter(DictionaryFragmentView dictionaryFragmentView,
+                                       DictionaryRepository dictionaryRepository,
+                                       ThreadExecutor threadExecutor) {
+        this.dictionaryFragmentView = dictionaryFragmentView;
         this.dictionaryRepository = dictionaryRepository;
         this.threadExecutor = threadExecutor;
     }
@@ -25,12 +25,12 @@ public class MainPagePresenter {
             threadExecutor.executeUiThread(() -> {
                 List<Dictionary> dictionaryList =
                         dictionaryRepository.getDictionaries(0, 3);
-                mainPageView.onDictionariesSuccessfully(dictionaryList);
+                dictionaryFragmentView.onDictionariesSuccessfully(dictionaryList);
             });
         });
     }
 
-    public interface MainPageView {
+    public interface DictionaryFragmentView {
         void onDictionariesSuccessfully(List<Dictionary> dictionaryList);
     }
 }
