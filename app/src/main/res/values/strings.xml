@@ -1,5 +1,23 @@
 <resources>
-    <string name="app_name">EnglishNote</string>
+    <string name="app_name">VocabularyNote</string>
+    <string name="channel_name">DailyVocabulary</string>
+    <string name="channel_description">DailyVocabularyNotification</string>
+    <string name="CHANNEL_ID">DailyVocabularyNotificationID</string>
     <string name="signIn"><u>Si</u>g<u>n In</u></string>
     <string name="signUp"><u>Si</u>g<u>n Up</u></string>
+
+    <!--  onMainActivity  -->
+    <string name="logInAsGuest"><font fgcolor = '#dee3dd'>log in as </font>
+        <u><i><font fgcolor = '#ffffff'>Guest</font></i></u></string>
+    <!--  InputWarningMessage  -->
+    <string name="inputEmpty">輸入欄不可為空</string>
+
+    <!-- SignUp and SignIn -->
+    <string name="emailFormatInvalid">郵箱格式錯誤</string>
+    <string name="passwordFormatInvalid">密碼格式錯誤</string>
+    <string name="passwordConfirmationNotMatch">密碼確認不符</string>
+    <string name="signUpEmailExist">郵箱已存在</string>
+    <string name="invalidCredentials">郵箱不存在</string>
+    <string name="errMessageTitle">錯誤</string>
+    <string name="dialogCancelButton">好</string>
 </resources>

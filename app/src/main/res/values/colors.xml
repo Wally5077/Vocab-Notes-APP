@@ -2,4 +2,9 @@
 <resources>
     <color name="mainColor">#315965</color>
     <color name="secondaryColor">#659663</color>
+    <color name="paleWhite">#ffffff</color>
+    <color name="publicDictionaryItemBackground">#dfe6e8</color>
+    <color name="publicDictionaryItemTitle">#8999a0</color>
+    <color name="publicDictionaryItemDescription">#888888</color>
+
 </resources>

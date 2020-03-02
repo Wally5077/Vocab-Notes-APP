@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dictionary_item_background">
+
+
+    <TextView
+        android:id="@+id/dictionaryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Dictionary 1"
+        android:textColor="@color/publicDictionaryItemTitle"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirheavy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dictionaryDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:text="description Excepteur sint occaecat  "
+        android:textColor="@color/publicDictionaryItemDescription"
+        android:textSize="11sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/exploreButton"
+        android:layout_width="45dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/bg_item_dictionary_button"
+        android:text="Explore"
+        android:textAlignment="center"
+        android:textSize="6sp"
+        app:fontFamily="@font/avenirbook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/dictionaryImage1"
+        android:layout_width="67.5dp"
+        android:layout_height="67.5dp"
+        android:layout_marginStart="67.5dp"
+        android:layout_marginLeft="67.5dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginBottom="32.5dp"
+        android:background="@drawable/pear_hydrosol_pyrus_communis_hydrolat_product_pic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/dictionaryImage2"
+        android:layout_width="75dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/guava_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dictionaryImage1"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
