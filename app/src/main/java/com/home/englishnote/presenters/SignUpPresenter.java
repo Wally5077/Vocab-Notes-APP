@@ -11,10 +11,12 @@ import com.home.englishnote.models.entities.Member;
 import com.home.englishnote.models.entities.Token;
 import com.home.englishnote.models.repositories.MemberRepository;
 import com.home.englishnote.utils.BaseView;
+import com.home.englishnote.utils.HashUtil;
 import com.home.englishnote.utils.ThreadExecutor;
+import com.home.englishnote.utils.VerifyInputFormatUtil;
 
 
-public class SignUpPresenter extends VerifyFormatPresenter {
+public class SignUpPresenter {
 
     private SignUpView signUpView;
     private MemberRepository memberRepository;
@@ -37,7 +39,7 @@ public class SignUpPresenter extends VerifyFormatPresenter {
                 // Todo There's a test code below this line
 //                String defaultAge = (age.equals(VocabularyNoteKeyword.DEFAULT_SPINNER_WORD)) ?
 //                        VocabularyNoteKeyword.DEFAULT_AGE : age;
-                String hashPassword = hashPassword(password);
+                String hashPassword = HashUtil.hashEncode(password);
                 Member member = new Member(firstName, lastName,
                         Integer.valueOf(age), email, hashPassword);
                 Credentials credentials = member.getCredentials();
@@ -60,10 +62,9 @@ public class SignUpPresenter extends VerifyFormatPresenter {
 
     private void verifyUserInfo(String firstName, String lastName, String age,
                                 String email, String password, String passwordConfirmation) {
-        // Todo
-        verifyUserInfoEmpty(firstName, lastName, age, email, password);
-        verifyEmailFormat(email);
-        verifyPasswordFormat(password);
+        VerifyInputFormatUtil.verifyInputEmpty(firstName, lastName, age, email, password);
+        VerifyInputFormatUtil.verifyEmailFormat(email);
+        VerifyInputFormatUtil.verifyPasswordFormat(password);
         verifyPasswordConfirmation(password, passwordConfirmation);
     }
 

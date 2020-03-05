@@ -49,18 +49,16 @@
             android:layout_width="10dp"
             android:layout_height="10dp"
             android:background="@drawable/search_button"
-            android:onClick="onVocabSearchClick"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/mainPageVocabSearch"
+            android:id="@+id/dictionaryContentVocabSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2.5dp"
             android:layout_marginLeft="2.5dp"
-            android:onClick="onVocabSearchClick"
             android:text="Look Up"
             android:textAlignment="center"
             android:textColor="#ABFFFFFF"
@@ -68,7 +66,8 @@
             app:fontFamily="@font/avenirheavy"
             app:layout_constraintBottom_toBottomOf="@+id/mainPageSearch1"
             app:layout_constraintStart_toEndOf="@+id/mainPageSearch1"
-            app:layout_constraintTop_toTopOf="@+id/mainPageSearch1" />
+            app:layout_constraintTop_toTopOf="@+id/mainPageSearch1"
+            app:lineHeight="14sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -86,18 +85,16 @@
             android:layout_width="10dp"
             android:layout_height="10dp"
             android:background="@drawable/search_button"
-            android:onClick="onVocabSearchClick"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/mainPageDictionaryListSearch"
+            android:id="@+id/dictionaryContentDictionaryListSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2.5dp"
             android:layout_marginLeft="2.5dp"
-            android:onClick="onDictionaryListSearchClick"
             android:text="Dictionary List"
             android:textAlignment="center"
             android:textColor="#ABFFFFFF"
@@ -105,7 +102,8 @@
             app:fontFamily="@font/avenirheavy"
             app:layout_constraintBottom_toBottomOf="@+id/mainPageSearch2"
             app:layout_constraintStart_toEndOf="@+id/mainPageSearch2"
-            app:layout_constraintTop_toTopOf="@+id/mainPageSearch2" />
+            app:layout_constraintTop_toTopOf="@+id/mainPageSearch2"
+            app:lineHeight="14sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -118,22 +116,20 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/mainPageUserPic"
+            android:id="@+id/dictionaryContentUserPic"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="7.5dp"
-            android:onClick="onUserPicClick"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/user_pic" />
 
         <TextView
-            android:id="@+id/mainPageUserName"
+            android:id="@+id/dictionaryContentUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:onClick="onUserPicClick"
             android:text="user name"
             android:textAlignment="center"
             android:textColor="@color/paleWhite"
@@ -141,8 +137,9 @@
             android:textStyle="italic"
             app:fontFamily="@font/avenirbook"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/mainPageUserPic"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/dictionaryContentUserPic"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lineHeight="12sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

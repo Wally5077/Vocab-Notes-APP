@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/paleWhite"
+    android:orientation="vertical">
+
+    <!--UpPart-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/constraintLayout3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/topBar"
+        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+        app:layout_constraintStart_toStartOf="@id/topBar"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/memberInfoBackButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="22.5dp"
+            android:layout_marginRight="22.5dp"
+            android:background="@drawable/noun_arrow_3136595"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/topBar"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/mainPageSearch1"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/search_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dictionaryContentVocabSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2.5dp"
+            android:layout_marginLeft="2.5dp"
+            android:text="Look Up"
+            android:textAlignment="center"
+            android:textColor="#ABFFFFFF"
+            android:textSize="12sp"
+            app:fontFamily="@font/avenirheavy"
+            app:layout_constraintBottom_toBottomOf="@+id/mainPageSearch1"
+            app:layout_constraintStart_toEndOf="@+id/mainPageSearch1"
+            app:layout_constraintTop_toTopOf="@+id/mainPageSearch1"
+            app:lineHeight="14sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/topBar"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/mainPageSearch2"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/search_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dictionaryContentDictionaryListSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2.5dp"
+            android:layout_marginLeft="2.5dp"
+            android:text="Dictionary List"
+            android:textAlignment="center"
+            android:textColor="#ABFFFFFF"
+            android:textSize="12sp"
+            app:fontFamily="@font/avenirheavy"
+            app:layout_constraintBottom_toBottomOf="@+id/mainPageSearch2"
+            app:layout_constraintStart_toEndOf="@+id/mainPageSearch2"
+            app:layout_constraintTop_toTopOf="@+id/mainPageSearch2"
+            app:lineHeight="14sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/topBar"
+        app:layout_constraintEnd_toEndOf="@+id/topBar"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/memberInfologOutButton"
+            android:layout_width="67.5dp"
+            android:layout_height="32.5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_log_out_round_button"
+            android:text="Log Out"
+            android:textColor="@color/paleWhite"
+            android:textSize="11sp"
+            app:fontFamily="@font/avenirbook"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lineHeight="15sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/MY_PROFILE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="7.5dp"
+        android:text="MY PROFILE"
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="14sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintBottom_toTopOf="@+id/profileLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:lineHeight="19sp" />
+
+    <!-- memberInfoModify -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/memberInfoModifyButton"
+        android:layout_width="75dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="32.5dp"
+        android:layout_marginEnd="32.5dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="7.5dp"
+        android:background="@drawable/bg_modify_green_round_button"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar">
+
+        <TextView
+            android:id="@+id/memberInfoModifyButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3.5dp"
+            android:text="@string/modifyButtonChangeText"
+            android:textColor="@color/paleWhite"
+            android:textSize="12sp"
+            app:fontFamily="@font/avenirmedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lineHeight="16sp" />
+
+        <ImageView
+            android:id="@+id/memberInfoModifyButtonImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="1.25dp"
+            android:layout_marginRight="1.25dp"
+            android:background="@drawable/modify_pen"
+            app:layout_constraintBottom_toBottomOf="@+id/memberInfoModifyButtonText"
+            app:layout_constraintEnd_toStartOf="@+id/memberInfoModifyButtonText"
+            app:layout_constraintTop_toTopOf="@+id/memberInfoModifyButtonText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/profileLine"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="2.5dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@color/mainGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/memberInfoModifyButton" />
+
+    <ImageView
+        android:id="@+id/profilePhoto"
+        android:layout_width="92.5dp"
+        android:layout_height="92.5dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView8"
+        app:srcCompat="@drawable/profile_photo" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="27.5dp"
+        android:text="First name : "
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@+id/profilePhoto"
+        app:layout_constraintTop_toBottomOf="@+id/profileLine"
+        app:lineHeight="15sp" />
+
+    <EditText
+        android:id="@+id/firstNameContent"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:focusable="false"
+        android:inputType="textPersonName"
+        android:paddingStart="2.5dp"
+        android:paddingLeft="2.5dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+        android:text="First"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="@+id/textView8"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22.5dp"
+        android:text="Last name : "
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintEnd_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:lineHeight="15sp" />
+
+    <EditText
+        android:id="@+id/lastNameContent"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:focusable="false"
+        android:inputType="textPersonName"
+        android:paddingStart="2.5dp"
+        android:paddingLeft="2.5dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+        android:text="Last"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/textView11"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22.5dp"
+        android:text="Age : "
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintEnd_toStartOf="@+id/lastNameContent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:lineHeight="15sp" />
+
+    <Spinner
+        android:id="@+id/profileAgeSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/age"
+        app:layout_constraintTop_toTopOf="@+id/age" />
+
+    <TextView
+        android:id="@+id/ageContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="2.5dp"
+        android:paddingLeft="2.5dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+        android:text="0"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@+id/age"
+        app:layout_constraintTop_toTopOf="@+id/age"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/EMAIL_ADDRESS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="32.5dp"
+        android:layout_marginBottom="7.5dp"
+        android:text="E-MAIL ADDRESS"
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="14sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ageContent"
+        app:lineHeight="19sp" />
+
+    <!-- emailAddressModify -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/emailAddressModifyButton"
+        android:layout_width="72.5dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="7.5dp"
+        android:background="@drawable/bg_modify_green_round_button"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@id/memberInfoModifyButton"
+        app:layout_constraintTop_toTopOf="@id/EMAIL_ADDRESS">
+
+        <TextView
+            android:id="@+id/emailAddressModifyButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3.5dp"
+            android:text="@string/modifyButtonChangeText"
+            android:textColor="@color/paleWhite"
+            android:textSize="12sp"
+            app:fontFamily="@font/avenirmedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lineHeight="16sp" />
+
+        <ImageView
+            android:id="@+id/emailAddressModifyButtonImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="1.25dp"
+            android:layout_marginRight="1.25dp"
+            android:background="@drawable/modify_pen"
+            app:layout_constraintBottom_toBottomOf="@+id/emailAddressModifyButtonText"
+            app:layout_constraintEnd_toStartOf="@+id/emailAddressModifyButtonText"
+            app:layout_constraintTop_toTopOf="@+id/emailAddressModifyButtonText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/emailAddressLine"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="2.5dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@color/mainGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailAddressModifyButton" />
+
+    <TextView
+        android:id="@+id/currentEmailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="17.5dp"
+        android:text="Current Email Address : "
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toStartOf="@+id/emailAddressLine"
+        app:layout_constraintTop_toBottomOf="@+id/emailAddressLine"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/currentEmailAddressContent"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="2.5dp"
+        android:paddingLeft="2.5dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+
+        android:text="12345678@gmail.com"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@+id/currentEmailAddress"
+        app:layout_constraintTop_toTopOf="@id/currentEmailAddress"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/newEmailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17.5dp"
+        android:focusable="false"
+        android:text="New Email Address : "
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        android:visibility="invisible"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toStartOf="@id/currentEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/currentEmailAddress"
+        app:lineHeight="15sp" />
+
+    <EditText
+        android:id="@+id/newEmailAddressContent"
+        android:layout_width="177.5dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modify_border"
+        android:focusable="false"
+        android:inputType="textEmailAddress"
+        android:paddingStart="2.5dp"
+        android:paddingLeft="2.5dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@id/newEmailAddress"
+        app:layout_constraintTop_toTopOf="@id/newEmailAddress"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/PASSWORD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="7.5dp"
+        android:text="PASSWORD"
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="14sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toStartOf="@id/EMAIL_ADDRESS"
+        app:layout_constraintTop_toBottomOf="@id/newEmailAddress"
+        app:lineHeight="19sp" />
+
+    <!-- passwordModify -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/passwordModifyButton"
+        android:layout_width="72.5dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="7.5dp"
+        android:background="@drawable/bg_modify_green_round_button"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@id/emailAddressModifyButton"
+        app:layout_constraintTop_toTopOf="@id/PASSWORD">
+
+        <TextView
+            android:id="@+id/passwordModifyButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3.5dp"
+            android:text="@string/modifyButtonChangeText"
+            android:textColor="@color/paleWhite"
+            android:textSize="12sp"
+            app:fontFamily="@font/avenirmedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lineHeight="16sp" />
+
+        <ImageView
+            android:id="@+id/passwordModifyButtonImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="1.25dp"
+            android:layout_marginRight="1.25dp"
+            android:background="@drawable/modify_pen"
+            app:layout_constraintBottom_toBottomOf="@+id/passwordModifyButtonText"
+            app:layout_constraintEnd_toStartOf="@+id/passwordModifyButtonText"
+            app:layout_constraintTop_toTopOf="@+id/passwordModifyButtonText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/passwordLine"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="2.5dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@color/mainGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordModifyButton" />
+
+    <TextView
+        android:id="@+id/newPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17.5dp"
+        android:text="New Password : "
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        android:visibility="invisible"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintEnd_toEndOf="@+id/currentEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/passwordLine"
+        app:lineHeight="15sp" />
+
+    <EditText
+        android:id="@+id/newPasswordContent"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modify_border"
+        android:focusable="false"
+        android:inputType="textPassword"
+        android:paddingStart="2.5dp"
+        android:paddingLeft="2.5dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@id/newPassword"
+        app:layout_constraintTop_toTopOf="@id/newPassword"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/confirmNewPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17.5dp"
+        android:text="Confirm new password : "
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        android:visibility="invisible"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintEnd_toEndOf="@+id/newPassword"
+        app:layout_constraintTop_toBottomOf="@+id/newPassword"
+        app:lineHeight="15sp" />
+
+    <EditText
+        android:id="@+id/newConfirmPasswordContent"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modify_border"
+        android:focusable="false"
+        android:inputType="textPassword"
+        android:paddingStart="2.5dp"
+        android:paddingLeft="2.5dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@id/confirmNewPassword"
+        app:layout_constraintTop_toTopOf="@id/confirmNewPassword"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/passwordModifyPrompt"
+        android:layout_width="232.5dp"
+        android:layout_height="42.5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Click the change button to add a password to your account."
+        android:textColor="@color/mainColor"
+        android:textSize="12sp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/passwordLine"
+        app:layout_constraintTop_toBottomOf="@+id/passwordLine"
+        app:lineHeight="15sp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

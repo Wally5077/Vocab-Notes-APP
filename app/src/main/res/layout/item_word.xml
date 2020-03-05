@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#efecec">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/wordItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/wordItemImage"
+            android:layout_width="65dp"
+            android:layout_height="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/china_fresh_sweet_delicious_red_fruit_apples_jpg_350_x_350" />
+
+        <TextView
+            android:id="@+id/wordItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="12.5dp"
+            android:layout_marginTop="7.5dp"
+            android:text="Word 1"
+            android:textAlignment="center"
+            android:textColor="@color/mainColor"
+            android:textSize="9sp"
+            app:fontFamily="@font/avenirroman"
+            app:layout_constraintEnd_toEndOf="@+id/wordItemImage"
+            app:layout_constraintStart_toStartOf="@+id/wordItemImage"
+            app:layout_constraintTop_toBottomOf="@+id/wordItemImage"
+            app:lineHeight="12sp" />
+
+        <TextView
+            android:id="@+id/wordItemSynonym"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="( synonym )"
+            android:textAlignment="center"
+            android:textColor="@color/mainColor"
+            android:textSize="6sp"
+            app:fontFamily="@font/avenirbook"
+            app:layout_constraintEnd_toEndOf="@+id/wordItemName"
+            app:layout_constraintStart_toStartOf="@+id/wordItemName"
+            app:layout_constraintTop_toBottomOf="@+id/wordItemName"
+            app:lineHeight="8sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

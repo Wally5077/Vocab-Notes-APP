@@ -1,6 +1,8 @@
 package com.home.englishnote.models.entities;
 
-public class Word {
+import java.io.Serializable;
+
+public class Word implements Serializable {
     private int id;
     private String name, synonyms, imageUrl;
 

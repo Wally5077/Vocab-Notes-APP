@@ -1,8 +1,9 @@
 package com.home.englishnote.models.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class WordGroup {
+public class WordGroup implements Serializable {
     private int id;
     private String title;
     private List<Word> words;

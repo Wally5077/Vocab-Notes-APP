@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/paleWhite">
+
+    <TextView
+        android:id="@+id/wordGroupTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="22.5dp"
+        android:text="TYPE 1 - TITLE"
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="7sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineHeight="10sp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/addFavoriteButton"
+        android:layout_width="52.5dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="7.5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/bg_modify_green_round_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:maxLines="1"
+            android:text="add in"
+            android:textSize="7.5sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lineHeight="7sp" />
+
+        <ImageView
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="1.5dp"
+            android:layout_marginEnd="2.5dp"
+            android:layout_marginRight="2.5dp"
+            android:background="@drawable/add_favorite"
+            app:layout_constraintBottom_toBottomOf="@+id/textView12"
+            app:layout_constraintEnd_toStartOf="@+id/textView12"
+            app:layout_constraintTop_toTopOf="@+id/textView12" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/worGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7.5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wordGroupTitle">
+
+        <ImageView
+            android:id="@+id/WordImage1"
+            android:layout_width="65dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/guava_1" />
+
+        <ImageView
+            android:id="@+id/WordImage2"
+            android:layout_width="65dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintStart_toEndOf="@+id/WordImage1"
+            app:layout_constraintTop_toTopOf="@+id/WordImage1"
+            app:srcCompat="@drawable/pear_hydrosol_pyrus_communis_hydrolat_product_pic" />
+
+        <ImageView
+            android:id="@+id/WordImage3"
+            android:layout_width="65dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintStart_toEndOf="@+id/WordImage2"
+            app:layout_constraintTop_toTopOf="@+id/WordImage2"
+            app:srcCompat="@drawable/china_fresh_sweet_delicious_red_fruit_apples_jpg_350_x_350" />
+
+        <TextView
+            android:id="@+id/WordName1"
+            android:layout_width="wrap_content"
+            android:layout_height="12.5dp"
+            android:layout_marginTop="7.5dp"
+            android:text="Word 1"
+            android:textAlignment="center"
+            android:textColor="@color/mainColor"
+            android:textSize="9sp"
+            app:fontFamily="@font/avenirroman"
+            app:layout_constraintEnd_toEndOf="@+id/WordImage1"
+            app:layout_constraintStart_toStartOf="@+id/WordImage1"
+            app:layout_constraintTop_toBottomOf="@+id/WordImage1"
+            app:lineHeight="12sp" />
+
+
+        <TextView
+            android:id="@+id/WordName2"
+            android:layout_width="wrap_content"
+            android:layout_height="12.5dp"
+            android:layout_marginTop="7.5dp"
+            android:text="Word 2"
+            android:textAlignment="center"
+            android:textColor="@color/mainColor"
+            android:textSize="9sp"
+            app:fontFamily="@font/avenirroman"
+            app:layout_constraintEnd_toEndOf="@+id/WordImage2"
+            app:layout_constraintStart_toStartOf="@+id/WordImage2"
+            app:layout_constraintTop_toBottomOf="@+id/WordImage2"
+            app:lineHeight="12sp" />
+
+        <TextView
+            android:id="@+id/WordName3"
+            android:layout_width="wrap_content"
+            android:layout_height="12.5dp"
+            android:layout_marginTop="7.5dp"
+            android:text="Word 3"
+            android:textAlignment="center"
+            android:textColor="@color/mainColor"
+            android:textSize="9sp"
+            app:fontFamily="@font/avenirroman"
+            app:layout_constraintEnd_toEndOf="@+id/WordImage3"
+            app:layout_constraintStart_toStartOf="@+id/WordImage3"
+            app:layout_constraintTop_toBottomOf="@+id/WordImage3"
+            app:lineHeight="12sp" />
+
+        <TextView
+            android:id="@+id/WordSynonym1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="( synonym )"
+            android:textAlignment="center"
+            android:textColor="@color/mainColor"
+            android:textSize="6sp"
+            app:fontFamily="@font/avenirbook"
+            app:layout_constraintEnd_toEndOf="@+id/WordName1"
+            app:layout_constraintStart_toStartOf="@+id/WordName1"
+            app:layout_constraintTop_toBottomOf="@+id/WordName1"
+            app:lineHeight="8sp" />
+
+        <TextView
+            android:id="@+id/WordSynonym2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="( synonym )"
+            android:textAlignment="center"
+            android:textColor="@color/mainColor"
+            android:textSize="6sp"
+            app:fontFamily="@font/avenirbook"
+            app:layout_constraintEnd_toEndOf="@+id/WordName2"
+            app:layout_constraintStart_toStartOf="@+id/WordName2"
+            app:layout_constraintTop_toBottomOf="@+id/WordName2"
+            app:lineHeight="8sp" />
+
+        <TextView
+            android:id="@+id/WordSynonym3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="( synonym )"
+            android:textAlignment="center"
+            android:textColor="@color/mainColor"
+            android:textSize="6sp"
+            app:fontFamily="@font/avenirbook"
+            app:layout_constraintEnd_toEndOf="@+id/WordName3"
+            app:layout_constraintStart_toStartOf="@+id/WordName3"
+            app:layout_constraintTop_toBottomOf="@+id/WordName3"
+            app:lineHeight="8sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="17.5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="17.5dp"
+        android:background="@color/mainGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/worGroup" />
+</androidx.constraintlayout.widget.ConstraintLayout>

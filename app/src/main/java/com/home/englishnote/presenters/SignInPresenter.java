@@ -12,10 +12,12 @@ import com.home.englishnote.models.entities.Member;
 import com.home.englishnote.models.entities.Token;
 import com.home.englishnote.models.repositories.MemberRepository;
 import com.home.englishnote.utils.BaseView;
+import com.home.englishnote.utils.HashUtil;
 import com.home.englishnote.utils.ThreadExecutor;
+import com.home.englishnote.utils.VerifyInputFormatUtil;
 
 
-public class SignInPresenter extends VerifyFormatPresenter {
+public class SignInPresenter {
 
     private SignInView signInView;
     private MemberRepository memberRepository;
@@ -33,7 +35,7 @@ public class SignInPresenter extends VerifyFormatPresenter {
         threadExecutor.execute(() -> {
             try {
 //                verifyUserInfo(email, password);
-                String hashPassword = hashPassword(password);
+                String hashPassword = HashUtil.hashEncode(password);
                 Credentials credentials = new Credentials(email, hashPassword);
                 Token token = memberRepository.signInToken(credentials);
                 Member member = memberRepository.signInMember(token.getMemberId());
@@ -57,9 +59,9 @@ public class SignInPresenter extends VerifyFormatPresenter {
 
     private void verifyUserInfo(String email, String password) {
         //Todo
-        verifyUserInfoEmpty(email, password);
-        verifyEmailFormat(email);
-        verifyPasswordFormat(password);
+        VerifyInputFormatUtil.verifyInputEmpty(email, password);
+        VerifyInputFormatUtil.verifyEmailFormat(email);
+        VerifyInputFormatUtil.verifyPasswordFormat(password);
     }
 
     public interface SignInView extends BaseView {

@@ -1,6 +1,8 @@
 package com.home.englishnote.models.entities;
 
-public class Token {
+import java.io.Serializable;
+
+public class Token implements Serializable {
     private String token;
     private int memberId;
     private int expired;

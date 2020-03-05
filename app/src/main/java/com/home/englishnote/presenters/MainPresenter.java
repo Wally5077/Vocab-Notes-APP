@@ -15,6 +15,7 @@ import static android.content.Context.ALARM_SERVICE;
 public class MainPresenter {
     private Context context;
 
+    // Todo waiting for amend
     public MainPresenter(Context context) {
         this.context = context;
     }

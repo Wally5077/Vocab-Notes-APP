@@ -4,8 +4,8 @@
     <color name="secondaryColor">#659663</color>
     <color name="thirdColor">#888888</color>
     <color name="paleWhite">#ffffff</color>
-    <color name="lightGreyBackground">#dfe6e8</color>
-    <color name="publicDictionaryItemTitle">#8999a0</color>
+    <color name="mainGrey">#dfe6e8</color>
+    <color name="secondaryGrey">#8999a0</color>
     <color name="bottomToolbarGrey">#4e585a</color>
 
 </resources>

@@ -25,11 +25,13 @@
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="37dp"
+        android:letterSpacing="0.1"
         android:text="Vocabulary Notes"
         android:textSize="12sp"
         app:fontFamily="@font/marion"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineHeight="13sp" />
 
     <TextView
         android:id="@+id/SignUpBorder"
@@ -56,7 +58,8 @@
         app:fontFamily="@font/avenirheavy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/SignUpBorder" />
+        app:layout_constraintTop_toTopOf="@+id/SignUpBorder"
+        app:lineHeight="20sp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signUpFirstNameLayout"
@@ -200,13 +203,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SignUpBorder" />
+        app:layout_constraintTop_toBottomOf="@+id/SignUpBorder"
+        app:lineHeight="14sp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        app:lineHeight="12sp"
         android:text="Have an account"
         app:fontFamily="@font/avenirbook"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -221,6 +226,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="18dp"
+        app:lineHeight="14sp"
         android:onClick="onSignInLinkClick"
         android:text="@string/signUpPageSignIn"
         android:textColor="#fcf9f9"

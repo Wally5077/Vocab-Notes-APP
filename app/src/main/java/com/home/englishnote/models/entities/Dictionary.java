@@ -1,6 +1,8 @@
 package com.home.englishnote.models.entities;
 
-public class Dictionary {
+import java.io.Serializable;
+
+public class Dictionary implements Serializable {
     private int id;
     private String title, description;
     private Member owner;

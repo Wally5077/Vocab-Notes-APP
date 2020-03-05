@@ -10,4 +10,9 @@
         <item name="colorControlNormal">#00FFFFFF</item>
         <item name="colorControlActivated">#00FFFFFF</item>
     </style>
+
+    <style name="VocabSearchView" parent="Widget.AppCompat.SearchView" >
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColorHint">@color/secondaryGrey</item>
+    </style>
 </resources>

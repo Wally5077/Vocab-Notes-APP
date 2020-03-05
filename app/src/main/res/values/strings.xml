@@ -8,7 +8,7 @@
     <string name="logInAsGuest"><font fgcolor='#dee3dd'>log in as </font>
         <u><i><font fgcolor='#ffffff'>Guest</font></i></u></string>
 
-    <!--  InputWarningMessage  -->
+    <!--  inputWarningMessage  -->
     <string name="inputEmpty">輸入欄不可為空</string>
 
     <!-- onSignUp or onSignIn -->
@@ -22,5 +22,10 @@
     <string name="invalidCredentials">郵箱不存在</string>
     <string name="errMessageTitle">錯誤</string>
     <string name="dialogCancelButton">好</string>
+
+    <!--  modifyButtonText  -->
+    <string name="modifyButtonChangeText">Change</string>
+    <string name="modifyButtonSaveText">Save</string>
+
 
 </resources>
