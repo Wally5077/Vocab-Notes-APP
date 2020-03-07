@@ -1,4 +1,4 @@
-package com.home.englishnote.views.fragments;
+package com.home.englishnote.views.fragments.profile;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.home.englishnote.R;
+import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,9 +50,9 @@ public class UserProfileModifyFragment extends BaseFragment {
     }
 
     private void findViews(View view) {
-        memberInfoBackButton = view.findViewById(R.id.memberInfoBackButton);
-        ageModifySpinner = view.findViewById(R.id.profileAgeSpinner);
-        ageContent = view.findViewById(R.id.ageContent);
+        memberInfoBackButton = view.findViewById(R.id.userModifyBackButton);
+        ageModifySpinner = view.findViewById(R.id.userModifyPageAgeSpinner);
+        ageContent = view.findViewById(R.id.userModifyPageAgeContent);
 
         memberInfoModifyButton = view.findViewById(R.id.memberInfoModifyButton);
         memberInfoModifyButtonText = view.findViewById(R.id.memberInfoModifyButtonText);
@@ -65,23 +66,23 @@ public class UserProfileModifyFragment extends BaseFragment {
         passwordModifyButtonText = view.findViewById(R.id.passwordModifyButtonText);
         passwordModifyButtonImage = view.findViewById(R.id.passwordModifyButtonImage);
 
-        firstNameContent = view.findViewById(R.id.firstNameContent);
-        lastNameContent = view.findViewById(R.id.lastNameContent);
+        firstNameContent = view.findViewById(R.id.userModifyPageFirstNameContent);
+        lastNameContent = view.findViewById(R.id.userModifyPageLastNameContent);
 
-        newEmailAddress = view.findViewById(R.id.newEmailAddress);
-        newEmailAddressContent = view.findViewById(R.id.newEmailAddressContent);
+        newEmailAddress = view.findViewById(R.id.userModifyPageNewEmailAddress);
+        newEmailAddressContent = view.findViewById(R.id.userModifyPageNewEmailAddressContent);
 
-        passwordModifyPrompt = view.findViewById(R.id.passwordModifyPrompt);
+        passwordModifyPrompt = view.findViewById(R.id.userModifyPagePasswordModifyPrompt);
 
-        newPassword = view.findViewById(R.id.newPassword);
-        newPasswordContent = view.findViewById(R.id.newPasswordContent);
+        newPassword = view.findViewById(R.id.userModifyPageNewPassword);
+        newPasswordContent = view.findViewById(R.id.userModifyPageNewPasswordContent);
 
-        confirmNewPassword = view.findViewById(R.id.confirmNewPassword);
-        newConfirmPasswordContent = view.findViewById(R.id.newConfirmPasswordContent);
+        confirmNewPassword = view.findViewById(R.id.userModifyPageConfirmNewPassword);
+        newConfirmPasswordContent = view.findViewById(R.id.userModifyPageNewConfirmPasswordContent);
     }
 
     private void init() {
-        setBackButton(memberInfoBackButton);
+        memberInfoBackButton.setOnClickListener(this::onBackButtonClick);
         setMemberInfoEnable(false);
         setEmailAddressEnable(false);
         setPasswordEnable(false);
@@ -100,7 +101,7 @@ public class UserProfileModifyFragment extends BaseFragment {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 view.setBackground(enable ?
                         getResources().getDrawable(R.drawable.modify_border) :
-                        getResources().getDrawable(R.color.paleWhite));
+                        getResources().getDrawable(R.color.mainWhite));
             }
         }
     }
@@ -156,24 +157,24 @@ public class UserProfileModifyFragment extends BaseFragment {
         switch (v.getId()) {
             case R.id.memberInfoModifyButton:
                 if (isModifyState(memberInfoModifyButtonText)) {
-                    setMemberInfoOnModitfyState(true);
+                    setMemberInfoOnModifyState(true);
                 } else {
-                    setMemberInfoOnModitfyState(false);
+                    setMemberInfoOnModifyState(false);
                 }
                 break;
             case R.id.emailAddressModifyButton:
                 if (isModifyState(emailAddressModifyButtonText)) {
-                    setEmailAddressOnModitfyState(true);
+                    setEmailAddressOnModifyState(true);
                 } else {
-                    setEmailAddressOnModitfyState(false);
+                    setEmailAddressOnModifyState(false);
                 }
                 break;
             case R.id.passwordModifyButton:
                 if (isModifyState(passwordModifyButtonText)) {
-                    setPasswordOnModitfyState(true);
+                    setPasswordOnModifyState(true);
                 } else {
                     // Todo upload new userInfo while user has modified
-                    setPasswordOnModitfyState(false);
+                    setPasswordOnModifyState(false);
                 }
                 break;
             default:
@@ -185,19 +186,19 @@ public class UserProfileModifyFragment extends BaseFragment {
         return !getString(R.string.modifyButtonChangeText).equals(textView.getText().toString());
     }
 
-    private void setMemberInfoOnModitfyState(boolean stateChange) {
+    private void setMemberInfoOnModifyState(boolean stateChange) {
         setMemberInfoEnable(stateChange);
         setModifyButtonState(stateChange, memberInfoModifyButton,
                 memberInfoModifyButtonText, memberInfoModifyButtonImage);
     }
 
-    private void setEmailAddressOnModitfyState(boolean stateChange) {
+    private void setEmailAddressOnModifyState(boolean stateChange) {
         setEmailAddressEnable(stateChange);
         setModifyButtonState(stateChange, emailAddressModifyButton,
                 emailAddressModifyButtonText, emailAddressModifyButtonImage);
     }
 
-    private void setPasswordOnModitfyState(boolean stateChange) {
+    private void setPasswordOnModifyState(boolean stateChange) {
         setPasswordEnable(stateChange);
         setModifyButtonState(stateChange, passwordModifyButton,
                 passwordModifyButtonText, passwordModifyButtonImage);

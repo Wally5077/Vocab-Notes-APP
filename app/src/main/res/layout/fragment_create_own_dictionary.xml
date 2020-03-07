@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainWhite">
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
+        android:lineHeight="20sp"
+        android:text="Create Your Own Dictionary"
+        android:textColor="@color/thirdGrey"
+        android:textSize="15sp"
+        app:fontFamily="@font/avenirheavy"
+        app:layout_constraintStart_toStartOf="@+id/editText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_marginTop="27.5dp"
+        android:layout_width="220dp"
+        android:layout_height="37.5dp"
+        android:inputType="textPersonName"
+        android:background="@drawable/modify_border"
+        android:paddingStart="12.5dp"
+        android:paddingLeft="12.5dp"
+        android:paddingEnd="0dp"
+        android:textSize="21sp"
+        android:textStyle="italic|bold"
+        android:paddingRight="0dp"
+        android:hint="@string/newDictionary"
+        android:textColorHint="#804E585A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

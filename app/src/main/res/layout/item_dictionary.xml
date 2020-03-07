@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="285dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/dictionary_item_background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -68,8 +68,10 @@
             android:layout_marginRight="15dp"
             android:background="@drawable/bg_item_dictionary_button"
             android:text="Explore"
+            android:paddingBottom="3dp"
+            android:textAllCaps="false"
             android:textAlignment="center"
-            android:textSize="6sp"
+            android:textSize="8sp"
             app:fontFamily="@font/avenirbook"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

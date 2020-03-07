@@ -10,7 +10,7 @@ import com.home.englishnote.models.entities.Credentials;
 import com.home.englishnote.models.entities.Member;
 import com.home.englishnote.models.entities.Token;
 import com.home.englishnote.models.repositories.MemberRepository;
-import com.home.englishnote.utils.BaseView;
+import com.home.englishnote.views.BaseView;
 import com.home.englishnote.utils.HashUtil;
 import com.home.englishnote.utils.ThreadExecutor;
 import com.home.englishnote.utils.VerifyInputFormatUtil;
@@ -44,6 +44,7 @@ public class SignUpPresenter {
                         Integer.valueOf(age), email, hashPassword);
                 Credentials credentials = member.getCredentials();
                 Token token = memberRepository.signUp(member, credentials);
+                member.setId(token.getMemberId());
                 threadExecutor.executeUiThread(
                         () -> signUpView.onSignUpSuccessfully(member, token));
             } catch (UserInputEmptyException err) {

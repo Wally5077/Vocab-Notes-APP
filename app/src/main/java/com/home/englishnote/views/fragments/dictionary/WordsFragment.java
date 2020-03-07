@@ -1,4 +1,4 @@
-package com.home.englishnote.views.fragments;
+package com.home.englishnote.views.fragments.dictionary;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,11 +19,12 @@ import com.home.englishnote.models.entities.WordGroup;
 import com.home.englishnote.presenters.WordsPresenter;
 import com.home.englishnote.presenters.WordsPresenter.WordsView;
 import com.home.englishnote.utils.Global;
+import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WordsFragment extends DictionaryFragment implements WordsView {
+public class WordsFragment extends BaseFragment implements WordsView {
 
     private WordGroup wordGroup;
     private RecyclerView wordGroupRecycler;

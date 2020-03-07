@@ -10,7 +10,7 @@ public interface MemberRepository {
 
     Token signInToken(Credentials credentials);
 
-    Member signInMember(int memberId);
+    Member getMember(int memberId);
 
     void updateMemberInfo(String firstName, String lastName, int age);
 }

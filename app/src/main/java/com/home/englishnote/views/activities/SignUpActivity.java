@@ -101,8 +101,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
 
     @Override
     public void onSignUpSuccessfully(Member member, Token token) {
-        member.setId(token.getMemberId());
-        startActivity(new Intent(this, MainPageActivity.class)
+        startActivity(new Intent(this, DictionaryHomePageActivity.class)
                 .putExtra("member", member));
     }
 

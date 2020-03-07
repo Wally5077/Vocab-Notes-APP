@@ -27,5 +27,6 @@
     <string name="modifyButtonChangeText">Change</string>
     <string name="modifyButtonSaveText">Save</string>
 
-
+    <string name="ownDictionaryView"><u>view</u></string>
+    <string name="newDictionary">New Dictionary</string>
 </resources>

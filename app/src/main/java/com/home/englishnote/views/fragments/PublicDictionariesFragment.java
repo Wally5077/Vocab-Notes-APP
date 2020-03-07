@@ -22,11 +22,12 @@ import com.home.englishnote.models.entities.Dictionary;
 import com.home.englishnote.presenters.PublicDictionaryPresenter;
 import com.home.englishnote.presenters.PublicDictionaryPresenter.PublicDictionaryView;
 import com.home.englishnote.utils.Global;
+import com.home.englishnote.utils.VocabularyNoteKeyword;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PublicDictionaryFragment extends BaseFragment implements PublicDictionaryView {
+public class PublicDictionariesFragment extends BaseFragment implements PublicDictionaryView {
 
     private RecyclerView dictionaryRecycler;
     private DictionaryAdapter dictionaryAdapter;
@@ -40,7 +41,7 @@ public class PublicDictionaryFragment extends BaseFragment implements PublicDict
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_public_dictionary, container, false);
+        return inflater.inflate(R.layout.fragment_public_dictionaries, container, false);
     }
 
     @Override
@@ -69,7 +70,7 @@ public class PublicDictionaryFragment extends BaseFragment implements PublicDict
     private void setMember() {
         String memberName = member.getLastName();
         userName.setText((memberName.isEmpty()) ? "userName" : memberName);
-        userPic.setImageResource(R.drawable.user_pic);
+        userPic.setImageResource(R.drawable.small_user_pic);
         userName.setOnClickListener(this::onChangeProfilePage);
         userPic.setOnClickListener(this::onChangeProfilePage);
     }
@@ -179,8 +180,8 @@ public class PublicDictionaryFragment extends BaseFragment implements PublicDict
 
             private void setExploreButtonClick(Dictionary dictionary) {
                 exploreButton.setOnClickListener(
-                        (v) -> mainPageActivity.switchFragment(
-                                R.layout.fragment_word_group, dictionary));
+                        (v) -> mainPageActivity.switchFragment(R.layout.fragment_public_dictionary,
+                                VocabularyNoteKeyword.DICTIONARY_HOME_PAGE_CONTAINER, dictionary));
             }
 
             private void setData(Dictionary dictionary) {

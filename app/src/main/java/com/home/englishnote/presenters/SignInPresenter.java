@@ -11,7 +11,7 @@ import com.home.englishnote.models.entities.Credentials;
 import com.home.englishnote.models.entities.Member;
 import com.home.englishnote.models.entities.Token;
 import com.home.englishnote.models.repositories.MemberRepository;
-import com.home.englishnote.utils.BaseView;
+import com.home.englishnote.views.BaseView;
 import com.home.englishnote.utils.HashUtil;
 import com.home.englishnote.utils.ThreadExecutor;
 import com.home.englishnote.utils.VerifyInputFormatUtil;
@@ -38,9 +38,10 @@ public class SignInPresenter {
                 String hashPassword = HashUtil.hashEncode(password);
                 Credentials credentials = new Credentials(email, hashPassword);
                 Token token = memberRepository.signInToken(credentials);
-                Member member = memberRepository.signInMember(token.getMemberId());
+                int memberId = token.getMemberId();
+                Member member = memberRepository.getMember(memberId);
                 threadExecutor.executeUiThread(
-                        () -> signInView.onSignInSuccessfully(member, token));
+                        () -> signInView.onSignInSuccessfully(member));
             } catch (UserInputEmptyException err) {
                 threadExecutor.executeUiThread(signInView::onUserInputEmpty);
             } catch (EmailFormatInvalidException err) {
@@ -68,6 +69,6 @@ public class SignInPresenter {
 
         void onInvalidCredentials();
 
-        void onSignInSuccessfully(Member member, Token token);
+        void onSignInSuccessfully(Member member);
     }
 }

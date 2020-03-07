@@ -1,6 +1,5 @@
 package com.home.englishnote.utils;
 
-import android.os.Build;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;

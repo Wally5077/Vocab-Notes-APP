@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainWhite">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/userProfilePageTopBar"
+        android:layout_width="0dp"
+        android:layout_height="135dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/constraintLayout3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/userProfilePageTopBar"
+        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+        app:layout_constraintStart_toStartOf="@id/userProfilePageTopBar"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/userProfilePageBackButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="17.5dp"
+            android:layout_marginEnd="22.5dp"
+            android:layout_marginRight="22.5dp"
+            android:background="@drawable/noun_arrow_3136595"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <ImageView
+        android:id="@+id/userProfilePagePhoto"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="27.5dp"
+        android:layout_marginLeft="27.5dp"
+        android:layout_marginTop="42.5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/big_user_pic" />
+
+    <TextView
+        android:id="@+id/userProfilePageName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12.5dp"
+        android:layout_marginLeft="12.5dp"
+        android:text="User name"
+        android:textAlignment="center"
+        android:textColor="@color/mainWhite"
+        android:textSize="16sp"
+        app:fontFamily="@font/avenirmedium"
+        app:layout_constraintBottom_toBottomOf="@+id/userProfilePageTopBar"
+        app:layout_constraintStart_toEndOf="@+id/userProfilePagePhoto"
+        app:layout_constraintTop_toTopOf="@+id/userProfilePagePhoto"
+        app:lineHeight="20sp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/userProfilePageTopBar"
+        app:layout_constraintEnd_toEndOf="@+id/userProfilePageTopBar"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/userModifyPageLogOutButton"
+            android:layout_width="67.5dp"
+            android:layout_height="27.5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="12.5dp"
+            android:layout_marginRight="12.5dp"
+            android:background="@drawable/bg_log_out_round_button"
+            android:paddingBottom="3dp"
+            android:text="Log Out"
+            android:textAllCaps="false"
+            android:textColor="@color/mainWhite"
+            android:textSize="11sp"
+            app:fontFamily="@font/avenirbook"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lineHeight="15sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/userModifyPageEditProfileButton"
+            android:layout_width="82.5dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_modify_green_round_button"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/userModifyPageLogOutButton"
+            app:layout_constraintTop_toBottomOf="@+id/userModifyPageLogOutButton">
+
+            <TextView
+                android:id="@+id/userModifyPageEditProfileText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7.5dp"
+                android:layout_marginLeft="7.5dp"
+                android:layout_marginTop="3.5dp"
+                android:text="edit my profile"
+                android:textColor="@color/mainWhite"
+                android:textSize="8sp"
+                app:fontFamily="@font/avenirmedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lineHeight="11sp" />
+
+            <ImageView
+                android:id="@+id/userModifyPageEditProfileImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1.25dp"
+                android:layout_marginRight="1.25dp"
+                android:background="@drawable/modify_pen"
+                app:layout_constraintBottom_toBottomOf="@+id/userModifyPageEditProfileText"
+                app:layout_constraintEnd_toStartOf="@+id/userModifyPageEditProfileText"
+                app:layout_constraintTop_toTopOf="@+id/userModifyPageEditProfileText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/userProfilePageCreateDictionaryButton"
+            android:layout_width="90dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_modify_green_round_button"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/userModifyPageEditProfileButton"
+            app:layout_constraintTop_toBottomOf="@+id/userModifyPageEditProfileButton">
+
+            <TextView
+                android:id="@+id/userProfilePageCreateDictionaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="9dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="3.5dp"
+                android:text="create dictionary"
+                android:textColor="@color/mainWhite"
+                android:textSize="8sp"
+                app:fontFamily="@font/avenirmedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lineHeight="11sp" />
+
+            <ImageView
+                android:id="@+id/userProfilePageCreateDictionaryImage"
+                android:layout_width="8.5dp"
+                android:layout_height="8.5dp"
+                android:layout_marginStart="2.5dp"
+                android:layout_marginLeft="2.5dp"
+                android:layout_marginTop="1.25dp"
+                android:background="@drawable/create_dictionary"
+                app:layout_constraintBottom_toBottomOf="@+id/userProfilePageCreateDictionaryText"
+                app:layout_constraintEnd_toStartOf="@+id/userProfilePageCreateDictionaryText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/userProfilePageCreateDictionaryText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/userProfilePageMyFavoriteButton"
+            android:layout_width="67.5dp"
+            android:layout_height="22.5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_modify_grey_round_button"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/userProfilePageCreateDictionaryButton"
+            app:layout_constraintTop_toBottomOf="@+id/userProfilePageCreateDictionaryButton">
+
+            <TextView
+                android:id="@+id/userProfilePageMyFavoriteText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7.5dp"
+                android:layout_marginLeft="7.5dp"
+                android:layout_marginTop="2dp"
+                android:text="my favorite"
+                android:textColor="@color/mainWhite"
+                android:textSize="8sp"
+                app:fontFamily="@font/avenirmedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lineHeight="11sp" />
+
+            <ImageView
+                android:id="@+id/userProfilePageMyFavoriteImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3.5dp"
+                android:layout_marginLeft="3.5dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/favorite"
+                app:layout_constraintBottom_toBottomOf="@+id/userProfilePageMyFavoriteText"
+                app:layout_constraintEnd_toStartOf="@+id/userProfilePageMyFavoriteText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/userProfilePageMyFavoriteText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/userProfilePageContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="167.5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

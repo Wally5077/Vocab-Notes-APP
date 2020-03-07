@@ -1,4 +1,4 @@
-package com.home.englishnote.utils;
+package com.home.englishnote.views;
 
 public interface BaseView {
 

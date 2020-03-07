@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/mainWhite">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginStart="22.5dp"
+        android:layout_marginLeft="22.5dp"
+        android:background="@color/mainGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ownDictionaryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:text="Own dictionary 1"
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirheavy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:lineHeight="18sp" />
+
+    <TextView
+        android:id="@+id/ownWordGroups"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7.5dp"
+        android:layout_marginBottom="7.5dp"
+        android:lineHeight="14sp"
+        android:text="20 Word groups"
+        android:textColor="@color/mainColor"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ownDictionaryName"
+        app:layout_constraintTop_toBottomOf="@+id/ownDictionaryName"
+        tools:text="20 Word groups" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:lineHeight="11sp"
+        android:text="@string/ownDictionaryView"
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ownDictionaryName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ownDictionaryName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

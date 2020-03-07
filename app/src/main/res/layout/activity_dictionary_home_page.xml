@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/paleWhite"
-    tools:context=".views.activities.MainPageActivity">
+    android:background="@color/mainWhite"
+    tools:context=".views.activities.DictionaryHomePageActivity">
 
 <!--  There are two different Toolbar  -->
 
@@ -13,7 +13,7 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="42.5dp"
-        android:background="@color/bottomToolbarGrey"
+        android:background="@color/thirdGrey"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +37,7 @@
         android:layout_height="10dp"
         android:layout_marginTop="5dp"
         android:text="Vocabulary Notes"
-        android:textColor="@color/paleWhite"
+        android:textColor="@color/mainWhite"
         android:textSize="10sp"
         app:fontFamily="@font/marion"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
@@ -45,7 +45,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/mainPageContainer"
+        android:id="@+id/dictionaryHomePageContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bottomBar"

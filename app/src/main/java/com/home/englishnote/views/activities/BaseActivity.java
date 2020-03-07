@@ -10,6 +10,8 @@ import com.home.englishnote.utils.Global;
 
 public class BaseActivity extends AppCompatActivity {
 
+    // Todo refactor to utils class
+
     protected void showErrorMessage(String errMessage, TextInputLayout... textInputLayouts) {
         for (TextInputLayout textInputLayout : textInputLayouts) {
             textInputLayout.setErrorEnabled(true);

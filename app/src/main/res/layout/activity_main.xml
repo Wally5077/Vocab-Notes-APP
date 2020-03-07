@@ -13,16 +13,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="137.1dp"
         android:layout_marginLeft="137.1dp"
-        app:lineHeight="24sp"
-        android:letterSpacing="0.19"
         android:layout_marginTop="128.8dp"
-        app:fontFamily="@font/marion"
+        android:letterSpacing="0.19"
         android:text="Vocabulary Notes"
         android:textAlignment="center"
-        android:textColor="@color/paleWhite"
+        android:textColor="@color/mainWhite"
         android:textSize="19sp"
+        app:fontFamily="@font/marion"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineHeight="24sp" />
 
     <ImageView
         android:id="@+id/logo"
@@ -36,7 +36,7 @@
         app:srcCompat="@drawable/logo" />
 
     <ImageView
-        android:id="@+id/mainPageSearch2"
+        android:id="@+id/userModifySearch2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="221dp"
@@ -54,12 +54,12 @@
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="234dp"
-        app:lineHeight="25sp"
         android:text="Welcome to Vocabulary Note  "
         android:textSize="18sp"
         app:fontFamily="@font/avenirbook"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineHeight="25sp" />
 
     <TextView
         android:id="@+id/textView4"
@@ -68,12 +68,12 @@
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="259dp"
-        app:lineHeight="18sp"
-        app:fontFamily="@font/avenirlight"
         android:text="Use image memory to improve your English!  "
         android:textSize="13sp"
+        app:fontFamily="@font/avenirlight"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineHeight="18sp" />
 
     <Button
         android:id="@+id/mainSignInButton"
@@ -83,13 +83,16 @@
         android:layout_marginEnd="36dp"
         android:layout_marginRight="36dp"
         android:background="@drawable/bg_grey_round_button"
-        app:fontFamily="@font/avenirbook"
-        app:lineHeight="22sp"
         android:onClick="onSignInButtonClick"
+        android:paddingBottom="3dp"
         android:text="Sign In"
-        android:textColor="@color/paleWhite"
+        android:textAllCaps="false"
+        android:textColor="@color/mainWhite"
+        android:textSize="16sp"
+        app:fontFamily="@font/avenirbook"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineHeight="22sp" />
 
     <Button
         android:id="@+id/mainSignUpButton"
@@ -100,12 +103,15 @@
         android:layout_marginTop="509dp"
         android:background="@drawable/bg_green_round_button"
         android:onClick="onSignUpButtonClick"
+        android:paddingBottom="3dp"
         android:text="Sign Up"
-        app:lineHeight="22sp"
+        android:textAllCaps="false"
         android:textColor="#ffffff"
+        android:textSize="16sp"
         app:fontFamily="@font/avenirbook"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineHeight="22sp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -118,14 +124,14 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="onGuestSignInClick"
         android:text="@string/logInAsGuest"
         android:textSize="12sp"
-        android:onClick="onGuestSignInClick"
         app:fontFamily="@font/avenirroman"
-        android:layout_marginTop="30dp"
-        app:lineHeight="16sp"
-        app:layout_constraintTop_toBottomOf="@id/mainSignInButton"
         app:layout_constraintEnd_toStartOf="@+id/mainSignUpButton"
-        app:layout_constraintStart_toEndOf="@+id/mainSignInButton" />
+        app:layout_constraintStart_toEndOf="@+id/mainSignInButton"
+        app:layout_constraintTop_toBottomOf="@id/mainSignInButton"
+        app:lineHeight="16sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

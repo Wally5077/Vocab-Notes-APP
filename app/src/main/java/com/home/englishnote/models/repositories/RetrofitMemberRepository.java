@@ -20,7 +20,6 @@ import retrofit2.http.Path;
 
 public class RetrofitMemberRepository implements MemberRepository {
 
-
     private MemberApi memberApi;
 
     public RetrofitMemberRepository(Retrofit retrofit) {
@@ -71,7 +70,7 @@ public class RetrofitMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Member signInMember(int memberId) {
+    public Member getMember(int memberId) {
         Call<Member> memberCall = memberApi.signInMemberInfo(memberId);
         Member member = null;
         try {

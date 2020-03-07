@@ -1,4 +1,4 @@
-package com.home.englishnote.views.fragments;
+package com.home.englishnote.views.fragments.dictionary;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,11 +21,13 @@ import com.home.englishnote.models.entities.WordGroup;
 import com.home.englishnote.presenters.WordGroupsPresenter;
 import com.home.englishnote.presenters.WordGroupsPresenter.WordGroupsView;
 import com.home.englishnote.utils.Global;
+import com.home.englishnote.utils.VocabularyNoteKeyword;
+import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WordGroupsFragment extends DictionaryFragment implements WordGroupsView {
+public class WordGroupsFragment extends BaseFragment implements WordGroupsView {
 
     private Dictionary dictionary;
     private RecyclerView wordGroupRecycler;
@@ -115,6 +117,7 @@ public class WordGroupsFragment extends DictionaryFragment implements WordGroups
     public void onGetWordGroupsSuccessfully(List<WordGroup> wordGroupList) {
         // Todo might be over all dictionary count
         setWordGroupSwipeRefreshLayoutEnable(false);
+        this.wordGroupList.clear();
         this.wordGroupList.addAll(wordGroupList);
         wordGroupAdapter.notifyDataSetChanged();
     }
@@ -203,8 +206,8 @@ public class WordGroupsFragment extends DictionaryFragment implements WordGroups
             }
 
             public void setHolderClick(WordGroup wordGroup) {
-                itemView.setOnClickListener(
-                        v -> switchFragment(R.layout.fragment_words, wordGroup));
+                mainPageActivity.switchFragment(R.layout.fragment_words,
+                        VocabularyNoteKeyword.DICTIONARY_CONTENT_CONTAINER, wordGroup);
             }
         }
     }

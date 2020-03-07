@@ -16,7 +16,7 @@ public class StubMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Member signInMember(int memberId) {
+    public Member getMember(int memberId) {
         return new Member("firstName", "lastName",
                 25, "email", "password");
     }
