@@ -39,7 +39,7 @@ public class UserProfileModifyFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_user_profile_modify, container, false);
+        return inflater.inflate(R.layout.fragment_member_profile_modify, container, false);
     }
 
     @Override

@@ -67,7 +67,7 @@ public class PublicDictionaryFragment extends BaseFragment {
 //        });
         setMember();
         setDictionary();
-        mainPageActivity.switchFragment(R.layout.fragment_word_group,
+        mainPageActivity.switchFragment(R.layout.fragment_public_word_groups,
                 VocabularyNoteKeyword.DICTIONARY_CONTENT_CONTAINER, dictionary);
     }
 

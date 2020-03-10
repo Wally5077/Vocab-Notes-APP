@@ -8,158 +8,6 @@
     android:orientation="vertical">
 
     <!--UpPart-->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/userModifyPageTopBar"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-
-        android:id="@+id/constraintLayout3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userModifyPageTopBar"
-        app:layout_constraintEnd_toStartOf="@+id/guideline1"
-        app:layout_constraintStart_toStartOf="@id/userModifyPageTopBar"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/userModifyBackButton"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="22.5dp"
-            android:layout_marginRight="22.5dp"
-            android:background="@drawable/noun_arrow_3136595"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userModifyPageTopBar"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/userModifySearch1"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@drawable/search_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/userModifyVocabSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2.5dp"
-            android:layout_marginLeft="2.5dp"
-            android:text="Look Up"
-            android:textAlignment="center"
-            android:textColor="#ABFFFFFF"
-            android:textSize="12sp"
-            app:fontFamily="@font/avenirheavy"
-            app:layout_constraintBottom_toBottomOf="@+id/userModifySearch1"
-            app:layout_constraintStart_toEndOf="@+id/userModifySearch1"
-            app:layout_constraintTop_toTopOf="@+id/userModifySearch1"
-            app:lineHeight="14sp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userModifyPageTopBar"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/userModifySearch2"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@drawable/search_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/userModifyDictionaryListSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2.5dp"
-            android:layout_marginLeft="2.5dp"
-            android:text="Dictionary List"
-            android:textAlignment="center"
-            android:textColor="#ABFFFFFF"
-            android:textSize="12sp"
-            app:fontFamily="@font/avenirheavy"
-            app:layout_constraintBottom_toBottomOf="@+id/userModifySearch2"
-            app:layout_constraintStart_toEndOf="@+id/userModifySearch2"
-            app:layout_constraintTop_toTopOf="@+id/userModifySearch2"
-            app:lineHeight="14sp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.7" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userModifyPageTopBar"
-        app:layout_constraintEnd_toEndOf="@+id/userModifyPageTopBar"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/userModifyPageLogOutButton"
-            android:layout_width="67.5dp"
-            android:layout_height="32.5dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/bg_log_out_round_button"
-            android:text="Log Out"
-            android:textColor="@color/mainWhite"
-            android:textSize="11sp"
-            app:fontFamily="@font/avenirbook"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lineHeight="15sp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/userModify_MY_PROFILE"
@@ -179,44 +27,30 @@
 
     <!-- memberInfoModify -->
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <Button
         android:id="@+id/memberInfoModifyButton"
         android:layout_width="75dp"
-        android:layout_height="30dp"
+        android:layout_height="27.5dp"
         android:layout_marginTop="32.5dp"
         android:layout_marginEnd="32.5dp"
         android:layout_marginRight="25dp"
         android:layout_marginBottom="7.5dp"
         android:background="@drawable/bg_modify_green_round_button"
+        android:drawableStart="@drawable/modify_member_info_pen"
+        android:drawableLeft="@drawable/modify_member_info_pen"
+        android:paddingStart="7.5dp"
+        android:paddingLeft="7.5dp"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="3dp"
+        android:text="@string/modifyButtonChangeText"
         android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/mainWhite"
+        android:textSize="12sp"
+        app:fontFamily="@font/avenirmedium"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userModifyPageTopBar">
-
-        <TextView
-            android:id="@+id/memberInfoModifyButtonText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3.5dp"
-            android:text="@string/modifyButtonChangeText"
-            android:textColor="@color/mainWhite"
-            android:textSize="12sp"
-            app:fontFamily="@font/avenirmedium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lineHeight="16sp" />
-
-        <ImageView
-            android:id="@+id/memberInfoModifyButtonImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="1.25dp"
-            android:layout_marginRight="1.25dp"
-            android:background="@drawable/modify_pen"
-            app:layout_constraintBottom_toBottomOf="@+id/memberInfoModifyButtonText"
-            app:layout_constraintEnd_toStartOf="@+id/memberInfoModifyButtonText"
-            app:layout_constraintTop_toTopOf="@+id/memberInfoModifyButtonText" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/profileLine"
@@ -367,41 +201,30 @@
 
     <!-- emailAddressModify -->
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <Button
         android:id="@+id/emailAddressModifyButton"
-        android:layout_width="72.5dp"
-        android:layout_height="30dp"
+        android:layout_width="75dp"
+        android:layout_height="27.5dp"
+        android:layout_marginTop="32.5dp"
+        android:layout_marginEnd="32.5dp"
+        android:layout_marginRight="25dp"
         android:layout_marginBottom="7.5dp"
         android:background="@drawable/bg_modify_green_round_button"
+        android:drawableStart="@drawable/modify_member_info_pen"
+        android:drawableLeft="@drawable/modify_member_info_pen"
+        android:paddingStart="7.5dp"
+        android:paddingLeft="7.5dp"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="3dp"
+        android:text="@string/modifyButtonChangeText"
         android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/mainWhite"
+        android:textSize="12sp"
+        app:fontFamily="@font/avenirmedium"
         app:layout_constraintStart_toStartOf="@id/memberInfoModifyButton"
-        app:layout_constraintTop_toTopOf="@id/userModifyPage_EMAIL_ADDRESS">
-
-        <TextView
-            android:id="@+id/emailAddressModifyButtonText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3.5dp"
-            android:text="@string/modifyButtonChangeText"
-            android:textColor="@color/mainWhite"
-            android:textSize="12sp"
-            app:fontFamily="@font/avenirmedium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lineHeight="16sp" />
-
-        <ImageView
-            android:id="@+id/emailAddressModifyButtonImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="1.25dp"
-            android:layout_marginRight="1.25dp"
-            android:background="@drawable/modify_pen"
-            app:layout_constraintBottom_toBottomOf="@+id/emailAddressModifyButtonText"
-            app:layout_constraintEnd_toStartOf="@+id/emailAddressModifyButtonText"
-            app:layout_constraintTop_toTopOf="@+id/emailAddressModifyButtonText" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="@id/userModifyPage_EMAIL_ADDRESS" />
 
     <View
         android:id="@+id/emailAddressLine"
@@ -501,41 +324,30 @@
 
     <!-- passwordModify -->
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <Button
         android:id="@+id/passwordModifyButton"
-        android:layout_width="72.5dp"
-        android:layout_height="30dp"
+        android:layout_width="75dp"
+        android:layout_height="27.5dp"
+        android:layout_marginTop="32.5dp"
+        android:layout_marginEnd="32.5dp"
+        android:layout_marginRight="25dp"
         android:layout_marginBottom="7.5dp"
         android:background="@drawable/bg_modify_green_round_button"
+        android:drawableStart="@drawable/modify_member_info_pen"
+        android:drawableLeft="@drawable/modify_member_info_pen"
+        android:paddingStart="7.5dp"
+        android:paddingLeft="7.5dp"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="3dp"
+        android:text="@string/modifyButtonChangeText"
         android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/mainWhite"
+        android:textSize="12sp"
+        app:fontFamily="@font/avenirmedium"
         app:layout_constraintStart_toStartOf="@id/emailAddressModifyButton"
-        app:layout_constraintTop_toTopOf="@id/userModifyPage_PASSWORD">
-
-        <TextView
-            android:id="@+id/passwordModifyButtonText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3.5dp"
-            android:text="@string/modifyButtonChangeText"
-            android:textColor="@color/mainWhite"
-            android:textSize="12sp"
-            app:fontFamily="@font/avenirmedium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lineHeight="16sp" />
-
-        <ImageView
-            android:id="@+id/passwordModifyButtonImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="1.25dp"
-            android:layout_marginRight="1.25dp"
-            android:background="@drawable/modify_pen"
-            app:layout_constraintBottom_toBottomOf="@+id/passwordModifyButtonText"
-            app:layout_constraintEnd_toStartOf="@+id/passwordModifyButtonText"
-            app:layout_constraintTop_toTopOf="@+id/passwordModifyButtonText" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="@id/userModifyPage_PASSWORD" />
 
     <View
         android:id="@+id/passwordLine"

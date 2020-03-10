@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainWhite">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/ownDictionaryPageTopBar"
+        android:layout_width="0dp"
+        android:layout_height="135dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="17.5dp"
+        android:layout_height="17.5dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/noun_side_bar_2672855"
+        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:openDrawer="start">
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <ImageView
+        android:id="@+id/ownDictionaryPagePhoto"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="17.5dp"
+        android:layout_marginEnd="7.5dp"
+        android:layout_marginRight="7.5dp"
+        app:layout_constraintEnd_toStartOf="@+id/ownDictionaryName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/big_user_pic" />
+
+    <Button
+        android:id="@+id/ownDictionaryButton"
+        android:layout_width="77.5dp"
+        android:layout_height="22.5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_modify_green_round_button"
+        android:drawableStart="@drawable/modify_member_info_pen"
+        android:drawableLeft="@drawable/modify_member_info_pen"
+        android:paddingStart="7.5dp"
+        android:paddingLeft="7.5dp"
+        android:paddingEnd="7.5dp"
+        android:paddingRight="7.5dp"
+        android:paddingBottom="3dp"
+        android:text="Edit Dictionary"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/mainWhite"
+        android:textSize="7sp"
+        app:fontFamily="@font/avenirmedium"
+        app:layout_constraintBottom_toBottomOf="@+id/ownDictionaryPageTopBar"
+        app:layout_constraintStart_toStartOf="@id/ownDictionaryPagePhoto"
+        app:layout_constraintTop_toBottomOf="@id/ownDictionaryPagePhoto" />
+
+    <TextView
+        android:id="@+id/ownDictionaryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12.5dp"
+        android:layout_marginRight="12.5dp"
+        android:text="User name"
+        android:textAlignment="center"
+        android:textColor="@color/mainWhite"
+        android:textSize="8sp"
+        app:fontFamily="@font/avenirmedium"
+        app:layout_constraintBottom_toBottomOf="@id/ownDictionaryPagePhoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ownDictionaryPagePhoto"
+        app:lineHeight="11sp" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12.5dp"
+        android:layout_marginLeft="12.5dp"
+        android:layout_marginBottom="7.5dp"
+        android:text="Own Dictionary 1"
+        android:textColor="@color/mainWhite"
+        android:textStyle="italic"
+        app:fontFamily="@font/avenirheavy"
+        app:layout_constraintBottom_toTopOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="@+id/drawerLayout" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20 word groups"
+        android:textAlignment="center"
+        android:textColor="@color/mainWhite"
+        android:textSize="10sp"
+        android:textStyle="italic"
+        app:fontFamily="@font/avenirbook"
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toTopOf="@+id/ownDictionaryButton"
+        app:lineHeight="14sp" />
+
+    <SearchView
+        android:layout_width="167.5dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/vocab_search_border"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/Search"
+        android:searchIcon="@android:drawable/ic_search_category_default"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ownDictionaryPageTopBar" />
+
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/dictionaryContentSearchView"-->
+    <!--        android:layout_width="167.5dp"-->
+    <!--        android:layout_height="20dp"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:background="@drawable/vocab_search_border"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/ownDictionaryPageTopBar">-->
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/imageView2"-->
+    <!--            android:layout_width="10dp"-->
+    <!--            android:layout_height="10dp"-->
+    <!--            android:layout_marginStart="10dp"-->
+    <!--            android:layout_marginLeft="10dp"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:srcCompat="@android:drawable/ic_search_category_default" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/textView10"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="10dp"-->
+    <!--            android:layout_marginStart="2.5dp"-->
+    <!--            android:layout_marginLeft="2.5dp"-->
+    <!--            android:layout_marginBottom="6dp"-->
+    <!--            android:gravity="center"-->
+    <!--            android:text="search"-->
+    <!--            android:textAlignment="center"-->
+    <!--            android:textColor="#948999A0"-->
+    <!--            android:textSize="8sp"-->
+    <!--            android:textStyle="italic"-->
+    <!--            app:fontFamily="@font/avenirbook"-->
+    <!--            app:layout_constraintBottom_toBottomOf="@+id/imageView2"-->
+    <!--            app:layout_constraintStart_toEndOf="@+id/imageView2"-->
+    <!--            app:layout_constraintTop_toTopOf="@+id/imageView2" />-->
+
+    <!--        &lt;!&ndash;        <EditText&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:id="@+id/dictionaryContentSearch"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_height="match_parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:paddingStart="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:paddingLeft="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:paddingEnd="5dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:paddingRight="5dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            app:layout_constraintTop_toTopOf="parent" />&ndash;&gt;-->
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ownDictionaryPageContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="152.5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

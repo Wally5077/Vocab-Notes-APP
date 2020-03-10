@@ -37,7 +37,7 @@ public class WordsFragment extends BaseFragment implements WordsView {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(
-                R.layout.fragment_words, container, false);
+                R.layout.fragment_public_words, container, false);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class WordsFragment extends BaseFragment implements WordsView {
         @NonNull
         @Override
         public WordHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = getLayoutInflater().inflate(R.layout.item_word, parent, false);
+            View view = getLayoutInflater().inflate(R.layout.item_public_word, parent, false);
             return new WordHolder(view);
         }
 

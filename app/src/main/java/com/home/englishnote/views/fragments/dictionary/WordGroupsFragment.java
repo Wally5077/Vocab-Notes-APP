@@ -41,7 +41,7 @@ public class WordGroupsFragment extends BaseFragment implements WordGroupsView {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(
-                R.layout.fragment_word_group, container, false);
+                R.layout.fragment_public_word_groups, container, false);
     }
 
     @Override
@@ -135,7 +135,7 @@ public class WordGroupsFragment extends BaseFragment implements WordGroupsView {
         @Override
         public WordGroupHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = getLayoutInflater()
-                    .inflate(R.layout.item_word_group, parent, false);
+                    .inflate(R.layout.item_public_word_group, parent, false);
             return new WordGroupHolder(view);
         }
 
@@ -173,16 +173,16 @@ public class WordGroupsFragment extends BaseFragment implements WordGroupsView {
 
             private void findViews(View itemView) {
                 // Todo add in button
-                wordGroupTitle = itemView.findViewById(R.id.wordGroupTitle);
-                wordImage1 = itemView.findViewById(R.id.WordImage1);
-                wordImage2 = itemView.findViewById(R.id.WordImage2);
-                wordImage3 = itemView.findViewById(R.id.WordImage3);
-                wordName1 = itemView.findViewById(R.id.WordName1);
-                wordName2 = itemView.findViewById(R.id.WordName2);
-                wordName3 = itemView.findViewById(R.id.WordName3);
-                wordSynonym1 = itemView.findViewById(R.id.WordSynonym1);
-                wordSynonym2 = itemView.findViewById(R.id.WordSynonym2);
-                wordSynonym3 = itemView.findViewById(R.id.WordSynonym3);
+                wordGroupTitle = itemView.findViewById(R.id.publicWordGroupTitle);
+                wordImage1 = itemView.findViewById(R.id.publicWordImage1);
+                wordImage2 = itemView.findViewById(R.id.publicWordImage2);
+                wordImage3 = itemView.findViewById(R.id.publicWordImage3);
+                wordName1 = itemView.findViewById(R.id.publicWordName1);
+                wordName2 = itemView.findViewById(R.id.publicWordName2);
+                wordName3 = itemView.findViewById(R.id.publicWordName3);
+                wordSynonym1 = itemView.findViewById(R.id.publicWordSynonym1);
+                wordSynonym2 = itemView.findViewById(R.id.publicWordSynonym2);
+                wordSynonym3 = itemView.findViewById(R.id.publicWordSynonym3);
             }
 
             private void setData(WordGroup wordGroup) {
@@ -206,7 +206,7 @@ public class WordGroupsFragment extends BaseFragment implements WordGroupsView {
             }
 
             public void setHolderClick(WordGroup wordGroup) {
-                mainPageActivity.switchFragment(R.layout.fragment_words,
+                mainPageActivity.switchFragment(R.layout.fragment_public_words,
                         VocabularyNoteKeyword.DICTIONARY_CONTENT_CONTAINER, wordGroup);
             }
         }

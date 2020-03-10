@@ -35,7 +35,7 @@ public class BaseFragment extends Fragment {
 
     protected void onChangeProfilePage(View v) {
         mainPageActivity.switchFragment(
-                R.layout.fragment_user_profile, VocabularyNoteKeyword.DICTIONARY_HOME_PAGE_CONTAINER);
+                R.layout.fragment_member_profile_page, VocabularyNoteKeyword.DICTIONARY_HOME_PAGE_CONTAINER);
     }
 
     protected void onBackButtonClick(View v) {

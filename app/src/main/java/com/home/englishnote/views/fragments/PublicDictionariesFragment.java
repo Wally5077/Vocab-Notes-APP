@@ -142,7 +142,7 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
         @Override
         public DictionaryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = getLayoutInflater()
-                    .inflate(R.layout.item_dictionary, parent, false);
+                    .inflate(R.layout.item_public_dictionary, parent, false);
             return new DictionaryHolder(view);
         }
 

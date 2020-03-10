@@ -42,16 +42,16 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
         // Dictionary
         fragmentMap.put(R.layout.fragment_public_dictionaries, new PublicDictionariesFragment());
         fragmentMap.put(R.layout.fragment_public_dictionary, new PublicDictionaryFragment());
-        fragmentMap.put(R.layout.fragment_word_group, new WordGroupsFragment());
-        fragmentMap.put(R.layout.fragment_words, new WordsFragment());
+        fragmentMap.put(R.layout.fragment_public_word_groups, new WordGroupsFragment());
+        fragmentMap.put(R.layout.fragment_public_words, new WordsFragment());
 
         // Profile
-        fragmentMap.put(R.layout.fragment_user_profile, new UserProfileFragment());
-        fragmentMap.put(R.layout.fragment_user_profile_modify, new UserProfileModifyFragment());
+        fragmentMap.put(R.layout.fragment_member_profile_page, new UserProfileFragment());
+        fragmentMap.put(R.layout.fragment_member_profile_modify, new UserProfileModifyFragment());
 
         switchFragment(R.layout.fragment_public_dictionaries,
                 VocabularyNoteKeyword.DICTIONARY_HOME_PAGE_CONTAINER);
-//        switchFragment(R.layout.fragment_user_profile_modify);
+//        switchFragment(R.layout.fragment_member_profile_modify);
     }
 
     public void switchFragment(int fragmentId, int containerId,
@@ -70,5 +70,4 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
                     .commit();
         }
     }
-
 }

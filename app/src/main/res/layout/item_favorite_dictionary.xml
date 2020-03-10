@@ -19,13 +19,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/ownDictionaryName"
+        android:id="@+id/favoriteDictionaryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="15dp"
-        android:text="Own dictionary 1"
+        android:text="Dictionary 1"
         android:textAlignment="center"
         android:textColor="@color/mainColor"
         android:textSize="13sp"
@@ -44,8 +44,18 @@
         android:textColor="@color/mainColor"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/ownDictionaryName"
-        app:layout_constraintTop_toBottomOf="@+id/ownDictionaryName"
+        app:layout_constraintStart_toStartOf="@+id/favoriteDictionaryName"
+        app:layout_constraintTop_toBottomOf="@+id/favoriteDictionaryName"
         tools:text="20 Word groups" />
+
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="22.5dp"
+        android:layout_marginRight="22.5dp"
+        android:background="@drawable/favorite"
+        app:layout_constraintBottom_toBottomOf="@+id/favoriteDictionaryName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/favoriteDictionaryName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

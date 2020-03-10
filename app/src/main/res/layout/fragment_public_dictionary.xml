@@ -6,169 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/mainWhite">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/userModifyPageTopBar"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-
-        android:id="@+id/constraintLayout3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userModifyPageTopBar"
-        app:layout_constraintEnd_toStartOf="@+id/guideline1"
-        app:layout_constraintStart_toStartOf="@id/userModifyPageTopBar"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/dictionaryContentBackButton"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="22.5dp"
-            android:layout_marginRight="22.5dp"
-            android:background="@drawable/noun_arrow_3136595"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userModifyPageTopBar"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/userModifySearch1"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@drawable/search_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/userModifyVocabSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2.5dp"
-            android:layout_marginLeft="2.5dp"
-            android:text="Look Up"
-            android:textAlignment="center"
-            android:textColor="#ABFFFFFF"
-            android:textSize="12sp"
-            app:fontFamily="@font/avenirheavy"
-            app:layout_constraintBottom_toBottomOf="@+id/userModifySearch1"
-            app:layout_constraintStart_toEndOf="@+id/userModifySearch1"
-            app:layout_constraintTop_toTopOf="@+id/userModifySearch1"
-            app:lineHeight="14sp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userModifyPageTopBar"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/userModifySearch2"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@drawable/search_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/userModifyDictionaryListSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2.5dp"
-            android:layout_marginLeft="2.5dp"
-            android:text="Dictionary List"
-            android:textAlignment="center"
-            android:textColor="#ABFFFFFF"
-            android:textSize="12sp"
-            app:fontFamily="@font/avenirheavy"
-            app:layout_constraintBottom_toBottomOf="@+id/userModifySearch2"
-            app:layout_constraintStart_toEndOf="@+id/userModifySearch2"
-            app:layout_constraintTop_toTopOf="@+id/userModifySearch2"
-            app:lineHeight="14sp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.7" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userModifyPageTopBar"
-        app:layout_constraintEnd_toEndOf="@+id/userModifyPageTopBar"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/dictionaryContentUserPic"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="7.5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/small_user_pic" />
-
-        <TextView
-            android:id="@+id/dictionaryContentUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:text="user name"
-            android:textAlignment="center"
-            android:textColor="@color/mainWhite"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            app:fontFamily="@font/avenirbook"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/dictionaryContentUserPic"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lineHeight="12sp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dictionaryContentSearchView"
         android:layout_width="167.5dp"
@@ -178,7 +15,7 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/vocab_search_border"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userModifyPageTopBar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -243,7 +80,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/textView13"
             app:layout_constraintEnd_toStartOf="@+id/textView13"
             app:layout_constraintTop_toTopOf="@+id/textView13"
-            app:srcCompat="@drawable/favorite" />
+            app:srcCompat="@drawable/favorite_hollow" />
 
         <TextView
             android:id="@+id/textView13"
@@ -277,10 +114,10 @@
         app:lineHeight="27sp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/dictionaryContentContainer"
+        android:id="@+id/WordGroupContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="162.5dp"
+        android:layout_marginTop="127.5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

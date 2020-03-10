@@ -7,28 +7,30 @@
     android:background="@color/mainWhite">
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/wordGroupContentTitle"
         android:layout_width="wrap_content"
-        android:layout_height="17.5dp"
+        android:layout_height="10dp"
         android:layout_marginStart="22.5dp"
         android:layout_marginLeft="22.5dp"
-        android:layout_marginTop="15dp"
-        android:text="Dictionary List"
+        android:layout_marginTop="47.5dp"
+        android:text="TYPE 1 - TITLE"
         android:textAlignment="center"
-        android:textColor="@color/thirdGrey"
-        android:textSize="13sp"
-        app:fontFamily="@font/avenirbook"
+        android:textColor="@color/mainColor"
+        android:textSize="7sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:lineHeight="18sp" />
+        app:lineHeight="10sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ownDictionaryRecycler"
+        android:id="@+id/wordRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="35dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="77.5dp"
+        android:layout_marginEnd="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

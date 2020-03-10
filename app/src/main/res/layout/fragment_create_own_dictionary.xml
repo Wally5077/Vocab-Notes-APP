@@ -16,26 +16,122 @@
         android:textColor="@color/thirdGrey"
         android:textSize="15sp"
         app:fontFamily="@font/avenirheavy"
-        app:layout_constraintStart_toStartOf="@+id/editText"
+        app:layout_constraintStart_toStartOf="@+id/ownDictionaryName"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_marginTop="27.5dp"
+        android:id="@+id/ownDictionaryName"
         android:layout_width="220dp"
         android:layout_height="37.5dp"
-        android:inputType="textPersonName"
+        android:layout_marginTop="27.5dp"
         android:background="@drawable/modify_border"
+        android:focusable="false"
+        android:hint="@string/newDictionary"
+        android:inputType="textPersonName"
         android:paddingStart="12.5dp"
         android:paddingLeft="12.5dp"
         android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+        android:textColorHint="@color/ownDictionaryHintColor"
         android:textSize="21sp"
         android:textStyle="italic|bold"
-        android:paddingRight="0dp"
-        android:hint="@string/newDictionary"
-        android:textColorHint="#804E585A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <ImageButton
+        android:id="@+id/ownDictionaryNamePen"
+        android:layout_width="15dp"
+        android:layout_height="17.5dp"
+        android:layout_marginStart="7.5dp"
+        android:layout_marginLeft="7.5dp"
+        android:background="@drawable/create_own_dictionary_pen"
+        app:layout_constraintBottom_toBottomOf="@+id/ownDictionaryName"
+        app:layout_constraintStart_toEndOf="@+id/ownDictionaryName"
+        app:layout_constraintTop_toTopOf="@+id/ownDictionaryName" />
+
+    <EditText
+        android:id="@+id/ownDictionaryDescription"
+        android:layout_width="220dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="17.5dp"
+        android:background="@drawable/modify_border"
+        android:focusable="false"
+        android:gravity="top"
+        android:hint="@string/ownDictionaryDescriptionLength"
+        android:inputType="textPersonName"
+        android:paddingStart="12.5dp"
+        android:paddingTop="2.5dp"
+        android:paddingEnd="12.5dp"
+        android:paddingBottom="2.5dp"
+        android:textColorHint="@color/ownDictionaryHintColor"
+        android:textSize="10sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@+id/ownDictionaryName"
+        app:layout_constraintStart_toStartOf="@+id/ownDictionaryName"
+        app:layout_constraintTop_toBottomOf="@+id/ownDictionaryName"
+        app:lineHeight="14sp" />
+
+    <ImageButton
+        android:id="@+id/ownDictionaryDescriptionPen"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/create_own_dictionary_pen"
+        app:layout_constraintStart_toStartOf="@+id/ownDictionaryNamePen"
+        app:layout_constraintTop_toTopOf="@+id/ownDictionaryDescription" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="220dp"
+        android:layout_height="27.5dp"
+        android:layout_marginTop="12.5dp"
+        android:text="@string/ownDictionaryPrompt"
+        android:textColor="@color/ownDictionaryHintColor"
+        android:textSize="10sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintEnd_toEndOf="@+id/ownDictionaryDescription"
+        app:layout_constraintStart_toStartOf="@+id/ownDictionaryDescription"
+        app:layout_constraintTop_toBottomOf="@+id/ownDictionaryDescription"
+        app:lineHeight="14sp" />
+
+    <Button
+        android:id="@+id/saveOwnDictionaryButton"
+        android:layout_width="57.5dp"
+        android:layout_height="25.5dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/bg_save_own_dictionary_button"
+        android:paddingBottom="3dp"
+        android:text="@string/save"
+        android:textAllCaps="false"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirmedium"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:lineHeight="18sp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <Button
+        android:id="@+id/cancelOwnDictionaryButton"
+        android:layout_width="57.5dp"
+        android:layout_height="25.5dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/bg_cancel_own_dictionary_button"
+        android:paddingBottom="3dp"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirmedium"
+        app:layout_constraintEnd_toEndOf="@+id/textView16"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:lineHeight="18sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

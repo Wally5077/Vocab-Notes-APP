@@ -20,7 +20,7 @@ public class UserProfileFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_user_profile, container, false);
+        return inflater.inflate(R.layout.fragment_member_profile_page, container, false);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class UserProfileFragment extends BaseFragment {
     }
 
     private void findViews(View view) {
-        ImageView userProfilePageBackButton = view.findViewById(R.id.userProfilePageBackButton);
+//        ImageView userProfilePageBackButton = view.findViewById(R.id.userProfilePageBackButton);
         ImageView userProfilePagePhoto = view.findViewById(R.id.userProfilePagePhoto);
         TextView userProfilePageName = view.findViewById(R.id.userProfilePageName);
         View userModifyPageLogOutButton = view.findViewById(R.id.userModifyPageLogOutButton);

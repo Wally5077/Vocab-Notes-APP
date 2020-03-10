@@ -15,7 +15,7 @@ public class Test {
 
     private static void passwordFormat() {
         String s = "!#$%&'()*+,./:;<=>?@^_`{|}~-";
-        String PASSWORD_PATTEN = "[a-zA-Z_0-9]{1,}";
+        String PASSWORD_PATTEN = "[a-zA-Z_0-create_own_dictionary_pen]{1,}";
         String p = "[ \\t\\r\\n\\v\\f]{1,}";
 //        char[] chars = s.toCharArray();
 //        for (char aChar : chars) {
