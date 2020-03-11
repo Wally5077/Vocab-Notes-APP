@@ -7,12 +7,12 @@
 
     <!--UpPart-->
 
-    <!--  dictionaryHomePageContainer  -->
+    <!--  publicDictionaryContainer  -->
 
     <!--DownPart-->
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/dictionarySwipeRefreshLayout"
+        android:id="@+id/publicDictionariesSwipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="37.5dp"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dictionaryRecycler"
+            android:id="@+id/publicDictionariesRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never" />

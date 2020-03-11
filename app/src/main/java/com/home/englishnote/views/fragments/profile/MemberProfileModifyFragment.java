@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -20,17 +21,14 @@ import com.home.englishnote.views.fragments.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserProfileModifyFragment extends BaseFragment {
+public class MemberProfileModifyFragment extends BaseFragment {
 
-    private View memberInfoBackButton;
     private Spinner ageModifySpinner;
-    private View memberInfoModifyButton, emailAddressModifyButton, passwordModifyButton;
+    private Button memberInfoModifyButton, emailAddressModifyButton, passwordModifyButton;
     private TextView newEmailAddress, passwordModifyPrompt, newPassword, confirmNewPassword;
-    private TextView memberInfoModifyButtonText, emailAddressModifyButtonText, passwordModifyButtonText;
     private TextView ageContent;
     private EditText firstNameContent, lastNameContent;
     private EditText newEmailAddressContent, newPasswordContent, newConfirmPasswordContent;
-    private ImageView memberInfoModifyButtonImage, emailAddressModifyButtonImage, passwordModifyButtonImage;
 
     // Todo data setting hasn't finished
 
@@ -50,21 +48,14 @@ public class UserProfileModifyFragment extends BaseFragment {
     }
 
     private void findViews(View view) {
-        memberInfoBackButton = view.findViewById(R.id.userModifyBackButton);
         ageModifySpinner = view.findViewById(R.id.userModifyPageAgeSpinner);
         ageContent = view.findViewById(R.id.userModifyPageAgeContent);
 
         memberInfoModifyButton = view.findViewById(R.id.memberInfoModifyButton);
-        memberInfoModifyButtonText = view.findViewById(R.id.memberInfoModifyButtonText);
-        memberInfoModifyButtonImage = view.findViewById(R.id.memberInfoModifyButtonImage);
 
         emailAddressModifyButton = view.findViewById(R.id.emailAddressModifyButton);
-        emailAddressModifyButtonText = view.findViewById(R.id.emailAddressModifyButtonText);
-        emailAddressModifyButtonImage = view.findViewById(R.id.emailAddressModifyButtonImage);
 
         passwordModifyButton = view.findViewById(R.id.passwordModifyButton);
-        passwordModifyButtonText = view.findViewById(R.id.passwordModifyButtonText);
-        passwordModifyButtonImage = view.findViewById(R.id.passwordModifyButtonImage);
 
         firstNameContent = view.findViewById(R.id.userModifyPageFirstNameContent);
         lastNameContent = view.findViewById(R.id.userModifyPageLastNameContent);
@@ -82,12 +73,11 @@ public class UserProfileModifyFragment extends BaseFragment {
     }
 
     private void init() {
-        memberInfoBackButton.setOnClickListener(this::onBackButtonClick);
         setMemberInfoEnable(false);
         setEmailAddressEnable(false);
         setPasswordEnable(false);
         setAgeSpinner();
-        setModifyButtons();
+//        setModifyButtons();
     }
 
     private void setMemberInfoEnable(boolean enable) {
@@ -147,62 +137,62 @@ public class UserProfileModifyFragment extends BaseFragment {
         return ageList;
     }
 
-    private void setModifyButtons() {
-        memberInfoModifyButton.setOnClickListener(this::onModifyButtonClick);
-        emailAddressModifyButton.setOnClickListener(this::onModifyButtonClick);
-        passwordModifyButton.setOnClickListener(this::onModifyButtonClick);
-    }
-
-    private void onModifyButtonClick(View v) {
-        switch (v.getId()) {
-            case R.id.memberInfoModifyButton:
-                if (isModifyState(memberInfoModifyButtonText)) {
-                    setMemberInfoOnModifyState(true);
-                } else {
-                    setMemberInfoOnModifyState(false);
-                }
-                break;
-            case R.id.emailAddressModifyButton:
-                if (isModifyState(emailAddressModifyButtonText)) {
-                    setEmailAddressOnModifyState(true);
-                } else {
-                    setEmailAddressOnModifyState(false);
-                }
-                break;
-            case R.id.passwordModifyButton:
-                if (isModifyState(passwordModifyButtonText)) {
-                    setPasswordOnModifyState(true);
-                } else {
-                    // Todo upload new userInfo while user has modified
-                    setPasswordOnModifyState(false);
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("哈啦");
-        }
-    }
-
-    private boolean isModifyState(TextView textView) {
-        return !getString(R.string.modifyButtonChangeText).equals(textView.getText().toString());
-    }
-
-    private void setMemberInfoOnModifyState(boolean stateChange) {
-        setMemberInfoEnable(stateChange);
-        setModifyButtonState(stateChange, memberInfoModifyButton,
-                memberInfoModifyButtonText, memberInfoModifyButtonImage);
-    }
-
-    private void setEmailAddressOnModifyState(boolean stateChange) {
-        setEmailAddressEnable(stateChange);
-        setModifyButtonState(stateChange, emailAddressModifyButton,
-                emailAddressModifyButtonText, emailAddressModifyButtonImage);
-    }
-
-    private void setPasswordOnModifyState(boolean stateChange) {
-        setPasswordEnable(stateChange);
-        setModifyButtonState(stateChange, passwordModifyButton,
-                passwordModifyButtonText, passwordModifyButtonImage);
-    }
+//    private void setModifyButtons() {
+//        memberInfoModifyButton.setOnClickListener(this::onModifyButtonClick);
+//        emailAddressModifyButton.setOnClickListener(this::onModifyButtonClick);
+//        passwordModifyButton.setOnClickListener(this::onModifyButtonClick);
+//    }
+//
+//    private void onModifyButtonClick(View v) {
+//        switch (v.getId()) {
+//            case R.id.memberInfoModifyButton:
+//                if (isModifyState(memberInfoModifyButtonText)) {
+//                    setMemberInfoOnModifyState(true);
+//                } else {
+//                    setMemberInfoOnModifyState(false);
+//                }
+//                break;
+//            case R.id.emailAddressModifyButton:
+//                if (isModifyState(emailAddressModifyButtonText)) {
+//                    setEmailAddressOnModifyState(true);
+//                } else {
+//                    setEmailAddressOnModifyState(false);
+//                }
+//                break;
+//            case R.id.passwordModifyButton:
+//                if (isModifyState(passwordModifyButtonText)) {
+//                    setPasswordOnModifyState(true);
+//                } else {
+//                    // Todo upload new userInfo while user has modified
+//                    setPasswordOnModifyState(false);
+//                }
+//                break;
+//            default:
+//                throw new IllegalArgumentException("哈啦");
+//        }
+//    }
+//
+//    private boolean isModifyState(TextView textView) {
+//        return !getString(R.string.modifyButtonChangeText).equals(textView.getText().toString());
+//    }
+//
+//    private void setMemberInfoOnModifyState(boolean stateChange) {
+//        setMemberInfoEnable(stateChange);
+//        setModifyButtonState(stateChange, memberInfoModifyButton,
+//                memberInfoModifyButtonText, memberInfoModifyButtonImage);
+//    }
+//
+//    private void setEmailAddressOnModifyState(boolean stateChange) {
+//        setEmailAddressEnable(stateChange);
+//        setModifyButtonState(stateChange, emailAddressModifyButton,
+//                emailAddressModifyButtonText, emailAddressModifyButtonImage);
+//    }
+//
+//    private void setPasswordOnModifyState(boolean stateChange) {
+//        setPasswordEnable(stateChange);
+//        setModifyButtonState(stateChange, passwordModifyButton,
+//                passwordModifyButtonText, passwordModifyButtonImage);
+//    }
 
     private void setModifyButtonState(boolean stateChange, View modifyButton, TextView buttonText, ImageView buttonImage) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {

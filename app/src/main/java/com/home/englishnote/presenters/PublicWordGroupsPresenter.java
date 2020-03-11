@@ -6,17 +6,17 @@ import com.home.englishnote.utils.ThreadExecutor;
 
 import java.util.List;
 
-public class WordGroupsPresenter {
+public class PublicWordGroupsPresenter {
 
-    private WordGroupsView wordGroupsView;
+    private PublicWordGroupsView publicWordGroupsView;
     private WordGroupRepository wordGroupRepository;
     private ThreadExecutor threadExecutor;
 
-    public WordGroupsPresenter(WordGroupsView
-                                       wordGroupsView,
-                               WordGroupRepository wordGroupRepository,
-                               ThreadExecutor threadExecutor) {
-        this.wordGroupsView = wordGroupsView;
+    public PublicWordGroupsPresenter(PublicWordGroupsView
+                                       publicWordGroupsView,
+                                     WordGroupRepository wordGroupRepository,
+                                     ThreadExecutor threadExecutor) {
+        this.publicWordGroupsView = publicWordGroupsView;
         this.wordGroupRepository = wordGroupRepository;
         this.threadExecutor = threadExecutor;
     }
@@ -27,7 +27,7 @@ public class WordGroupsPresenter {
                 List<WordGroup> groupList = wordGroupRepository
                         .getWordGroupsFromDictionary(dictionaryId, offset, limit);
                 threadExecutor.executeUiThread(
-                        () -> wordGroupsView
+                        () -> publicWordGroupsView
                                 .onGetWordGroupsSuccessfully(groupList));
             } catch (RuntimeException err) {
                 err.printStackTrace();
@@ -35,7 +35,7 @@ public class WordGroupsPresenter {
         });
     }
 
-    public interface WordGroupsView {
+    public interface PublicWordGroupsView {
         void onGetWordGroupsSuccessfully(List<WordGroup> wordGroupList);
     }
 }

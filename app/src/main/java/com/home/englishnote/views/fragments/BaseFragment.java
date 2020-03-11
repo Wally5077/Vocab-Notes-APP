@@ -6,18 +6,23 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Member;
 import com.home.englishnote.models.entities.Token;
-import com.home.englishnote.utils.VocabularyNoteKeyword;
 import com.home.englishnote.views.activities.DictionaryHomePageActivity;
+
+import java.io.Serializable;
 
 public class BaseFragment extends Fragment {
 
+    protected final static int DICTIONARY_HOME_PAGE_CONTAINER = R.id.DictionaryHomePageContainer;
+
+    protected final static int PUBLIC_DICTIONARY_CONTAINER = R.id.PublicDictionaryContainer;
+    protected final static int MEMBER_PROFILE_CONTAINER = R.id.memberProfileContainer;
+    protected final static int OWN_DICTIONARY_CONTAINER = R.id.ownDictionaryContainer;
+
     protected DictionaryHomePageActivity mainPageActivity;
-    protected FragmentManager fragmentManager;
     protected Member member;
     protected Token token;
 
@@ -28,18 +33,22 @@ public class BaseFragment extends Fragment {
         // Todo
 //        member = (Member) mainPageActivity.getIntent().getSerializableExtra("member");
 //        token = (Token) mainPageActivity.getIntent().getSerializableExtra("token");
-        fragmentManager = mainPageActivity.getSupportFragmentManager();
         member = new Member("firstName", "lastName",
                 25, "email", "password");
     }
 
-    protected void onChangeProfilePage(View v) {
-        mainPageActivity.switchFragment(
-                R.layout.fragment_member_profile_page, VocabularyNoteKeyword.DICTIONARY_HOME_PAGE_CONTAINER);
+    protected void onSwitchProfilePage(View v) {
+        switchFragment(R.layout.fragment_member_profile_page, DICTIONARY_HOME_PAGE_CONTAINER);
     }
 
-    protected void onBackButtonClick(View v) {
-        mainPageActivity.switchFragment(
-                R.layout.fragment_public_dictionaries, VocabularyNoteKeyword.DICTIONARY_HOME_PAGE_CONTAINER);
+    protected void switchDictionaryHomePage(Serializable... serializables) {
+        switchFragment(R.layout.fragment_public_dictionary_page,
+                R.id.DictionaryHomePageContainer, serializables);
     }
+
+    protected void switchFragment(int fragmentId, int containerId,
+                                  Serializable... serializableArray) {
+        mainPageActivity.switchFragment(fragmentId, containerId, serializableArray);
+    }
+
 }

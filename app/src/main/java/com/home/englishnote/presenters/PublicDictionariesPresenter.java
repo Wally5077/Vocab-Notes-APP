@@ -6,15 +6,15 @@ import com.home.englishnote.utils.ThreadExecutor;
 
 import java.util.List;
 
-public class PublicDictionaryPresenter {
+public class PublicDictionariesPresenter {
 
     private PublicDictionaryView publicDictionaryView;
     private DictionaryRepository dictionaryRepository;
     private ThreadExecutor threadExecutor;
 
-    public PublicDictionaryPresenter(PublicDictionaryView publicDictionaryView,
-                                     DictionaryRepository dictionaryRepository,
-                                     ThreadExecutor threadExecutor) {
+    public PublicDictionariesPresenter(PublicDictionaryView publicDictionaryView,
+                                       DictionaryRepository dictionaryRepository,
+                                       ThreadExecutor threadExecutor) {
         this.publicDictionaryView = publicDictionaryView;
         this.dictionaryRepository = dictionaryRepository;
         this.threadExecutor = threadExecutor;
