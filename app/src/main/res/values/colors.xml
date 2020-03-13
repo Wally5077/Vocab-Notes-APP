@@ -9,4 +9,5 @@
     <color name="thirdGrey">#4e585a</color>
     <color name="secondaryWhite">#e0d9d9</color>
     <color name="ownDictionaryHintColor">#804E585A</color>
+    <color name="deleteDictionaryColor">#ce787b</color>
 </resources>

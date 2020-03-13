@@ -6,28 +6,27 @@ import com.home.englishnote.utils.ThreadExecutor;
 
 import java.util.List;
 
-public class PublicWordGroupsPresenter {
+public class OwnDictionaryPagePresenter {
 
-    private PublicWordGroupsView publicWordGroupsView;
+    private OwnDictionaryPageView ownDictionaryPageView;
     private WordGroupRepository wordGroupRepository;
     private ThreadExecutor threadExecutor;
 
-    public PublicWordGroupsPresenter(PublicWordGroupsView
-                                       publicWordGroupsView,
-                                     WordGroupRepository wordGroupRepository,
-                                     ThreadExecutor threadExecutor) {
-        this.publicWordGroupsView = publicWordGroupsView;
+    public OwnDictionaryPagePresenter(OwnDictionaryPageView ownDictionaryPageView,
+                                      WordGroupRepository wordGroupRepository,
+                                      ThreadExecutor threadExecutor) {
+        this.ownDictionaryPageView = ownDictionaryPageView;
         this.wordGroupRepository = wordGroupRepository;
         this.threadExecutor = threadExecutor;
     }
 
-    public void getWordGroups(int dictionaryId, int offset, int limit) {
+    public void getWordGroups(int memberId, int offset, int limit) {
         threadExecutor.execute(() -> {
             try {
                 List<WordGroup> groupList = wordGroupRepository
-                        .getWordGroupsFromPublicDictionary(dictionaryId, offset, limit);
+                        .getWordGroupsFromOwnDictionary(memberId, offset, limit);
                 threadExecutor.executeUiThread(
-                        () -> publicWordGroupsView
+                        () -> ownDictionaryPageView
                                 .onGetWordGroupsSuccessfully(groupList));
             } catch (RuntimeException err) {
                 err.printStackTrace();
@@ -35,7 +34,7 @@ public class PublicWordGroupsPresenter {
         });
     }
 
-    public interface PublicWordGroupsView {
+    public interface OwnDictionaryPageView {
         void onGetWordGroupsSuccessfully(List<WordGroup> wordGroupList);
     }
 }

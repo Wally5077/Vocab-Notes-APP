@@ -19,7 +19,7 @@ import com.home.englishnote.models.entities.WordGroup;
 import com.home.englishnote.presenters.PublicWordGroupsPresenter;
 import com.home.englishnote.presenters.PublicWordGroupsPresenter.PublicWordGroupsView;
 import com.home.englishnote.utils.Global;
-import com.home.englishnote.utils.WordGroupsAdapter;
+import com.home.englishnote.utils.PublicWordGroupsAdapter;
 import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
@@ -27,12 +27,11 @@ import java.util.List;
 
 public class PublicWordGroupsFragment extends BaseFragment implements PublicWordGroupsView {
 
-    private Dictionary dictionary;
     private Button publicDictionaryFavoriteButton;
     private TextView publicDictionaryName;
     private SwipeRefreshLayout wordGroupsSwipeRefreshLayout;
     private RecyclerView wordGroupsRecycler;
-    private WordGroupsAdapter wordGroupsAdapter;
+    private PublicWordGroupsAdapter publicWordGroupsAdapter;
     private PublicWordGroupsPresenter publicWordGroupsPresenter;
 
     @Nullable
@@ -70,8 +69,10 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
     }
 
     private void onFavoriteButtonClick(View view) {
-
+        //Todo switch member profile page
     }
+
+    private Dictionary dictionary;
 
     private void setDictionary() {
         Bundle bundle = getArguments();
@@ -84,11 +85,11 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
     private List<WordGroup> wordGroupsList = new ArrayList<>();
 
     private void setWordGroupsRecycler() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mainPageActivity);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         wordGroupsRecycler.setHasFixedSize(true);
         wordGroupsRecycler.setLayoutManager(linearLayoutManager);
-        wordGroupsAdapter = new WordGroupsAdapter(wordGroupsList);
-        wordGroupsRecycler.setAdapter(wordGroupsAdapter);
+        publicWordGroupsAdapter = new PublicWordGroupsAdapter(wordGroupsList);
+        wordGroupsRecycler.setAdapter(publicWordGroupsAdapter);
         wordGroupsRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView,
@@ -96,7 +97,7 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
                 super.onScrollStateChanged(recyclerView, newState);
                 int lastVisibleItemPosition =
                         linearLayoutManager.findLastVisibleItemPosition();
-                if (lastVisibleItemPosition + 1 == wordGroupsAdapter.getItemCount()) {
+                if (lastVisibleItemPosition + 1 == publicWordGroupsAdapter.getItemCount()) {
                     updateWordGroupsList();
                 }
             }
@@ -112,7 +113,6 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
     private void updateWordGroupsList() {
         setWordGroupSwipeRefreshLayoutEnable(true);
         int wordGroupListSize = wordGroupsList.size();
-        wordGroupListSize = (wordGroupListSize == 0) ? wordGroupListSize : ++wordGroupListSize;
         publicWordGroupsPresenter.getWordGroups(
                 dictionary.getId(), wordGroupListSize, wordGroupListSize + 3);
     }
@@ -121,7 +121,7 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
     public void onGetWordGroupsSuccessfully(List<WordGroup> wordGroupList) {
         setWordGroupSwipeRefreshLayoutEnable(false);
         this.wordGroupsList.addAll(wordGroupList);
-        wordGroupsAdapter.notifyDataSetChanged();
+        publicWordGroupsAdapter.notifyDataSetChanged();
     }
 
     private void setWordGroupSwipeRefreshLayoutEnable(boolean enable) {

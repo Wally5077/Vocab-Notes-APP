@@ -1,4 +1,4 @@
-package com.home.englishnote.views.fragments.dictionary;
+package com.home.englishnote.views.fragments;
 
 import com.home.englishnote.models.entities.Word;
 import com.home.englishnote.presenters.WordsPresenter.WordsView;

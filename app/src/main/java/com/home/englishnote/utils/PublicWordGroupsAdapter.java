@@ -15,24 +15,23 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Word;
 import com.home.englishnote.models.entities.WordGroup;
-import com.home.englishnote.utils.WordGroupsAdapter.WordGroupsHolder;
+import com.home.englishnote.utils.PublicWordGroupsAdapter.WordGroupsHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class WordGroupsAdapter extends Adapter<WordGroupsHolder> {
+public class PublicWordGroupsAdapter extends Adapter<WordGroupsHolder> {
 
     private List<WordGroup> wordGroupsList;
     private Context context;
 
-    public WordGroupsAdapter(List<WordGroup> wordGroupsList) {
+    public PublicWordGroupsAdapter(List<WordGroup> wordGroupsList) {
         this.wordGroupsList = wordGroupsList;
     }
 
     @NonNull
     @Override
     public WordGroupsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        context = parent.getContext();
+        context = (context == null) ? parent.getContext() : context;
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.item_public_word_group, parent, false);
         return new WordGroupsHolder(view);
@@ -54,7 +53,6 @@ public class WordGroupsAdapter extends Adapter<WordGroupsHolder> {
         private TextView publicWordGroupTitle;
         private Button publicWordGroupFavoriteButton;
         private RecyclerView publicWordsRecycler;
-        private WordsAdapter wordsAdapter;
 
         public WordGroupsHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,38 +66,20 @@ public class WordGroupsAdapter extends Adapter<WordGroupsHolder> {
             publicWordsRecycler = itemView.findViewById(R.id.publicWordsRecycler);
         }
 
-        private List<Word> maxWordList;
+        private List<Word> wordList;
 
         private void setData(WordGroup wordGroup) {
             publicWordGroupTitle.setText(wordGroup.getTitle());
-            maxWordList = wordGroup.getWords();
-            setMinWordList(maxWordList);
+            wordList = wordGroup.getWords();
             setWordsRecycler();
-            publicWordsRecycler.setOnClickListener(this::onWordsRecyclerClick);
-        }
-
-        private List<Word> minWordList = new ArrayList<>(3);
-
-        private void setMinWordList(List<Word> maxWordList) {
-            for (int index = 0; index < 3; index++) {
-                minWordList.add(maxWordList.get(index));
-            }
         }
 
         private void setWordsRecycler() {
             GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
             publicWordsRecycler.setHasFixedSize(true);
             publicWordsRecycler.setLayoutManager(gridLayoutManager);
-            wordsAdapter = new WordsAdapter(minWordList);
-            publicWordsRecycler.setAdapter(wordsAdapter);
-        }
-
-        private boolean isWordsRecyclerClick = false;
-
-        private void onWordsRecyclerClick(View v) {
-            isWordsRecyclerClick = !isWordsRecyclerClick;
-            wordsAdapter
-                    .updateWordList((isWordsRecyclerClick) ? maxWordList : minWordList);
+            PublicWordsAdapter publicWordsAdapter = new PublicWordsAdapter(wordList);
+            publicWordsRecycler.setAdapter(publicWordsAdapter);
         }
     }
 }

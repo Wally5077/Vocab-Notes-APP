@@ -21,132 +21,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lineHeight="10sp" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ownWordGroup"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/ownWordGroupDelete"
+        android:layout_width="10dp"
+        android:layout_height="12.5dp"
+        android:layout_marginTop="22.5dp"
+        android:layout_marginEnd="17.5dp"
+        android:layout_marginRight="17.5dp"
+        android:background="@drawable/item_trash_can"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ownWordsRecycler"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="7.5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ownWordGroupTitle">
-
-        <ImageView
-            android:id="@+id/ownWordImage1"
-            android:layout_width="65dp"
-            android:layout_height="60dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/guava_1" />
-
-        <ImageView
-            android:id="@+id/ownWordImage2"
-            android:layout_width="65dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintStart_toEndOf="@+id/ownWordImage1"
-            app:layout_constraintTop_toTopOf="@+id/ownWordImage1"
-            app:srcCompat="@drawable/pear_hydrosol_pyrus_communis_hydrolat_product_pic" />
-
-        <ImageView
-            android:id="@+id/ownWordImage3"
-            android:layout_width="65dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintStart_toEndOf="@+id/ownWordImage2"
-            app:layout_constraintTop_toTopOf="@+id/ownWordImage2"
-            app:srcCompat="@drawable/china_fresh_sweet_delicious_red_fruit_apples_jpg_350_x_350" />
-
-        <TextView
-            android:id="@+id/ownWordName1"
-            android:layout_width="wrap_content"
-            android:layout_height="12.5dp"
-            android:layout_marginTop="7.5dp"
-            android:text="Word 1"
-            android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="9sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintEnd_toEndOf="@+id/ownWordImage1"
-            app:layout_constraintStart_toStartOf="@+id/ownWordImage1"
-            app:layout_constraintTop_toBottomOf="@+id/ownWordImage1"
-            app:lineHeight="12sp" />
-
-
-        <TextView
-            android:id="@+id/ownWordName2"
-            android:layout_width="wrap_content"
-            android:layout_height="12.5dp"
-            android:layout_marginTop="7.5dp"
-            android:text="Word 2"
-            android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="9sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintEnd_toEndOf="@+id/ownWordImage2"
-            app:layout_constraintStart_toStartOf="@+id/ownWordImage2"
-            app:layout_constraintTop_toBottomOf="@+id/ownWordImage2"
-            app:lineHeight="12sp" />
-
-        <TextView
-            android:id="@+id/ownWordName3"
-            android:layout_width="wrap_content"
-            android:layout_height="12.5dp"
-            android:layout_marginTop="7.5dp"
-            android:text="Word 3"
-            android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="9sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintEnd_toEndOf="@+id/ownWordImage3"
-            app:layout_constraintStart_toStartOf="@+id/ownWordImage3"
-            app:layout_constraintTop_toBottomOf="@+id/ownWordImage3"
-            app:lineHeight="12sp" />
-
-        <TextView
-            android:id="@+id/ownWordSynonym1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="( synonym )"
-            android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="6sp"
-            app:fontFamily="@font/avenirbook"
-            app:layout_constraintEnd_toEndOf="@+id/ownWordName1"
-            app:layout_constraintStart_toStartOf="@+id/ownWordName1"
-            app:layout_constraintTop_toBottomOf="@+id/ownWordName1"
-            app:lineHeight="8sp" />
-
-        <TextView
-            android:id="@+id/ownWordSynonym2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="( synonym )"
-            android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="6sp"
-            app:fontFamily="@font/avenirbook"
-            app:layout_constraintEnd_toEndOf="@+id/ownWordName2"
-            app:layout_constraintStart_toStartOf="@+id/ownWordName2"
-            app:layout_constraintTop_toBottomOf="@+id/ownWordName2"
-            app:lineHeight="8sp" />
-
-        <TextView
-            android:id="@+id/ownWordSynonym3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="( synonym )"
-            android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="6sp"
-            app:fontFamily="@font/avenirbook"
-            app:layout_constraintEnd_toEndOf="@+id/ownWordName3"
-            app:layout_constraintStart_toStartOf="@+id/ownWordName3"
-            app:layout_constraintTop_toBottomOf="@+id/ownWordName3"
-            app:lineHeight="8sp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintStart_toEndOf="@+id/ownWordGroupTitle"
+        app:layout_constraintTop_toBottomOf="@+id/ownWordGroupTitle" />
 
     <View
         android:layout_width="match_parent"
@@ -157,5 +49,5 @@
         android:background="@color/mainGrey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ownWordGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/ownWordsRecycler" />
 </androidx.constraintlayout.widget.ConstraintLayout>

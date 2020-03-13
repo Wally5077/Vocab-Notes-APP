@@ -18,9 +18,8 @@ public class BaseFragment extends Fragment {
 
     protected final static int DICTIONARY_HOME_PAGE_CONTAINER = R.id.DictionaryHomePageContainer;
 
-    protected final static int PUBLIC_DICTIONARY_CONTAINER = R.id.PublicDictionaryContainer;
-    protected final static int MEMBER_PROFILE_CONTAINER = R.id.memberProfileContainer;
-    protected final static int OWN_DICTIONARY_CONTAINER = R.id.ownDictionaryContainer;
+    protected final static int PUBLIC_DICTIONARY_CONTAINER = R.id.PublicDictionaryPageContainer;
+    protected final static int MEMBER_PROFILE_CONTAINER = R.id.memberProfilePageContainer;
 
     protected DictionaryHomePageActivity mainPageActivity;
     protected Member member;

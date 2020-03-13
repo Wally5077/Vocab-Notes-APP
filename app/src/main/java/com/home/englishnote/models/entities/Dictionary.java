@@ -3,7 +3,7 @@ package com.home.englishnote.models.entities;
 import java.io.Serializable;
 
 public class Dictionary implements Serializable {
-    private int id;
+    private int id, ownId;
     private String title, description;
     private Member owner;
     private Type type;
@@ -24,6 +24,14 @@ public class Dictionary implements Serializable {
         this.id = id;
     }
 
+    public int getOwnId() {
+        return ownId;
+    }
+
+    public void setOwnId(int ownId) {
+        this.ownId = ownId;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -40,11 +48,11 @@ public class Dictionary implements Serializable {
         this.description = description;
     }
 
-    public Member getMember() {
+    public Member getOwner() {
         return owner;
     }
 
-    public void setMember(Member owner) {
+    public void setOwner(Member owner) {
         this.owner = owner;
     }
 

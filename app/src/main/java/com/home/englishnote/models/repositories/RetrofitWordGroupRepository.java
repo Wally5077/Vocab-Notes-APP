@@ -46,7 +46,7 @@ public class RetrofitWordGroupRepository implements WordGroupRepository {
     }
 
     @Override
-    public List<WordGroup> getWordGroupsFromDictionary(int dictionaryId, int offset, int limit) {
+    public List<WordGroup> getWordGroupsFromPublicDictionary(int dictionaryId, int offset, int limit) {
         Call<List<WordGroup>> wordGroupCall =
                 wordGroupApi.getWordGroupsFromDictionary(dictionaryId, offset, limit);
         List<WordGroup> wordGroupList = new ArrayList<>();
@@ -57,5 +57,10 @@ public class RetrofitWordGroupRepository implements WordGroupRepository {
             e.printStackTrace();
         }
         return wordGroupList;
+    }
+
+    @Override
+    public List<WordGroup> getWordGroupsFromOwnDictionary(int memberId, int offset, int limit) {
+        return null;
     }
 }

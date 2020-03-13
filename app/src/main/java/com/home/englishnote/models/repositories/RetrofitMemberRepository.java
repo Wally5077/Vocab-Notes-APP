@@ -5,10 +5,12 @@ import com.home.englishnote.exceptions.InvalidCredentialsException;
 import com.home.englishnote.exceptions.MemberIdInvalidException;
 import com.home.englishnote.exceptions.MemberInfoNotFoundException;
 import com.home.englishnote.models.entities.Credentials;
+import com.home.englishnote.models.entities.Dictionary;
 import com.home.englishnote.models.entities.Member;
 import com.home.englishnote.models.entities.Token;
 
 import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -91,5 +93,10 @@ public class RetrofitMemberRepository implements MemberRepository {
     @Override
     public void updateMemberInfo(String firstName, String lastName, int age) {
 
+    }
+
+    @Override
+    public List<Dictionary> getOwnDictionaries(int memberId, int offset, int limit) {
+        return null;
     }
 }

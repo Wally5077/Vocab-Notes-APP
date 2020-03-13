@@ -47,18 +47,18 @@
         android:layout_marginTop="17.5dp"
         android:layout_marginEnd="7.5dp"
         android:layout_marginRight="7.5dp"
-        app:layout_constraintEnd_toStartOf="@+id/ownDictionaryName"
+        app:layout_constraintEnd_toStartOf="@+id/ownDictionaryPageMemberName"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/big_user_pic" />
 
     <Button
-        android:id="@+id/ownDictionaryButton"
+        android:id="@+id/ownDictionaryPageEditButton"
         android:layout_width="77.5dp"
         android:layout_height="22.5dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/bg_modify_green_round_button"
-        android:drawableStart="@drawable/modify_member_info_pen"
-        android:drawableLeft="@drawable/modify_member_info_pen"
+        android:drawableStart="@drawable/modify_pen"
+        android:drawableLeft="@drawable/modify_pen"
         android:paddingStart="7.5dp"
         android:paddingLeft="7.5dp"
         android:paddingEnd="7.5dp"
@@ -74,8 +74,48 @@
         app:layout_constraintStart_toStartOf="@id/ownDictionaryPagePhoto"
         app:layout_constraintTop_toBottomOf="@id/ownDictionaryPagePhoto" />
 
+    <Button
+        android:id="@+id/ownDictionaryPageDeleteButton"
+        android:layout_width="102.5dp"
+        android:layout_height="17.5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/bg_delete_dictionary"
+        android:drawableStart="@drawable/own_dictionary_trash_can"
+        android:drawableLeft="@drawable/own_dictionary_trash_can"
+        android:paddingStart="7.5dp"
+        android:paddingLeft="7.5dp"
+        android:paddingEnd="2.5dp"
+        android:paddingRight="2.5dp"
+        android:paddingBottom="3dp"
+        android:text="@string/delete_this_dictionary"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="8sp"
+        android:visibility="invisible"
+        app:fontFamily="@font/avenirmedium"
+        app:layout_constraintEnd_toStartOf="@+id/ownDictionaryPageSaveButton"
+        app:layout_constraintTop_toTopOf="@+id/ownDictionaryPageSaveButton" />
+
+    <Button
+        android:id="@+id/ownDictionaryPageSaveButton"
+        android:layout_width="35dp"
+        android:layout_height="17.5dp"
+        android:layout_marginTop="17.5dp"
+        android:background="@drawable/bg_save_dictionary"
+        android:paddingBottom="3dp"
+        android:text="@string/save"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="8sp"
+        android:visibility="invisible"
+        app:fontFamily="@font/avenirmedium"
+        app:layout_constraintEnd_toEndOf="@+id/ownDictionaryPageMemberName"
+        app:layout_constraintStart_toStartOf="@+id/ownDictionaryPageMemberName"
+        app:layout_constraintTop_toTopOf="@+id/ownDictionaryPageWordGroupCount" />
+
     <TextView
-        android:id="@+id/ownDictionaryName"
+        android:id="@+id/ownDictionaryPageMemberName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12.5dp"
@@ -90,22 +130,36 @@
         app:layout_constraintTop_toTopOf="@id/ownDictionaryPagePhoto"
         app:lineHeight="11sp" />
 
-    <TextView
-        android:id="@+id/textView17"
+    <EditText
+        android:id="@+id/ownDictionaryPageDictionaryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12.5dp"
         android:layout_marginLeft="12.5dp"
         android:layout_marginBottom="7.5dp"
+        android:background="@null"
         android:text="Own Dictionary 1"
         android:textColor="@color/mainWhite"
         android:textStyle="italic"
         app:fontFamily="@font/avenirheavy"
-        app:layout_constraintBottom_toTopOf="@+id/textView12"
+        app:layout_constraintBottom_toTopOf="@+id/ownDictionaryPageWordGroupCount"
         app:layout_constraintStart_toStartOf="@+id/drawerLayout" />
 
+    <ImageView
+        android:id="@+id/ownDictionaryPageDictionaryNamePen"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/modify_pen"
+        android:visibility="invisible"
+        app:backgroundTint="#73FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/ownDictionaryPageDictionaryName"
+        app:layout_constraintStart_toEndOf="@+id/ownDictionaryPageDictionaryName"
+        app:layout_constraintTop_toTopOf="@+id/ownDictionaryPageDictionaryName" />
+
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/ownDictionaryPageWordGroupCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="20 word groups"
@@ -114,11 +168,12 @@
         android:textSize="10sp"
         android:textStyle="italic"
         app:fontFamily="@font/avenirbook"
-        app:layout_constraintStart_toStartOf="@+id/textView17"
-        app:layout_constraintTop_toTopOf="@+id/ownDictionaryButton"
+        app:layout_constraintStart_toStartOf="@+id/ownDictionaryPageDictionaryName"
+        app:layout_constraintTop_toTopOf="@+id/ownDictionaryPageEditButton"
         app:lineHeight="14sp" />
 
     <SearchView
+        android:id="@+id/ownDictionaryPageSearch"
         android:layout_width="167.5dp"
         android:layout_height="20dp"
         android:layout_marginTop="20dp"
@@ -183,16 +238,12 @@
     <!--        &lt;!&ndash;            app:layout_constraintTop_toTopOf="parent" />&ndash;&gt;-->
     <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ownDictionaryContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="152.5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/wordGroupRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="165dp"
+        android:overScrollMode="never" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

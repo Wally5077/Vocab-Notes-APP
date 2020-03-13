@@ -194,7 +194,8 @@ public class MemberProfileModifyFragment extends BaseFragment {
 //                passwordModifyButtonText, passwordModifyButtonImage);
 //    }
 
-    private void setModifyButtonState(boolean stateChange, View modifyButton, TextView buttonText, ImageView buttonImage) {
+    private void setModifyButtonState(boolean stateChange, View modifyButton,
+                                      TextView buttonText, ImageView buttonImage) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             modifyButton.setBackground(stateChange ?
                     getResources().getDrawable(R.drawable.bg_modify_grey_round_button) :

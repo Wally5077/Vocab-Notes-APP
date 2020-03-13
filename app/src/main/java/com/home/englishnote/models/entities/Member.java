@@ -12,6 +12,8 @@ public class Member implements Serializable {
 
     }
 
+    // Todo delete password constructor parameter
+
     public Member(String firstName, String lastName, int age, String email, String password) {
         this.age = age;
         this.firstName = firstName;

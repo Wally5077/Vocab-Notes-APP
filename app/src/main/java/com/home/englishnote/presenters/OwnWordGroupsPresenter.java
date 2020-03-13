@@ -6,28 +6,27 @@ import com.home.englishnote.utils.ThreadExecutor;
 
 import java.util.List;
 
-public class PublicWordGroupsPresenter {
+public class OwnWordGroupsPresenter {
 
-    private PublicWordGroupsView publicWordGroupsView;
+    private OwnWordGroupsView ownWordGroupsView;
     private WordGroupRepository wordGroupRepository;
     private ThreadExecutor threadExecutor;
 
-    public PublicWordGroupsPresenter(PublicWordGroupsView
-                                       publicWordGroupsView,
-                                     WordGroupRepository wordGroupRepository,
-                                     ThreadExecutor threadExecutor) {
-        this.publicWordGroupsView = publicWordGroupsView;
+    public OwnWordGroupsPresenter(OwnWordGroupsView ownWordGroupsView,
+                                  WordGroupRepository wordGroupRepository,
+                                  ThreadExecutor threadExecutor) {
+        this.ownWordGroupsView = ownWordGroupsView;
         this.wordGroupRepository = wordGroupRepository;
         this.threadExecutor = threadExecutor;
     }
 
-    public void getWordGroups(int dictionaryId, int offset, int limit) {
+    public void getWordGroups(int memberId, int offset, int limit) {
         threadExecutor.execute(() -> {
             try {
                 List<WordGroup> groupList = wordGroupRepository
-                        .getWordGroupsFromPublicDictionary(dictionaryId, offset, limit);
+                        .getWordGroupsFromOwnDictionary(memberId, offset, limit);
                 threadExecutor.executeUiThread(
-                        () -> publicWordGroupsView
+                        () -> ownWordGroupsView
                                 .onGetWordGroupsSuccessfully(groupList));
             } catch (RuntimeException err) {
                 err.printStackTrace();
@@ -35,7 +34,7 @@ public class PublicWordGroupsPresenter {
         });
     }
 
-    public interface PublicWordGroupsView {
+    public interface OwnWordGroupsView {
         void onGetWordGroupsSuccessfully(List<WordGroup> wordGroupList);
     }
 }

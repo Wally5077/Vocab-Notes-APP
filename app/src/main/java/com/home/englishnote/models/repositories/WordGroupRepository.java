@@ -7,5 +7,7 @@ import java.util.List;
 public interface WordGroupRepository {
     WordGroup getWordGroup(int wordGroupId);
 
-    List<WordGroup> getWordGroupsFromDictionary(int dictionaryId, int offset, int limit);
+    List<WordGroup> getWordGroupsFromPublicDictionary(int dictionaryId, int offset, int limit);
+
+    List<WordGroup> getWordGroupsFromOwnDictionary(int memberId, int offset, int limit);
 }

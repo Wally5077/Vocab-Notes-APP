@@ -1,7 +1,10 @@
 package com.home.englishnote.presenters;
 
+import com.home.englishnote.models.entities.Dictionary;
 import com.home.englishnote.models.repositories.MemberRepository;
 import com.home.englishnote.utils.ThreadExecutor;
+
+import java.util.List;
 
 public class OwnDictionariesPresenter {
     private OwnDictionariesView ownDictionariesView;
@@ -16,7 +19,21 @@ public class OwnDictionariesPresenter {
         this.threadExecutor = threadExecutor;
     }
 
-    public interface OwnDictionariesView {
+    public void getOwnDictionaries(int memberId, int offset, int limit) {
+        threadExecutor.execute(() -> {
+            try {
+                threadExecutor.executeUiThread(() -> {
+                    List<Dictionary> dictionaryList =
+                            memberRepository.getOwnDictionaries(memberId, offset, limit);
+                    ownDictionariesView.onGetDictionariesSuccessfully(dictionaryList);
+                });
+            } catch (Exception err) {
 
+            }
+        });
+    }
+
+    public interface OwnDictionariesView {
+        void onGetDictionariesSuccessfully(List<Dictionary> dictionaryList);
     }
 }

@@ -14,28 +14,40 @@ import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Word;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.WordsHolder> {
+public class OwnWordsAdapter extends RecyclerView.Adapter<OwnWordsAdapter.OwnWordsHolder> {
 
-    private List<Word> wordList;
     private Context context;
+    private List<Word> minWordList;
+    private List<Word> maxWordList;
+    private List<Word> wordList;
 
-    public WordsAdapter(List<Word> wordList) {
-        this.wordList = wordList;
+    public OwnWordsAdapter(List<Word> wordList) {
+        this.maxWordList = wordList;
+        this.minWordList = new ArrayList<>(3);
+        setMinWordList(wordList);
+    }
+
+    private void setMinWordList(List<Word> wordList) {
+        for (int index = 0; index < 3; index++) {
+            minWordList.add(wordList.get(index));
+        }
+        this.wordList = minWordList;
     }
 
     @NonNull
     @Override
-    public WordsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        context = parent.getContext();
+    public OwnWordsAdapter.OwnWordsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = (context == null) ? parent.getContext() : context;
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.item_public_word, parent, false);
-        return new WordsAdapter.WordsHolder(view);
+                .inflate(R.layout.item_word, parent, false);
+        return new OwnWordsAdapter.OwnWordsHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WordsHolder holder, int position) {
+    public void onBindViewHolder(@NonNull OwnWordsAdapter.OwnWordsHolder holder, int position) {
         holder.setData(wordList.get(position));
     }
 
@@ -44,20 +56,24 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.WordsHolder>
         return wordList.size();
     }
 
-    public void updateWordList(List<Word> wordList) {
-        this.wordList = wordList;
-        notifyDataSetChanged();
-    }
-
-    public class WordsHolder extends RecyclerView.ViewHolder {
+    public class OwnWordsHolder extends RecyclerView.ViewHolder {
 
         private ImageView wordItemImage;
         private TextView wordItemName;
         private TextView wordItemSynonym;
 
-        public WordsHolder(@NonNull View itemView) {
+        public OwnWordsHolder(@NonNull View itemView) {
             super(itemView);
             findViews(itemView);
+            itemView.setOnClickListener(this::onWordsRecyclerClick);
+        }
+
+        private boolean isWordsRecyclerClick = false;
+
+        private void onWordsRecyclerClick(View v) {
+            isWordsRecyclerClick = !isWordsRecyclerClick;
+            wordList = (isWordsRecyclerClick) ? maxWordList : minWordList;
+            notifyDataSetChanged();
         }
 
         private void findViews(View view) {
@@ -77,4 +93,5 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.WordsHolder>
             wordItemSynonym.setText(wordSynonyms);
         }
     }
+
 }

@@ -25,11 +25,13 @@ import com.home.englishnote.views.fragments.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PublicDictionariesFragment extends BaseFragment implements PublicDictionariesPresenter.PublicDictionaryView {
+import static com.home.englishnote.presenters.PublicDictionariesPresenter.*;
+
+public class PublicDictionariesFragment extends BaseFragment implements PublicDictionaryView {
 
     private SwipeRefreshLayout publicDictionariesSwipeRefreshLayout;
     private RecyclerView publicDictionariesRecycler;
-    private DictionariesAdapter dictionariesAdapter;
+    private PublicDictionariesAdapter publicDictionariesAdapter;
     private PublicDictionariesPresenter publicDictionariesPresenter;
 
     @Nullable
@@ -56,13 +58,13 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
     private void init() {
         publicDictionariesPresenter = new PublicDictionariesPresenter(
                 this, Global.dictionaryRepository(), Global.threadExecutor());
-        setDictionarySwipeRefreshLayout();
-        setDictionaryRecycler();
+        setDictionariesSwipeRefreshLayout();
+        setDictionariesRecycler();
         dictionaryList.clear();
         updateDictionaryList();
     }
 
-    private void setDictionarySwipeRefreshLayout() {
+    private void setDictionariesSwipeRefreshLayout() {
         publicDictionariesSwipeRefreshLayout.measure(0, 0);
         publicDictionariesSwipeRefreshLayout.setProgressViewOffset(true, 80, 90);
         publicDictionariesSwipeRefreshLayout.setOnRefreshListener(this::updateDictionaryList);
@@ -70,12 +72,12 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
 
     private List<Dictionary> dictionaryList = new ArrayList<>();
 
-    private void setDictionaryRecycler() {
+    private void setDictionariesRecycler() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mainPageActivity);
         publicDictionariesRecycler.setHasFixedSize(true);
         publicDictionariesRecycler.setLayoutManager(linearLayoutManager);
-        dictionariesAdapter = new DictionariesAdapter(dictionaryList);
-        publicDictionariesRecycler.setAdapter(dictionariesAdapter);
+        publicDictionariesAdapter = new PublicDictionariesAdapter(dictionaryList);
+        publicDictionariesRecycler.setAdapter(publicDictionariesAdapter);
         publicDictionariesRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView,
@@ -83,7 +85,7 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
                 super.onScrollStateChanged(recyclerView, newState);
                 int lastVisibleItemPosition =
                         linearLayoutManager.findLastVisibleItemPosition();
-                if (lastVisibleItemPosition + 1 == dictionariesAdapter.getItemCount()) {
+                if (lastVisibleItemPosition + 1 == publicDictionariesAdapter.getItemCount()) {
                     updateDictionaryList();
                 }
             }
@@ -91,13 +93,13 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
     }
 
     private void updateDictionaryList() {
-        setDictionarySwipeRefreshLayoutEnable(true);
+        setDictionariesSwipeRefreshLayoutEnable(true);
         int dictionaryListSize = dictionaryList.size();
         publicDictionariesPresenter
                 .getDictionaries(dictionaryListSize, dictionaryListSize + 3);
     }
 
-    private void setDictionarySwipeRefreshLayoutEnable(boolean enable) {
+    private void setDictionariesSwipeRefreshLayoutEnable(boolean enable) {
         publicDictionariesSwipeRefreshLayout.setEnabled(enable);
         publicDictionariesSwipeRefreshLayout.setRefreshing(enable);
     }
@@ -112,29 +114,29 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
 
     @Override
     public void onGetDictionariesSuccessfully(List<Dictionary> dictionaryList) {
-        setDictionarySwipeRefreshLayoutEnable(false);
+        setDictionariesSwipeRefreshLayoutEnable(false);
         this.dictionaryList.addAll(dictionaryList);
-        dictionariesAdapter.notifyDataSetChanged();
+        publicDictionariesAdapter.notifyDataSetChanged();
     }
 
-    public class DictionariesAdapter extends Adapter<DictionariesAdapter.DictionariesHolder> {
+    public class PublicDictionariesAdapter extends Adapter<PublicDictionariesAdapter.PublicDictionariesHolder> {
 
         private List<Dictionary> dictionaryList;
 
-        public DictionariesAdapter(List<Dictionary> dictionaryList) {
+        public PublicDictionariesAdapter(List<Dictionary> dictionaryList) {
             this.dictionaryList = dictionaryList;
         }
 
         @NonNull
         @Override
-        public DictionariesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = getLayoutInflater()
+        public PublicDictionariesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_public_dictionary, parent, false);
-            return new DictionariesHolder(view);
+            return new PublicDictionariesHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull DictionariesHolder holder, int position) {
+        public void onBindViewHolder(@NonNull PublicDictionariesHolder holder, int position) {
             Dictionary dictionary = dictionaryList.get(position);
             holder.setData(dictionary);
             holder.setExploreButtonClick(dictionary);
@@ -145,13 +147,13 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
             return dictionaryList.size();
         }
 
-        protected class DictionariesHolder extends ViewHolder {
+        protected class PublicDictionariesHolder extends ViewHolder {
 
             private TextView dictionaryTitle, dictionaryDescription;
             private ImageView dictionaryImage1, dictionaryImage2, dictionaryImage3;
             private Button exploreButton;
 
-            public DictionariesHolder(@NonNull View itemView) {
+            public PublicDictionariesHolder(@NonNull View itemView) {
                 super(itemView);
                 findViews(itemView);
             }

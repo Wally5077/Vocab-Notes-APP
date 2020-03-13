@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
+import com.home.englishnote.views.fragments.BaseFragment;
 
 public class PublicDictionaryPageFragment extends BaseFragment {
 

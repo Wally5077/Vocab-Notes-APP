@@ -2,13 +2,13 @@ package com.home.englishnote.views.activities;
 
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.home.englishnote.R;
+import com.home.englishnote.views.fragments.OwnDictionaryPageFragment;
 import com.home.englishnote.views.fragments.PublicDictionaryPageFragment;
 import com.home.englishnote.views.fragments.MemberProfilePageFragment;
 import com.home.englishnote.views.fragments.dictionary.PublicDictionariesFragment;
@@ -43,7 +43,7 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
         // DictionaryHomePageContainer
         fragmentMap.put(R.layout.fragment_public_dictionary_page, new PublicDictionaryPageFragment());
         fragmentMap.put(R.layout.fragment_member_profile_page, new MemberProfilePageFragment());
-        //        fragmentMap.put(R.layout.fragment_own_dictionary_page)
+        fragmentMap.put(R.layout.fragment_own_dictionary_page, new OwnDictionaryPageFragment());
 
         // Public Dictionary
         fragmentMap.put(R.layout.fragment_public_dictionaries, new PublicDictionariesFragment());
@@ -54,7 +54,7 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
         fragmentMap.put(R.layout.fragment_member_profile_modify, new MemberProfileModifyFragment());
 
         // Own Dictionary
-        fragmentMap.put(R.layout.fragment_own_dictionaries,new OwnDictionariesFragment());
+        fragmentMap.put(R.layout.fragment_own_dictionaries, new OwnDictionariesFragment());
 
         switchFragment(R.layout.fragment_public_dictionary_page, R.id.DictionaryHomePageContainer);
     }

@@ -162,7 +162,7 @@
     <!--DownPart-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/PublicDictionaryContainer"
+        android:id="@+id/PublicDictionaryPageContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="60dp"

@@ -1,8 +1,11 @@
 package com.home.englishnote.models.repositories;
 
 import com.home.englishnote.models.entities.Credentials;
+import com.home.englishnote.models.entities.Dictionary;
 import com.home.englishnote.models.entities.Member;
 import com.home.englishnote.models.entities.Token;
+
+import java.util.List;
 
 public class StubMemberRepository implements MemberRepository {
     @Override
@@ -24,5 +27,10 @@ public class StubMemberRepository implements MemberRepository {
     @Override
     public void updateMemberInfo(String firstName, String lastName, int age) {
 
+    }
+
+    @Override
+    public List<Dictionary> getOwnDictionaries(int memberId, int offset, int limit) {
+        return null;
     }
 }

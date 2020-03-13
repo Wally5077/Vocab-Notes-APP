@@ -44,8 +44,8 @@
         android:layout_marginEnd="12.5dp"
         android:layout_marginRight="12.5dp"
         android:background="@drawable/bg_modify_green_round_button"
-        android:drawableStart="@drawable/modify_member_info_pen"
-        android:drawableLeft="@drawable/modify_member_info_pen"
+        android:drawableStart="@drawable/modify_pen"
+        android:drawableLeft="@drawable/modify_pen"
         android:paddingStart="7.5dp"
         android:paddingLeft="7.5dp"
         android:paddingEnd="10dp"
@@ -101,7 +101,7 @@
         app:lineHeight="20sp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/memberProfileContainer"
+        android:id="@+id/memberProfilePageContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="162.5dp"

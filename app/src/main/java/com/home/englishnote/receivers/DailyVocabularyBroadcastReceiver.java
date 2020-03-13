@@ -14,7 +14,6 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
-import com.google.gson.Gson;
 import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Word;
 import com.home.englishnote.models.entities.WordGroup;
@@ -54,7 +53,7 @@ public class DailyVocabularyBroadcastReceiver extends BroadcastReceiver {
             int offset = sp.getInt(VocabularyNoteKeyword.OFFSET, 0);
             int limit = VocabularyNoteKeyword.READ_DICTIONARY_LIMIT;
             List<WordGroup> wordGroupList = wordGroupRepository
-                    .getWordGroupsFromDictionary(dictionaryId, offset, limit);
+                    .getWordGroupsFromPublicDictionary(dictionaryId, offset, limit);
             setVocabToLocalVocabStorage(dictionaryId, wordGroupList);
             createNotificationChannel();
             sendDailyVocabularyNotification(intent);
