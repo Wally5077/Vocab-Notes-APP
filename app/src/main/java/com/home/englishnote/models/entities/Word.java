@@ -1,6 +1,7 @@
 package com.home.englishnote.models.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Word implements Serializable {
     private int id;
@@ -11,6 +12,10 @@ public class Word implements Serializable {
         this.name = name;
         this.synonyms = synonyms;
         this.imageUrl = imageUrl;
+    }
+
+    public Word() {
+
     }
 
     public int getId() {
@@ -43,5 +48,15 @@ public class Word implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    private List<String> synonymsList;
+
+    public List<String> getSynonymsList() {
+        return synonymsList;
+    }
+
+    public void setSynonyms(List<String> synonymsList) {
+        this.synonymsList = synonymsList;
     }
 }

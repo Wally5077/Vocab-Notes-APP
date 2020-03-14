@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
@@ -11,8 +11,16 @@
         <item name="colorControlActivated">#00FFFFFF</item>
     </style>
 
-    <style name="VocabSearchView" parent="Widget.AppCompat.SearchView" >
+    <style name="VocabSearchView" parent="Widget.AppCompat.SearchView">
         <item name="android:textSize">8sp</item>
         <item name="android:textColorHint">@color/secondaryGrey</item>
     </style>
+
+    <style name="NavigationTheme">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/avenirmedium</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginBottom">12.5dp</item>
+        <item name="android:layout_marginTop">12.5dp</item>
+    </style>
+
 </resources>

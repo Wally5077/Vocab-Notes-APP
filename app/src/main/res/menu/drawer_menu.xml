@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_create_dictionary"
+            android:icon="@drawable/drawer_create_dictionary"
+            android:title="create a new list" />
+
+        <item
+            android:id="@+id/favorite"
+            android:icon="@drawable/drawer_favorite"
+            android:title="my favorite" />
+
+        <item
+            android:id="@+id/my_list"
+            android:icon="@drawable/drawer_noun_list"
+            android:title="my list" />
+
+        <item
+            android:id="@+id/log_out"
+            android:icon="@drawable/drawer_noun_log_out"
+            android:title="log out" />
+
+    </group>
+</menu>

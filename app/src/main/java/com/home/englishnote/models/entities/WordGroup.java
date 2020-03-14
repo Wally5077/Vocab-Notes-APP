@@ -2,6 +2,7 @@ package com.home.englishnote.models.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 public class WordGroup implements Serializable {
     private int id;
@@ -12,6 +13,10 @@ public class WordGroup implements Serializable {
         this.id = id;
         this.title = title;
         this.words = words;
+    }
+
+    public WordGroup() {
+
     }
 
     public int getId() {
@@ -36,5 +41,9 @@ public class WordGroup implements Serializable {
 
     public void setWords(List<Word> words) {
         this.words = words;
+    }
+
+    public void setWords(Set<Word> words) {
+        this.words.addAll(words);
     }
 }
