@@ -2,6 +2,7 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ownDictionaryPageDrawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainWhite"
@@ -24,6 +25,17 @@
             app:layout_constraintTop_toTopOf="parent">
 
         </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/ownDictionaryPageDrawerButton"
+            android:layout_width="17.5dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="17.5dp"
+            android:layout_marginLeft="17.5dp"
+            android:layout_marginTop="22.5dp"
+            android:background="@drawable/noun_side_bar_2672855"
+            app:layout_constraintStart_toStartOf="@id/ownDictionaryPageTopBar"
+            app:layout_constraintTop_toTopOf="@id/ownDictionaryPageTopBar" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"
@@ -241,6 +253,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/odp_ngv"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

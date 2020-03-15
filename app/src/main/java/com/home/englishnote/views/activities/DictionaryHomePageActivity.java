@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.home.englishnote.R;
 import com.home.englishnote.views.fragments.OwnDictionaryPageFragment;
@@ -19,13 +20,13 @@ import com.home.englishnote.views.fragments.profile.OwnDictionariesFragment;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 
 public class DictionaryHomePageActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     private Map<Integer, Fragment> fragmentMap = new HashMap<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,22 +58,52 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
         fragmentMap.put(R.layout.fragment_own_dictionaries, new OwnDictionariesFragment());
 
         switchFragment(R.layout.fragment_public_dictionary_page, R.id.DictionaryHomePageContainer);
+
     }
+
+    private Stack<Integer> containerStack = new Stack<>();
+    private Stack<Integer> fragmentStack = new Stack<>();
 
     public void switchFragment(int fragmentId, int containerId,
                                Serializable... serializableArray) {
-        Fragment fragment = fragmentMap.get(fragmentId);
-        if (fragment != null) {
+        Fragment nextFragment = fragmentMap.get(fragmentId);
+        if (nextFragment != null) {
             if (serializableArray.length > 0) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("VocabNoteObjects", serializableArray[0]);
-                fragment.setArguments(bundle);
+                nextFragment.setArguments(bundle);
             }
-            fragmentManager
-                    .beginTransaction()
-                    .replace(containerId, fragment)
-                    .addToBackStack(String.valueOf(fragmentId))
-                    .commit();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            if (nextFragment.isAdded()) {
+                fragmentTransaction
+                        .hide(fragmentMap.get(fragmentStack.peek()))
+                        .show(nextFragment).commit();
+            } else {
+                fragmentTransaction.add(containerId, nextFragment).commit();
+                fragmentStack.add(fragmentId);
+                containerStack.add(containerId);
+            }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (fragmentStack.size() > 2) {
+            int fragmentId = fragmentStack.pop();
+            backLastFragment(fragmentId);
+            fragmentId = fragmentStack.peek();
+            if (fragmentId == R.layout.fragment_public_dictionary_page
+                    || fragmentId == R.layout.fragment_member_profile_page
+                    || fragmentId == R.layout.fragment_own_dictionary_page) {
+                backLastFragment(fragmentStack.pop());
+            }
+        }
+    }
+
+    private void backLastFragment(int fragmentId) {
+        Fragment fragment = fragmentMap.get(fragmentId);
+        containerStack.pop();
+        fragmentManager.beginTransaction().remove(fragment).commit();
+        switchFragment(fragmentStack.peek(), containerStack.peek());
     }
 }

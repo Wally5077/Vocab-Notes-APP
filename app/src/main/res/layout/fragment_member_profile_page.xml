@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainWhite"
+    android:id="@+id/memberProfilePageDrawer"
     android:fitsSystemWindows="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="22.5dp"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/userProfilePageTopBar"
+            android:id="@+id/memberProfilePageTopBar"
             android:layout_width="0dp"
             android:layout_height="135dp"
             android:background="?attr/colorPrimary"
@@ -21,8 +23,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
         </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/memberProfilePageDrawerButton"
+            android:layout_width="17.5dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="17.5dp"
+            android:layout_marginLeft="17.5dp"
+            android:layout_marginTop="22.5dp"
+            android:background="@drawable/noun_side_bar_2672855"
+            app:layout_constraintStart_toStartOf="@id/memberProfilePageTopBar"
+            app:layout_constraintTop_toTopOf="@id/memberProfilePageTopBar" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"
@@ -119,6 +131,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/mpp_ngv"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

@@ -9,10 +9,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
-import com.home.englishnote.views.fragments.BaseFragment;
 
 public class PublicDictionaryPageFragment extends BaseFragment {
 
@@ -21,6 +23,8 @@ public class PublicDictionaryPageFragment extends BaseFragment {
     private View vocabSearch;
     private View dictionarySearch;
     private View memberProfile;
+    private DrawerLayout publicDictionaryPageDrawer;
+    private ImageView publicDictionaryPageDrawerButton;
 
     @Nullable
     @Override
@@ -39,6 +43,8 @@ public class PublicDictionaryPageFragment extends BaseFragment {
     }
 
     private void findViews(View view) {
+        publicDictionaryPageDrawer = view.findViewById(R.id.publicDictionaryPageDrawer);
+        publicDictionaryPageDrawerButton = view.findViewById(R.id.publicDictionaryPageDrawerButton);
         vocabSearch = view.findViewById(R.id.publicDictionaryPageVocabSearch);
         dictionarySearch = view.findViewById(R.id.publicDictionaryPageDictionarySearch);
         memberProfile = view.findViewById(R.id.publicDictionaryPageMemberProfile);
@@ -47,12 +53,18 @@ public class PublicDictionaryPageFragment extends BaseFragment {
     }
 
     private void init() {
+        setToolBar();
         setOnVocabSearchClick();
         setOnDictionarySearchClick();
         setOnMemberProfileClick();
         setMemberPhoto();
         setMemberName();
         setDefaultPage();
+    }
+
+    private void setToolBar() {
+        publicDictionaryPageDrawerButton.setOnClickListener(
+                v -> publicDictionaryPageDrawer.openDrawer(GravityCompat.START));
     }
 
     private void setOnVocabSearchClick() {

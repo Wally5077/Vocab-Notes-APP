@@ -10,10 +10,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
-import com.home.englishnote.views.fragments.BaseFragment;
 
 public class MemberProfilePageFragment extends BaseFragment {
 
@@ -21,6 +22,8 @@ public class MemberProfilePageFragment extends BaseFragment {
     private TextView memberProfilePageName;
     private Button memberProfilePageEditProfileButton;
     private Button memberProfilePageCreateDictionaryButton;
+    private DrawerLayout memberProfilePageDrawer;
+    private ImageView memberProfilePageDrawerButton;
 
     @Nullable
     @Override
@@ -39,6 +42,8 @@ public class MemberProfilePageFragment extends BaseFragment {
     }
 
     private void findViews(View view) {
+        memberProfilePageDrawer = view.findViewById(R.id.memberProfilePageDrawer);
+        memberProfilePageDrawerButton = view.findViewById(R.id.memberProfilePageDrawerButton);
         memberProfilePagePhoto = view.findViewById(R.id.memberProfilePagePhoto);
         memberProfilePageName = view.findViewById(R.id.memberProfilePageName);
         memberProfilePageEditProfileButton = view.findViewById(R.id.memberProfilePageEditProfileButton);
@@ -46,11 +51,17 @@ public class MemberProfilePageFragment extends BaseFragment {
     }
 
     private void init() {
+        setToolBar();
         setMemberPhoto();
         setMemberName();
         setMemberProfileEditProfileButtonClick();
         setMemberProfileCreateDictionaryButtonClick();
         setDefaultPage();
+    }
+
+    private void setToolBar() {
+        memberProfilePageDrawerButton.setOnClickListener(
+                v -> memberProfilePageDrawer.openDrawer(GravityCompat.START));
     }
 
     private void setMemberPhoto() {
@@ -69,7 +80,7 @@ public class MemberProfilePageFragment extends BaseFragment {
     private void setMemberProfileEditProfileButtonClick() {
         memberProfilePageEditProfileButton.setOnClickListener(
                 v -> switchFragment(
-                        R.layout.fragment_member_profile_modify, DICTIONARY_HOME_PAGE_CONTAINER));
+                        R.layout.fragment_member_profile_modify, PUBLIC_DICTIONARY_CONTAINER));
     }
 
     private void setMemberProfileCreateDictionaryButtonClick() {

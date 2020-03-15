@@ -1,43 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainWhite"
-    android:orientation="vertical">
-
-    <!--UpPart-->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/memberInfoModifyTopToolBar"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:layout_width="17.5dp"
-        android:layout_height="17.5dp"
-        android:background="@drawable/noun_side_bar_2672855"
-        app:layout_constraintBottom_toBottomOf="@+id/memberInfoModifyTopToolBar"
-        app:layout_constraintEnd_toStartOf="@+id/guideline1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </androidx.drawerlayout.widget.DrawerLayout>
+    android:background="@color/mainWhite">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.125" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/memberInfoModifyVocabSearch"
@@ -79,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.325" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/memberInfoModifyDictionarySearch"
@@ -122,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.7" />
+        app:layout_constraintGuide_percent="0.675" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/publicDictionaryPageMemberProfile"
