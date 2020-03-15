@@ -30,8 +30,8 @@ public class SignUpPresenter {
         this.threadExecutor = threadExecutor;
     }
 
-    public void signUp(String firstName, String lastName, String age,
-                       String email, String password, String passwordConfirmation) {
+    public void signUp(String firstName, String lastName, String age, String email,
+                       String password, String passwordConfirmation, String passwordSalt) {
         threadExecutor.execute(() -> {
             try {
 //                verifyUserInfo(firstName, lastName, age,
@@ -39,7 +39,7 @@ public class SignUpPresenter {
                 // Todo There's a test code below this line
 //                String defaultAge = (age.equals(VocabularyNoteKeyword.DEFAULT_SPINNER_WORD)) ?
 //                        VocabularyNoteKeyword.DEFAULT_AGE : age;
-                String hashPassword = HashUtil.hashEncode(password);
+                String hashPassword = HashUtil.hashEncode(password, passwordSalt.getBytes());
                 Member member = new Member(firstName, lastName,
                         Integer.valueOf(age), email, hashPassword);
                 Credentials credentials = member.getCredentials();

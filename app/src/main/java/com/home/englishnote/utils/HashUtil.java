@@ -13,10 +13,10 @@ import javax.crypto.spec.PBEKeySpec;
 
 public final class HashUtil {
 
-    public static String hashEncode(String keyword) {
-        byte[] salt = new byte[16];
-        Random random = new SecureRandom();
-        random.nextBytes(salt);
+    private static Random random = new SecureRandom();
+    private static byte[] salt = new byte[16];
+
+    public static String hashEncode(String keyword, byte[] salt) {
         KeySpec spec = new PBEKeySpec(
                 keyword.toCharArray(), salt, 65536, 128);
         StringBuilder stringBuilder = new StringBuilder(keyword);
@@ -36,4 +36,10 @@ public final class HashUtil {
         }
         return stringBuilder.toString();
     }
+
+    public static byte[] configSalt() {
+        random.nextBytes(salt);
+        return salt;
+    }
+
 }

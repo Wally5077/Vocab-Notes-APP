@@ -1,5 +1,6 @@
 package com.home.englishnote.views.activities;
 
+import android.content.SharedPreferences;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,8 +8,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.home.englishnote.R;
 import com.home.englishnote.utils.Global;
+import com.home.englishnote.utils.HashUtil;
+import com.home.englishnote.utils.VocabularyNoteKeyword;
 
 public class BaseActivity extends AppCompatActivity {
+    private SharedPreferences sharedPreferences = getSharedPreferences(VocabularyNoteKeyword.SP_NAME, MODE_PRIVATE);
+    ;
 
     // Todo refactor to utils class
 
@@ -38,5 +43,15 @@ public class BaseActivity extends AppCompatActivity {
                 textInputLayout.setErrorEnabled(false);
             }
         });
+    }
+
+    protected String getSalt() {
+        return sharedPreferences.
+                getString(VocabularyNoteKeyword.PASSWORD_SALT, new String(HashUtil.configSalt()));
+    }
+
+    protected void saveSalt(String passwordSalt) {
+        sharedPreferences.edit()
+                .putString(VocabularyNoteKeyword.PASSWORD_SALT, passwordSalt).apply();
     }
 }

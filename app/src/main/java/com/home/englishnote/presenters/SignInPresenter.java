@@ -31,11 +31,11 @@ public class SignInPresenter {
         this.threadExecutor = threadExecutor;
     }
 
-    public void signIn(String email, String password) {
+    public void signIn(String email, String password, String passwordSalt) {
         threadExecutor.execute(() -> {
             try {
 //                verifyUserInfo(email, password);
-                String hashPassword = HashUtil.hashEncode(password);
+                String hashPassword = HashUtil.hashEncode(password, passwordSalt.getBytes());
                 Credentials credentials = new Credentials(email, hashPassword);
                 Token token = memberRepository.signInToken(credentials);
                 int memberId = token.getMemberId();

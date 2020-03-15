@@ -16,6 +16,7 @@ public class SignInActivity extends BaseActivity implements SignInView {
     private TextInputLayout signInEmailLayout;
     private TextInputLayout signInPasswordLayout;
     private SignInPresenter signInPresenter;
+    private String passwordSalt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,6 @@ public class SignInActivity extends BaseActivity implements SignInView {
                 this, Global.memberRepository(), Global.threadExecutor());
     }
 
-
     public void onSignUpLinkClick(View view) {
         startActivity(new Intent(this, SignUpActivity.class));
     }
@@ -44,13 +44,15 @@ public class SignInActivity extends BaseActivity implements SignInView {
         // Todo Layout - > TIL
         String email = signInEmailLayout.getEditText().getText().toString().trim();
         String password = signInPasswordLayout.getEditText().getText().toString().trim();
-        signInPresenter.signIn(email, password);
+        passwordSalt = getSalt();
+        signInPresenter.signIn(email, password, passwordSalt);
     }
 
     @Override
     public void onSignInSuccessfully(Member member) {
         startActivity(new Intent(this, DictionaryHomePageActivity.class)
                 .putExtra("member", member));
+        saveSalt(passwordSalt);
     }
 
     @Override

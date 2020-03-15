@@ -2,6 +2,7 @@ package com.home.englishnote.utils;
 
 public final class VocabularyNoteKeyword {
     public final static String SP_NAME = "VOCABULARY_NOTE";
+    public final static String PASSWORD_SALT = "passwordSalt";
     public final static String NOTIFICATION_SWITCH = "notificationSwitch";
     public final static String DICTIONARY_ID = "dictionId";
     public final static String OFFSET = "offset";
