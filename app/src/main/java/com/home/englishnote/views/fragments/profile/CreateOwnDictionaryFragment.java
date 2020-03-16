@@ -114,11 +114,10 @@ public class CreateOwnDictionaryFragment extends BaseFragment implements CreateO
     }
 
     private void setSaveOwnDictionaryButton() {
-        saveOwnDictionaryButton.setOnClickListener(v -> {
-            createOwnDictionaryPresenter.createOwnDictionary(
-                    token, member.getId(), ownDictionaryTitle.getText().toString(),
-                    ownDictionaryDescription.getText().toString());
-        });
+        saveOwnDictionaryButton.setOnClickListener(
+                v -> createOwnDictionaryPresenter.createOwnDictionary(
+                        token, member.getId(), ownDictionaryTitle.getText().toString(),
+                        ownDictionaryDescription.getText().toString()));
     }
 
     private void setCancelOwnDictionaryButton() {
@@ -128,6 +127,7 @@ public class CreateOwnDictionaryFragment extends BaseFragment implements CreateO
 
     @Override
     public void createOwnDictionarySuccessfully() {
-
+        //  git commit -m "Create own dictionary fragment has finished"
+        clearText(ownDictionaryTitle, ownDictionaryDescription);
     }
 }
