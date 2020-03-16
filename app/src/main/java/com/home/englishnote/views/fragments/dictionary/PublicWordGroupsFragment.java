@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -69,7 +70,8 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
     }
 
     private void onFavoriteButtonClick(View view) {
-        //Todo switch member profile page
+        // Todo check this public vocabulary dictionary has been added to favorite dictionary
+        Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
     }
 
     private Dictionary dictionary;

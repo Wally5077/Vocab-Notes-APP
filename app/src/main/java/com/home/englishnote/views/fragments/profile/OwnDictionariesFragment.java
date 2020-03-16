@@ -128,12 +128,11 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
 
         @Override
         public void onBindViewHolder(@NonNull OwnDictionariesHolder holder, int position) {
-            OwnWordGroupsPresenter ownWordGroupsPresenter = new OwnWordGroupsPresenter(
-                    holder, Global.wordGroupRepository(), Global.threadExecutor());
             Dictionary dictionary = dictionaryList.get(position);
             holder.setData(dictionary);
-            ownWordGroupsPresenter.getWordGroups(
-                    dictionary.getOwnId(), 0, -1);
+            new OwnWordGroupsPresenter(
+                    holder, Global.wordGroupRepository(), Global.threadExecutor())
+                    .getWordGroups(dictionary.getOwnId(), 0, -1);
         }
 
         @Override
@@ -154,7 +153,7 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
             }
 
             private void findViews(View view) {
-                ownDictionaryName = view.findViewById(R.id.ownDictionaryName);
+                ownDictionaryName = view.findViewById(R.id.ownDictionaryTitle);
                 ownWordGroups = view.findViewById(R.id.ownWordGroups);
             }
 

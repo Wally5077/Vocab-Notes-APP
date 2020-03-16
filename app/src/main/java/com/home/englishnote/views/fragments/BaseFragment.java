@@ -34,6 +34,7 @@ public class BaseFragment extends Fragment {
 //        token = (Token) mainPageActivity.getIntent().getSerializableExtra("token");
         member = new Member("firstName", "lastName",
                 25, "email", "password");
+        token = new Token();
     }
 
     protected void onSwitchProfilePage(View v) {

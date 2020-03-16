@@ -13,6 +13,7 @@ import com.home.englishnote.views.fragments.OwnDictionaryPageFragment;
 import com.home.englishnote.views.fragments.PublicDictionaryPageFragment;
 import com.home.englishnote.views.fragments.MemberProfilePageFragment;
 import com.home.englishnote.views.fragments.dictionary.PublicDictionariesFragment;
+import com.home.englishnote.views.fragments.profile.CreateOwnDictionaryFragment;
 import com.home.englishnote.views.fragments.profile.MemberProfileModifyFragment;
 import com.home.englishnote.views.fragments.dictionary.PublicWordGroupsFragment;
 import com.home.englishnote.views.fragments.profile.OwnDictionariesFragment;
@@ -52,13 +53,13 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
 //        fragmentMap.put(R.layout.fragment_public_words, new WordsFragment());
 
         // Profile
+        fragmentMap.put(R.layout.fragment_own_dictionaries, new OwnDictionariesFragment());
+        fragmentMap.put(R.layout.fragment_create_own_dictionary, new CreateOwnDictionaryFragment());
         fragmentMap.put(R.layout.fragment_member_profile_modify, new MemberProfileModifyFragment());
 
         // Own Dictionary
-        fragmentMap.put(R.layout.fragment_own_dictionaries, new OwnDictionariesFragment());
 
         switchFragment(R.layout.fragment_public_dictionary_page, R.id.DictionaryHomePageContainer);
-
     }
 
     private Stack<Integer> containerStack = new Stack<>();
@@ -73,16 +74,18 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
                 bundle.putSerializable("VocabNoteObjects", serializableArray[0]);
                 nextFragment.setArguments(bundle);
             }
+            Fragment hideFragment;
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             if (nextFragment.isAdded()) {
-                fragmentTransaction
-                        .hide(fragmentMap.get(fragmentStack.peek()))
-                        .show(nextFragment).commit();
+                hideFragment = fragmentMap.get(fragmentStack.peek());
             } else {
-                fragmentTransaction.add(containerId, nextFragment).commit();
+                hideFragment = nextFragment;
+                fragmentTransaction
+                        .add(containerId, nextFragment);
                 fragmentStack.add(fragmentId);
                 containerStack.add(containerId);
             }
+            fragmentTransaction.hide(hideFragment).show(nextFragment).commit();
         }
     }
 

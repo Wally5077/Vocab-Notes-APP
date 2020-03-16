@@ -35,7 +35,7 @@
         app:lineHeight="18sp" />
 
     <TextView
-        android:id="@+id/ownWordGroups"
+        android:id="@+id/favoriteWordGroups"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7.5dp"

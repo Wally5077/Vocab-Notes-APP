@@ -23,7 +23,7 @@
         app:lineHeight="18sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favoriteDictionaryRecycler"
+        android:id="@+id/favoriteDictionariesRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="27.5dp"

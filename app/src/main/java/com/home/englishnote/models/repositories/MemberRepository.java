@@ -17,5 +17,7 @@ public interface MemberRepository {
 
     void updateMemberInfo(String firstName, String lastName, int age);
 
+    void createOwnDictionary(Token token, int memberId, String title, String description);
+
     List<Dictionary> getOwnDictionaries(int memberId, int offset, int limit);
 }

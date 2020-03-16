@@ -96,6 +96,11 @@ public class RetrofitMemberRepository implements MemberRepository {
     }
 
     @Override
+    public void createOwnDictionary(Token token, int memberId, String title, String description) {
+
+    }
+
+    @Override
     public List<Dictionary> getOwnDictionaries(int memberId, int offset, int limit) {
         return null;
     }

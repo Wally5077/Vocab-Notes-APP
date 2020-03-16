@@ -22,7 +22,7 @@ public class OwnDictionariesPresenter {
     public void getOwnDictionaries(int memberId, int offset, int limit) {
         threadExecutor.execute(() -> {
             try {
-                threadExecutor.executeUiThread(() -> {
+                threadExecutor.delayExecuteUiThreadDelay(() -> {
                     List<Dictionary> dictionaryList =
                             memberRepository.getOwnDictionaries(memberId, offset, limit);
                     ownDictionariesView.onGetDictionariesSuccessfully(dictionaryList);

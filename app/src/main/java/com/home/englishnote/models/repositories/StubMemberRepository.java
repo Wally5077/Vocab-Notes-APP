@@ -5,6 +5,7 @@ import com.home.englishnote.models.entities.Dictionary;
 import com.home.englishnote.models.entities.Member;
 import com.home.englishnote.models.entities.Token;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StubMemberRepository implements MemberRepository {
@@ -30,7 +31,12 @@ public class StubMemberRepository implements MemberRepository {
     }
 
     @Override
+    public void createOwnDictionary(Token token, int memberId, String title, String description) {
+
+    }
+
+    @Override
     public List<Dictionary> getOwnDictionaries(int memberId, int offset, int limit) {
-        return null;
+        return new ArrayList<>();
     }
 }

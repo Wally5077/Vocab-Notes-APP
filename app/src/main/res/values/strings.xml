@@ -28,8 +28,8 @@
     <string name="modifyButtonSaveText">Save</string>
 
     <string name="ownDictionaryView"><u>view</u></string>
-    <string name="newDictionary">New Dictionary</string>
-    <string name="ownDictionaryDescriptionLength">Limited In Length 80</string>
+    <string name="newDictionary"><i><b>New Dictionary</b></i></string>
+    <string name="ownDictionaryDescriptionLength"><i>Limited In Length 80</i></string>
     <string name="ownDictionaryPrompt">After creating a dictionary, you can reference the word groups Into your own dictionary.</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
@@ -39,5 +39,6 @@
 
     <string name="navigation_drawer_open">navigation_drawer_open</string>
     <string name="navigation_drawer_close">navigation_drawer_close</string>
+    <string name="createYourOwnDictionary">Create Your Own Dictionary</string>
 
 </resources>

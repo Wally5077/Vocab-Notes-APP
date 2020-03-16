@@ -46,7 +46,7 @@
             android:id="@+id/memberProfilePagePhoto"
             android:layout_width="125dp"
             android:layout_height="125dp"
-            android:layout_marginTop="52.5dp"
+            android:layout_marginTop="42.5dp"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/big_user_pic" />
