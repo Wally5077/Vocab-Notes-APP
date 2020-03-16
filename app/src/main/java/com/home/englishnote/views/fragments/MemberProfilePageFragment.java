@@ -80,7 +80,7 @@ public class MemberProfilePageFragment extends BaseFragment {
     private void setMemberProfileEditProfileButtonClick() {
         memberProfilePageEditProfileButton.setOnClickListener(
                 v -> switchFragment(
-                        R.layout.fragment_member_profile_modify, PUBLIC_DICTIONARY_CONTAINER));
+                        R.layout.fragment_member_profile_modify, DICTIONARY_HOME_PAGE_CONTAINER));
     }
 
     private void setMemberProfileCreateDictionaryButtonClick() {

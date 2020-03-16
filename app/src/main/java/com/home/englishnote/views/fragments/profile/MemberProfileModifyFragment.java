@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.home.englishnote.R;
 import com.home.englishnote.views.fragments.BaseFragment;
@@ -29,6 +31,8 @@ public class MemberProfileModifyFragment extends BaseFragment {
     private TextView ageContent;
     private EditText firstNameContent, lastNameContent;
     private EditText newEmailAddressContent, newPasswordContent, newConfirmPasswordContent;
+    private ImageView memberInfoModifyDrawerButton;
+    private DrawerLayout memberInfoModifyDrawer;
 
     // Todo data setting hasn't finished
 
@@ -48,6 +52,10 @@ public class MemberProfileModifyFragment extends BaseFragment {
     }
 
     private void findViews(View view) {
+
+        memberInfoModifyDrawer = view.findViewById(R.id.memberInfoModifyDrawer);
+        memberInfoModifyDrawerButton = view.findViewById(R.id.memberInfoModifyDrawerButton);
+
         ageModifySpinner = view.findViewById(R.id.userModifyPageAgeSpinner);
         ageContent = view.findViewById(R.id.userModifyPageAgeContent);
 
@@ -73,11 +81,17 @@ public class MemberProfileModifyFragment extends BaseFragment {
     }
 
     private void init() {
+        setToolBar();
         setMemberInfoEnable(false);
         setEmailAddressEnable(false);
         setPasswordEnable(false);
         setAgeSpinner();
 //        setModifyButtons();
+    }
+
+    private void setToolBar() {
+        memberInfoModifyDrawerButton.setOnClickListener(
+                v -> memberInfoModifyDrawer.openDrawer(GravityCompat.START));
     }
 
     private void setMemberInfoEnable(boolean enable) {

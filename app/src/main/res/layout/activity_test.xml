@@ -20,7 +20,18 @@
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/memberInfoModifyDrawerButton"
+            android:layout_width="17.5dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="17.5dp"
+            android:layout_marginLeft="17.5dp"
+            android:layout_marginTop="22.5dp"
+            android:background="@drawable/noun_side_bar_2672855"
+            app:layout_constraintStart_toStartOf="@id/memberInfoModifyTopToolBar"
+            app:layout_constraintTop_toTopOf="@id/memberInfoModifyTopToolBar" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"

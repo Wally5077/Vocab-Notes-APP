@@ -2,16 +2,16 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/memberProfilePageDrawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainWhite"
-    android:id="@+id/memberProfilePageDrawer"
     android:fitsSystemWindows="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="22.5dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="22.5dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/memberProfilePageTopBar"
@@ -22,8 +22,7 @@
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        </androidx.appcompat.widget.Toolbar>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/memberProfilePageDrawerButton"
