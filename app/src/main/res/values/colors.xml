@@ -7,6 +7,7 @@
     <color name="mainGrey">#dfe6e8</color>
     <color name="secondaryGrey">#8999a0</color>
     <color name="thirdGrey">#4e585a</color>
+    <color name="fourthGrey">#c5ced1</color>
     <color name="secondaryWhite">#e0d9d9</color>
     <color name="ownDictionaryHintColor">#804E585A</color>
     <color name="deleteDictionaryColor">#ce787b</color>

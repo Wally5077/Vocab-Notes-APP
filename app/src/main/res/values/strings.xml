@@ -40,5 +40,7 @@
     <string name="navigation_drawer_open">navigation_drawer_open</string>
     <string name="navigation_drawer_close">navigation_drawer_close</string>
     <string name="createYourOwnDictionary">Create Your Own Dictionary</string>
+    <string name="test">An apple is a round fruit with red or green skin and a whitish inside.
+description Excepteur sint occaecat cupidatat non proident description Excepteur sint occaecat cupidatat non proident…  </string>
 
 </resources>
