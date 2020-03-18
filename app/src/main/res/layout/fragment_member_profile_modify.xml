@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/memberInfoModifyDrawer"
@@ -8,612 +8,583 @@
     android:background="@color/mainWhite"
     android:fitsSystemWindows="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="22.5dp">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/memberInfoModifyTopToolBar"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/memberInfoModifyTopToolBar"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:layout_constraintEnd_toEndOf="parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1375" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/memberInfoModifyVocabSearch"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/memberInfoModifyTopToolBar"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/memberInfoModifySearch1"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/search_button"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/memberInfoModifyDrawerButton"
-            android:layout_width="17.5dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="17.5dp"
-            android:layout_marginLeft="17.5dp"
-            android:layout_marginTop="22.5dp"
-            android:background="@drawable/noun_side_bar_2672855"
-            app:layout_constraintStart_toStartOf="@id/memberInfoModifyTopToolBar"
-            app:layout_constraintTop_toTopOf="@id/memberInfoModifyTopToolBar" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.175" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/memberInfoModifyVocabSearch"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/memberInfoModifyTopToolBar"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/memberInfoModifySearch1"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:background="@drawable/search_button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/memberInfoModifyVocabSearch1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2.5dp"
-                android:layout_marginLeft="2.5dp"
-                android:text="Look Up"
-                android:textAlignment="center"
-                android:textColor="#ABFFFFFF"
-                android:textSize="12sp"
-                app:fontFamily="@font/avenirheavy"
-                app:layout_constraintBottom_toBottomOf="@+id/memberInfoModifySearch1"
-                app:layout_constraintStart_toEndOf="@+id/memberInfoModifySearch1"
-                app:layout_constraintTop_toTopOf="@+id/memberInfoModifySearch1"
-                app:lineHeight="14sp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.4" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/memberInfoModifyDictionarySearch"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/memberInfoModifyTopToolBar"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/memberInfoModifySearch2"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:background="@drawable/search_button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/memberInfoModifyDictionaryListSearch2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2.5dp"
-                android:layout_marginLeft="2.5dp"
-                android:text="Dictionary List"
-                android:textAlignment="center"
-                android:textColor="#ABFFFFFF"
-                android:textSize="12sp"
-                app:fontFamily="@font/avenirheavy"
-                app:layout_constraintBottom_toBottomOf="@+id/memberInfoModifySearch2"
-                app:layout_constraintStart_toEndOf="@+id/memberInfoModifySearch2"
-                app:layout_constraintTop_toTopOf="@+id/memberInfoModifySearch2"
-                app:lineHeight="14sp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.7" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/publicDictionaryPageMemberProfile"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/memberInfoModifyTopToolBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline3"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/memberInfoModifyMemberPhoto"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="7.5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/small_user_pic" />
-
-            <TextView
-                android:id="@+id/memberInfoModifyMemberName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="user name"
-                android:textAlignment="center"
-                android:textColor="@color/mainWhite"
-                android:textSize="12sp"
-                android:textStyle="italic"
-                app:fontFamily="@font/avenirbook"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/memberInfoModifyMemberPhoto"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lineHeight="12sp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         <TextView
-            android:id="@+id/userModify_MY_PROFILE"
+            android:id="@+id/memberInfoModifyVocabSearch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="7.5dp"
-            android:text="MY PROFILE"
+            android:layout_marginStart="2.5dp"
+            android:layout_marginLeft="2.5dp"
+            android:text="Look Up"
             android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="14sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintBottom_toTopOf="@+id/profileLine"
-            app:layout_constraintStart_toStartOf="parent"
-            app:lineHeight="19sp" />
-
-        <!-- memberInfoModify -->
-
-        <Button
-            android:id="@+id/memberInfoModifyButton"
-            android:layout_width="75dp"
-            android:layout_height="27.5dp"
-            android:layout_marginTop="32.5dp"
-            android:layout_marginEnd="32.5dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="7.5dp"
-            android:background="@drawable/bg_modify_green_round_button"
-            android:drawableStart="@drawable/modify_pen"
-            android:drawableLeft="@drawable/modify_pen"
-            android:paddingStart="7.5dp"
-            android:paddingLeft="7.5dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="3dp"
-            android:text="@string/modifyButtonChangeText"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/mainWhite"
+            android:textColor="#ABFFFFFF"
             android:textSize="12sp"
-            app:fontFamily="@font/avenirmedium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/memberInfoModifyTopToolBar" />
+            app:fontFamily="@font/avenirheavy"
+            app:layout_constraintBottom_toBottomOf="@+id/memberInfoModifySearch1"
+            app:layout_constraintStart_toEndOf="@+id/memberInfoModifySearch1"
+            app:layout_constraintTop_toTopOf="@+id/memberInfoModifySearch1"
+            app:lineHeight="14sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            android:id="@+id/profileLine"
-            android:layout_width="match_parent"
-            android:layout_height="1.5dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="2.5dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            android:background="@color/mainGrey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/memberInfoModifyButton" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3375" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/memberInfoModifyDictionarySearch"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/memberInfoModifyTopToolBar"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/userModifyPagePhoto"
-            android:layout_width="92.5dp"
-            android:layout_height="92.5dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
+            android:id="@+id/memberInfoModifySearch2"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/search_button"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView8"
-            app:srcCompat="@drawable/profile_photo" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/memberInfoModifyDictionaryListSearch2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="27.5dp"
-            android:text="First name : "
+            android:layout_marginStart="2.5dp"
+            android:layout_marginLeft="2.5dp"
+            android:text="Dictionary List"
             android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintStart_toEndOf="@+id/userModifyPagePhoto"
-            app:layout_constraintTop_toBottomOf="@+id/profileLine"
-            app:lineHeight="15sp" />
-
-        <EditText
-            android:id="@+id/userModifyPageFirstNameContent"
-            android:layout_width="115dp"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:focusable="false"
-            android:inputType="textPersonName"
-            android:paddingStart="2.5dp"
-            android:paddingLeft="2.5dp"
-            android:paddingEnd="0dp"
-            android:paddingRight="0dp"
-            android:text="First"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintStart_toEndOf="@+id/textView8"
-            app:layout_constraintTop_toTopOf="@+id/textView8"
-            app:lineHeight="15sp" />
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22.5dp"
-            android:text="Last name : "
-            android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintEnd_toEndOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView8"
-            app:lineHeight="15sp" />
-
-        <EditText
-            android:id="@+id/userModifyPageLastNameContent"
-            android:layout_width="115dp"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:focusable="false"
-            android:inputType="textPersonName"
-            android:paddingStart="2.5dp"
-            android:paddingLeft="2.5dp"
-            android:paddingEnd="0dp"
-            android:paddingRight="0dp"
-            android:text="Last"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintStart_toEndOf="@+id/textView11"
-            app:layout_constraintTop_toTopOf="@+id/textView11"
-            app:lineHeight="15sp" />
-
-        <TextView
-            android:id="@+id/age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22.5dp"
-            android:text="Age : "
-            android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintEnd_toStartOf="@+id/userModifyPageLastNameContent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11"
-            app:lineHeight="15sp" />
-
-        <Spinner
-            android:id="@+id/userModifyPageAgeSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            app:layout_constraintStart_toEndOf="@+id/age"
-            app:layout_constraintTop_toTopOf="@+id/age" />
-
-        <TextView
-            android:id="@+id/userModifyPageAgeContent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="2.5dp"
-            android:paddingLeft="2.5dp"
-            android:paddingEnd="0dp"
-            android:paddingRight="0dp"
-            android:text="0"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintStart_toEndOf="@+id/age"
-            app:layout_constraintTop_toTopOf="@+id/age"
-            app:lineHeight="15sp" />
-
-        <TextView
-            android:id="@+id/userModifyPage_EMAIL_ADDRESS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="32.5dp"
-            android:layout_marginBottom="7.5dp"
-            android:text="E-MAIL ADDRESS"
-            android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="14sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/userModifyPageAgeContent"
-            app:lineHeight="19sp" />
-
-        <!-- emailAddressModify -->
-
-        <Button
-            android:id="@+id/emailAddressModifyButton"
-            android:layout_width="75dp"
-            android:layout_height="27.5dp"
-            android:layout_marginTop="32.5dp"
-            android:layout_marginEnd="32.5dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="7.5dp"
-            android:background="@drawable/bg_modify_green_round_button"
-            android:drawableStart="@drawable/modify_pen"
-            android:drawableLeft="@drawable/modify_pen"
-            android:paddingStart="7.5dp"
-            android:paddingLeft="7.5dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="3dp"
-            android:text="@string/modifyButtonChangeText"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/mainWhite"
+            android:textColor="#ABFFFFFF"
             android:textSize="12sp"
-            app:fontFamily="@font/avenirmedium"
-            app:layout_constraintStart_toStartOf="@id/memberInfoModifyButton"
-            app:layout_constraintTop_toTopOf="@id/userModifyPage_EMAIL_ADDRESS" />
-
-        <View
-            android:id="@+id/emailAddressLine"
-            android:layout_width="match_parent"
-            android:layout_height="1.5dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="2.5dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            android:background="@color/mainGrey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailAddressModifyButton" />
-
-        <TextView
-            android:id="@+id/userModifyPageCurrentEmailAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="17.5dp"
-            android:text="Current Email Address : "
-            android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintStart_toStartOf="@+id/emailAddressLine"
-            app:layout_constraintTop_toBottomOf="@+id/emailAddressLine"
-            app:lineHeight="15sp" />
-
-        <TextView
-            android:id="@+id/userModifyPageCurrentEmailAddressContent"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:paddingStart="2.5dp"
-            android:paddingLeft="2.5dp"
-            android:paddingEnd="0dp"
-            android:paddingRight="0dp"
-
-            android:text="12345678@gmail.com"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintStart_toEndOf="@+id/userModifyPageCurrentEmailAddress"
-            app:layout_constraintTop_toTopOf="@id/userModifyPageCurrentEmailAddress"
-            app:lineHeight="15sp" />
-
-        <TextView
-            android:id="@+id/userModifyPageNewEmailAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17.5dp"
-            android:focusable="false"
-            android:text="New Email Address : "
-            android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"
-            android:visibility="invisible"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintStart_toStartOf="@id/userModifyPageCurrentEmailAddress"
-            app:layout_constraintTop_toBottomOf="@id/userModifyPageCurrentEmailAddress"
-            app:lineHeight="15sp" />
-
-        <EditText
-            android:id="@+id/userModifyPageNewEmailAddressContent"
-            android:layout_width="177.5dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/modify_border"
-            android:focusable="false"
-            android:inputType="textEmailAddress"
-            android:paddingStart="2.5dp"
-            android:paddingLeft="2.5dp"
-            android:paddingEnd="0dp"
-            android:paddingRight="0dp"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintStart_toEndOf="@id/userModifyPageNewEmailAddress"
-            app:layout_constraintTop_toTopOf="@id/userModifyPageNewEmailAddress"
-            app:lineHeight="15sp" />
-
-        <TextView
-            android:id="@+id/userModifyPage_PASSWORD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:layout_marginBottom="7.5dp"
-            android:text="PASSWORD"
-            android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="14sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintStart_toStartOf="@id/userModifyPage_EMAIL_ADDRESS"
-            app:layout_constraintTop_toBottomOf="@id/userModifyPageNewEmailAddress"
-            app:lineHeight="19sp" />
-
-        <!-- passwordModify -->
-
-        <Button
-            android:id="@+id/passwordModifyButton"
-            android:layout_width="75dp"
-            android:layout_height="27.5dp"
-            android:layout_marginTop="32.5dp"
-            android:layout_marginEnd="32.5dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="7.5dp"
-            android:background="@drawable/bg_modify_green_round_button"
-            android:drawableStart="@drawable/modify_pen"
-            android:drawableLeft="@drawable/modify_pen"
-            android:paddingStart="7.5dp"
-            android:paddingLeft="7.5dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="3dp"
-            android:text="@string/modifyButtonChangeText"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/mainWhite"
-            android:textSize="12sp"
-            app:fontFamily="@font/avenirmedium"
-            app:layout_constraintStart_toStartOf="@id/emailAddressModifyButton"
-            app:layout_constraintTop_toTopOf="@id/userModifyPage_PASSWORD" />
-
-        <View
-            android:id="@+id/passwordLine"
-            android:layout_width="match_parent"
-            android:layout_height="1.5dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="2.5dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            android:background="@color/mainGrey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordModifyButton" />
-
-        <TextView
-            android:id="@+id/userModifyPageNewPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17.5dp"
-            android:text="New Password : "
-            android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"
-            android:visibility="invisible"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintEnd_toEndOf="@+id/userModifyPageCurrentEmailAddress"
-            app:layout_constraintTop_toBottomOf="@+id/passwordLine"
-            app:lineHeight="15sp" />
-
-        <EditText
-            android:id="@+id/userModifyPageNewPasswordContent"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/modify_border"
-            android:focusable="false"
-            android:inputType="textPassword"
-            android:paddingStart="2.5dp"
-            android:paddingLeft="2.5dp"
-            android:paddingEnd="0dp"
-            android:paddingRight="0dp"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintStart_toEndOf="@id/userModifyPageNewPassword"
-            app:layout_constraintTop_toTopOf="@id/userModifyPageNewPassword"
-            app:lineHeight="15sp" />
-
-        <TextView
-            android:id="@+id/userModifyPageConfirmNewPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17.5dp"
-            android:text="Confirm new password : "
-            android:textAlignment="center"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"
-            android:visibility="invisible"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintEnd_toEndOf="@+id/userModifyPageNewPassword"
-            app:layout_constraintTop_toBottomOf="@+id/userModifyPageNewPassword"
-            app:lineHeight="15sp" />
-
-        <EditText
-            android:id="@+id/userModifyPageNewConfirmPasswordContent"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/modify_border"
-            android:focusable="false"
-            android:inputType="textPassword"
-            android:paddingStart="2.5dp"
-            android:paddingLeft="2.5dp"
-            android:paddingEnd="0dp"
-            android:paddingRight="0dp"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"
-            app:fontFamily="@font/avenirroman"
-            app:layout_constraintStart_toEndOf="@id/userModifyPageConfirmNewPassword"
-            app:layout_constraintTop_toTopOf="@id/userModifyPageConfirmNewPassword"
-            app:lineHeight="15sp" />
-
-        <TextView
-            android:id="@+id/userModifyPagePasswordModifyPrompt"
-            android:layout_width="232.5dp"
-            android:layout_height="42.5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:text="Click the change button to add a password to your account."
-            android:textColor="@color/mainColor"
-            android:textSize="12sp"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="@+id/passwordLine"
-            app:layout_constraintTop_toBottomOf="@+id/passwordLine"
-            app:lineHeight="15sp" />
+            app:fontFamily="@font/avenirheavy"
+            app:layout_constraintBottom_toBottomOf="@+id/memberInfoModifySearch2"
+            app:layout_constraintStart_toEndOf="@+id/memberInfoModifySearch2"
+            app:layout_constraintTop_toTopOf="@+id/memberInfoModifySearch2"
+            app:lineHeight="14sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.navigation.NavigationView
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/mainColor"
-        android:theme="@style/NavigationTheme"
-        app:headerLayout="@layout/drawer_header"
-        app:itemHorizontalPadding="45dp"
-        app:itemIconTint="@color/mainWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/drawer_menu" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.675" />
 
-</androidx.drawerlayout.widget.DrawerLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/publicDictionaryPageMemberProfile"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/memberInfoModifyTopToolBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/memberInfoModifyMemberPhoto"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="7.5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/small_user_pic" />
+
+        <TextView
+            android:id="@+id/memberInfoModifyMemberName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="user name"
+            android:textAlignment="center"
+            android:textColor="@color/mainWhite"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            app:fontFamily="@font/avenirbook"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/memberInfoModifyMemberPhoto"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lineHeight="12sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/userModifyMyProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="7.5dp"
+        android:text="MY PROFILE"
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="14sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintBottom_toTopOf="@+id/profileLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:lineHeight="19sp" />
+
+    <!-- memberInfoModify -->
+
+    <TextView
+        android:id="@+id/profileModifyButton"
+        android:layout_width="75dp"
+        android:layout_height="27.5dp"
+        android:layout_marginTop="32.5dp"
+        android:layout_marginEnd="32.5dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="7.5dp"
+        android:background="@drawable/bg_modify_green_round_button"
+        android:drawableStart="@drawable/modify_pen"
+        android:drawableLeft="@drawable/modify_pen"
+        android:paddingStart="7.5dp"
+        android:paddingLeft="7.5dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="6dp"
+        android:text="@string/modifyButtonChangeText"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/mainWhite"
+        android:textSize="12sp"
+        app:fontFamily="@font/avenirmedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/memberInfoModifyTopToolBar" />
+
+    <View
+        android:id="@+id/profileLine"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="2.5dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@color/mainGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileModifyButton" />
+
+    <ImageView
+        android:id="@+id/userModifyPagePhoto"
+        android:layout_width="92.5dp"
+        android:layout_height="92.5dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView8"
+        app:srcCompat="@drawable/profile_photo" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="27.5dp"
+        android:text="First name : "
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@+id/userModifyPagePhoto"
+        app:layout_constraintTop_toBottomOf="@+id/profileLine"
+        app:lineHeight="15sp" />
+
+    <EditText
+        android:id="@+id/userModifyPageFirstNameContent"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:focusable="false"
+        android:inputType="textPersonName"
+        android:paddingStart="2.5dp"
+        android:paddingLeft="2.5dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+        android:text="First"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="@+id/textView8"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22.5dp"
+        android:text="Last name : "
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintEnd_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:lineHeight="15sp" />
+
+    <EditText
+        android:id="@+id/userModifyPageLastNameContent"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:focusable="false"
+        android:inputType="textPersonName"
+        android:paddingStart="2.5dp"
+        android:paddingLeft="2.5dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+        android:text="Last"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/textView11"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22.5dp"
+        android:text="Age : "
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintEnd_toStartOf="@+id/userModifyPageLastNameContent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:lineHeight="15sp" />
+
+    <Spinner
+        android:id="@+id/userModifyPageAgeSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/age"
+        app:layout_constraintTop_toTopOf="@+id/age" />
+
+    <TextView
+        android:id="@+id/userModifyPageAgeContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="2.5dp"
+        android:paddingLeft="2.5dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+        android:text="0"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@+id/age"
+        app:layout_constraintTop_toTopOf="@+id/age"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/userModifyPageEmailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="32.5dp"
+        android:layout_marginBottom="7.5dp"
+        android:text="E-MAIL ADDRESS"
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="14sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userModifyPageAgeContent"
+        app:lineHeight="19sp" />
+
+    <!-- emailAddressModify -->
+
+    <TextView
+        android:id="@+id/emailAddressModifyButton"
+        android:layout_width="75dp"
+        android:layout_height="27.5dp"
+        android:layout_marginTop="32.5dp"
+        android:layout_marginEnd="32.5dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="7.5dp"
+        android:background="@drawable/bg_modify_green_round_button"
+        android:drawableStart="@drawable/modify_pen"
+        android:drawableLeft="@drawable/modify_pen"
+        android:paddingStart="7.5dp"
+        android:paddingLeft="7.5dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="6dp"
+        android:text="@string/modifyButtonChangeText"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/mainWhite"
+        android:textSize="12sp"
+        app:fontFamily="@font/avenirmedium"
+        app:layout_constraintStart_toStartOf="@id/profileModifyButton"
+        app:layout_constraintTop_toTopOf="@id/userModifyPageEmailAddress" />
+
+    <View
+        android:id="@+id/emailAddressLine"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="2.5dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@color/mainGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailAddressModifyButton" />
+
+    <TextView
+        android:id="@+id/userModifyPageCurrentEmailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="17.5dp"
+        android:text="Current Email Address : "
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toStartOf="@+id/emailAddressLine"
+        app:layout_constraintTop_toBottomOf="@+id/emailAddressLine"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/userModifyPageCurrentEmailAddressContent"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="2.5dp"
+        android:paddingLeft="2.5dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+
+        android:text="12345678@gmail.com"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@+id/userModifyPageCurrentEmailAddress"
+        app:layout_constraintTop_toTopOf="@id/userModifyPageCurrentEmailAddress"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/userModifyPageNewEmailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17.5dp"
+        android:focusable="false"
+        android:text="New Email Address : "
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        android:visibility="invisible"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toStartOf="@id/userModifyPageCurrentEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/userModifyPageCurrentEmailAddress"
+        app:lineHeight="15sp" />
+
+    <EditText
+        android:id="@+id/userModifyPageNewEmailAddressContent"
+        android:layout_width="177.5dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modify_border"
+        android:focusable="false"
+        android:inputType="textEmailAddress"
+        android:paddingStart="2.5dp"
+        android:paddingLeft="2.5dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@id/userModifyPageNewEmailAddress"
+        app:layout_constraintTop_toTopOf="@id/userModifyPageNewEmailAddress"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/userModifyPagePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="7.5dp"
+        android:text="PASSWORD"
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="14sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toStartOf="@id/userModifyPageEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/userModifyPageNewEmailAddress"
+        app:lineHeight="19sp" />
+
+    <!-- passwordModify -->
+
+    <TextView
+        android:id="@+id/passwordModifyButton"
+        android:layout_width="75dp"
+        android:layout_height="27.5dp"
+        android:layout_marginTop="32.5dp"
+        android:layout_marginEnd="32.5dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="7.5dp"
+        android:background="@drawable/bg_modify_green_round_button"
+        android:drawableStart="@drawable/modify_pen"
+        android:drawableLeft="@drawable/modify_pen"
+        android:paddingStart="7.5dp"
+        android:paddingLeft="7.5dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="6dp"
+        android:text="@string/modifyButtonChangeText"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/mainWhite"
+        android:textSize="12sp"
+        app:fontFamily="@font/avenirmedium"
+        app:layout_constraintStart_toStartOf="@id/emailAddressModifyButton"
+        app:layout_constraintTop_toTopOf="@id/userModifyPagePassword" />
+
+    <View
+        android:id="@+id/passwordLine"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="2.5dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@color/mainGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordModifyButton" />
+
+    <TextView
+        android:id="@+id/userModifyPageNewPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17.5dp"
+        android:text="New Password : "
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        android:visibility="invisible"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintEnd_toEndOf="@+id/userModifyPageCurrentEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/passwordLine"
+        app:lineHeight="15sp" />
+
+    <EditText
+        android:id="@+id/userModifyPageNewPasswordContent"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modify_border"
+        android:focusable="false"
+        android:inputType="textPassword"
+        android:paddingStart="2.5dp"
+        android:paddingLeft="2.5dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@id/userModifyPageNewPassword"
+        app:layout_constraintTop_toTopOf="@id/userModifyPageNewPassword"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/userModifyPageConfirmNewPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17.5dp"
+        android:text="Confirm new password : "
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        android:visibility="invisible"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintEnd_toEndOf="@+id/userModifyPageNewPassword"
+        app:layout_constraintTop_toBottomOf="@+id/userModifyPageNewPassword"
+        app:lineHeight="15sp" />
+
+    <EditText
+        android:id="@+id/userModifyPageNewConfirmPasswordContent"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modify_border"
+        android:focusable="false"
+        android:inputType="textPassword"
+        android:paddingStart="2.5dp"
+        android:paddingLeft="2.5dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+        android:textColor="@color/mainColor"
+        android:textSize="13sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintStart_toEndOf="@id/userModifyPageConfirmNewPassword"
+        app:layout_constraintTop_toTopOf="@id/userModifyPageConfirmNewPassword"
+        app:lineHeight="15sp" />
+
+    <TextView
+        android:id="@+id/userModifyPagePasswordModifyPrompt"
+        android:layout_width="232.5dp"
+        android:layout_height="42.5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Click the change button to add a password to your account."
+        android:textColor="@color/mainColor"
+        android:textSize="12sp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/passwordLine"
+        app:layout_constraintTop_toBottomOf="@+id/passwordLine"
+        app:lineHeight="15sp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

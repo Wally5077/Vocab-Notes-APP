@@ -23,4 +23,7 @@
         <item name="android:layout_marginTop">12.5dp</item>
     </style>
 
+    <style name="progressLoading" parent="@android:style/Widget.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/bg_progress_loading</item>
+    </style>
 </resources>

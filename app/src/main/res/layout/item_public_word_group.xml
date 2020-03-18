@@ -47,9 +47,9 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="7.5dp"
-        app:layout_constraintEnd_toStartOf="@+id/publicWordGroupFavoriteButton"
-        app:layout_constraintStart_toEndOf="@+id/publicWordGroupTitle"
-        app:layout_constraintTop_toBottomOf="@+id/publicWordGroupTitle"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/publicWordGroupTitle" />
 
     <View
         android:id="@+id/view2"

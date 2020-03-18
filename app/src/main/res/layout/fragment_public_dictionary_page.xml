@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/publicDictionaryPageDrawer"
@@ -8,188 +8,156 @@
     android:background="@color/mainWhite"
     android:fitsSystemWindows="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/publicDictionaryPageTopToolBar"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/publicDictionaryPageTopToolBar"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:layout_constraintEnd_toEndOf="parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1375" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/publicDictionaryPageVocabSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/publicDictionaryPageTopToolBar"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/publicDictionaryPageSearch1"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/search_button"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/userModifyVocabSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2.5dp"
+            android:layout_marginLeft="2.5dp"
+            android:text="Look Up"
+            android:textAlignment="center"
+            android:textColor="#ABFFFFFF"
+            android:textSize="12sp"
+            app:fontFamily="@font/avenirheavy"
+            app:layout_constraintBottom_toBottomOf="@+id/publicDictionaryPageSearch1"
+            app:layout_constraintStart_toEndOf="@+id/publicDictionaryPageSearch1"
+            app:layout_constraintTop_toTopOf="@+id/publicDictionaryPageSearch1"
+            app:lineHeight="14sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3375" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/publicDictionaryPageDictionarySearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/publicDictionaryPageTopToolBar"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
-            android:id="@+id/publicDictionaryPageDrawerButton"
-            android:layout_width="17.5dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="17.5dp"
-            android:layout_marginLeft="17.5dp"
-            android:layout_marginTop="22.5dp"
-            android:background="@drawable/noun_side_bar_2672855"
-            app:layout_constraintStart_toStartOf="@id/publicDictionaryPageTopToolBar"
-            app:layout_constraintTop_toTopOf="@id/publicDictionaryPageTopToolBar" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.125" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/publicDictionaryPageVocabSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/publicDictionaryPageTopToolBar"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/publicDictionaryPageSearch1"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:background="@drawable/search_button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/userModifyVocabSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2.5dp"
-                android:layout_marginLeft="2.5dp"
-                android:text="Look Up"
-                android:textAlignment="center"
-                android:textColor="#ABFFFFFF"
-                android:textSize="12sp"
-                app:fontFamily="@font/avenirheavy"
-                app:layout_constraintBottom_toBottomOf="@+id/publicDictionaryPageSearch1"
-                app:layout_constraintStart_toEndOf="@+id/publicDictionaryPageSearch1"
-                app:layout_constraintTop_toTopOf="@+id/publicDictionaryPageSearch1"
-                app:lineHeight="14sp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.325" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/publicDictionaryPageDictionarySearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/publicDictionaryPageTopToolBar"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/publicDictionaryPageSearch2"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:background="@drawable/search_button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/userModifyDictionaryListSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2.5dp"
-                android:layout_marginLeft="2.5dp"
-                android:text="Dictionary List"
-                android:textAlignment="center"
-                android:textColor="#ABFFFFFF"
-                android:textSize="12sp"
-                app:fontFamily="@font/avenirheavy"
-                app:layout_constraintBottom_toBottomOf="@+id/publicDictionaryPageSearch2"
-                app:layout_constraintStart_toEndOf="@+id/publicDictionaryPageSearch2"
-                app:layout_constraintTop_toTopOf="@+id/publicDictionaryPageSearch2"
-                app:lineHeight="14sp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.675" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/publicDictionaryPageMemberProfile"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/publicDictionaryPageTopToolBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline3"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/publicDictionaryPageMemberPhoto"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="7.5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/small_user_pic" />
-
-            <TextView
-                android:id="@+id/publicDictionaryPageMemberName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="user name"
-                android:textAlignment="center"
-                android:textColor="@color/mainWhite"
-                android:textSize="12sp"
-                android:textStyle="italic"
-                app:fontFamily="@font/avenirbook"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/publicDictionaryPageMemberPhoto"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lineHeight="12sp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/PublicDictionaryPageContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="60dp"
+            android:id="@+id/publicDictionaryPageSearch2"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/search_button"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/userModifyDictionaryListSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2.5dp"
+            android:layout_marginLeft="2.5dp"
+            android:text="Dictionary List"
+            android:textAlignment="center"
+            android:textColor="#ABFFFFFF"
+            android:textSize="12sp"
+            app:fontFamily="@font/avenirheavy"
+            app:layout_constraintBottom_toBottomOf="@+id/publicDictionaryPageSearch2"
+            app:layout_constraintStart_toEndOf="@+id/publicDictionaryPageSearch2"
+            app:layout_constraintTop_toTopOf="@+id/publicDictionaryPageSearch2"
+            app:lineHeight="14sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/pdp_ngv"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/mainColor"
-        android:theme="@style/NavigationTheme"
-        app:headerLayout="@layout/drawer_header"
-        app:itemHorizontalPadding="45dp"
-        app:itemIconTint="@color/mainWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/drawer_menu" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.675" />
 
-</androidx.drawerlayout.widget.DrawerLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/publicDictionaryPageMemberProfile"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/publicDictionaryPageTopToolBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/publicDictionaryPageMemberPhoto"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="7.5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/small_user_pic" />
+
+        <TextView
+            android:id="@+id/publicDictionaryPageMemberName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="user name"
+            android:textAlignment="center"
+            android:textColor="@color/mainWhite"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            app:fontFamily="@font/avenirbook"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/publicDictionaryPageMemberPhoto"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lineHeight="12sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/publicDictionaryPageContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
