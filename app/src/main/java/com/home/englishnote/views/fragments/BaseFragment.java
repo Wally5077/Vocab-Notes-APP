@@ -16,9 +16,8 @@ import java.io.Serializable;
 
 public class BaseFragment extends Fragment {
 
-    protected final static int DICTIONARY_HOME_PAGE_CONTAINER = R.id.DictionaryHomePageContainer;
-
-    protected final static int PUBLIC_DICTIONARY_CONTAINER = R.id.PublicDictionaryPageContainer;
+    protected final static int DICTIONARY_HOME_PAGE_CONTAINER = R.id.dictionaryHomePageContainer;
+    protected final static int PUBLIC_DICTIONARY_CONTAINER = R.id.publicDictionaryPageContainer;
     protected final static int MEMBER_PROFILE_CONTAINER = R.id.memberProfilePageContainer;
 
     protected DictionaryHomePageActivity mainPageActivity;
@@ -39,11 +38,11 @@ public class BaseFragment extends Fragment {
 
     protected void onSwitchProfilePage(View v) {
         switchFragment(R.layout.fragment_member_profile_page, DICTIONARY_HOME_PAGE_CONTAINER);
+        switchFragment(R.layout.fragment_own_dictionaries, MEMBER_PROFILE_CONTAINER);
     }
 
-    protected void switchDictionaryHomePage(Serializable... serializables) {
-        switchFragment(R.layout.fragment_public_dictionary_page,
-                R.id.DictionaryHomePageContainer, serializables);
+    protected void backLastFragment() {
+        mainPageActivity.onBackPressed();
     }
 
     protected void switchFragment(int fragmentId, int containerId,

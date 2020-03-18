@@ -19,7 +19,7 @@ public class StubDictionaryRepository implements DictionaryRepository {
 
     @Override
     public List<Dictionary> getDictionaries(int offset, int limit) {
-        List<Dictionary> dictionaryList = new ArrayList<>(3);
+        List<Dictionary> dictionaryList = new ArrayList<>(10);
         dictionaryList.add(new Dictionary(0, "title", "description",
                 new Member("firstName", "lastName",
                         25, "email", "password"), OWN));

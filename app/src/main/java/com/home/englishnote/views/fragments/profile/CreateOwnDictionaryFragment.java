@@ -122,12 +122,15 @@ public class CreateOwnDictionaryFragment extends BaseFragment implements CreateO
 
     private void setCancelOwnDictionaryButton() {
         cancelOwnDictionaryButton.setOnClickListener(
-                v -> clearText(ownDictionaryTitle, ownDictionaryDescription));
+                v -> {
+                    clearText(ownDictionaryTitle, ownDictionaryDescription);
+                    backLastFragment();
+                });
     }
 
     @Override
     public void createOwnDictionarySuccessfully() {
-        //  git commit -m "Create own dictionary fragment has finished"
         clearText(ownDictionaryTitle, ownDictionaryDescription);
+        backLastFragment();
     }
 }

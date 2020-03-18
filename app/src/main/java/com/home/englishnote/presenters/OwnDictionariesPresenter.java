@@ -7,6 +7,7 @@ import com.home.englishnote.utils.ThreadExecutor;
 import java.util.List;
 
 public class OwnDictionariesPresenter {
+
     private OwnDictionariesView ownDictionariesView;
     private MemberRepository memberRepository;
     private ThreadExecutor threadExecutor;
@@ -22,7 +23,7 @@ public class OwnDictionariesPresenter {
     public void getOwnDictionaries(int memberId, int offset, int limit) {
         threadExecutor.execute(() -> {
             try {
-                threadExecutor.delayExecuteUiThreadDelay(() -> {
+                threadExecutor.executeUiThread(() -> {
                     List<Dictionary> dictionaryList =
                             memberRepository.getOwnDictionaries(memberId, offset, limit);
                     ownDictionariesView.onGetDictionariesSuccessfully(dictionaryList);

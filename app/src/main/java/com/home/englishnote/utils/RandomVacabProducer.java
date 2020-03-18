@@ -52,7 +52,7 @@ public class RandomVacabProducer {
             for (int i = 0; i < wordGroupCount; i++) {
                 wordGroups.add(randomWordGroup(minWordCount, maxWordCount));
             }
-            dictionary.setWordGroups(wordGroups);
+            dictionary.setWordGroups(new ArrayList<>(wordGroups));
         }
         return dictionary;
     }
@@ -72,7 +72,7 @@ public class RandomVacabProducer {
             for (int i = 0; i < wordCount; i++) {
                 words.add(randomWord());
             }
-            wordGroup.setWords(words);
+            wordGroup.setWords(new ArrayList<>(words));
         }
         return wordGroup;
     }

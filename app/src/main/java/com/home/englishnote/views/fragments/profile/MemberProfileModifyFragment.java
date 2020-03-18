@@ -1,12 +1,12 @@
 package com.home.englishnote.views.fragments.profile;
 
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
 import com.home.englishnote.views.fragments.BaseFragment;
 
@@ -26,13 +27,16 @@ import java.util.List;
 public class MemberProfileModifyFragment extends BaseFragment {
 
     private Spinner ageModifySpinner;
-    private Button memberInfoModifyButton, emailAddressModifyButton, passwordModifyButton;
+    private TextView profileModifyButton, emailAddressModifyButton, passwordModifyButton;
     private TextView newEmailAddress, passwordModifyPrompt, newPassword, confirmNewPassword;
     private TextView ageContent;
     private EditText firstNameContent, lastNameContent;
     private EditText newEmailAddressContent, newPasswordContent, newConfirmPasswordContent;
-    private ImageView memberInfoModifyDrawerButton;
-    private DrawerLayout memberInfoModifyDrawer;
+    private View memberInfoModifyVocabSearch;
+    private View memberInfoModifyDictionarySearch;
+    private ImageView memberInfoModifyMemberPhoto;
+    private TextView memberInfoModifyMemberName;
+    private TextView userModifyPageCurrentEmailAddressContent;
 
     // Todo data setting hasn't finished
 
@@ -52,52 +56,72 @@ public class MemberProfileModifyFragment extends BaseFragment {
     }
 
     private void findViews(View view) {
+        // Toolbar
+        memberInfoModifyVocabSearch = view.findViewById(R.id.memberInfoModifyVocabSearch);
+        memberInfoModifyDictionarySearch = view.findViewById(R.id.memberInfoModifyDictionarySearch);
+        memberInfoModifyMemberPhoto = view.findViewById(R.id.memberInfoModifyMemberPhoto);
+        memberInfoModifyMemberName = view.findViewById(R.id.memberInfoModifyMemberName);
 
-        memberInfoModifyDrawer = view.findViewById(R.id.memberInfoModifyDrawer);
-        memberInfoModifyDrawerButton = view.findViewById(R.id.memberInfoModifyDrawerButton);
-
-        ageModifySpinner = view.findViewById(R.id.userModifyPageAgeSpinner);
-        ageContent = view.findViewById(R.id.userModifyPageAgeContent);
-
-        memberInfoModifyButton = view.findViewById(R.id.memberInfoModifyButton);
-
-        emailAddressModifyButton = view.findViewById(R.id.emailAddressModifyButton);
-
-        passwordModifyButton = view.findViewById(R.id.passwordModifyButton);
-
+        // MyProfile
         firstNameContent = view.findViewById(R.id.userModifyPageFirstNameContent);
         lastNameContent = view.findViewById(R.id.userModifyPageLastNameContent);
+        ageContent = view.findViewById(R.id.userModifyPageAgeContent);
+        ageModifySpinner = view.findViewById(R.id.userModifyPageAgeSpinner);
+        profileModifyButton = view.findViewById(R.id.profileModifyButton);
 
+        // EmailAddress
+        userModifyPageCurrentEmailAddressContent = view.findViewById(R.id.userModifyPageCurrentEmailAddressContent);
         newEmailAddress = view.findViewById(R.id.userModifyPageNewEmailAddress);
         newEmailAddressContent = view.findViewById(R.id.userModifyPageNewEmailAddressContent);
+        emailAddressModifyButton = view.findViewById(R.id.emailAddressModifyButton);
 
+        // Password
         passwordModifyPrompt = view.findViewById(R.id.userModifyPagePasswordModifyPrompt);
-
         newPassword = view.findViewById(R.id.userModifyPageNewPassword);
         newPasswordContent = view.findViewById(R.id.userModifyPageNewPasswordContent);
-
         confirmNewPassword = view.findViewById(R.id.userModifyPageConfirmNewPassword);
         newConfirmPasswordContent = view.findViewById(R.id.userModifyPageNewConfirmPasswordContent);
+        passwordModifyButton = view.findViewById(R.id.passwordModifyButton);
     }
 
     private void init() {
-        setToolBar();
-        setMemberInfoEnable(false);
+        setMember();
+        setProfileEnable(false);
         setEmailAddressEnable(false);
         setPasswordEnable(false);
         setAgeSpinner();
-//        setModifyButtons();
+        setModifyButtons();
     }
 
-    private void setToolBar() {
-        memberInfoModifyDrawerButton.setOnClickListener(
-                v -> memberInfoModifyDrawer.openDrawer(GravityCompat.START));
+    private void setMember() {
+        Glide.with(this)
+                .asBitmap()
+                .load(member.getImageURL())
+                .fitCenter()
+                .error(R.drawable.small_user_pic)
+                .into(memberInfoModifyMemberPhoto);
+        String memberName = member.getFirstName();
+        memberInfoModifyMemberName.setText((memberName.isEmpty()) ? "memberName" : memberName);
     }
 
-    private void setMemberInfoEnable(boolean enable) {
+    private void setProfileEnable(boolean enable) {
         setViewsVisible(enable, ageModifySpinner);
         setViewsFocusable(enable, firstNameContent, lastNameContent, ageModifySpinner);
         setModifyBorder(enable, firstNameContent, lastNameContent);
+    }
+
+    private void setEmailAddressEnable(boolean enable) {
+        setViewsVisible(enable, newEmailAddress, newEmailAddressContent);
+        setViewsFocusable(enable, newEmailAddressContent);
+        setModifyBorder(enable, newEmailAddressContent);
+    }
+
+    private void setPasswordEnable(boolean enable) {
+        setViewsVisible(enable, newPassword, newPasswordContent,
+                confirmNewPassword, newConfirmPasswordContent);
+        setViewsVisible(!enable, passwordModifyPrompt);
+        setViewsFocusable(enable, newPasswordContent, newConfirmPasswordContent);
+        setModifyBorder(enable, newPasswordContent, newConfirmPasswordContent);
     }
 
     private void setModifyBorder(boolean enable, View... views) {
@@ -108,18 +132,6 @@ public class MemberProfileModifyFragment extends BaseFragment {
                         getResources().getDrawable(R.color.mainWhite));
             }
         }
-    }
-
-    private void setEmailAddressEnable(boolean enable) {
-        setViewsVisible(enable, newEmailAddress, newEmailAddressContent);
-        setViewsFocusable(enable, newEmailAddressContent);
-    }
-
-    private void setPasswordEnable(boolean enable) {
-        setViewsVisible(enable, newPassword, newPasswordContent,
-                confirmNewPassword, newConfirmPasswordContent);
-        setViewsVisible(!enable, passwordModifyPrompt);
-        setViewsFocusable(enable, newPasswordContent, newConfirmPasswordContent);
     }
 
     private void setViewsVisible(boolean visible, View... views) {
@@ -151,72 +163,41 @@ public class MemberProfileModifyFragment extends BaseFragment {
         return ageList;
     }
 
-//    private void setModifyButtons() {
-//        memberInfoModifyButton.setOnClickListener(this::onModifyButtonClick);
-//        emailAddressModifyButton.setOnClickListener(this::onModifyButtonClick);
-//        passwordModifyButton.setOnClickListener(this::onModifyButtonClick);
-//    }
-//
-//    private void onModifyButtonClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.memberInfoModifyButton:
-//                if (isModifyState(memberInfoModifyButtonText)) {
-//                    setMemberInfoOnModifyState(true);
-//                } else {
-//                    setMemberInfoOnModifyState(false);
-//                }
-//                break;
-//            case R.id.emailAddressModifyButton:
-//                if (isModifyState(emailAddressModifyButtonText)) {
-//                    setEmailAddressOnModifyState(true);
-//                } else {
-//                    setEmailAddressOnModifyState(false);
-//                }
-//                break;
-//            case R.id.passwordModifyButton:
-//                if (isModifyState(passwordModifyButtonText)) {
-//                    setPasswordOnModifyState(true);
-//                } else {
-//                    // Todo upload new userInfo while user has modified
-//                    setPasswordOnModifyState(false);
-//                }
-//                break;
-//            default:
-//                throw new IllegalArgumentException("哈啦");
-//        }
-//    }
-//
-//    private boolean isModifyState(TextView textView) {
-//        return !getString(R.string.modifyButtonChangeText).equals(textView.getText().toString());
-//    }
-//
-//    private void setMemberInfoOnModifyState(boolean stateChange) {
-//        setMemberInfoEnable(stateChange);
-//        setModifyButtonState(stateChange, memberInfoModifyButton,
-//                memberInfoModifyButtonText, memberInfoModifyButtonImage);
-//    }
-//
-//    private void setEmailAddressOnModifyState(boolean stateChange) {
-//        setEmailAddressEnable(stateChange);
-//        setModifyButtonState(stateChange, emailAddressModifyButton,
-//                emailAddressModifyButtonText, emailAddressModifyButtonImage);
-//    }
-//
-//    private void setPasswordOnModifyState(boolean stateChange) {
-//        setPasswordEnable(stateChange);
-//        setModifyButtonState(stateChange, passwordModifyButton,
-//                passwordModifyButtonText, passwordModifyButtonImage);
-//    }
+    private boolean isProfileModifyButtonClick = false;
+    private boolean isEmailAddressModifyButtonClick = false;
+    private boolean isPasswordModifyButtonClick = false;
 
-    private void setModifyButtonState(boolean stateChange, View modifyButton,
-                                      TextView buttonText, ImageView buttonImage) {
+    private void setModifyButtons() {
+        setMemberInfoEditable(isProfileModifyButtonClick, profileModifyButton);
+        setMemberInfoEditable(isEmailAddressModifyButtonClick, emailAddressModifyButton);
+        setMemberInfoEditable(isPasswordModifyButtonClick, passwordModifyButton);
+
+        profileModifyButton.setOnClickListener(v -> {
+            isProfileModifyButtonClick = !isProfileModifyButtonClick;
+            setMemberInfoEditable(isProfileModifyButtonClick, profileModifyButton);
+            setProfileEnable(isProfileModifyButtonClick);
+        });
+        emailAddressModifyButton.setOnClickListener(v -> {
+            isEmailAddressModifyButtonClick = !isEmailAddressModifyButtonClick;
+            setMemberInfoEditable(isEmailAddressModifyButtonClick, emailAddressModifyButton);
+            setEmailAddressEnable(isEmailAddressModifyButtonClick);
+        });
+        passwordModifyButton.setOnClickListener(v -> {
+            isPasswordModifyButtonClick = !isPasswordModifyButtonClick;
+            setMemberInfoEditable(isPasswordModifyButtonClick, passwordModifyButton);
+            setPasswordEnable(isPasswordModifyButtonClick);
+        });
+    }
+
+    private void setMemberInfoEditable(boolean editable, TextView modifyButton) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            modifyButton.setBackground(stateChange ?
+            modifyButton.setBackground(editable ?
                     getResources().getDrawable(R.drawable.bg_modify_grey_round_button) :
                     getResources().getDrawable(R.drawable.bg_modify_green_round_button));
         }
-        buttonText.setText(stateChange ?
+        Drawable img = (editable) ? null : getResources().getDrawable(R.drawable.modify_pen);
+        modifyButton.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+        modifyButton.setText(editable ?
                 getString(R.string.modifyButtonSaveText) : getString(R.string.modifyButtonChangeText));
-        setViewsVisible(!stateChange, buttonImage);
     }
 }

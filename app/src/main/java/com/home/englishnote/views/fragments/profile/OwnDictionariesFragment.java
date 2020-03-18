@@ -59,6 +59,7 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
                 this, Global.memberRepository(), Global.threadExecutor());
         setDictionariesSwipeRefreshLayout();
         setDictionariesRecycler();
+        updateDictionaryList();
     }
 
     private void setDictionariesSwipeRefreshLayout() {
@@ -166,7 +167,7 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
 
             private void switchOwnDictionaryPage(View v) {
                 switchFragment(R.layout.fragment_own_dictionary_page,
-                        R.id.DictionaryHomePageContainer, dictionary);
+                        R.id.dictionaryHomePageContainer, dictionary);
             }
 
             @Override

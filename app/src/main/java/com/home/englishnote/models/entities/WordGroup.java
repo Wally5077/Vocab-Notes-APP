@@ -43,7 +43,4 @@ public class WordGroup implements Serializable {
         this.words = words;
     }
 
-    public void setWords(Set<Word> words) {
-        this.words.addAll(words);
-    }
 }

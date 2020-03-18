@@ -1,13 +1,21 @@
 package com.home.englishnote.models.repositories;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.home.englishnote.models.entities.Credentials;
 import com.home.englishnote.models.entities.Dictionary;
 import com.home.englishnote.models.entities.Member;
+import com.home.englishnote.models.entities.Role;
 import com.home.englishnote.models.entities.Token;
+import com.home.englishnote.models.entities.Type;
+import com.home.englishnote.utils.RandomVacabProducer;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class StubMemberRepository implements MemberRepository {
     @Override
     public Token signUp(Member member, Credentials credentials) {
@@ -21,8 +29,7 @@ public class StubMemberRepository implements MemberRepository {
 
     @Override
     public Member getMember(int memberId) {
-        return new Member("firstName", "lastName",
-                25, "email", "password");
+        return RandomVacabProducer.randomMember(Role.MEMBER);
     }
 
     @Override
@@ -37,6 +44,23 @@ public class StubMemberRepository implements MemberRepository {
 
     @Override
     public List<Dictionary> getOwnDictionaries(int memberId, int offset, int limit) {
-        return new ArrayList<>();
+        List<Dictionary> dictionaryList = new ArrayList<>(10);
+        for (int i = 0; i < 10; i++) {
+            dictionaryList.add(RandomVacabProducer.randomDictionary(
+                    Type.PUBLIC, 3, 10,
+                    5, 20));
+        }
+        return dictionaryList;
+    }
+
+    @Override
+    public List<Dictionary> getFavoriteDictionaries(int memberId, int offset, int limit) {
+        List<Dictionary> dictionaryList = new ArrayList<>(10);
+        for (int i = 0; i < 10; i++) {
+            dictionaryList.add(RandomVacabProducer.randomDictionary(
+                    Type.PUBLIC, 3, 10,
+                    5, 20));
+        }
+        return dictionaryList;
     }
 }

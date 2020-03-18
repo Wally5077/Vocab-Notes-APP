@@ -22,8 +22,6 @@ public class MemberProfilePageFragment extends BaseFragment {
     private TextView memberProfilePageName;
     private Button memberProfilePageEditProfileButton;
     private Button memberProfilePageCreateDictionaryButton;
-    private DrawerLayout memberProfilePageDrawer;
-    private ImageView memberProfilePageDrawerButton;
 
     @Nullable
     @Override
@@ -42,8 +40,6 @@ public class MemberProfilePageFragment extends BaseFragment {
     }
 
     private void findViews(View view) {
-        memberProfilePageDrawer = view.findViewById(R.id.memberProfilePageDrawer);
-        memberProfilePageDrawerButton = view.findViewById(R.id.memberProfilePageDrawerButton);
         memberProfilePagePhoto = view.findViewById(R.id.memberProfilePagePhoto);
         memberProfilePageName = view.findViewById(R.id.memberProfilePageName);
         memberProfilePageEditProfileButton = view.findViewById(R.id.memberProfilePageEditProfileButton);
@@ -51,17 +47,10 @@ public class MemberProfilePageFragment extends BaseFragment {
     }
 
     private void init() {
-        setToolBar();
         setMemberPhoto();
         setMemberName();
         setMemberProfileEditProfileButtonClick();
         setMemberProfileCreateDictionaryButtonClick();
-        setDefaultPage();
-    }
-
-    private void setToolBar() {
-        memberProfilePageDrawerButton.setOnClickListener(
-                v -> memberProfilePageDrawer.openDrawer(GravityCompat.START));
     }
 
     private void setMemberPhoto() {
@@ -89,7 +78,4 @@ public class MemberProfilePageFragment extends BaseFragment {
                         R.layout.fragment_create_own_dictionary, MEMBER_PROFILE_CONTAINER));
     }
 
-    private void setDefaultPage() {
-        switchFragment(R.layout.fragment_own_dictionaries, MEMBER_PROFILE_CONTAINER);
-    }
 }

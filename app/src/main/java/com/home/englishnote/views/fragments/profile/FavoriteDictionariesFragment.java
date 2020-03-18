@@ -14,13 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Dictionary;
+import com.home.englishnote.models.entities.WordGroup;
+import com.home.englishnote.presenters.FavoriteDictionariesPresenter;
+import com.home.englishnote.presenters.FavoriteWordGroupsPresenter;
+import com.home.englishnote.presenters.FavoriteWordGroupsPresenter.FavoriteWordGroupsView;
+import com.home.englishnote.utils.Global;
 import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoriteDictionariesFragment extends BaseFragment {
+public class FavoriteDictionariesFragment extends BaseFragment implements FavoriteDictionariesPresenter.FavoriteDictionariesView {
 
+    private FavoriteDictionariesPresenter favoriteDictionariesPresenter;
     private RecyclerView favoriteDictionariesRecycler;
     private FavoriteDictionariesAdapter favoriteDictionariesAdapter;
 
@@ -45,7 +51,10 @@ public class FavoriteDictionariesFragment extends BaseFragment {
     }
 
     private void init() {
+        favoriteDictionariesPresenter = new FavoriteDictionariesPresenter(
+                this, Global.memberRepository(), Global.threadExecutor());
         setDictionariesRecycler();
+        downloadFavoriteDictionaryList();
     }
 
     private List<Dictionary> dictionaryList = new ArrayList<>();
@@ -56,6 +65,18 @@ public class FavoriteDictionariesFragment extends BaseFragment {
         favoriteDictionariesRecycler.setLayoutManager(linearLayoutManager);
         favoriteDictionariesAdapter = new FavoriteDictionariesAdapter(dictionaryList);
         favoriteDictionariesRecycler.setAdapter(favoriteDictionariesAdapter);
+    }
+
+    private void downloadFavoriteDictionaryList() {
+        int dictionaryListSize = dictionaryList.size();
+        favoriteDictionariesPresenter.getOwnDictionaries(
+                member.getId(), dictionaryListSize, dictionaryListSize + 30);
+    }
+
+    @Override
+    public void onGetDictionariesSuccessfully(List<Dictionary> dictionaryList) {
+        this.dictionaryList.addAll(dictionaryList);
+        favoriteDictionariesAdapter.notifyDataSetChanged();
     }
 
     public class FavoriteDictionariesAdapter extends RecyclerView.Adapter<FavoriteDictionariesAdapter.FavoriteDictionariesHolder> {
@@ -80,6 +101,9 @@ public class FavoriteDictionariesFragment extends BaseFragment {
         public void onBindViewHolder(@NonNull FavoriteDictionariesHolder holder, int position) {
             Dictionary dictionary = dictionaryList.get(position);
             holder.setData(dictionary);
+            new FavoriteWordGroupsPresenter(
+                    holder, Global.wordGroupRepository(), Global.threadExecutor())
+                    .getWordGroups(dictionary.getOwnId(), 0, -1);
         }
 
         @Override
@@ -87,11 +111,11 @@ public class FavoriteDictionariesFragment extends BaseFragment {
             return dictionaryList.size();
         }
 
-        public class FavoriteDictionariesHolder extends RecyclerView.ViewHolder {
+        public class FavoriteDictionariesHolder extends RecyclerView.ViewHolder
+                implements FavoriteWordGroupsView {
 
-            private TextView dictionaryName;
+            private TextView favoriteDictionaryName;
             private TextView favoriteWordGroups;
-            private Dictionary dictionary;
 
             public FavoriteDictionariesHolder(@NonNull View itemView) {
                 super(itemView);
@@ -99,13 +123,21 @@ public class FavoriteDictionariesFragment extends BaseFragment {
             }
 
             private void findViews(@NonNull View itemView) {
-                dictionaryName = itemView.findViewById(R.id.favoriteDictionaryName);
+                favoriteDictionaryName = itemView.findViewById(R.id.favoriteDictionaryName);
                 favoriteWordGroups = itemView.findViewById(R.id.favoriteWordGroups);
             }
 
+            private Dictionary dictionary;
+
             public void setData(Dictionary dictionary) {
                 this.dictionary = dictionary;
-                dictionaryName.setText(dictionary.getTitle());
+                favoriteDictionaryName.setText(dictionary.getTitle());
+            }
+
+            @Override
+            public void onGetWordGroupsSuccessfully(List<WordGroup> wordGroupList) {
+                String wordGroupSize = wordGroupList.size() + " Word groups";
+                favoriteWordGroups.setText(wordGroupSize);
             }
         }
     }

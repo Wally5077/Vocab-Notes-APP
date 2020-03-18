@@ -1,7 +1,7 @@
 package com.home.englishnote.models.entities;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 public class Dictionary implements Serializable {
     private int id, ownId;
@@ -69,13 +69,13 @@ public class Dictionary implements Serializable {
         this.type = type;
     }
 
-    private Set<WordGroup> wordGroups;
+    private List<WordGroup> wordGroups;
 
-    public Set<WordGroup> getWordGroups() {
+    public List<WordGroup> getWordGroups() {
         return wordGroups;
     }
 
-    public void setWordGroups(Set<WordGroup> wordGroups) {
+    public void setWordGroups(List<WordGroup> wordGroups) {
         this.wordGroups = wordGroups;
     }
 }

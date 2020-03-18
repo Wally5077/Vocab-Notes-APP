@@ -104,4 +104,9 @@ public class RetrofitMemberRepository implements MemberRepository {
     public List<Dictionary> getOwnDictionaries(int memberId, int offset, int limit) {
         return null;
     }
+
+    @Override
+    public List<Dictionary> getFavoriteDictionaries(int memberId, int offset, int limit) {
+        return null;
+    }
 }

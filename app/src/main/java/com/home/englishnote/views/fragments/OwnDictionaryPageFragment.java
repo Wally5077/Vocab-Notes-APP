@@ -42,8 +42,6 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
     private RecyclerView wordGroupsRecycler;
     private OwnWordGroupsAdapter ownWordGroupsAdapter;
     private OwnDictionaryPagePresenter ownDictionaryPagePresenter;
-    private DrawerLayout ownDictionaryPageDrawer;
-    private ImageView ownDictionaryPageDrawerButton;
 
     @Nullable
     @Override
@@ -62,8 +60,6 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
     }
 
     private void findViews(View view) {
-        ownDictionaryPageDrawer = view.findViewById(R.id.ownDictionaryPageDrawer);
-        ownDictionaryPageDrawerButton = view.findViewById(R.id.ownDictionaryPageDrawerButton);
         ownDictionaryPageDictionaryName = view.findViewById(R.id.ownDictionaryPageDictionaryName);
         ownDictionaryPageWordGroupCount = view.findViewById(R.id.ownDictionaryPageWordGroupCount);
         ownDictionaryPagePhoto = view.findViewById(R.id.ownDictionaryPagePhoto);
@@ -79,17 +75,11 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
     private void init() {
         ownDictionaryPagePresenter = new OwnDictionaryPagePresenter(
                 this, Global.wordGroupRepository(), Global.threadExecutor());
-        setToolBar();
         setDictionary();
         setMember();
         setWordGroupsRecycler();
         downloadWordGroupsList();
         setEditButton();
-    }
-
-    private void setToolBar() {
-        ownDictionaryPageDrawerButton.setOnClickListener(
-                v -> ownDictionaryPageDrawer.openDrawer(GravityCompat.START));
     }
 
     private void setDictionary() {

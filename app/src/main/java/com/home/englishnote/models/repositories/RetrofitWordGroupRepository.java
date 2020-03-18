@@ -63,4 +63,9 @@ public class RetrofitWordGroupRepository implements WordGroupRepository {
     public List<WordGroup> getWordGroupsFromOwnDictionary(int memberId, int offset, int limit) {
         return null;
     }
+
+    @Override
+    public List<WordGroup> getWordGroupsFromFavoriteDictionary(int memberId, int offset, int limit) {
+        return null;
+    }
 }
