@@ -73,7 +73,7 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
     private List<Dictionary> dictionaryList = new ArrayList<>();
 
     private void setDictionariesRecycler() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mainPageActivity);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
         publicDictionariesRecycler.setHasFixedSize(true);
         publicDictionariesRecycler.setLayoutManager(linearLayoutManager);
         publicDictionariesAdapter = new PublicDictionariesAdapter(dictionaryList);

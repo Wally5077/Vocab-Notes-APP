@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
@@ -45,7 +43,8 @@ public class MemberProfileModifyFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_member_profile_modify, container, false);
+        return inflater
+                .inflate(R.layout.fragment_member_profile_modify, container, false);
     }
 
     @Override
@@ -150,7 +149,7 @@ public class MemberProfileModifyFragment extends BaseFragment {
     }
 
     private void setAgeSpinner() {
-        ageModifySpinner.setAdapter(new ArrayAdapter<>(mainPageActivity,
+        ageModifySpinner.setAdapter(new ArrayAdapter<>(dictionaryHomePageActivity,
                 android.R.layout.simple_spinner_dropdown_item,
                 configAgeRange(150)));
     }

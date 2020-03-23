@@ -20,17 +20,17 @@ public class BaseFragment extends Fragment {
     protected final static int PUBLIC_DICTIONARY_CONTAINER = R.id.publicDictionaryPageContainer;
     protected final static int MEMBER_PROFILE_CONTAINER = R.id.memberProfilePageContainer;
 
-    protected DictionaryHomePageActivity mainPageActivity;
+    protected DictionaryHomePageActivity dictionaryHomePageActivity;
     protected Member member;
     protected Token token;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mainPageActivity = (DictionaryHomePageActivity) getActivity();
+        dictionaryHomePageActivity = (DictionaryHomePageActivity) getActivity();
         // Todo
-//        member = (Member) mainPageActivity.getIntent().getSerializableExtra("member");
-//        token = (Token) mainPageActivity.getIntent().getSerializableExtra("token");
+//        member = (Member) dictionaryHomePageActivity.getIntent().getSerializableExtra("member");
+//        token = (Token) dictionaryHomePageActivity.getIntent().getSerializableExtra("token");
         member = new Member("firstName", "lastName",
                 25, "email", "password");
         token = new Token();
@@ -42,12 +42,12 @@ public class BaseFragment extends Fragment {
     }
 
     protected void backLastFragment() {
-        mainPageActivity.onBackPressed();
+        dictionaryHomePageActivity.onBackPressed();
     }
 
     protected void switchFragment(int fragmentId, int containerId,
                                   Serializable... serializableArray) {
-        mainPageActivity.switchFragment(fragmentId, containerId, serializableArray);
+        dictionaryHomePageActivity.switchFragment(fragmentId, containerId, serializableArray);
     }
 
 }

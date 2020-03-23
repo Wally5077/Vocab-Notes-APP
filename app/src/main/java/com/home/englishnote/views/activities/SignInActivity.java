@@ -53,6 +53,7 @@ public class SignInActivity extends BaseActivity implements SignInView {
         startActivity(new Intent(this, DictionaryHomePageActivity.class)
                 .putExtra("member", member));
         saveSalt(passwordSalt);
+        finish();
     }
 
     @Override

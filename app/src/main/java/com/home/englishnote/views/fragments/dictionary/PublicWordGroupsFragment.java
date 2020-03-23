@@ -1,15 +1,20 @@
 package com.home.englishnote.views.fragments.dictionary;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -24,8 +29,11 @@ import com.home.englishnote.utils.PublicWordGroupsAdapter;
 import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class PublicWordGroupsFragment extends BaseFragment implements PublicWordGroupsView {
 
     private Button publicDictionaryFavoriteButton;
@@ -34,6 +42,7 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
     private RecyclerView wordGroupsRecycler;
     private PublicWordGroupsAdapter publicWordGroupsAdapter;
     private PublicWordGroupsPresenter publicWordGroupsPresenter;
+    private AutoCompleteTextView publicDictionaryQuery;
 
     @Nullable
     @Override
@@ -53,6 +62,7 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
 
     private void findViews(View view) {
         // Todo need a searchView
+        publicDictionaryQuery = view.findViewById(R.id.publicDictionaryQuery);
         publicDictionaryName = view.findViewById(R.id.publicDictionaryName);
         publicDictionaryFavoriteButton = view.findViewById(R.id.publicDictionaryFavoriteButton);
         wordGroupsSwipeRefreshLayout = view.findViewById(R.id.publicWordGroupsSwipeRefreshLayout);
@@ -64,14 +74,10 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
                 this, Global.wordGroupRepository(), Global.threadExecutor());
         setDictionary();
         publicDictionaryFavoriteButton.setOnClickListener(this::onFavoriteButtonClick);
+        setPublicDictionaryQuery();
         setWordGroupsRecycler();
         setWordGroupsSwipeRefreshLayout();
         updateWordGroupsList();
-    }
-
-    private void onFavoriteButtonClick(View view) {
-        // Todo check this public vocabulary dictionary has been added to favorite dictionary
-        Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
     }
 
     private Dictionary dictionary;
@@ -82,6 +88,38 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
             dictionary = (Dictionary) bundle.getSerializable("VocabNoteObjects");
             publicDictionaryName.setText(dictionary.getTitle());
         }
+    }
+
+    private void onFavoriteButtonClick(View view) {
+        // Todo check this public vocabulary dictionary has been added to favorite dictionary
+        Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
+    }
+
+    private void setPublicDictionaryQuery() {
+        publicDictionaryQuery.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String filterPattern = s.toString().toLowerCase().trim();
+                if (count == 0) {
+                    publicWordGroupsAdapter.updateWordGroupsList(wordGroupsList);
+                } else {
+                    publicWordGroupsAdapter.updateWordGroupsList(wordGroupsList.stream()
+                            .filter(wordGroup -> wordGroup.getTitle().contains(filterPattern))
+                            .collect(Collectors.toCollection(ArrayList::new)));
+                }
+                publicWordGroupsAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private List<WordGroup> wordGroupsList = new ArrayList<>();

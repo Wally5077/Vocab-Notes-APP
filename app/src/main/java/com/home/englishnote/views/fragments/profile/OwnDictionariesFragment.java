@@ -1,6 +1,7 @@
 package com.home.englishnote.views.fragments.profile;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -26,6 +28,7 @@ import com.home.englishnote.views.fragments.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class OwnDictionariesFragment extends BaseFragment implements OwnDictionariesView {
 
     private OwnDictionariesPresenter ownDictionariesPresenter;
@@ -71,7 +74,7 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
     private List<Dictionary> dictionaryList = new ArrayList<>();
 
     private void setDictionariesRecycler() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mainPageActivity);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
         ownDictionariesRecycler.setHasFixedSize(true);
         ownDictionariesRecycler.setLayoutManager(linearLayoutManager);
         ownDictionariesAdapter = new OwnDictionariesAdapter(dictionaryList);
@@ -105,6 +108,7 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
     @Override
     public void onGetDictionariesSuccessfully(List<Dictionary> dictionaryList) {
         setDictionariesSwipeRefreshLayoutEnable(false);
+        this.dictionaryList.clear();
         this.dictionaryList.addAll(dictionaryList);
         ownDictionariesAdapter.notifyDataSetChanged();
     }

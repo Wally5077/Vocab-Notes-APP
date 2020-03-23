@@ -1,9 +1,12 @@
 package com.home.englishnote.views.activities;
 
 
+import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -28,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class DictionaryHomePageActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
@@ -82,22 +85,29 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
     }
 
     private void setNavigationView() {
-        dhp_ngv.setNavigationItemSelectedListener(menuItem -> {
-            switch (menuItem.getItemId()) {
-                case R.id.drawer_create_dictionary:
-                    setInnerFragmentIntoMemberProfilePage(R.layout.fragment_create_own_dictionary);
-                    break;
-                case R.id.drawer_favorite:
-                    setInnerFragmentIntoMemberProfilePage(R.layout.fragment_favorite_dictionaries);
-                    break;
-                case R.id.drawer_my_list:
-                    setInnerFragmentIntoMemberProfilePage(R.layout.fragment_own_dictionaries);
-                    break;
-                case R.id.drawer_log_out:
-                    break;
-            }
-            return true;
-        });
+        dhp_ngv.setNavigationItemSelectedListener(
+                menuItem -> {
+                    switch (menuItem.getItemId()) {
+                        case R.id.drawer_create_dictionary:
+                            setInnerFragmentIntoMemberProfilePage(
+                                    R.layout.fragment_create_own_dictionary);
+                            break;
+                        case R.id.drawer_favorite:
+                            setInnerFragmentIntoMemberProfilePage(
+                                    R.layout.fragment_favorite_dictionaries);
+                            break;
+                        case R.id.drawer_my_list:
+                            setInnerFragmentIntoMemberProfilePage(
+                                    R.layout.fragment_own_dictionaries);
+                            break;
+                        case R.id.drawer_log_out:
+                            finish();
+                            break;
+                    }
+                    return true;
+                });
+        View view = LayoutInflater.from(this)
+                .inflate(R.layout.drawer_header, dhp_ngv, false);
     }
 
     private void setInnerFragmentIntoMemberProfilePage(int innerFragmentId) {

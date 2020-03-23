@@ -3,7 +3,7 @@
     package="com.home.englishnote">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +16,9 @@
         <activity android:name=".views.activities.SignUpActivity" />
         <activity android:name=".views.activities.SignInActivity" />
         <activity android:name=".views.activities.TestActivity" />
-        <activity android:name=".views.activities.DictionaryHomePageActivity">
+        <activity
+            android:name=".views.activities.DictionaryHomePageActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,10 +1,15 @@
 package com.home.englishnote.utils;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.home.englishnote.models.repositories.*;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public final class Global {
 
     private static Retrofit vocabularyNoteRetrofit = new Retrofit
@@ -16,7 +21,8 @@ public final class Global {
     public static MemberRepository memberRepository() {
 //        return memberRepository = (memberRepository != null) ? memberRepository :
 //                new RetrofitMemberRepository(vocabularyNoteRetrofit);
-        return new StubMemberRepository();
+        return memberRepository = (memberRepository != null) ?
+                memberRepository : new StubMemberRepository();
     }
 
     private static DictionaryRepository dictionaryRepository;
@@ -24,7 +30,8 @@ public final class Global {
     public static DictionaryRepository dictionaryRepository() {
 //        return dictionaryRepository = (dictionaryRepository != null) ? dictionaryRepository :
 //                new RetrofitDictionaryRepository(vocabularyNoteRetrofit);
-        return new StubDictionaryRepository();
+        return dictionaryRepository = (dictionaryRepository != null) ?
+                dictionaryRepository : new StubDictionaryRepository();
     }
 
     private static WordGroupRepository wordGroupRepository;
@@ -33,7 +40,8 @@ public final class Global {
     public static WordGroupRepository wordGroupRepository() {
 //        return wordGroupRepository = (wordGroupRepository != null) ? wordGroupRepository :
 //                new RetrofitWordGroupRepository(vocabularyNoteRetrofit);
-        return new StubWordGroupRepository();
+        return wordGroupRepository = (wordGroupRepository != null) ?
+                wordGroupRepository : new StubWordGroupRepository();
     }
 
     private static WordRepository wordRepository;
@@ -41,7 +49,8 @@ public final class Global {
     public static WordRepository wordRepository() {
 //        return wordRepository = (wordRepository != null) ? wordRepository :
 //                new RetrofitWordRepository(vocabularyNoteRetrofit);
-        return new StubWordRepository();
+        return wordRepository = (wordRepository != null) ?
+                wordRepository : new StubWordRepository();
     }
 
     private static ThreadExecutor threadExecutor;

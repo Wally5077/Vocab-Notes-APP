@@ -1,6 +1,7 @@
 package com.home.englishnote.views.fragments.profile;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,7 +26,9 @@ import com.home.englishnote.views.fragments.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoriteDictionariesFragment extends BaseFragment implements FavoriteDictionariesPresenter.FavoriteDictionariesView {
+@RequiresApi(api = Build.VERSION_CODES.N)
+public class FavoriteDictionariesFragment extends BaseFragment
+        implements FavoriteDictionariesPresenter.FavoriteDictionariesView {
 
     private FavoriteDictionariesPresenter favoriteDictionariesPresenter;
     private RecyclerView favoriteDictionariesRecycler;
@@ -60,7 +64,7 @@ public class FavoriteDictionariesFragment extends BaseFragment implements Favori
     private List<Dictionary> dictionaryList = new ArrayList<>();
 
     private void setDictionariesRecycler() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mainPageActivity);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
         favoriteDictionariesRecycler.setHasFixedSize(true);
         favoriteDictionariesRecycler.setLayoutManager(linearLayoutManager);
         favoriteDictionariesAdapter = new FavoriteDictionariesAdapter(dictionaryList);

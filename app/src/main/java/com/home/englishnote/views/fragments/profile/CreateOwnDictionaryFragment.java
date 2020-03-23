@@ -1,5 +1,6 @@
 package com.home.englishnote.views.fragments.profile;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.home.englishnote.R;
 import com.home.englishnote.presenters.CreateOwnDictionaryPresenter;
@@ -20,7 +22,9 @@ import com.home.englishnote.views.fragments.BaseFragment;
 
 import static com.home.englishnote.presenters.CreateOwnDictionaryPresenter.*;
 
-public class CreateOwnDictionaryFragment extends BaseFragment implements CreateOwnDictionaryView {
+@RequiresApi(api = Build.VERSION_CODES.N)
+public class CreateOwnDictionaryFragment extends BaseFragment
+        implements CreateOwnDictionaryView {
 
     private EditText ownDictionaryTitle;
     private EditText ownDictionaryDescription;
@@ -80,6 +84,11 @@ public class CreateOwnDictionaryFragment extends BaseFragment implements CreateO
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (ownDictionaryTitle.getText().toString().contains("\n")) {
+                    ownDictionaryTitle
+                            .setText(ownDictionaryTitle.getText().toString()
+                                    .replace("\n", ""));
+                }
                 if (s.toString().length() > 80) {
                     clearText(ownDictionaryTitle);
                 }

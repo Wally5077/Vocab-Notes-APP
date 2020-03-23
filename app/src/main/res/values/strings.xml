@@ -34,7 +34,7 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 
-    <string name="Search"><font fgcolor='#948999A0'><i>Search</i></font></string>
+    <string name="Search"><i>Search</i></string>
     <string name="delete_this_dictionary">Delete This Dictionary</string>
 
     <string name="navigation_drawer_open">navigation_drawer_open</string>

@@ -106,6 +106,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         startActivity(new Intent(this, DictionaryHomePageActivity.class)
                 .putExtra("member", member));
         saveSalt(passwordSalt);
+        finish();
     }
 
     @Override

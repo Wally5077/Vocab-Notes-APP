@@ -1,13 +1,17 @@
 package com.home.englishnote.utils;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
@@ -17,7 +21,11 @@ import com.home.englishnote.models.entities.Word;
 import com.home.englishnote.models.entities.WordGroup;
 import com.home.englishnote.utils.PublicWordGroupsAdapter.WordGroupsHolder;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class PublicWordGroupsAdapter extends Adapter<WordGroupsHolder> {
 
@@ -46,6 +54,11 @@ public class PublicWordGroupsAdapter extends Adapter<WordGroupsHolder> {
     @Override
     public int getItemCount() {
         return wordGroupsList.size();
+    }
+
+
+    public void updateWordGroupsList(List<WordGroup> wordGroupsList) {
+        this.wordGroupsList = wordGroupsList;
     }
 
     public class WordGroupsHolder extends RecyclerView.ViewHolder {

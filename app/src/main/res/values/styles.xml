@@ -11,10 +11,10 @@
         <item name="colorControlActivated">#00FFFFFF</item>
     </style>
 
-    <style name="VocabSearchView" parent="Widget.AppCompat.SearchView">
-        <item name="android:textSize">8sp</item>
-        <item name="android:textColorHint">@color/secondaryGrey</item>
-    </style>
+    <!--    <style name="VocabSearchView" parent="Widget.AppCompat.SearchView">-->
+    <!--        <item name="android:textSize">8sp</item>-->
+    <!--        <item name="android:textColorHint">@color/secondaryGrey</item>-->
+    <!--    </style>-->
 
     <style name="NavigationTheme">
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/avenirmedium</item>
@@ -25,5 +25,12 @@
 
     <style name="progressLoading" parent="@android:style/Widget.ProgressBar">
         <item name="android:indeterminateDrawable">@drawable/bg_progress_loading</item>
+    </style>
+
+    <style name="VocabSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:textSize">8sp</item>
+        <item name="android:background">@drawable/vocab_search_border</item>
+        <item name="android:textColorHint">@color/secondaryGrey</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/avenirbook</item>
     </style>
 </resources>

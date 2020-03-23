@@ -62,7 +62,7 @@ public class RandomVacabProducer {
 
         // make random unique title
         do {
-            wordGroup.setTitle(RANDOM.nextBoolean() ? null : randomString(4, 15, false));
+            wordGroup.setTitle(randomString(4, 15, false));
         } while (wordGroupTitles.contains(wordGroup.getTitle()));
         wordGroupTitles.add(wordGroup.getTitle());
 

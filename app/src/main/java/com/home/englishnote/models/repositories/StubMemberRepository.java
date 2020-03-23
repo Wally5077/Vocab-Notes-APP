@@ -13,10 +13,12 @@ import com.home.englishnote.models.entities.Type;
 import com.home.englishnote.utils.RandomVacabProducer;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class StubMemberRepository implements MemberRepository {
+
     @Override
     public Token signUp(Member member, Credentials credentials) {
         return new Token("token", 0, 365);
@@ -37,19 +39,20 @@ public class StubMemberRepository implements MemberRepository {
 
     }
 
+    private LinkedList<Dictionary> dictionaryList = new LinkedList<>();
+
     @Override
     public void createOwnDictionary(Token token, int memberId, String title, String description) {
-
+        Dictionary dictionary = RandomVacabProducer.randomDictionary(
+                Type.PUBLIC, 3, 10,
+                5, 20);
+        dictionary.setTitle(title);
+        dictionary.setDescription(description);
+        dictionaryList.addFirst(dictionary);
     }
 
     @Override
     public List<Dictionary> getOwnDictionaries(int memberId, int offset, int limit) {
-        List<Dictionary> dictionaryList = new ArrayList<>(10);
-        for (int i = 0; i < 10; i++) {
-            dictionaryList.add(RandomVacabProducer.randomDictionary(
-                    Type.PUBLIC, 3, 10,
-                    5, 20));
-        }
         return dictionaryList;
     }
 
