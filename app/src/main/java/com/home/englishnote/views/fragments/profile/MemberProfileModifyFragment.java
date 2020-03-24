@@ -22,6 +22,9 @@ import com.home.englishnote.views.fragments.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.home.englishnote.utils.ViewEnableUtil.setViewsFocusable;
+import static com.home.englishnote.utils.ViewEnableUtil.setViewsVisible;
+
 public class MemberProfileModifyFragment extends BaseFragment {
 
     private Spinner ageModifySpinner;
@@ -106,13 +109,13 @@ public class MemberProfileModifyFragment extends BaseFragment {
     private void setProfileEnable(boolean enable) {
         setViewsVisible(enable, ageModifySpinner);
         setViewsFocusable(enable, firstNameContent, lastNameContent, ageModifySpinner);
-        setModifyBorder(enable, firstNameContent, lastNameContent);
+        setViewBackground(enable, firstNameContent, lastNameContent);
     }
 
     private void setEmailAddressEnable(boolean enable) {
         setViewsVisible(enable, newEmailAddress, newEmailAddressContent);
         setViewsFocusable(enable, newEmailAddressContent);
-        setModifyBorder(enable, newEmailAddressContent);
+        setViewBackground(enable, newEmailAddressContent);
     }
 
     private void setPasswordEnable(boolean enable) {
@@ -120,31 +123,16 @@ public class MemberProfileModifyFragment extends BaseFragment {
                 confirmNewPassword, newConfirmPasswordContent);
         setViewsVisible(!enable, passwordModifyPrompt);
         setViewsFocusable(enable, newPasswordContent, newConfirmPasswordContent);
-        setModifyBorder(enable, newPasswordContent, newConfirmPasswordContent);
+        setViewBackground(enable, newPasswordContent, newConfirmPasswordContent);
     }
 
-    private void setModifyBorder(boolean enable, View... views) {
+    private void setViewBackground(boolean enable, View... views) {
         for (View view : views) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 view.setBackground(enable ?
                         getResources().getDrawable(R.drawable.modify_border) :
                         getResources().getDrawable(R.color.mainWhite));
             }
-        }
-    }
-
-    private void setViewsVisible(boolean visible, View... views) {
-        for (View view : views) {
-            view.setVisibility((visible) ? View.VISIBLE : View.INVISIBLE);
-        }
-    }
-
-    private void setViewsFocusable(boolean enable, View... views) {
-        for (View view : views) {
-            view.setFocusable(enable);
-            view.setFocusableInTouchMode(enable);
-            view.setClickable(enable);
-            view.setLongClickable(enable);
         }
     }
 

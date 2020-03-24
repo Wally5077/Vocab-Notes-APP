@@ -9,14 +9,14 @@
     <TextView
         android:id="@+id/publicWordGroupTitle"
         android:layout_width="wrap_content"
-        android:layout_height="10dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="22.5dp"
         android:text="TYPE 1 - TITLE"
         android:textAlignment="center"
         android:textColor="@color/mainColor"
-        android:textSize="7sp"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lineHeight="10sp" />
@@ -25,9 +25,9 @@
         android:id="@+id/publicWordGroupFavoriteButton"
         android:layout_width="52.5dp"
         android:layout_height="20dp"
-        android:layout_marginTop="7.5dp"
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
+        android:layout_marginBottom="7.5dp"
         android:background="@drawable/bg_modify_green_round_button"
         android:drawableStart="@drawable/add_favorite"
         android:drawableLeft="@drawable/add_favorite"
@@ -38,8 +38,8 @@
         android:textAllCaps="false"
         android:textSize="7.5sp"
         app:fontFamily="@font/avenirheavy"
+        app:layout_constraintBottom_toTopOf="@+id/publicWordsRecycler"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:lineHeight="7sp" />
 
     <androidx.recyclerview.widget.RecyclerView

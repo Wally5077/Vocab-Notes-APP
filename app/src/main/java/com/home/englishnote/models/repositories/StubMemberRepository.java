@@ -53,7 +53,8 @@ public class StubMemberRepository implements MemberRepository {
 
     @Override
     public List<Dictionary> getOwnDictionaries(int memberId, int offset, int limit) {
-        return dictionaryList;
+        return !dictionaryList.isEmpty() ? dictionaryList :
+                getFavoriteDictionaries(memberId, offset, limit);
     }
 
     @Override

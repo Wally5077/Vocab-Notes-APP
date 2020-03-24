@@ -37,10 +37,12 @@
     <string name="Search"><i>Search</i></string>
     <string name="delete_this_dictionary">Delete This Dictionary</string>
 
-    <string name="navigation_drawer_open">navigation_drawer_open</string>
-    <string name="navigation_drawer_close">navigation_drawer_close</string>
+    <string name="navigationDrawerOpen">navigation_drawer_open</string>
+    <string name="navigationDrawerClose">navigation_drawer_close</string>
     <string name="createYourOwnDictionary">Create Your Own Dictionary</string>
     <string name="test">An apple is a round fruit with red or green skin and a whitish inside.
 description Excepteur sint occaecat cupidatat non proident description Excepteur sint occaecat cupidatat non proident…  </string>
+
+    <string name="publicDictionaryPageVocabAutoSearchHint">搜尋單字 <i>look up…</i></string>
 
 </resources>

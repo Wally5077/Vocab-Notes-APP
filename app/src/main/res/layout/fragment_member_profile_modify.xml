@@ -39,7 +39,7 @@
             android:id="@+id/memberInfoModifySearch1"
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:background="@drawable/search_button"
+            android:background="@drawable/grey_search_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -81,7 +81,7 @@
             android:id="@+id/memberInfoModifySearch2"
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:background="@drawable/search_button"
+            android:background="@drawable/grey_search_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -329,15 +329,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="32.5dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="7.5dp"
         android:text="E-MAIL ADDRESS"
         android:textAlignment="center"
         android:textColor="@color/mainColor"
         android:textSize="14sp"
         app:fontFamily="@font/avenirroman"
+        app:layout_constraintBottom_toTopOf="@+id/emailAddressLine"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userModifyPageAgeContent"
         app:lineHeight="19sp" />
 
     <!-- emailAddressModify -->
@@ -346,10 +346,7 @@
         android:id="@+id/emailAddressModifyButton"
         android:layout_width="75dp"
         android:layout_height="27.5dp"
-        android:layout_marginTop="32.5dp"
-        android:layout_marginEnd="32.5dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="7.5dp"
+        android:layout_marginTop="180dp"
         android:background="@drawable/bg_modify_green_round_button"
         android:drawableStart="@drawable/modify_pen"
         android:drawableLeft="@drawable/modify_pen"
@@ -366,7 +363,7 @@
         android:textSize="12sp"
         app:fontFamily="@font/avenirmedium"
         app:layout_constraintStart_toStartOf="@id/profileModifyButton"
-        app:layout_constraintTop_toTopOf="@id/userModifyPageEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/profileModifyButton" />
 
     <View
         android:id="@+id/emailAddressLine"
@@ -453,15 +450,14 @@
         android:id="@+id/userModifyPagePassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
         android:layout_marginBottom="7.5dp"
         android:text="PASSWORD"
         android:textAlignment="center"
         android:textColor="@color/mainColor"
         android:textSize="14sp"
         app:fontFamily="@font/avenirroman"
+        app:layout_constraintBottom_toTopOf="@+id/passwordLine"
         app:layout_constraintStart_toStartOf="@id/userModifyPageEmailAddress"
-        app:layout_constraintTop_toBottomOf="@id/userModifyPageNewEmailAddress"
         app:lineHeight="19sp" />
 
     <!-- passwordModify -->
@@ -470,10 +466,7 @@
         android:id="@+id/passwordModifyButton"
         android:layout_width="75dp"
         android:layout_height="27.5dp"
-        android:layout_marginTop="32.5dp"
-        android:layout_marginEnd="32.5dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="7.5dp"
+        android:layout_marginTop="102.5dp"
         android:background="@drawable/bg_modify_green_round_button"
         android:drawableStart="@drawable/modify_pen"
         android:drawableLeft="@drawable/modify_pen"
@@ -490,7 +483,7 @@
         android:textSize="12sp"
         app:fontFamily="@font/avenirmedium"
         app:layout_constraintStart_toStartOf="@id/emailAddressModifyButton"
-        app:layout_constraintTop_toTopOf="@id/userModifyPagePassword" />
+        app:layout_constraintTop_toBottomOf="@+id/emailAddressModifyButton" />
 
     <View
         android:id="@+id/passwordLine"

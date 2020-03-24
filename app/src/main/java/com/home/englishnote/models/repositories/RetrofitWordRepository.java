@@ -3,6 +3,7 @@ package com.home.englishnote.models.repositories;
 import com.home.englishnote.models.entities.Word;
 
 import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -21,6 +22,11 @@ public class RetrofitWordRepository implements WordRepository {
     private interface WordApi {
         @GET("/api/public/word/{name}")
         Call<Word> getWord(@Path("name") String name);
+    }
+
+    @Override
+    public List<Word> getPossibleWord(String keyword) {
+        return null;
     }
 
     @Override
