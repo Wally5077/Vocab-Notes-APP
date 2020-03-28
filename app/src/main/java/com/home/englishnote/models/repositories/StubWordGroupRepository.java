@@ -12,7 +12,6 @@ import com.home.englishnote.utils.RandomVacabProducer;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class StubWordGroupRepository implements WordGroupRepository {
 
 

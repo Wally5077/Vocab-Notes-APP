@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class PublicWordGroupsFragment extends BaseFragment implements PublicWordGroupsView {
 
     private Button publicDictionaryFavoriteButton;
@@ -142,9 +141,9 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
                 if (count == 0) {
                     publicWordGroupsAdapter.updateWordGroupList(wordGroupsList);
                 } else {
-                    publicWordGroupsAdapter.updateWordGroupList(wordGroupsList.stream()
-                            .filter(wordGroup -> wordGroup.getTitle().contains(filterPattern))
-                            .collect(Collectors.toList()));
+//                    publicWordGroupsAdapter.updateWordGroupList(wordGroupsList.stream()
+//                            .filter(wordGroup -> wordGroup.getTitle().contains(filterPattern))
+//                            .collect(Collectors.toList()));
                 }
                 publicWordGroupsAdapter.notifyDataSetChanged();
             }

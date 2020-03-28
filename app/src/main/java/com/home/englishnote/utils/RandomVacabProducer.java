@@ -1,8 +1,5 @@
 package com.home.englishnote.utils;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 
 import com.home.englishnote.models.entities.Dictionary;
 import com.home.englishnote.models.entities.Member;
@@ -21,7 +18,6 @@ import java.util.Set;
 import static com.home.englishnote.utils.RandomGenerator.randomHttpUrl;
 import static com.home.englishnote.utils.RandomGenerator.randomString;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class RandomVacabProducer {
 
     private final static Random RANDOM = new Random();

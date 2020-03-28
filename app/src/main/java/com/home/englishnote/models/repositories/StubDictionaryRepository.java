@@ -14,7 +14,6 @@ import java.util.List;
 
 import static com.home.englishnote.models.entities.Type.OWN;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class StubDictionaryRepository implements DictionaryRepository {
 
     private List<Dictionary> dictionaryList;

@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class StubMemberRepository implements MemberRepository {
 
     @Override

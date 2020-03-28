@@ -22,7 +22,6 @@ import com.home.englishnote.utils.PublicWordGroupsAdapter.WordGroupsHolder;
 
 import java.util.List;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class PublicWordGroupsAdapter extends Adapter<WordGroupsHolder> {
 
     private List<WordGroup> wordGroupList;

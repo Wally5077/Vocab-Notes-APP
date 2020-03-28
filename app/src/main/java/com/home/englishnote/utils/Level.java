@@ -6,7 +6,6 @@ import androidx.annotation.RequiresApi;
 
 import java.util.HashMap;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class Level {
     private final static int[] LEVEL_TABLE = {
             0, 10, 50, 100, 200, 500, 1000, 2000, 4000, 8000, 10000, 30000, 80000, 150000,

@@ -22,7 +22,6 @@ import com.home.englishnote.views.fragments.BaseFragment;
 
 import static com.home.englishnote.presenters.CreateOwnDictionaryPresenter.*;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class CreateOwnDictionaryFragment extends BaseFragment
         implements CreateOwnDictionaryView {
 

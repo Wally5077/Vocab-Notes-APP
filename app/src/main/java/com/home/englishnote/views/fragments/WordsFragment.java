@@ -22,7 +22,6 @@ import java.util.List;
 import static com.home.englishnote.utils.ViewEnableUtil.setViewsFocusable;
 import static com.home.englishnote.utils.ViewEnableUtil.setViewsVisible;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class WordsFragment extends BaseFragment implements WordsView {
 
     // Todo

@@ -19,7 +19,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class DictionarySearchAdapter extends RecyclerView.Adapter<DictionarySearchAdapter.DictionarySearchViewHolder> {
 
     private List<Dictionary> dictionaryList;
@@ -51,8 +50,9 @@ public class DictionarySearchAdapter extends RecyclerView.Adapter<DictionarySear
     }
 
     public void setDefaultItemBackground() {
-        dictionarySearchViewHolderSet.forEach(dictionarySearchViewHolder ->
-                dictionarySearchViewHolder.setDictionaryItemBackgroundEnable(false));
+        for (DictionarySearchViewHolder dictionarySearchViewHolder : dictionarySearchViewHolderSet) {
+            dictionarySearchViewHolder.setDictionaryItemBackgroundEnable(false);
+        }
     }
 
     public class DictionarySearchViewHolder extends RecyclerView.ViewHolder {
@@ -73,11 +73,11 @@ public class DictionarySearchAdapter extends RecyclerView.Adapter<DictionarySear
 
         private void setOnItemClick(@NonNull View itemView) {
             itemView.setOnClickListener(v -> {
-                dictionarySearchViewHolderSet.stream()
-                        .filter(dictionarySearchViewHolder -> !dictionarySearchViewHolder
-                                .equals(DictionarySearchViewHolder.this))
-                        .forEach(dictionarySearchViewHolder -> dictionarySearchViewHolder.
-                                setDictionaryItemBackgroundEnable(false));
+//                dictionarySearchViewHolderSet.stream()
+//                        .filter(dictionarySearchViewHolder -> !dictionarySearchViewHolder
+//                                .equals(DictionarySearchViewHolder.this))
+//                        .forEach(dictionarySearchViewHolder -> dictionarySearchViewHolder.
+//                                setDictionaryItemBackgroundEnable(false));
                 setDictionaryItemBackgroundEnable(true);
             });
         }

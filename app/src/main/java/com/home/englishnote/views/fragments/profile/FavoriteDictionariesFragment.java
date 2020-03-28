@@ -26,7 +26,6 @@ import com.home.englishnote.views.fragments.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class FavoriteDictionariesFragment extends BaseFragment
         implements FavoriteDictionariesPresenter.FavoriteDictionariesView {
 

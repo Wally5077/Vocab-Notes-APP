@@ -18,7 +18,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class MemberProfilePageFragment extends BaseFragment {
 
     private ImageView memberProfilePagePhoto;

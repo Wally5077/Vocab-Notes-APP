@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class DictionaryHomePageActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;

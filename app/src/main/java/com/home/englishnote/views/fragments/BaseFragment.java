@@ -16,7 +16,6 @@ import com.home.englishnote.views.activities.DictionaryHomePageActivity;
 
 import java.io.Serializable;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class BaseFragment extends Fragment {
 
     protected final static int DICTIONARY_HOME_PAGE_CONTAINER = R.id.dictionaryHomePageContainer;
