@@ -10,6 +10,7 @@
     <color name="mainWhite">#ffffff</color>
     <color name="secondaryWhite">#e0d9d9</color>
     <color name="thirdWhite">#99FFFFFF</color>
+    <color name="fourthWhite">#26FFFFFF</color>
     <color name="ownDictionaryHintColor">#804E585A</color>
     <color name="deleteDictionaryColor">#ce787b</color>
     <color name="mainBlack">#000000</color>

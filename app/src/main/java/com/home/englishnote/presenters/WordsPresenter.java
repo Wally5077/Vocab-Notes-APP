@@ -20,6 +20,5 @@ public class WordsPresenter {
 
 
     public interface WordsView {
-        void onGetWordSuccessfully(Word word);
     }
 }

@@ -39,11 +39,12 @@ public class RandomVacabProducer {
         return member;
     }
 
-    public static Dictionary randomDictionary(Type type, int minWordGroupCount, int maxWordGroupCount,
+    public static Dictionary randomDictionary(Type type,
+                                              int minWordGroupCount, int maxWordGroupCount,
                                               int minWordCount, int maxWordCount) {
         Dictionary dictionary = new Dictionary();
-        dictionary.setTitle(randomString(4, 20, true));
-        dictionary.setDescription(randomString(0, 100, true));
+        dictionary.setTitle(randomString(4, 10, false));
+        dictionary.setDescription(randomString(10, 100, true));
         dictionary.setType(type);
 
         if (minWordGroupCount > 0) {
@@ -81,11 +82,12 @@ public class RandomVacabProducer {
         Word word = new Word();
         word.setName(randomString(1, 20, false));
 
-        int synonymCount = RANDOM.nextInt(3);
+        int synonymCount = RANDOM.nextInt(6) + 1;
         List<String> synonyms = new ArrayList<>(synonymCount);
         for (int i = 0; i < synonymCount; i++) {
             synonyms.add(randomString(3, 5, false));
         }
+        word.setDescription(randomString(5, 15, false));
         word.setSynonyms(synonyms);
         word.setImageUrl(randomHttpUrl(false));
         return word;

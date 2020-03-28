@@ -1,5 +1,6 @@
 package com.home.englishnote.views.fragments.dictionary;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
@@ -27,6 +29,7 @@ import java.util.List;
 
 import static com.home.englishnote.presenters.PublicDictionariesPresenter.*;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class PublicDictionariesFragment extends BaseFragment implements PublicDictionaryView {
 
     private SwipeRefreshLayout publicDictionariesSwipeRefreshLayout;
@@ -181,7 +184,7 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
                         R.drawable.pear_hydrosol_pyrus_communis_hydrolat_product_pic);
                 dictionaryImage2.setImageResource(R.drawable.guava_1);
                 dictionaryImage3.setImageResource(
-                        R.drawable.china_fresh_sweet_delicious_red_fruit_apples_jpg_350_x_350);
+                        R.drawable.apple);
             }
         }
     }

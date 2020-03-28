@@ -1,5 +1,6 @@
 package com.home.englishnote.views.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class MemberProfilePageFragment extends BaseFragment {
 
     private ImageView memberProfilePagePhoto;

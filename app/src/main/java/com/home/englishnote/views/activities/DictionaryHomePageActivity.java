@@ -19,6 +19,7 @@ import com.home.englishnote.R;
 import com.home.englishnote.views.fragments.OwnDictionaryPageFragment;
 import com.home.englishnote.views.fragments.PublicDictionaryPageFragment;
 import com.home.englishnote.views.fragments.MemberProfilePageFragment;
+import com.home.englishnote.views.fragments.WordsFragment;
 import com.home.englishnote.views.fragments.dictionary.PublicDictionariesFragment;
 import com.home.englishnote.views.fragments.profile.CreateOwnDictionaryFragment;
 import com.home.englishnote.views.fragments.profile.FavoriteDictionariesFragment;
@@ -67,7 +68,7 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
         // Public Dictionary
         fragmentMap.put(R.layout.fragment_public_dictionaries, new PublicDictionariesFragment());
         fragmentMap.put(R.layout.fragment_public_word_groups, new PublicWordGroupsFragment());
-//        fragmentMap.put(R.layout.fragment_public_words, new WordsFragment());
+        fragmentMap.put(R.layout.fragment_word, new WordsFragment());
 
         // Profile
         fragmentMap.put(R.layout.fragment_own_dictionaries, new OwnDictionariesFragment());

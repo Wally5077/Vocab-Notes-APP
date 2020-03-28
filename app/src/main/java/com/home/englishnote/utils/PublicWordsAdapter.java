@@ -1,6 +1,7 @@
 package com.home.englishnote.utils;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,15 +9,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Word;
+import com.home.englishnote.views.activities.DictionaryHomePageActivity;
+import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class PublicWordsAdapter extends RecyclerView.Adapter<PublicWordsAdapter.PublicWordsHolder> {
 
     private Context context;
@@ -86,11 +91,14 @@ public class PublicWordsAdapter extends RecyclerView.Adapter<PublicWordsAdapter.
             Glide.with(context)
                     .asBitmap()
                     .load(word.getImageUrl())
-                    .error(R.drawable.china_fresh_sweet_delicious_red_fruit_apples_jpg_350_x_350)
+                    .error(R.drawable.apple)
                     .into(wordItemImage);
             wordItemName.setText(word.getName());
-            String wordSynonyms = "( " + word.getSynonyms() + " )";
+            String wordSynonyms = "( " + word.getSynonyms().get(0) + " )";
             wordItemSynonym.setText(wordSynonyms);
+            wordItemImage.setOnClickListener(v -> ((DictionaryHomePageActivity) context)
+                    .switchFragment(R.layout.fragment_word,
+                            R.id.publicDictionaryPageContainer, word));
         }
 
     }

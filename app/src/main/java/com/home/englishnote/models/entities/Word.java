@@ -5,9 +5,10 @@ import java.util.List;
 
 public class Word implements Serializable {
     private int id;
-    private String name, synonyms, imageUrl;
+    private String name, description, imageUrl;
+    private List<String> synonyms;
 
-    public Word(int id, String name, String synonyms, String imageUrl) {
+    public Word(int id, String name, List<String> synonyms, String imageUrl) {
         this.id = id;
         this.name = name;
         this.synonyms = synonyms;
@@ -15,7 +16,6 @@ public class Word implements Serializable {
     }
 
     public Word() {
-
     }
 
     public int getId() {
@@ -34,12 +34,20 @@ public class Word implements Serializable {
         this.name = name;
     }
 
-    public String getSynonyms() {
-        return synonyms;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSynonyms(String synonyms) {
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setSynonyms(List<String> synonyms) {
         this.synonyms = synonyms;
+    }
+
+    public List<String> getSynonyms() {
+        return synonyms;
     }
 
     public String getImageUrl() {
@@ -48,15 +56,5 @@ public class Word implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    private List<String> synonymsList;
-
-    public List<String> getSynonymsList() {
-        return synonymsList;
-    }
-
-    public void setSynonyms(List<String> synonymsList) {
-        this.synonymsList = synonymsList;
     }
 }

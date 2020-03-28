@@ -86,7 +86,7 @@ public class OwnWordsAdapter extends RecyclerView.Adapter<OwnWordsAdapter.OwnWor
             Glide.with(context)
                     .asBitmap()
                     .load(word.getImageUrl())
-                    .error(R.drawable.china_fresh_sweet_delicious_red_fruit_apples_jpg_350_x_350)
+                    .error(R.drawable.apple)
                     .into(wordItemImage);
             wordItemName.setText(word.getName());
             String wordSynonyms = "( " + word.getSynonyms() + " )";

@@ -16,12 +16,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
+import com.home.englishnote.models.entities.Dictionary;
 import com.home.englishnote.models.entities.Word;
 import com.home.englishnote.presenters.PublicDictionaryPagePresenter;
 import com.home.englishnote.presenters.PublicDictionaryPagePresenter.PublicDictionaryPageView;
+import com.home.englishnote.utils.DictionarySearchAdapter;
 import com.home.englishnote.utils.Global;
 
 import java.util.ArrayList;
@@ -33,7 +38,8 @@ import static com.home.englishnote.utils.ViewEnableUtil.setViewsFocusable;
 import static com.home.englishnote.utils.ViewEnableUtil.setViewsVisible;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class PublicDictionaryPageFragment extends BaseFragment implements PublicDictionaryPageView {
+public class PublicDictionaryPageFragment extends BaseFragment
+        implements PublicDictionaryPageView {
 
     private TextView memberName;
     private ImageView memberPhoto;
@@ -47,6 +53,8 @@ public class PublicDictionaryPageFragment extends BaseFragment implements Public
     private ImageView dictionarySearchImage;
     private TextView dictionarySearchText;
     private PublicDictionaryPagePresenter publicDictionaryPagePresenter;
+    private RecyclerView dictionarySearchRecycler;
+    private DictionarySearchAdapter dictionarySearchAdapter;
 
     @Nullable
     @Override
@@ -54,7 +62,8 @@ public class PublicDictionaryPageFragment extends BaseFragment implements Public
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater
-                .inflate(R.layout.fragment_public_dictionary_page, container, false);
+                .inflate(R.layout.fragment_public_dictionary_page,
+                        container, false);
     }
 
     @Override
@@ -76,6 +85,7 @@ public class PublicDictionaryPageFragment extends BaseFragment implements Public
         dictionarySearch = view.findViewById(R.id.publicDictionaryPageDictionarySearch);
         dictionarySearchImage = view.findViewById(R.id.publicDictionaryPageDictionarySearchImage);
         dictionarySearchText = view.findViewById(R.id.publicDictionaryPageDictionarySearchText);
+        dictionarySearchRecycler = view.findViewById(R.id.publicDictionaryPageDictionarySearchRecycler);
 
         // memberProfile
         memberProfile = view.findViewById(R.id.publicDictionaryPageMemberProfile);
@@ -88,8 +98,9 @@ public class PublicDictionaryPageFragment extends BaseFragment implements Public
         publicDictionaryPagePresenter = new PublicDictionaryPagePresenter(
                 this, Global.dictionaryRepository(),
                 Global.wordRepository(), Global.memberRepository(), Global.threadExecutor());
-        setOnVocabSearchClick();
         setVocabAutoSearch();
+        setOnVocabSearchClick();
+        setDictionarySearchRecycler();
         setOnDictionarySearchClick();
         setOnMemberProfileClick();
         setMemberPhoto();
@@ -134,6 +145,16 @@ public class PublicDictionaryPageFragment extends BaseFragment implements Public
         });
     }
 
+    private List<Dictionary> dictionaryList = new ArrayList<>();
+
+    private void setDictionarySearchRecycler() {
+        LayoutManager layoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
+        dictionarySearchRecycler.setHasFixedSize(true);
+        dictionarySearchRecycler.setLayoutManager(layoutManager);
+        dictionarySearchAdapter = new DictionarySearchAdapter(dictionaryList);
+        dictionarySearchRecycler.setAdapter(dictionarySearchAdapter);
+    }
+
     private boolean isDictionarySearchClick = false;
 
     private void setOnDictionarySearchClick() {
@@ -141,8 +162,11 @@ public class PublicDictionaryPageFragment extends BaseFragment implements Public
             isDictionarySearchClick = !isDictionarySearchClick;
             setSearchImageDrawable(isDictionarySearchClick, dictionarySearchImage);
             setSearchTextColor(isDictionarySearchClick, dictionarySearchText);
-//            setViewsVisible(isDictionarySearchClick, vocabSearchFeature);
-//            setViewsFocusable(isDictionarySearchClick, vocabSearchFeature);
+            setViewsVisible(isDictionarySearchClick, dictionarySearchRecycler);
+            setViewsFocusable(isDictionarySearchClick, dictionarySearchRecycler);
+            if (isDictionarySearchClick) {
+                publicDictionaryPagePresenter.getDictionaryList();
+            }
         });
     }
 
@@ -203,5 +227,13 @@ public class PublicDictionaryPageFragment extends BaseFragment implements Public
                 vocabAutoSearch.dismissDropDown();
             }
         });
+    }
+
+    @Override
+    public void onGetDictionaryListSuccessfully(List<Dictionary> dictionaryList) {
+        this.dictionaryList.clear();
+        this.dictionaryList.addAll(dictionaryList);
+        dictionarySearchAdapter.setDefaultItemBackground();
+        dictionarySearchAdapter.notifyDataSetChanged();
     }
 }

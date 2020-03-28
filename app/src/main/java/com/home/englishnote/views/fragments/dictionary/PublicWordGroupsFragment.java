@@ -29,7 +29,6 @@ import com.home.englishnote.utils.PublicWordGroupsAdapter;
 import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,10 +73,10 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
                 this, Global.wordGroupRepository(), Global.threadExecutor());
         setDictionary();
         publicDictionaryFavoriteButton.setOnClickListener(this::onFavoriteButtonClick);
-        setPublicDictionaryQuery();
         setWordGroupsRecycler();
         setWordGroupsSwipeRefreshLayout();
         updateWordGroupsList();
+        setPublicDictionaryQuery();
     }
 
     private Dictionary dictionary;
@@ -95,37 +94,10 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
         Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
     }
 
-    private void setPublicDictionaryQuery() {
-        publicDictionaryQuery.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String filterPattern = s.toString().toLowerCase().trim();
-                if (count == 0) {
-                    publicWordGroupsAdapter.updateWordGroupsList(wordGroupsList);
-                } else {
-                    publicWordGroupsAdapter.updateWordGroupsList(wordGroupsList.stream()
-                            .filter(wordGroup -> wordGroup.getTitle().contains(filterPattern))
-                            .collect(Collectors.toCollection(ArrayList::new)));
-                }
-                publicWordGroupsAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-    }
-
     private List<WordGroup> wordGroupsList = new ArrayList<>();
 
     private void setWordGroupsRecycler() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
         wordGroupsRecycler.setHasFixedSize(true);
         wordGroupsRecycler.setLayoutManager(linearLayoutManager);
         publicWordGroupsAdapter = new PublicWordGroupsAdapter(wordGroupsList);
@@ -155,6 +127,33 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
         int wordGroupListSize = wordGroupsList.size();
         publicWordGroupsPresenter.getWordGroups(
                 dictionary.getId(), wordGroupListSize, wordGroupListSize + 3);
+    }
+
+    private void setPublicDictionaryQuery() {
+        publicDictionaryQuery.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String filterPattern = s.toString().toLowerCase().trim();
+                if (count == 0) {
+                    publicWordGroupsAdapter.updateWordGroupList(wordGroupsList);
+                } else {
+                    publicWordGroupsAdapter.updateWordGroupList(wordGroupsList.stream()
+                            .filter(wordGroup -> wordGroup.getTitle().contains(filterPattern))
+                            .collect(Collectors.toList()));
+                }
+                publicWordGroupsAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override

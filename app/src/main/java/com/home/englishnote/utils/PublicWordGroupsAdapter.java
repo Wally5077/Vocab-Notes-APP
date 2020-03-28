@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,25 +13,23 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
+import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 
 import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Word;
 import com.home.englishnote.models.entities.WordGroup;
 import com.home.englishnote.utils.PublicWordGroupsAdapter.WordGroupsHolder;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class PublicWordGroupsAdapter extends Adapter<WordGroupsHolder> {
 
-    private List<WordGroup> wordGroupsList;
+    private List<WordGroup> wordGroupList;
     private Context context;
 
-    public PublicWordGroupsAdapter(List<WordGroup> wordGroupsList) {
-        this.wordGroupsList = wordGroupsList;
+    public PublicWordGroupsAdapter(List<WordGroup> wordGroupList) {
+        this.wordGroupList = wordGroupList;
     }
 
     @NonNull
@@ -47,18 +43,17 @@ public class PublicWordGroupsAdapter extends Adapter<WordGroupsHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull WordGroupsHolder holder, int position) {
-        WordGroup wordGroup = wordGroupsList.get(position);
+        WordGroup wordGroup = wordGroupList.get(position);
         holder.setData(wordGroup);
     }
 
     @Override
     public int getItemCount() {
-        return wordGroupsList.size();
+        return wordGroupList.size();
     }
 
-
-    public void updateWordGroupsList(List<WordGroup> wordGroupsList) {
-        this.wordGroupsList = wordGroupsList;
+    public void updateWordGroupList(List<WordGroup> wordGroupList) {
+        this.wordGroupList = wordGroupList;
     }
 
     public class WordGroupsHolder extends RecyclerView.ViewHolder {
@@ -88,7 +83,7 @@ public class PublicWordGroupsAdapter extends Adapter<WordGroupsHolder> {
         }
 
         private void setWordsRecycler() {
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
+            LayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
             publicWordsRecycler.setHasFixedSize(true);
             publicWordsRecycler.setLayoutManager(gridLayoutManager);
             PublicWordsAdapter publicWordsAdapter = new PublicWordsAdapter(wordList);

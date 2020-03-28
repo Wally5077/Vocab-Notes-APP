@@ -1,28 +1,39 @@
 package com.home.englishnote.models.repositories;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.home.englishnote.models.entities.Dictionary;
 import com.home.englishnote.models.entities.Member;
+import com.home.englishnote.models.entities.Type;
+import com.home.englishnote.utils.RandomVacabProducer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.home.englishnote.models.entities.Type.OWN;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class StubDictionaryRepository implements DictionaryRepository {
+
+    private List<Dictionary> dictionaryList;
 
     @Override
     public Dictionary getDictionary(int dictionaryId) {
-        return new Dictionary(0, "title", "description",
-                new Member("firstName", "lastName",
-                        25, "email", "password"), OWN);
+        return RandomVacabProducer.randomDictionary(Type.PUBLIC,
+                1, 3, 5, 20);
     }
 
     @Override
     public List<Dictionary> getDictionaries(int offset, int limit) {
-        List<Dictionary> dictionaryList = new ArrayList<>(10);
-        dictionaryList.add(new Dictionary(0, "title", "description",
-                new Member("firstName", "lastName",
-                        25, "email", "password"), OWN));
+        if (dictionaryList == null) {
+            dictionaryList = new ArrayList<>(50);
+            for (int index = 0; index < 50; index++) {
+                dictionaryList.add(RandomVacabProducer.randomDictionary(Type.PUBLIC,
+                        1, 3, 5, 20));
+            }
+        }
         return dictionaryList;
     }
 }

@@ -23,7 +23,7 @@
         android:id="@+id/publicDictionaryPageVocabSearchFeature"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_vocab_search_feature"
+        android:background="@drawable/bg_search_feature"
         android:elevation="2dp"
         android:focusable="false"
         android:paddingTop="10dp"
@@ -54,7 +54,7 @@
             android:paddingTop="1dp"
             android:paddingEnd="5dp"
             android:paddingRight="5dp"
-            android:popupBackground="@drawable/bg_vocab_search_feature"
+            android:popupBackground="@drawable/bg_search_feature"
             android:textColorHint="@color/secondaryWhite"
             android:textSize="8sp"
             app:fontFamily="@font/avenirbook"
@@ -63,6 +63,23 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/publicDictionaryPageDictionarySearchRecycler"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:background="@drawable/bg_search_feature"
+        android:elevation="2dp"
+        android:paddingStart="15dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="12.5dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/publicDictionaryPageTopToolBar" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"

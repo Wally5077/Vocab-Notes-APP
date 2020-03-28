@@ -1,5 +1,6 @@
 package com.home.englishnote.presenters;
 
+import com.home.englishnote.models.entities.Dictionary;
 import com.home.englishnote.models.entities.Word;
 import com.home.englishnote.models.repositories.DictionaryRepository;
 import com.home.englishnote.models.repositories.MemberRepository;
@@ -28,6 +29,19 @@ public class PublicDictionaryPagePresenter {
         this.threadExecutor = threadExecutor;
     }
 
+    public void getDictionaryList() {
+        threadExecutor.execute(() -> {
+            try {
+                List<Dictionary> dictionaryList =
+                        dictionaryRepository.getDictionaries(0, -1);
+                threadExecutor.executeUiThread(() -> publicDictionaryPageView
+                        .onGetDictionaryListSuccessfully(dictionaryList));
+            } catch (Exception e) {
+
+            }
+        });
+    }
+
     public void getPossibleWord(String keyword) {
         threadExecutor.execute(() -> {
             try {
@@ -42,5 +56,7 @@ public class PublicDictionaryPagePresenter {
 
     public interface PublicDictionaryPageView {
         void onGetPossibleWordSuccessfully(List<Word> wordList);
+
+        void onGetDictionaryListSuccessfully(List<Dictionary> dictionaryList);
     }
 }
