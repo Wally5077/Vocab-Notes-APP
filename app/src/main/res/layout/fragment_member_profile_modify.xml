@@ -304,6 +304,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/age"
         app:layout_constraintStart_toEndOf="@+id/age"
         app:layout_constraintTop_toTopOf="@+id/age" />
 

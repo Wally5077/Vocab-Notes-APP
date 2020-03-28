@@ -176,7 +176,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/publicDictionaryPageMemberProfile"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/publicDictionaryPageTopToolBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline3"
@@ -196,7 +196,7 @@
             android:id="@+id/publicDictionaryPageMemberName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="1"
+            android:maxLength="10"
             android:text="user name"
             android:textAlignment="center"
             android:textColor="@color/mainWhite"

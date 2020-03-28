@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
@@ -25,6 +26,7 @@ import java.util.List;
 import static com.home.englishnote.utils.ViewEnableUtil.setViewsFocusable;
 import static com.home.englishnote.utils.ViewEnableUtil.setViewsVisible;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class MemberProfileModifyFragment extends BaseFragment {
 
     private Spinner ageModifySpinner;

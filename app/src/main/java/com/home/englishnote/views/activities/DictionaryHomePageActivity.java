@@ -3,6 +3,7 @@ package com.home.englishnote.views.activities;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -77,6 +78,9 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
         fragmentMap.put(R.layout.fragment_member_profile_modify, new MemberProfileModifyFragment());
 
         // Own Dictionary
+        containerNameMap.put(R.id.dictionaryHomePageContainer, "DICTIONARY_HOME_PAGE_CONTAINER");
+        containerNameMap.put(R.id.publicDictionaryPageContainer, "PUBLIC_DICTIONARY_CONTAINER");
+        containerNameMap.put(R.id.memberProfilePageContainer, "MEMBER_PROFILE_CONTAINER");
 
         switchFragment(R.layout.fragment_public_dictionary_page, R.id.dictionaryHomePageContainer);
     }
@@ -118,6 +122,7 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
 
     private Stack<Integer> containerStack = new Stack<>();
     private Stack<Integer> fragmentStack = new Stack<>();
+    private Map<Integer, String> containerNameMap = new HashMap<>();
 
     public void switchFragment(int fragmentId, int containerId,
                                Serializable... serializableArray) {
@@ -129,13 +134,11 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
                 bundle.putSerializable("VocabNoteObjects", serializableArray[0]);
                 nextFragment.setArguments(bundle);
             }
-            Fragment hideFragment;
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             if (nextFragment.isAdded()) {
                 // fragmentStack.peek() 為當前片段 layout
-                hideFragment = fragmentMap.get(fragmentStack.peek());
+                fragmentTransaction.hide(fragmentMap.get(fragmentStack.peek()));
             } else {
-                hideFragment = nextFragment;
                 // 加入新片段進 container (無論 container 內或外)
                 fragmentTransaction
                         .add(containerId, nextFragment);
@@ -143,10 +146,30 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
                 fragmentStack.add(fragmentId);
                 containerStack.add(containerId);
             }
+            Log.d(this.getClass().getSimpleName(), getFragmentStackLog());
+            Log.d(this.getClass().getSimpleName(), getContainerStackLog());
+            fragmentTransaction.show(nextFragment).commit();
             // 隱藏當前片段 , 顯示下一片段
-            fragmentTransaction.hide(hideFragment).show(nextFragment).commit();
             dictionaryHomePageDrawer.closeDrawer(GravityCompat.START);
         }
+    }
+
+    private String getFragmentStackLog() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Integer fragmentId : fragmentStack) {
+            Fragment fragment = fragmentMap.get(fragmentId);
+            stringBuilder.append(fragment.getClass().getSimpleName()).append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    private String getContainerStackLog() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Integer containerId : containerStack) {
+            String containerName = containerNameMap.get(containerId);
+            stringBuilder.append(containerName).append("\n");
+        }
+        return stringBuilder.toString();
     }
 
     @Override
