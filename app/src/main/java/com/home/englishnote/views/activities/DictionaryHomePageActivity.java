@@ -1,13 +1,14 @@
 package com.home.englishnote.views.activities;
 
 
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -15,30 +16,32 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.home.englishnote.R;
-import com.home.englishnote.views.fragments.OwnDictionaryPageFragment;
-import com.home.englishnote.views.fragments.PublicDictionaryPageFragment;
-import com.home.englishnote.views.fragments.MemberProfilePageFragment;
+import com.home.englishnote.models.entities.Guest;
+import com.home.englishnote.models.entities.Token;
+import com.home.englishnote.models.entities.User;
+import com.home.englishnote.views.fragments.BaseFragment;
+import com.home.englishnote.views.fragments.main.OwnDictionaryPageFragment;
+import com.home.englishnote.views.fragments.main.PublicDictionaryPageFragment;
+import com.home.englishnote.views.fragments.main.MemberProfilePageFragment;
 import com.home.englishnote.views.fragments.WordsFragment;
-import com.home.englishnote.views.fragments.dictionary.PublicDictionariesFragment;
-import com.home.englishnote.views.fragments.profile.CreateOwnDictionaryFragment;
-import com.home.englishnote.views.fragments.profile.FavoriteDictionariesFragment;
-import com.home.englishnote.views.fragments.profile.MemberProfileModifyFragment;
-import com.home.englishnote.views.fragments.dictionary.PublicWordGroupsFragment;
-import com.home.englishnote.views.fragments.profile.OwnDictionariesFragment;
+import com.home.englishnote.views.fragments.secondary.dictionary.PublicDictionariesFragment;
+import com.home.englishnote.views.fragments.secondary.profile.CreateOwnDictionaryFragment;
+import com.home.englishnote.views.fragments.secondary.profile.FavoriteDictionariesFragment;
+import com.home.englishnote.views.fragments.secondary.profile.MemberProfileModifyFragment;
+import com.home.englishnote.views.fragments.secondary.dictionary.PublicWordGroupsFragment;
+import com.home.englishnote.views.fragments.secondary.profile.OwnDictionariesFragment;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
 public class DictionaryHomePageActivity extends AppCompatActivity {
-
-    private FragmentManager fragmentManager;
-    private Map<Integer, Fragment> fragmentMap = new HashMap<>();
-    private DrawerLayout dictionaryHomePageDrawer;
-    private NavigationView dhp_ngv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +53,35 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
 
     private void findViews() {
         dictionaryHomePageDrawer = findViewById(R.id.dictionaryHomePageDrawer);
-        dhp_ngv = findViewById(R.id.dhp_ngv);
+        dictionaryHomePageNavigationView = findViewById(R.id.dictionaryHomePageNavigationView);
     }
+
+    private FragmentManager fragmentManager;
 
     private void init() {
         fragmentManager = getSupportFragmentManager();
-        setFragments();
+        setMember();
         setNavigationView();
+        setFragmentMap();
     }
 
-    private void setFragments() {
+    private User user;
+
+    private void setMember() {
+        user = (User) getIntent().getSerializableExtra("user");
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Token getToken() {
+        return user.getToken();
+    }
+
+    private Map<Integer, BaseFragment> fragmentMap = new HashMap<>();
+
+    private void setFragmentMap() {
         // DictionaryHomePageContainer
         fragmentMap.put(R.layout.fragment_public_dictionary_page, new PublicDictionaryPageFragment());
         fragmentMap.put(R.layout.fragment_member_profile_page, new MemberProfilePageFragment());
@@ -84,12 +106,46 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
         switchFragment(R.layout.fragment_public_dictionary_page, R.id.dictionaryHomePageContainer);
     }
 
+    private DrawerLayout dictionaryHomePageDrawer;
+    private NavigationView dictionaryHomePageNavigationView;
+
     public void onDrawerClick(View view) {
         dictionaryHomePageDrawer.openDrawer(GravityCompat.START);
+        if (user instanceof Guest) {
+            Menu menu = dictionaryHomePageNavigationView.getMenu();
+            int itemSize = menu.size();
+            List<MenuItem> menuItemListToRemove = new ArrayList<>(itemSize - 1);
+            if (itemSize > 1) {
+                for (int itemIndex = 0; itemIndex < itemSize - 1; itemIndex++) {
+                    menuItemListToRemove.add(menu.getItem(itemIndex));
+                }
+                for (MenuItem menuItem : menuItemListToRemove) {
+                    menu.removeItem(menuItem.getItemId());
+                }
+            }
+        }
     }
 
     private void setNavigationView() {
-        dhp_ngv.setNavigationItemSelectedListener(
+        setHeaderView();
+        setOnDictionaryHomePageNavigationItemSelected();
+    }
+
+    private void setHeaderView() {
+        View headerView = dictionaryHomePageNavigationView.getHeaderView(0);
+        ImageView userPhoto = headerView.findViewById(R.id.headViewMemberPhoto);
+        TextView userName = headerView.findViewById(R.id.headViewMemberName);
+        Glide.with(this)
+                .asBitmap()
+                .load(user.getImageURL())
+                .circleCrop()
+                .error(R.drawable.big_user_pic)
+                .into(userPhoto);
+        userName.setText(user.getFirstName());
+    }
+
+    private void setOnDictionaryHomePageNavigationItemSelected() {
+        dictionaryHomePageNavigationView.setNavigationItemSelectedListener(
                 menuItem -> {
                     switch (menuItem.getItemId()) {
                         case R.id.drawer_create_dictionary:
@@ -110,8 +166,6 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
                     }
                     return true;
                 });
-        View view = LayoutInflater.from(this)
-                .inflate(R.layout.drawer_header, dhp_ngv, false);
     }
 
     private void setInnerFragmentIntoMemberProfilePage(int innerFragmentId) {
@@ -125,7 +179,7 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
 
     public void switchFragment(int fragmentId, int containerId,
                                Serializable... serializableArray) {
-        Fragment nextFragment = fragmentMap.get(fragmentId);
+        BaseFragment nextFragment = fragmentMap.get(fragmentId);
         if (nextFragment != null) {
             // 傳遞參數給其他 Fragment
             if (serializableArray.length > 0) {

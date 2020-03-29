@@ -51,7 +51,7 @@ public class SignInActivity extends BaseActivity implements SignInView {
     @Override
     public void onSignInSuccessfully(Member member) {
         startActivity(new Intent(this, DictionaryHomePageActivity.class)
-                .putExtra("member", member));
+                .putExtra("user", member));
         saveSalt(passwordSalt);
         finish();
     }

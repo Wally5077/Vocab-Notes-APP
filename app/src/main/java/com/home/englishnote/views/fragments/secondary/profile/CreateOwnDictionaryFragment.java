@@ -1,6 +1,5 @@
-package com.home.englishnote.views.fragments.profile;
+package com.home.englishnote.views.fragments.secondary.profile;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import com.home.englishnote.R;
 import com.home.englishnote.presenters.CreateOwnDictionaryPresenter;
@@ -124,7 +122,7 @@ public class CreateOwnDictionaryFragment extends BaseFragment
     private void setSaveOwnDictionaryButton() {
         saveOwnDictionaryButton.setOnClickListener(
                 v -> createOwnDictionaryPresenter.createOwnDictionary(
-                        token, member.getId(), ownDictionaryTitle.getText().toString(),
+                        token, user.getId(), ownDictionaryTitle.getText().toString(),
                         ownDictionaryDescription.getText().toString()));
     }
 

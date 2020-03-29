@@ -40,6 +40,7 @@ public class SignInPresenter {
                 Token token = memberRepository.signInToken(credentials);
                 int memberId = token.getMemberId();
                 Member member = memberRepository.getMember(memberId);
+                member.setToken(token);
                 threadExecutor.executeUiThread(
                         () -> signInView.onSignInSuccessfully(member));
             } catch (UserInputEmptyException err) {

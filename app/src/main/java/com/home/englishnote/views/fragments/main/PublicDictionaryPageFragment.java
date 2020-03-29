@@ -1,4 +1,4 @@
-package com.home.englishnote.views.fragments;
+package com.home.englishnote.views.fragments.main;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
@@ -28,6 +27,7 @@ import com.home.englishnote.presenters.PublicDictionaryPagePresenter;
 import com.home.englishnote.presenters.PublicDictionaryPagePresenter.PublicDictionaryPageView;
 import com.home.englishnote.utils.DictionarySearchAdapter;
 import com.home.englishnote.utils.Global;
+import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -93,29 +93,21 @@ public class PublicDictionaryPageFragment extends BaseFragment
     }
 
     private void init() {
-        setDefaultPage();
         publicDictionaryPagePresenter = new PublicDictionaryPagePresenter(
                 this, Global.dictionaryRepository(),
                 Global.wordRepository(), Global.memberRepository(), Global.threadExecutor());
+        setDefaultPage();
         setVocabAutoSearch();
         setOnVocabSearchClick();
         setDictionarySearchRecycler();
         setOnDictionarySearchClick();
-        setOnMemberProfileClick();
-        setMemberPhoto();
-        setMemberName();
     }
 
-    private boolean isVocabSearchClick = false;
-
-    private void setOnVocabSearchClick() {
-        vocabSearch.setOnClickListener(v -> {
-            isVocabSearchClick = !isVocabSearchClick;
-            setSearchImageDrawable(isVocabSearchClick, vocabSearchImage);
-            setSearchTextColor(isVocabSearchClick, vocabSearchText);
-            setViewsVisible(isVocabSearchClick, vocabSearchFeature);
-            setViewsFocusable(isVocabSearchClick, vocabSearchFeature);
-        });
+    @Override
+    public void onResume() {
+        super.onResume();
+        setMemberPhoto();
+        setMemberName();
     }
 
     private Set<String> wordSet = new HashSet<>();
@@ -141,6 +133,18 @@ public class PublicDictionaryPageFragment extends BaseFragment
             public void afterTextChanged(Editable s) {
 
             }
+        });
+    }
+
+    private boolean isVocabSearchClick = false;
+
+    private void setOnVocabSearchClick() {
+        vocabSearch.setOnClickListener(v -> {
+            isVocabSearchClick = !isVocabSearchClick;
+            setSearchImageDrawable(isVocabSearchClick, vocabSearchImage);
+            setSearchTextColor(isVocabSearchClick, vocabSearchText);
+            setViewsVisible(isVocabSearchClick, vocabSearchFeature);
+            setViewsFocusable(isVocabSearchClick, vocabSearchFeature);
         });
     }
 
@@ -185,21 +189,17 @@ public class PublicDictionaryPageFragment extends BaseFragment
         }
     }
 
-    private void setOnMemberProfileClick() {
-        memberProfile.setOnClickListener(this::onSwitchProfilePage);
-    }
-
     private void setMemberPhoto() {
         Glide.with(this)
                 .asBitmap()
-                .load(member.getImageURL())
+                .load(user.getImageURL())
                 .fitCenter()
                 .error(R.drawable.small_user_pic)
                 .into(memberPhoto);
     }
 
     private void setMemberName() {
-        String memberName = member.getFirstName();
+        String memberName = user.getFirstName();
         this.memberName.setText((memberName.isEmpty()) ? "memberName" : memberName);
     }
 

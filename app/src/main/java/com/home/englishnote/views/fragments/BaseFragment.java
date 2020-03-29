@@ -1,17 +1,16 @@
 package com.home.englishnote.views.fragments;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Member;
 import com.home.englishnote.models.entities.Token;
+import com.home.englishnote.models.entities.User;
 import com.home.englishnote.views.activities.DictionaryHomePageActivity;
 
 import java.io.Serializable;
@@ -23,7 +22,7 @@ public class BaseFragment extends Fragment {
     protected final static int MEMBER_PROFILE_CONTAINER = R.id.memberProfilePageContainer;
 
     protected DictionaryHomePageActivity dictionaryHomePageActivity;
-    protected Member member;
+    protected User user;
     protected Token token;
 
     @Override
@@ -31,16 +30,8 @@ public class BaseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         dictionaryHomePageActivity = (DictionaryHomePageActivity) getActivity();
         // Todo
-//        member = (Member) dictionaryHomePageActivity.getIntent().getSerializableExtra("member");
-//        token = (Token) dictionaryHomePageActivity.getIntent().getSerializableExtra("token");
-        member = new Member("firstName", "lastName",
-                25, "email", "password");
-        token = new Token();
-    }
-
-    protected void onSwitchProfilePage(View v) {
-        switchFragment(R.layout.fragment_member_profile_page, DICTIONARY_HOME_PAGE_CONTAINER);
-        switchFragment(R.layout.fragment_own_dictionaries, MEMBER_PROFILE_CONTAINER);
+        user = dictionaryHomePageActivity.getUser();
+        token = dictionaryHomePageActivity.getToken();
     }
 
     protected void backLastFragment() {

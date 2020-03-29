@@ -1,9 +1,8 @@
 package com.home.englishnote.utils;
 
-import android.os.Build;
 
-import androidx.annotation.RequiresApi;
-
+import com.home.englishnote.models.entities.Guest;
+import com.home.englishnote.models.entities.User;
 import com.home.englishnote.models.repositories.*;
 
 import retrofit2.Retrofit;
@@ -24,6 +23,7 @@ public final class Global {
                 memberRepository : new StubMemberRepository();
     }
 
+
     private static DictionaryRepository dictionaryRepository;
 
     public static DictionaryRepository dictionaryRepository() {
@@ -33,8 +33,8 @@ public final class Global {
                 dictionaryRepository : new StubDictionaryRepository();
     }
 
-    private static WordGroupRepository wordGroupRepository;
 
+    private static WordGroupRepository wordGroupRepository;
 
     public static WordGroupRepository wordGroupRepository() {
 //        return wordGroupRepository = (wordGroupRepository != null) ? wordGroupRepository :
@@ -57,5 +57,11 @@ public final class Global {
     public static ThreadExecutor threadExecutor() {
         return threadExecutor = (threadExecutor == null) ?
                 new AndroidThreadExecutor() : threadExecutor;
+    }
+
+    private static User user = new Guest();
+
+    public static User user() {
+        return user;
     }
 }

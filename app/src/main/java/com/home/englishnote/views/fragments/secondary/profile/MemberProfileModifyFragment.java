@@ -1,8 +1,14 @@
-package com.home.englishnote.views.fragments.profile;
+package com.home.englishnote.views.fragments.secondary.profile;
 
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,20 +20,24 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
+import com.home.englishnote.presenters.MemberProfileModifyPresenter;
+import com.home.englishnote.utils.Global;
+import com.home.englishnote.utils.VocabularyNoteKeyword;
 import com.home.englishnote.views.fragments.BaseFragment;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+import static com.home.englishnote.presenters.MemberProfileModifyPresenter.*;
 import static com.home.englishnote.utils.ViewEnableUtil.setViewsFocusable;
 import static com.home.englishnote.utils.ViewEnableUtil.setViewsVisible;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
-public class MemberProfileModifyFragment extends BaseFragment {
+public class MemberProfileModifyFragment extends BaseFragment implements MemberProfileModifyView {
 
     private Spinner ageModifySpinner;
     private TextView profileModifyButton, emailAddressModifyButton, passwordModifyButton;
@@ -40,6 +50,8 @@ public class MemberProfileModifyFragment extends BaseFragment {
     private ImageView memberInfoModifyMemberPhoto;
     private TextView memberInfoModifyMemberName;
     private TextView userModifyPageCurrentEmailAddressContent;
+    private MemberProfileModifyPresenter memberProfileModifyPresenter;
+    private ImageView memberModifyPhoto;
 
     // Todo data setting hasn't finished
 
@@ -71,6 +83,7 @@ public class MemberProfileModifyFragment extends BaseFragment {
         lastNameContent = view.findViewById(R.id.userModifyPageLastNameContent);
         ageContent = view.findViewById(R.id.userModifyPageAgeContent);
         ageModifySpinner = view.findViewById(R.id.userModifyPageAgeSpinner);
+        memberModifyPhoto = view.findViewById(R.id.memberModifyPhoto);
         profileModifyButton = view.findViewById(R.id.profileModifyButton);
 
         // EmailAddress
@@ -89,22 +102,25 @@ public class MemberProfileModifyFragment extends BaseFragment {
     }
 
     private void init() {
+        memberProfileModifyPresenter = new MemberProfileModifyPresenter(
+                this, Global.memberRepository(), Global.threadExecutor());
         setMember();
         setProfileEnable(false);
         setEmailAddressEnable(false);
         setPasswordEnable(false);
         setAgeSpinner();
+        setMemberPhoto();
         setModifyButtons();
     }
 
     private void setMember() {
         Glide.with(this)
                 .asBitmap()
-                .load(member.getImageURL())
-                .fitCenter()
+                .load(user.getImageURL())
+                .circleCrop()
                 .error(R.drawable.small_user_pic)
                 .into(memberInfoModifyMemberPhoto);
-        String memberName = member.getFirstName();
+        String memberName = user.getFirstName();
         memberInfoModifyMemberName.setText((memberName.isEmpty()) ? "memberName" : memberName);
     }
 
@@ -152,9 +168,65 @@ public class MemberProfileModifyFragment extends BaseFragment {
         return ageList;
     }
 
+    private void setMemberPhoto() {
+        memberModifyPhoto.setOnClickListener(v -> {
+            if (isProfileModifyButtonClick) {
+                uploadPhoto();
+            }
+        });
+    }
+
+    private void uploadPhoto() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        //這裡的intent是跳轉到指定的Android內建功能，讓使用者在相片總管選照片。
+        //SELECT_CAR_PHOTO_REQUEST_CODE之常數，則是為了執行onActivityResult時判斷是誰發出。
+        startActivityForResult(intent, VocabularyNoteKeyword.SELECT_CAR_PHOTO_REQUEST_CODE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //執行此函式，會將SELECT_CAR_PHOTO_REQUEST_CODE傳入requestCode
+        //並自動把取得的資料內容傳入data、執行結果傳入resultCode
+        if (resultCode == RESULT_OK) {
+            if (requestCode == VocabularyNoteKeyword.SELECT_CAR_PHOTO_REQUEST_CODE) {
+                //把data中相片的uri取出。
+                if (data != null) {
+                    Uri uri = data.getData();
+                    if (uri != null) {
+                        try {
+                            ContentResolver contentResolver = getActivity().getContentResolver();
+                            if (contentResolver != null) {
+                                //開啟檔案路徑, 讀取檔案, 轉成inputStream(輸入串流)型態
+//                            Glide.get(getContext()).clearMemory();
+//                            Thread thread = new Thread(() -> Glide.get(getContext()).clearDiskCache());
+//                            thread.start();
+//                            try {
+//                                thread.join();
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+                                photoBitmap = BitmapFactory
+                                        .decodeStream(contentResolver.openInputStream(uri));
+                                if (!isProfileModifyButtonClick) {
+                                    memberProfileModifyPresenter
+                                            .uploadPhoto(token, user.getId(), photoBitmap);
+                                }
+                            }
+                        } catch (FileNotFoundException err) {
+                            Log.e("FileNotFoundException", err.getMessage(), err);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private boolean isProfileModifyButtonClick = false;
     private boolean isEmailAddressModifyButtonClick = false;
     private boolean isPasswordModifyButtonClick = false;
+    private Bitmap photoBitmap;
 
     private void setModifyButtons() {
         setMemberInfoEditable(isProfileModifyButtonClick, profileModifyButton);
@@ -165,6 +237,12 @@ public class MemberProfileModifyFragment extends BaseFragment {
             isProfileModifyButtonClick = !isProfileModifyButtonClick;
             setMemberInfoEditable(isProfileModifyButtonClick, profileModifyButton);
             setProfileEnable(isProfileModifyButtonClick);
+            if (!isProfileModifyButtonClick) {
+                if (photoBitmap != null) {
+                    memberProfileModifyPresenter
+                            .uploadPhoto(token, user.getId(), photoBitmap);
+                }
+            }
         });
         emailAddressModifyButton.setOnClickListener(v -> {
             isEmailAddressModifyButtonClick = !isEmailAddressModifyButtonClick;
@@ -188,5 +266,21 @@ public class MemberProfileModifyFragment extends BaseFragment {
         modifyButton.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
         modifyButton.setText(editable ?
                 getString(R.string.modifyButtonSaveText) : getString(R.string.modifyButtonChangeText));
+    }
+
+    @Override
+    public void onUploadMemberPhotoSuccessfully(Bitmap photoBitmap) {
+        Glide.with(this)
+                .asBitmap()
+                .load(photoBitmap)
+                .error(R.drawable.small_user_pic)
+                .circleCrop()
+                .into(memberInfoModifyMemberPhoto);
+        Glide.with(this)
+                .asBitmap()
+                .load(photoBitmap)
+                .error(R.drawable.profile_photo)
+                .circleCrop()
+                .into(memberModifyPhoto);
     }
 }

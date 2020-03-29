@@ -6,7 +6,7 @@
     android:background="@color/mainColor">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/headViewMemberPhoto"
         android:layout_width="67.5dp"
         android:layout_height="67.5dp"
         android:layout_marginStart="22.5dp"
@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/headViewMemberName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12.5dp"
@@ -25,9 +26,9 @@
         android:textColor="@color/mainWhite"
         android:textSize="15sp"
         app:fontFamily="@font/avenirmedium"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/headViewMemberPhoto"
+        app:layout_constraintStart_toEndOf="@+id/headViewMemberPhoto"
+        app:layout_constraintTop_toTopOf="@+id/headViewMemberPhoto"
         app:lineHeight="20sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
-package com.home.englishnote.views.fragments;
+package com.home.englishnote.views.fragments.main;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +10,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
+import com.home.englishnote.views.fragments.BaseFragment;
 
 public class MemberProfilePageFragment extends BaseFragment {
 
@@ -58,14 +55,14 @@ public class MemberProfilePageFragment extends BaseFragment {
     private void setMemberPhoto() {
         Glide.with(getContext())
                 .asBitmap()
-                .load(member.getImageURL())
+                .load(user.getImageURL())
                 .fitCenter()
                 .error(R.drawable.big_user_pic)
                 .into(memberProfilePagePhoto);
     }
 
     private void setMemberName() {
-        memberProfilePageName.setText(member.getFirstName());
+        memberProfilePageName.setText(user.getFirstName());
     }
 
     private void setMemberProfileEditProfileButtonClick() {

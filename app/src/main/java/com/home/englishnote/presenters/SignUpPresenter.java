@@ -45,6 +45,7 @@ public class SignUpPresenter {
                 Credentials credentials = member.getCredentials();
                 Token token = memberRepository.signUp(member, credentials);
                 member.setId(token.getMemberId());
+                member.setToken(token);
                 threadExecutor.executeUiThread(
                         () -> signUpView.onSignUpSuccessfully(member, token));
             } catch (UserInputEmptyException err) {

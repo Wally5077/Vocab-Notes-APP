@@ -12,4 +12,5 @@ public final class VocabularyNoteKeyword {
     public static final String DEFAULT_AGE = "1";
     public static final int READ_DICTIONARY_LIMIT = 1;
     public static final int REQUEST_CODE_CAMERA = 2;
+    public static final int SELECT_CAR_PHOTO_REQUEST_CODE = 3;
 }

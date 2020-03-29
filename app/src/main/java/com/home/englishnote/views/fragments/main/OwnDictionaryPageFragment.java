@@ -1,4 +1,4 @@
-package com.home.englishnote.views.fragments;
+package com.home.englishnote.views.fragments.main;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +22,7 @@ import com.home.englishnote.presenters.OwnDictionaryPagePresenter;
 import com.home.englishnote.presenters.OwnDictionaryPagePresenter.OwnDictionaryPageView;
 import com.home.englishnote.utils.Global;
 import com.home.englishnote.utils.OwnWordGroupsAdapter;
+import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,10 +90,10 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
     }
 
     private void setMember() {
-        ownDictionaryPageMemberName.setText(member.getFirstName());
+        ownDictionaryPageMemberName.setText(user.getFirstName());
         Glide.with(getContext())
                 .asBitmap()
-                .load(member.getImageURL())
+                .load(user.getImageURL())
                 .fitCenter()
                 .error(R.drawable.small_user_pic)
                 .into(ownDictionaryPagePhoto);
@@ -111,7 +110,7 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
     }
 
     private void downloadWordGroupsList() {
-        ownDictionaryPagePresenter.getWordGroups(member.getId(), 0, -1);
+        ownDictionaryPagePresenter.getWordGroups(user.getId(), 0, -1);
     }
 
     private void setEditButton() {

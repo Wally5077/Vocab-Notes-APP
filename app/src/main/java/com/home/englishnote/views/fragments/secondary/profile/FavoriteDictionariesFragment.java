@@ -1,7 +1,6 @@
-package com.home.englishnote.views.fragments.profile;
+package com.home.englishnote.views.fragments.secondary.profile;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,7 +71,7 @@ public class FavoriteDictionariesFragment extends BaseFragment
     private void downloadFavoriteDictionaryList() {
         int dictionaryListSize = dictionaryList.size();
         favoriteDictionariesPresenter.getOwnDictionaries(
-                member.getId(), dictionaryListSize, dictionaryListSize + 30);
+                user.getId(), dictionaryListSize, dictionaryListSize + 30);
     }
 
     @Override

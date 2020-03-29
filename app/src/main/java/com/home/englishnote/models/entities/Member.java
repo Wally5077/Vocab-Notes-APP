@@ -1,12 +1,12 @@
 package com.home.englishnote.models.entities;
 
-import java.io.Serializable;
 
-public class Member implements Serializable {
-    private int id, age, exp;
-    private String firstName, lastName, email, password, level, imageURL;
+public class Member implements User {
+    private int id, age, level, exp;
+    private String firstName, lastName, email, password, imageURL;
     private Credentials credentials;
     private Role role;
+    private Token token;
 
     public Member() {
 
@@ -23,6 +23,7 @@ public class Member implements Serializable {
         setCredentials(email, password);
     }
 
+    @Override
     public Credentials getCredentials() {
         return credentials;
     }
@@ -31,6 +32,7 @@ public class Member implements Serializable {
         credentials = new Credentials(email, password);
     }
 
+    @Override
     public int getId() {
         return id;
     }
@@ -39,6 +41,7 @@ public class Member implements Serializable {
         this.id = id;
     }
 
+    @Override
     public int getAge() {
         return age;
     }
@@ -47,6 +50,7 @@ public class Member implements Serializable {
         this.age = age;
     }
 
+    @Override
     public int getExp() {
         return exp;
     }
@@ -55,6 +59,7 @@ public class Member implements Serializable {
         this.exp = exp;
     }
 
+    @Override
     public String getFirstName() {
         return firstName;
     }
@@ -63,6 +68,7 @@ public class Member implements Serializable {
         this.firstName = firstName;
     }
 
+    @Override
     public String getLastName() {
         return lastName;
     }
@@ -71,6 +77,7 @@ public class Member implements Serializable {
         this.lastName = lastName;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
@@ -79,6 +86,7 @@ public class Member implements Serializable {
         this.email = email;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -87,14 +95,16 @@ public class Member implements Serializable {
         this.password = password;
     }
 
-    public String getLevel() {
+    @Override
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 
+    @Override
     public Role getRole() {
         return role;
     }
@@ -103,11 +113,26 @@ public class Member implements Serializable {
         this.role = role;
     }
 
+    @Override
     public String getImageURL() {
         return imageURL;
     }
 
+    @Override
+    public boolean isGuest() {
+        return false;
+    }
+
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    @Override
+    public Token getToken() {
+        return token;
+    }
+
+    public void setToken(Token token) {
+        this.token = token;
     }
 }

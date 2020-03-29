@@ -1,7 +1,6 @@
-package com.home.englishnote.views.fragments.profile;
+package com.home.englishnote.views.fragments.secondary.profile;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -30,7 +28,6 @@ import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class OwnDictionariesFragment extends BaseFragment implements OwnDictionariesView {
 
@@ -67,7 +64,6 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
                 this, Global.memberRepository(), Global.threadExecutor());
         setDictionariesSwipeRefreshLayout();
         setDictionariesRecycler();
-        updateDictionaryList();
         setOwnDictionaryQuery();
     }
 
@@ -99,11 +95,17 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateDictionaryList();
+    }
+
     private void updateDictionaryList() {
         setDictionariesSwipeRefreshLayoutEnable(true);
         int dictionaryListSize = dictionaryList.size();
         ownDictionariesPresenter.getOwnDictionaries(
-                member.getId(), dictionaryListSize, dictionaryListSize + 3);
+                user.getId(), dictionaryListSize, dictionaryListSize + 3);
     }
 
     private void setOwnDictionaryQuery() {

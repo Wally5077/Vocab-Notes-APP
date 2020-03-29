@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainWhite"
+    android:elevation="2dp"
     android:fitsSystemWindows="true">
 
     <androidx.appcompat.widget.Toolbar
@@ -124,7 +125,6 @@
             android:id="@+id/memberInfoModifyMemberPhoto"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="7.5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -134,6 +134,8 @@
             android:id="@+id/memberInfoModifyMemberName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="7.5dp"
+            android:layout_marginLeft="7.5dp"
             android:maxLines="1"
             android:text="user name"
             android:textAlignment="center"
@@ -208,7 +210,7 @@
         app:layout_constraintTop_toBottomOf="@+id/profileModifyButton" />
 
     <ImageView
-        android:id="@+id/userModifyPagePhoto"
+        android:id="@+id/memberModifyPhoto"
         android:layout_width="92.5dp"
         android:layout_height="92.5dp"
         android:layout_marginStart="30dp"
@@ -229,7 +231,7 @@
         android:textColor="@color/mainColor"
         android:textSize="13sp"
         app:fontFamily="@font/avenirroman"
-        app:layout_constraintStart_toEndOf="@+id/userModifyPagePhoto"
+        app:layout_constraintStart_toEndOf="@+id/memberModifyPhoto"
         app:layout_constraintTop_toBottomOf="@+id/profileLine"
         app:lineHeight="15sp" />
 
