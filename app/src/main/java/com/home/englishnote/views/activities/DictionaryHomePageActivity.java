@@ -202,8 +202,8 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
                 fragmentStack.add(fragmentId);
                 containerStack.add(containerId);
             }
-            Log.d(this.getClass().getSimpleName(), getFragmentStackLog());
-            Log.d(this.getClass().getSimpleName(), getContainerStackLog());
+//            Log.d(this.getClass().getSimpleName(), getFragmentStackLog());
+//            Log.d(this.getClass().getSimpleName(), getContainerStackLog());
             fragmentTransaction.show(nextFragment).commit();
             // 隱藏當前片段 , 顯示下一片段
             dictionaryHomePageDrawer.closeDrawer(GravityCompat.START);

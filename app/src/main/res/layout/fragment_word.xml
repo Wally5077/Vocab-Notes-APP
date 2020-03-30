@@ -24,14 +24,14 @@
 
     <ImageView
         android:id="@+id/wordImageUp"
-        android:layout_width="142.5dp"
-        android:layout_height="142.5dp"
-        android:layout_marginTop="27.5dp"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:background="@drawable/apple"
         android:elevation="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wordTitle" />
+        app:layout_constraintBottom_toTopOf="@+id/wordDescription"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
     <TextView
         android:id="@+id/wordContentUp"
@@ -57,99 +57,94 @@
         android:layout_width="315dp"
         android:layout_height="327.5dp"
         android:background="@drawable/word_dish"
-        app:layout_constraintBottom_toBottomOf="@+id/synonymLeftCenter"
-        app:layout_constraintEnd_toEndOf="@+id/wordImageUp"
-        app:layout_constraintStart_toStartOf="@+id/wordImageUp"
-        app:layout_constraintTop_toTopOf="@+id/synonymLeftCenter" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/wordTitle" />
 
     <TextView
         android:id="@+id/synonymLeftTop"
-        android:layout_width="72.5dp"
+        android:layout_width="77.5dp"
         android:layout_height="57.5dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginStart="12.5dp"
+        android:layout_marginLeft="12.5dp"
         android:background="@drawable/bg_round_word"
         android:gravity="center"
-        android:paddingBottom="5dp"
         android:text="synonym"
         android:textColor="@color/mainColor"
         android:textSize="14sp"
         app:fontFamily="@font/avenirheavy"
-        app:layout_constraintBottom_toBottomOf="@+id/wordImageUp"
-        app:layout_constraintEnd_toStartOf="@+id/wordImageUp" />
+        app:layout_constraintEnd_toStartOf="@+id/wordImageUp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/wordDescription" />
 
     <TextView
         android:id="@+id/synonymLeftCenter"
-        android:layout_width="72.5dp"
+        android:layout_width="77.5dp"
         android:layout_height="57.5dp"
-        android:layout_marginTop="22.5dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginEnd="2.5dp"
+        android:layout_marginRight="2.5dp"
         android:background="@drawable/bg_round_word"
         android:gravity="center"
-        android:paddingBottom="5dp"
         android:text="synonym"
         android:textColor="@color/mainColor"
         android:textSize="14sp"
         app:fontFamily="@font/avenirheavy"
-        app:layout_constraintEnd_toEndOf="@+id/synonymLeftTop"
-        app:layout_constraintTop_toBottomOf="@+id/synonymLeftTop" />
+        app:layout_constraintBottom_toBottomOf="@+id/wordDescription"
+        app:layout_constraintEnd_toStartOf="@+id/wordDescription"
+        app:layout_constraintTop_toTopOf="@+id/wordDescription" />
 
     <TextView
         android:id="@+id/synonymLeftBottom"
-        android:layout_width="72.5dp"
-        android:layout_height="57.5dp"
-        android:layout_marginTop="22.5dp"
+        android:layout_width="77.5dp"
+        android:layout_height="59dp"
         android:background="@drawable/bg_round_word"
         android:gravity="center"
-        android:paddingBottom="5dp"
         android:text="synonym"
         android:textColor="@color/mainColor"
         android:textSize="14sp"
         app:fontFamily="@font/avenirheavy"
+        app:layout_constraintBottom_toBottomOf="@+id/wordDescription"
         app:layout_constraintEnd_toEndOf="@+id/synonymLeftTop"
-        app:layout_constraintStart_toStartOf="@+id/synonymLeftTop"
-        app:layout_constraintTop_toBottomOf="@id/synonymLeftCenter" />
+        app:layout_constraintStart_toStartOf="@+id/synonymLeftTop" />
 
     <TextView
         android:id="@+id/synonymRightTop"
-        android:layout_width="72.5dp"
+        android:layout_width="77.5dp"
         android:layout_height="57.5dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="12.5dp"
+        android:layout_marginRight="12.5dp"
         android:background="@drawable/bg_round_word"
         android:gravity="center"
-        android:paddingBottom="5dp"
         android:text="synonym"
         android:textColor="@color/mainColor"
         android:textSize="14sp"
         app:fontFamily="@font/avenirheavy"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/wordImageUp"
         app:layout_constraintTop_toTopOf="@+id/synonymLeftTop" />
 
     <TextView
         android:id="@+id/synonymRightCenter"
-        android:layout_width="72.5dp"
+        android:layout_width="77.5dp"
         android:layout_height="57.5dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="2.5dp"
+        android:layout_marginLeft="2.5dp"
         android:background="@drawable/bg_round_word"
         android:gravity="center"
-        android:paddingBottom="5dp"
         android:text="synonym"
         android:textColor="@color/mainColor"
         android:textSize="14sp"
         app:fontFamily="@font/avenirheavy"
-        app:layout_constraintStart_toStartOf="@+id/synonymRightTop"
+        app:layout_constraintStart_toEndOf="@+id/wordDescription"
         app:layout_constraintTop_toTopOf="@+id/synonymLeftCenter" />
 
     <TextView
         android:id="@+id/synonymRightBottom"
-        android:layout_width="72.5dp"
+        android:layout_width="77.5dp"
         android:layout_height="57.5dp"
         android:background="@drawable/bg_round_word"
         android:gravity="center"
-        android:paddingBottom="5dp"
         android:text="synonym"
         android:textColor="@color/mainColor"
         android:textSize="14sp"
@@ -160,8 +155,9 @@
 
     <TextView
         android:id="@+id/wordDescription"
-        android:layout_width="215dp"
-        android:layout_height="190dp"
+        android:layout_width="210dp"
+        android:layout_height="217.5dp"
+        android:layout_marginTop="20dp"
         android:background="#5c1a1717"
         android:elevation="2dp"
         android:gravity="center"
@@ -171,26 +167,26 @@
         android:paddingBottom="42.5dp"
         android:text="@string/test"
         android:textAlignment="center"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:visibility="invisible"
         app:fontFamily="@font/avenirbook"
-        app:layout_constraintBottom_toBottomOf="@+id/synonymLeftBottom"
-        app:layout_constraintEnd_toStartOf="@+id/synonymRightCenter"
-        app:layout_constraintStart_toEndOf="@+id/synonymLeftCenter"
-        app:layout_constraintTop_toTopOf="@+id/synonymLeftTop"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/imageView5"
         app:lineHeight="14sp" />
 
     <ImageView
         android:id="@+id/wordImageDown"
-        android:layout_width="142.5dp"
-        android:layout_height="142.5dp"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:background="@drawable/apple"
         android:elevation="1dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
-        app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/wordContentUp" />
+        app:layout_constraintBottom_toBottomOf="@id/wordDescription"
+        app:layout_constraintEnd_toEndOf="@id/wordDescription"
+        app:layout_constraintStart_toStartOf="@id/wordDescription"
+        app:layout_constraintTop_toTopOf="@id/wordDescription" />
 
     <TextView
         android:id="@+id/wordContentDown"
@@ -202,10 +198,10 @@
         android:textColor="@color/mainColor"
         android:textSize="18sp"
         app:fontFamily="@font/avenirheavy"
-        app:layout_constraintBottom_toBottomOf="@+id/synonymLeftCenter"
-        app:layout_constraintEnd_toStartOf="@+id/synonymRightCenter"
-        app:layout_constraintStart_toEndOf="@+id/synonymLeftCenter"
-        app:layout_constraintTop_toTopOf="@+id/synonymLeftCenter"
+        app:layout_constraintBottom_toBottomOf="@id/wordDescription"
+        app:layout_constraintEnd_toEndOf="@id/wordDescription"
+        app:layout_constraintStart_toStartOf="@id/wordDescription"
+        app:layout_constraintTop_toTopOf="@id/wordDescription"
         app:lineHeight="25sp" />
 
     <ImageView

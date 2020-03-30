@@ -8,11 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.home.englishnote.R;
-import com.home.englishnote.models.entities.Member;
-import com.home.englishnote.models.entities.Role;
 import com.home.englishnote.models.entities.Token;
 import com.home.englishnote.models.entities.User;
-import com.home.englishnote.utils.RandomVacabProducer;
 import com.home.englishnote.views.activities.DictionaryHomePageActivity;
 
 import java.io.Serializable;

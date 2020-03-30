@@ -1,6 +1,7 @@
 package com.home.englishnote.views.fragments.secondary.profile;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -63,20 +64,21 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
     private void init() {
         ownDictionariesPresenter = new OwnDictionariesPresenter(
                 this, Global.memberRepository(), Global.threadExecutor());
-        setDictionariesSwipeRefreshLayout();
-        setDictionariesRecycler();
-        setOwnDictionaryQuery();
+        initDictionariesSwipeRefreshLayout();
+        initDictionariesRecycler();
+        initOwnDictionaryQuery();
+        queryDictionaryList();
     }
 
-    private void setDictionariesSwipeRefreshLayout() {
+    private void initDictionariesSwipeRefreshLayout() {
         ownDictionariesSwipeRefreshLayout.measure(0, 0);
         ownDictionariesSwipeRefreshLayout.setProgressViewOffset(true, 80, 90);
-        ownDictionariesSwipeRefreshLayout.setOnRefreshListener(this::updateDictionaryList);
+        ownDictionariesSwipeRefreshLayout.setOnRefreshListener(this::queryDictionaryList);
     }
 
     private List<Dictionary> dictionaryList = new ArrayList<>();
 
-    private void setDictionariesRecycler() {
+    private void initDictionariesRecycler() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
         ownDictionariesRecycler.setHasFixedSize(true);
         ownDictionariesRecycler.setLayoutManager(linearLayoutManager);
@@ -90,26 +92,20 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
                 int lastVisibleItemPosition =
                         linearLayoutManager.findLastVisibleItemPosition();
                 if (lastVisibleItemPosition + 1 == ownDictionariesAdapter.getItemCount()) {
-                    updateDictionaryList();
+                    queryDictionaryList();
                 }
             }
         });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateDictionaryList();
-    }
-
-    private void updateDictionaryList() {
+    private void queryDictionaryList() {
         setDictionariesSwipeRefreshLayoutEnable(true);
         int dictionaryListSize = dictionaryList.size();
         ownDictionariesPresenter.getOwnDictionaries(
                 user.getId(), dictionaryListSize, dictionaryListSize + 3);
     }
 
-    private void setOwnDictionaryQuery() {
+    private void initOwnDictionaryQuery() {
         ownDictionariesQuery.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -122,9 +118,11 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
                 if (count == 0) {
                     ownDictionariesAdapter.updateDictionaryList(dictionaryList);
                 } else {
-                    ownDictionariesAdapter.updateDictionaryList(dictionaryList.stream()
-                            .filter(dictionary -> dictionary.getTitle().contains(filterPattern))
-                            .collect(Collectors.toList()));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        ownDictionariesAdapter.updateDictionaryList(dictionaryList.stream()
+                                .filter(dictionary -> dictionary.getTitle().contains(filterPattern))
+                                .collect(Collectors.toList()));
+                    }
                 }
                 ownDictionariesAdapter.notifyDataSetChanged();
             }

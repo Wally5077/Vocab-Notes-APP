@@ -109,8 +109,6 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
     public void onGetDictionariesSuccessfully(List<Dictionary> dictionaryList) {
         isPullToRefreshTriggered = false;
         setDictionariesSwipeRefreshLayoutEnable(false);
-        Log.d(this.getClass().getSimpleName(), "onGetDictionariesSuccessfully: " +
-                this.dictionaryList.size());
         this.dictionaryList.addAll(dictionaryList);
         publicDictionariesAdapter.notifyDataSetChanged();
         publicDictionariesRecycler.scrollToPosition(publicDictionariesAdapter.getItemCount() - 1);
