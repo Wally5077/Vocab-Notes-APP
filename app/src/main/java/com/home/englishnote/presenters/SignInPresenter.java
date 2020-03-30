@@ -34,7 +34,7 @@ public class SignInPresenter {
     public void signIn(String email, String password, String passwordSalt) {
         threadExecutor.execute(() -> {
             try {
-//                verifyUserInfo(email, password);
+                verifyUserInfo(email, password);
                 String hashPassword = HashUtil.hashEncode(password, passwordSalt.getBytes());
                 Credentials credentials = new Credentials(email, hashPassword);
                 Token token = memberRepository.signInToken(credentials);

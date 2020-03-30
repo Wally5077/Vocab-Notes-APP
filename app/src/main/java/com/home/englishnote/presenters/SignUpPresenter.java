@@ -34,11 +34,8 @@ public class SignUpPresenter {
                        String password, String passwordConfirmation, String passwordSalt) {
         threadExecutor.execute(() -> {
             try {
-//                verifyUserInfo(firstName, lastName, age,
-//                        email, password, passwordConfirmation);
-                // Todo There's a test code below this line
-//                String defaultAge = (age.equals(VocabularyNoteKeyword.DEFAULT_SPINNER_WORD)) ?
-//                        VocabularyNoteKeyword.DEFAULT_AGE : age;
+                verifyUserInfo(firstName, lastName, age,
+                        email, password, passwordConfirmation);
                 String hashPassword = HashUtil.hashEncode(password, passwordSalt.getBytes());
                 Member member = new Member(firstName, lastName,
                         Integer.valueOf(age), email, hashPassword);
