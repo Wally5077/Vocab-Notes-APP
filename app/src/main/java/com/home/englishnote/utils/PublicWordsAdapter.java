@@ -1,6 +1,7 @@
 package com.home.englishnote.utils;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,7 @@ public class PublicWordsAdapter extends RecyclerView.Adapter<PublicWordsAdapter.
         private ImageView wordItemImage;
         private TextView wordItemName;
         private TextView wordItemSynonym;
+        private View wordItem;
 
         public PublicWordsHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +80,7 @@ public class PublicWordsAdapter extends RecyclerView.Adapter<PublicWordsAdapter.
         }
 
         private void findViews(View view) {
+            wordItem = view.findViewById(R.id.wordItem);
             wordItemImage = view.findViewById(R.id.wordItemImage);
             wordItemName = view.findViewById(R.id.wordItemName);
             wordItemSynonym = view.findViewById(R.id.wordItemSynonym);
@@ -92,10 +95,24 @@ public class PublicWordsAdapter extends RecyclerView.Adapter<PublicWordsAdapter.
             wordItemName.setText(word.getName());
             String wordSynonyms = "( " + word.getSynonyms().get(0) + " )";
             wordItemSynonym.setText(wordSynonyms);
-            wordItemImage.setOnClickListener(v -> ((DictionaryHomePageActivity) context)
-                    .switchFragment(R.layout.fragment_word,
-                            R.id.publicDictionaryPageContainer, word));
+            wordItemImage.setOnClickListener(v -> {
+                setWordItemImageEnable(false);
+                Global.threadExecutor().executeUiThread(() -> {
+                    DelayUtil.delayExecuteThread(200);
+                    setWordItemImageEnable(true);
+                    ((DictionaryHomePageActivity) context)
+                            .switchFragment(R.layout.fragment_word,
+                                    R.id.publicDictionaryPageContainer, word);
+                });
+            });
         }
 
+        private void setWordItemImageEnable(boolean enable) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                wordItem.setBackgroundColor(enable ?
+                        context.getResources().getColor(R.color.mainWhite) :
+                        context.getResources().getColor(R.color.itemWordClicked));
+            }
+        }
     }
 }

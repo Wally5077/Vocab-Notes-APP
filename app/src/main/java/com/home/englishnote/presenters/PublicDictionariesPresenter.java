@@ -22,11 +22,14 @@ public class PublicDictionariesPresenter {
 
     public void getDictionaries(int offset, int limit) {
         threadExecutor.execute(() -> {
-            threadExecutor.executeUiThread(() -> {
+            try {
                 List<Dictionary> dictionaryList =
                         dictionaryRepository.getDictionaries(offset, limit);
-                publicDictionaryView.onGetDictionariesSuccessfully(dictionaryList);
-            });
+                threadExecutor.executeUiThread(
+                        () -> publicDictionaryView.onGetDictionariesSuccessfully(dictionaryList));
+            } catch (Exception err) {
+
+            }
         });
     }
 

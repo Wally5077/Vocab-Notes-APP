@@ -28,6 +28,7 @@ import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OwnDictionariesFragment extends BaseFragment implements OwnDictionariesView {
 
@@ -121,9 +122,9 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
                 if (count == 0) {
                     ownDictionariesAdapter.updateDictionaryList(dictionaryList);
                 } else {
-//                    ownDictionariesAdapter.updateDictionaryList(dictionaryList.stream()
-//                            .filter(dictionary -> dictionary.getTitle().contains(filterPattern))
-//                            .collect(Collectors.toList()));
+                    ownDictionariesAdapter.updateDictionaryList(dictionaryList.stream()
+                            .filter(dictionary -> dictionary.getTitle().contains(filterPattern))
+                            .collect(Collectors.toList()));
                 }
                 ownDictionariesAdapter.notifyDataSetChanged();
             }

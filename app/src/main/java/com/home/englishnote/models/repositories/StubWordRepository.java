@@ -2,6 +2,7 @@ package com.home.englishnote.models.repositories;
 
 
 import com.home.englishnote.models.entities.Word;
+import com.home.englishnote.utils.DelayUtil;
 import com.home.englishnote.utils.RandomVacabProducer;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class StubWordRepository implements WordRepository {
 
     @Override
     public List<Word> getPossibleWord(String keyword) {
+        DelayUtil.delayExecuteThread(300);
         if (wordList == null) {
             wordList = RandomVacabProducer.randomWordGroup(999, 1000).getWords();
         }
@@ -25,6 +27,7 @@ public class StubWordRepository implements WordRepository {
 
     @Override
     public Word getWord(String name) {
+        DelayUtil.delayExecuteThread(300);
         return getPossibleWord(name).get(1);
     }
 }

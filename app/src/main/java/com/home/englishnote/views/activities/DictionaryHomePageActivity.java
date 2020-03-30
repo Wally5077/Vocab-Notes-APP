@@ -20,8 +20,10 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Guest;
+import com.home.englishnote.models.entities.Role;
 import com.home.englishnote.models.entities.Token;
 import com.home.englishnote.models.entities.User;
+import com.home.englishnote.utils.RandomVacabProducer;
 import com.home.englishnote.views.fragments.BaseFragment;
 import com.home.englishnote.views.fragments.main.OwnDictionaryPageFragment;
 import com.home.englishnote.views.fragments.main.PublicDictionaryPageFragment;
@@ -69,6 +71,7 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
 
     private void setMember() {
         user = (User) getIntent().getSerializableExtra("user");
+        user = RandomVacabProducer.randomMember(Role.MEMBER);
     }
 
     public User getUser() {

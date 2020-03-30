@@ -1,6 +1,7 @@
 package com.home.englishnote.views.fragments.secondary.dictionary;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,21 +59,15 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
     private void init() {
         publicDictionariesPresenter = new PublicDictionariesPresenter(
                 this, Global.dictionaryRepository(), Global.threadExecutor());
-        setDictionariesSwipeRefreshLayout();
-        setDictionariesRecycler();
         dictionaryList.clear();
-        updateDictionaryList();
-    }
-
-    private void setDictionariesSwipeRefreshLayout() {
-        publicDictionariesSwipeRefreshLayout.measure(0, 0);
-        publicDictionariesSwipeRefreshLayout.setProgressViewOffset(true, 80, 90);
-        publicDictionariesSwipeRefreshLayout.setOnRefreshListener(this::updateDictionaryList);
+        initDictionariesRecycler();
+        initDictionariesSwipeRefreshLayout();
+        queryDictionaryList();
     }
 
     private List<Dictionary> dictionaryList = new ArrayList<>();
 
-    private void setDictionariesRecycler() {
+    private void initDictionariesRecycler() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
         publicDictionariesRecycler.setHasFixedSize(true);
         publicDictionariesRecycler.setLayoutManager(linearLayoutManager);
@@ -86,17 +81,39 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
                 int lastVisibleItemPosition =
                         linearLayoutManager.findLastVisibleItemPosition();
                 if (lastVisibleItemPosition + 1 == publicDictionariesAdapter.getItemCount()) {
-                    updateDictionaryList();
+                    if (!isPullToRefreshTriggered) {
+                        isPullToRefreshTriggered = true;
+                        queryDictionaryList();
+                    }
                 }
             }
         });
     }
 
-    private void updateDictionaryList() {
+    private void initDictionariesSwipeRefreshLayout() {
+        publicDictionariesSwipeRefreshLayout.measure(0, 0);
+        publicDictionariesSwipeRefreshLayout.setProgressViewOffset(true, 80, 90);
+        publicDictionariesSwipeRefreshLayout.setOnRefreshListener(this::queryDictionaryList);
+    }
+
+    private void queryDictionaryList() {
         setDictionariesSwipeRefreshLayoutEnable(true);
         int dictionaryListSize = dictionaryList.size();
         publicDictionariesPresenter
                 .getDictionaries(dictionaryListSize, dictionaryListSize + 3);
+    }
+
+    private boolean isPullToRefreshTriggered = false;
+
+    @Override
+    public void onGetDictionariesSuccessfully(List<Dictionary> dictionaryList) {
+        isPullToRefreshTriggered = false;
+        setDictionariesSwipeRefreshLayoutEnable(false);
+        Log.d(this.getClass().getSimpleName(), "onGetDictionariesSuccessfully: " +
+                this.dictionaryList.size());
+        this.dictionaryList.addAll(dictionaryList);
+        publicDictionariesAdapter.notifyDataSetChanged();
+        publicDictionariesRecycler.scrollToPosition(publicDictionariesAdapter.getItemCount() - 1);
     }
 
     private void setDictionariesSwipeRefreshLayoutEnable(boolean enable) {
@@ -110,13 +127,6 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
 
     public void onDictionaryListSearchClick(View view) {
         // Todo show dictionaryListSearch
-    }
-
-    @Override
-    public void onGetDictionariesSuccessfully(List<Dictionary> dictionaryList) {
-        setDictionariesSwipeRefreshLayoutEnable(false);
-        this.dictionaryList.addAll(dictionaryList);
-        publicDictionariesAdapter.notifyDataSetChanged();
     }
 
     public class PublicDictionariesAdapter extends Adapter<PublicDictionariesAdapter.PublicDictionariesHolder> {

@@ -19,6 +19,8 @@ public interface MemberRepository {
 
     void createOwnDictionary(Token token, int memberId, String title, String description);
 
+    void addFavoriteDictionary(int dictionaryId, int memberId);
+
     List<Dictionary> getOwnDictionaries(int memberId, int offset, int limit);
 
     List<Dictionary> getFavoriteDictionaries(int memberId, int offset, int limit);

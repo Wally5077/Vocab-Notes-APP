@@ -16,5 +16,5 @@
     <color name="mainBlack">#000000</color>
     <color name="searchTextGrey">#ABFFFFFF</color>
     <color name="searchTextGreen">#59d880</color>
-
+    <color name="itemWordClicked">#efecec</color>
 </resources>

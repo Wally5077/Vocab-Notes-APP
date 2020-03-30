@@ -211,13 +211,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        app:lineHeight="12sp"
         android:text="Have an account"
         app:fontFamily="@font/avenirbook"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:lineHeight="12sp" />
 
     <TextView
         android:id="@+id/textView5"
@@ -226,13 +226,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="18dp"
-        app:lineHeight="14sp"
         android:onClick="onSignInLinkClick"
         android:text="@string/signUpPageSignIn"
         android:textColor="#fcf9f9"
         android:textSize="16sp"
         app:fontFamily="@font/avenirmedium"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textView2" />
+        app:layout_constraintStart_toEndOf="@id/textView2"
+        app:lineHeight="14sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

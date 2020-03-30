@@ -28,6 +28,7 @@ import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PublicWordGroupsFragment extends BaseFragment implements PublicWordGroupsView {
 
@@ -65,19 +66,20 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
     }
 
     private void init() {
-        publicWordGroupsPresenter = new PublicWordGroupsPresenter(
-                this, Global.wordGroupRepository(), Global.threadExecutor());
-        setDictionary();
+        publicWordGroupsPresenter = new PublicWordGroupsPresenter(this,
+                Global.memberRepository(), Global.wordGroupRepository(), Global.threadExecutor());
+        wordGroupsList.clear();
+        fetchDictionaryFromBundle();
         publicDictionaryFavoriteButton.setOnClickListener(this::onFavoriteButtonClick);
-        setWordGroupsRecycler();
-        setWordGroupsSwipeRefreshLayout();
-        updateWordGroupsList();
-        setPublicDictionaryQuery();
+        initWordGroupsRecycler();
+        initWordGroupsSwipeRefreshLayout();
+        queryWordGroupsList();
+        initPublicDictionarySearchBar();
     }
 
     private Dictionary dictionary;
 
-    private void setDictionary() {
+    private void fetchDictionaryFromBundle() {
         Bundle bundle = getArguments();
         if (bundle != null) {
             dictionary = (Dictionary) bundle.getSerializable("VocabNoteObjects");
@@ -87,12 +89,12 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
 
     private void onFavoriteButtonClick(View view) {
         // Todo check this public vocabulary dictionary has been added to favorite dictionary
-        Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
+        publicWordGroupsPresenter.addFavoriteDictionaryList(dictionary.getId(), user.getId());
     }
 
     private List<WordGroup> wordGroupsList = new ArrayList<>();
 
-    private void setWordGroupsRecycler() {
+    private void initWordGroupsRecycler() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
         wordGroupsRecycler.setHasFixedSize(true);
         wordGroupsRecycler.setLayoutManager(linearLayoutManager);
@@ -106,26 +108,26 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
                 int lastVisibleItemPosition =
                         linearLayoutManager.findLastVisibleItemPosition();
                 if (lastVisibleItemPosition + 1 == publicWordGroupsAdapter.getItemCount()) {
-                    updateWordGroupsList();
+                    queryWordGroupsList();
                 }
             }
         });
     }
 
-    private void setWordGroupsSwipeRefreshLayout() {
+    private void initWordGroupsSwipeRefreshLayout() {
         wordGroupsSwipeRefreshLayout.measure(0, 0);
         wordGroupsSwipeRefreshLayout.setProgressViewOffset(true, 80, 90);
-        wordGroupsSwipeRefreshLayout.setOnRefreshListener(this::updateWordGroupsList);
+        wordGroupsSwipeRefreshLayout.setOnRefreshListener(this::queryWordGroupsList);
     }
 
-    private void updateWordGroupsList() {
+    private void queryWordGroupsList() {
         setWordGroupSwipeRefreshLayoutEnable(true);
         int wordGroupListSize = wordGroupsList.size();
         publicWordGroupsPresenter.getWordGroups(
                 dictionary.getId(), wordGroupListSize, wordGroupListSize + 3);
     }
 
-    private void setPublicDictionaryQuery() {
+    private void initPublicDictionarySearchBar() {
         publicDictionaryQuery.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -138,9 +140,9 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
                 if (count == 0) {
                     publicWordGroupsAdapter.updateWordGroupList(wordGroupsList);
                 } else {
-//                    publicWordGroupsAdapter.updateWordGroupList(wordGroupsList.stream()
-//                            .filter(wordGroup -> wordGroup.getTitle().contains(filterPattern))
-//                            .collect(Collectors.toList()));
+                    publicWordGroupsAdapter.updateWordGroupList(wordGroupsList.stream()
+                            .filter(wordGroup -> wordGroup.getTitle().contains(filterPattern))
+                            .collect(Collectors.toList()));
                 }
                 publicWordGroupsAdapter.notifyDataSetChanged();
             }
@@ -162,6 +164,16 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
     private void setWordGroupSwipeRefreshLayoutEnable(boolean enable) {
         wordGroupsSwipeRefreshLayout.setEnabled(enable);
         wordGroupsSwipeRefreshLayout.setRefreshing(enable);
+    }
+
+    @Override
+    public void onAddFavoriteDictionaryListSuccessfully() {
+        Toast.makeText(getActivity(), "It had been already removed.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onAddFavoriteDictionaryListFailed() {
+        Toast.makeText(getActivity(), "It had been already added.", Toast.LENGTH_SHORT).show();
     }
 
 }

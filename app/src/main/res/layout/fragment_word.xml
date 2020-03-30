@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/wordTitle"
-        android:layout_width="175dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32.5dp"
         android:layout_marginLeft="32.5dp"
@@ -38,7 +38,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12.5dp"
-        android:maxWidth="100dp"
         android:maxLength="12"
         android:text="word"
         android:textAlignment="center"
@@ -197,7 +196,6 @@
         android:id="@+id/wordContentDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxWidth="100dp"
         android:maxLength="12"
         android:text="word"
         android:textAlignment="center"

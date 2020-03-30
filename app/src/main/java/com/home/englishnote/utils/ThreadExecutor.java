@@ -5,5 +5,4 @@ public interface ThreadExecutor {
 
     void executeUiThread(Runnable runnable);
 
-    void delayExecuteUiThreadDelay(Runnable runnable);
 }

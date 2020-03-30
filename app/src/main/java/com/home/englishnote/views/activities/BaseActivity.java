@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.home.englishnote.R;
+import com.home.englishnote.utils.DelayUtil;
 import com.home.englishnote.utils.Global;
 import com.home.englishnote.utils.HashUtil;
 import com.home.englishnote.utils.VocabularyNoteKeyword;
@@ -46,7 +47,8 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     private void clearAllTextInputLayoutError(TextInputLayout[] textInputLayouts) {
-        Global.threadExecutor().delayExecuteUiThreadDelay(() -> {
+        Global.threadExecutor().executeUiThread(() -> {
+            DelayUtil.delayExecuteThread(1500);
             for (TextInputLayout textInputLayout : textInputLayouts) {
                 textInputLayout.setError("");
                 textInputLayout.setErrorEnabled(false);
