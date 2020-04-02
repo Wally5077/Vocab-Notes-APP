@@ -185,11 +185,11 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
         BaseFragment nextFragment = fragmentMap.get(fragmentId);
         if (nextFragment != null) {
             // 傳遞參數給其他 Fragment
-            if (serializableArray.length > 0) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("VocabNoteObjects", serializableArray[0]);
-                nextFragment.setArguments(bundle);
-            }
+            Bundle bundle = new Bundle();
+            Serializable serializable = serializableArray.length > 0 ? serializableArray[0] : null;
+            bundle.putSerializable("VocabNoteObjects", serializable);
+            nextFragment.setArguments(bundle);
+
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             if (nextFragment.isAdded()) {
                 // fragmentStack.peek() 為當前片段 layout
@@ -204,6 +204,7 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
             }
 //            Log.d(this.getClass().getSimpleName(), getFragmentStackLog());
 //            Log.d(this.getClass().getSimpleName(), getContainerStackLog());
+            nextFragment.updateFragmentData();
             fragmentTransaction.show(nextFragment).commit();
             // 隱藏當前片段 , 顯示下一片段
             dictionaryHomePageDrawer.closeDrawer(GravityCompat.START);

@@ -55,6 +55,11 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
         init();
     }
 
+    @Override
+    public void updateFragmentData() {
+
+    }
+
     private void findViews(View view) {
         ownDictionariesSwipeRefreshLayout = view.findViewById(R.id.ownDictionariesSwipeRefreshLayout);
         ownDictionariesRecycler = view.findViewById(R.id.ownDictionariesRecycler);

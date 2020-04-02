@@ -46,6 +46,11 @@ public class CreateOwnDictionaryFragment extends BaseFragment
     }
 
     @Override
+    public void updateFragmentData() {
+
+    }
+
+    @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         ownDictionaryTitle.setText("");

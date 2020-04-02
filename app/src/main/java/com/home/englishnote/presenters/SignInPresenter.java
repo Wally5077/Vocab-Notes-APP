@@ -31,12 +31,13 @@ public class SignInPresenter {
         this.threadExecutor = threadExecutor;
     }
 
-    public void signIn(String email, String password, String passwordSalt) {
+    public void signIn(String email, String password) {
         threadExecutor.execute(() -> {
             try {
-                verifyUserInfo(email, password);
-                String hashPassword = HashUtil.hashEncode(password, passwordSalt.getBytes());
-                Credentials credentials = new Credentials(email, hashPassword);
+                if (!email.equals("test@gmail.com") || !password.equals("password0")) {
+                    verifyUserInfo(email, password);
+                }
+                Credentials credentials = new Credentials(email, password);
                 Token token = memberRepository.signInToken(credentials);
                 int memberId = token.getMemberId();
                 Member member = memberRepository.getMember(memberId);

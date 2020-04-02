@@ -47,6 +47,11 @@ public class FavoriteDictionariesFragment extends BaseFragment
         init();
     }
 
+    @Override
+    public void updateFragmentData() {
+
+    }
+
     private void findViews(View view) {
         favoriteDictionariesRecycler = view.findViewById(R.id.favoriteDictionariesRecycler);
     }

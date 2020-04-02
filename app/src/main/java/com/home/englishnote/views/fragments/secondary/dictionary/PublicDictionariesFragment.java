@@ -1,7 +1,7 @@
 package com.home.englishnote.views.fragments.secondary.dictionary;
 
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +25,7 @@ import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.home.englishnote.presenters.PublicDictionariesPresenter.*;
 
@@ -49,6 +50,19 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
         super.onViewCreated(view, savedInstanceState);
         findViews(view);
         init();
+    }
+
+    @Override
+    public void updateFragmentData() {
+        fetchDictionaryFromBundle();
+    }
+
+
+    private void fetchDictionaryFromBundle() {
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            Dictionary dictionary = (Dictionary) bundle.getSerializable("VocabNoteObjects");
+        }
     }
 
     private void findViews(View view) {
@@ -96,11 +110,12 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
         publicDictionariesSwipeRefreshLayout.setOnRefreshListener(this::queryDictionaryList);
     }
 
+    private static final int PAGE_LIMIT = 10;
+
     private void queryDictionaryList() {
         setDictionariesSwipeRefreshLayoutEnable(true);
         int dictionaryListSize = dictionaryList.size();
-        publicDictionariesPresenter
-                .getDictionaries(dictionaryListSize, dictionaryListSize + 3);
+        publicDictionariesPresenter.getDictionaries(dictionaryListSize, PAGE_LIMIT);
     }
 
     private boolean isPullToRefreshTriggered = false;
@@ -111,7 +126,6 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
         setDictionariesSwipeRefreshLayoutEnable(false);
         this.dictionaryList.addAll(dictionaryList);
         publicDictionariesAdapter.notifyDataSetChanged();
-        publicDictionariesRecycler.scrollToPosition(publicDictionariesAdapter.getItemCount() - 1);
     }
 
     private void setDictionariesSwipeRefreshLayoutEnable(boolean enable) {

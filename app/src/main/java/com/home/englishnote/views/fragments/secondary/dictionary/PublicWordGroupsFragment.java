@@ -1,8 +1,10 @@
 package com.home.englishnote.views.fragments.secondary.dictionary;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +58,15 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
         init();
     }
 
+    @Override
+    public void updateFragmentData() {
+        if (publicWordGroupsAdapter != null) {
+            fetchDictionaryFromBundle();
+            wordGroupsList.clear();
+            queryWordGroupsList();
+        }
+    }
+
     private void findViews(View view) {
         // Todo need a searchView
         publicDictionaryQuery = view.findViewById(R.id.publicDictionaryQuery);
@@ -69,12 +80,12 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
         publicWordGroupsPresenter = new PublicWordGroupsPresenter(this,
                 Global.memberRepository(), Global.wordGroupRepository(), Global.threadExecutor());
         wordGroupsList.clear();
-        fetchDictionaryFromBundle();
         publicDictionaryFavoriteButton.setOnClickListener(this::onFavoriteButtonClick);
+        fetchDictionaryFromBundle();
         initWordGroupsRecycler();
         initWordGroupsSwipeRefreshLayout();
-        queryWordGroupsList();
         initPublicDictionarySearchBar();
+        queryWordGroupsList();
     }
 
     private Dictionary dictionary;
@@ -83,7 +94,9 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
         Bundle bundle = getArguments();
         if (bundle != null) {
             dictionary = (Dictionary) bundle.getSerializable("VocabNoteObjects");
-            publicDictionaryName.setText(dictionary.getTitle());
+            if (dictionary != null) {
+                publicDictionaryName.setText(dictionary.getTitle());
+            }
         }
     }
 
@@ -120,11 +133,12 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
         wordGroupsSwipeRefreshLayout.setOnRefreshListener(this::queryWordGroupsList);
     }
 
+    private static final int WORD_GROUP_LIMIT = 10;
+
     private void queryWordGroupsList() {
         setWordGroupSwipeRefreshLayoutEnable(true);
-        int wordGroupListSize = wordGroupsList.size();
         publicWordGroupsPresenter.getWordGroups(
-                dictionary.getId(), wordGroupListSize, wordGroupListSize + 3);
+                dictionary.getId(), wordGroupsList.size(), WORD_GROUP_LIMIT);
     }
 
     private void initPublicDictionarySearchBar() {
@@ -140,9 +154,11 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
                 if (count == 0) {
                     publicWordGroupsAdapter.updateWordGroupList(wordGroupsList);
                 } else {
-                    publicWordGroupsAdapter.updateWordGroupList(wordGroupsList.stream()
-                            .filter(wordGroup -> wordGroup.getTitle().contains(filterPattern))
-                            .collect(Collectors.toList()));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        publicWordGroupsAdapter.updateWordGroupList(wordGroupsList.stream()
+                                .filter(wordGroup -> wordGroup.getTitle().contains(filterPattern))
+                                .collect(Collectors.toList()));
+                    }
                 }
                 publicWordGroupsAdapter.notifyDataSetChanged();
             }

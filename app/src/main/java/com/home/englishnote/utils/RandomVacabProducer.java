@@ -39,6 +39,7 @@ public class RandomVacabProducer {
                                               int minWordGroupCount, int maxWordGroupCount,
                                               int minWordCount, int maxWordCount) {
         Dictionary dictionary = new Dictionary();
+        dictionary.setId(RANDOM.nextInt(10000) + 1);
         dictionary.setTitle(randomString(4, 10, false));
         dictionary.setDescription(randomString(10, 100, true));
         dictionary.setType(type);

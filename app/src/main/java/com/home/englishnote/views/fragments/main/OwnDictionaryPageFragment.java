@@ -58,6 +58,11 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
         init();
     }
 
+    @Override
+    public void updateFragmentData() {
+
+    }
+
     private void findViews(View view) {
         ownDictionaryPageDictionaryName = view.findViewById(R.id.ownDictionaryPageDictionaryName);
         ownDictionaryPageWordGroupCount = view.findViewById(R.id.ownDictionaryPageWordGroupCount);

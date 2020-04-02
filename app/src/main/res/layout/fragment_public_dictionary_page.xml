@@ -28,7 +28,7 @@
         android:focusable="false"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/publicDictionaryPageTopToolBar">
@@ -76,7 +76,7 @@
         android:paddingEnd="15dp"
         android:paddingRight="15dp"
         android:paddingBottom="12.5dp"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/publicDictionaryPageTopToolBar" />

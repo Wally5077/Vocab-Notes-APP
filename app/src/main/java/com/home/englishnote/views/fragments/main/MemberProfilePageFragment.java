@@ -38,6 +38,11 @@ public class MemberProfilePageFragment extends BaseFragment {
         init();
     }
 
+    @Override
+    public void updateFragmentData() {
+
+    }
+
     private void findViews(View view) {
         memberProfilePagePhoto = view.findViewById(R.id.memberProfilePagePhoto);
         memberProfilePageName = view.findViewById(R.id.memberProfilePageName);

@@ -20,7 +20,6 @@
 
     <TextView
         android:id="@+id/SignInAppName"
-        app:lineHeight="13sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -31,7 +30,8 @@
         android:textSize="12sp"
         app:fontFamily="@font/marion"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineHeight="13sp" />
 
     <TextView
         android:id="@+id/SignInBorder"
@@ -52,13 +52,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
         android:text="Sign up To Vocabulary Note"
-        app:lineHeight="20sp"
         android:textAlignment="center"
         android:textSize="16sp"
         app:fontFamily="@font/avenirheavy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/SignInBorder" />
+        app:layout_constraintTop_toTopOf="@+id/SignInBorder"
+        app:lineHeight="20sp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signInEmailLayout"
@@ -81,6 +81,7 @@
             android:layout_marginBottom="10dp"
             android:hint="Email address"
             android:inputType="textEmailAddress"
+            android:maxLength="30"
             android:maxLines="1"
             android:textSize="14sp"
             android:theme="@style/disableUnderLineEditText" />
@@ -107,6 +108,7 @@
             android:layout_marginBottom="10dp"
             android:hint="Password"
             android:inputType="textEmailAddress"
+            android:maxLength="20"
             android:maxLines="1"
             android:textSize="14sp"
             android:theme="@style/disableUnderLineEditText" />
@@ -120,12 +122,12 @@
         android:text="Don’t have an account yet?"
         android:textColor="#c5ced1"
         android:textSize="15sp"
-        app:lineHeight="20sp"
         android:textStyle="italic"
         app:fontFamily="@font/avenirbook"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signInPasswordLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/signInPasswordLayout"
+        app:lineHeight="20sp" />
 
     <TextView
         android:id="@+id/signUpTextView"
@@ -134,13 +136,13 @@
         android:onClick="onSignUpLinkClick"
         android:text="@string/signInPageSignUp"
         android:textColor="#fcf9f9"
-        app:lineHeight="20sp"
         android:textSize="15sp"
         android:textStyle="italic"
         app:fontFamily="@font/avenirmedium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpSuggestion" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpSuggestion"
+        app:lineHeight="20sp" />
 
     <Button
         android:id="@+id/signInButton"
@@ -152,10 +154,10 @@
         android:text="Sign In"
         android:textColor="#ffffff"
         android:textSize="12sp"
-        app:lineHeight="16sp"
         app:fontFamily="@font/avenirbook"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpTextView"
+        app:lineHeight="16sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

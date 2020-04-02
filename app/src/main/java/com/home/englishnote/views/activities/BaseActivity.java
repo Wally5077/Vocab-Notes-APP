@@ -55,14 +55,4 @@ public class BaseActivity extends AppCompatActivity {
             }
         });
     }
-
-    protected String getSalt() {
-        return sharedPreferences.
-                getString(VocabularyNoteKeyword.PASSWORD_SALT, new String(HashUtil.configSalt()));
-    }
-
-    protected void saveSalt(String passwordSalt) {
-        sharedPreferences.edit()
-                .putString(VocabularyNoteKeyword.PASSWORD_SALT, passwordSalt).apply();
-    }
 }

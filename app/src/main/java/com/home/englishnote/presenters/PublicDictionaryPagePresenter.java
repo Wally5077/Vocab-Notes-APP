@@ -33,7 +33,7 @@ public class PublicDictionaryPagePresenter {
         threadExecutor.execute(() -> {
             try {
                 List<Dictionary> dictionaryList =
-                        dictionaryRepository.getDictionaries(0, -1);
+                        dictionaryRepository.getDictionaries(-1, -1);
                 threadExecutor.executeUiThread(() -> publicDictionaryPageView
                         .onGetDictionaryListSuccessfully(dictionaryList));
             } catch (Exception e) {

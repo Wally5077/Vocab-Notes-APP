@@ -30,15 +30,14 @@ public class SignUpPresenter {
         this.threadExecutor = threadExecutor;
     }
 
-    public void signUp(String firstName, String lastName, String age, String email,
-                       String password, String passwordConfirmation, String passwordSalt) {
+    public void signUp(String firstName, String lastName, String age,
+                       String email, String password, String passwordConfirmation) {
         threadExecutor.execute(() -> {
             try {
                 verifyUserInfo(firstName, lastName, age,
                         email, password, passwordConfirmation);
-                String hashPassword = HashUtil.hashEncode(password, passwordSalt.getBytes());
                 Member member = new Member(firstName, lastName,
-                        Integer.valueOf(age), email, hashPassword);
+                        Integer.valueOf(age), email, password);
                 Credentials credentials = member.getCredentials();
                 Token token = memberRepository.signUp(member, credentials);
                 member.setId(token.getMemberId());

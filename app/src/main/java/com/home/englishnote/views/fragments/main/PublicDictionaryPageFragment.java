@@ -1,5 +1,7 @@
 package com.home.englishnote.views.fragments.main;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -25,8 +27,9 @@ import com.home.englishnote.models.entities.Dictionary;
 import com.home.englishnote.models.entities.Word;
 import com.home.englishnote.presenters.PublicDictionaryPagePresenter;
 import com.home.englishnote.presenters.PublicDictionaryPagePresenter.PublicDictionaryPageView;
-import com.home.englishnote.utils.DictionarySearchAdapter;
+import com.home.englishnote.utils.DelayUtil;
 import com.home.englishnote.utils.Global;
+import com.home.englishnote.views.activities.DictionaryHomePageActivity;
 import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
@@ -44,7 +47,6 @@ public class PublicDictionaryPageFragment extends BaseFragment
     private ImageView memberPhoto;
     private View vocabSearch;
     private View dictionarySearch;
-    private View memberProfile;
     private View vocabSearchFeature;
     private AutoCompleteTextView vocabAutoSearch;
     private ImageView vocabSearchImage;
@@ -72,6 +74,11 @@ public class PublicDictionaryPageFragment extends BaseFragment
         init();
     }
 
+    @Override
+    public void updateFragmentData() {
+
+    }
+
     private void findViews(View view) {
         // vocabSearch
         vocabSearch = view.findViewById(R.id.publicDictionaryPageVocabSearch);
@@ -87,7 +94,6 @@ public class PublicDictionaryPageFragment extends BaseFragment
         dictionarySearchRecycler = view.findViewById(R.id.publicDictionaryPageDictionarySearchRecycler);
 
         // memberProfile
-        memberProfile = view.findViewById(R.id.publicDictionaryPageMemberProfile);
         memberName = view.findViewById(R.id.publicDictionaryPageMemberName);
         memberPhoto = view.findViewById(R.id.publicDictionaryPageMemberPhoto);
     }
@@ -101,11 +107,6 @@ public class PublicDictionaryPageFragment extends BaseFragment
         setOnVocabSearchClick();
         setDictionarySearchRecycler();
         setOnDictionarySearchClick();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
         setMemberPhoto();
         setMemberName();
     }
@@ -167,9 +168,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
             setSearchTextColor(isDictionarySearchClick, dictionarySearchText);
             setViewsVisible(isDictionarySearchClick, dictionarySearchRecycler);
             setViewsFocusable(isDictionarySearchClick, dictionarySearchRecycler);
-            if (isDictionarySearchClick) {
-                publicDictionaryPagePresenter.getDictionaryList();
-            }
+            publicDictionaryPagePresenter.getDictionaryList();
         });
     }
 
@@ -234,5 +233,102 @@ public class PublicDictionaryPageFragment extends BaseFragment
         this.dictionaryList.addAll(dictionaryList);
         dictionarySearchAdapter.setDefaultItemBackground();
         dictionarySearchAdapter.notifyDataSetChanged();
+    }
+
+    public class DictionarySearchAdapter extends RecyclerView.Adapter<DictionarySearchAdapter.DictionarySearchViewHolder> {
+
+        private List<Dictionary> dictionaryList;
+        private HashSet<DictionarySearchViewHolder> dictionarySearchViewHolderSet = new HashSet<>();
+        private Context context;
+
+        public DictionarySearchAdapter(List<Dictionary> dictionaryList) {
+            this.dictionaryList = dictionaryList;
+        }
+
+        @NonNull
+        @Override
+        public DictionarySearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            context = (context == null) ? parent.getContext() : context;
+            View view = LayoutInflater.from(context)
+                    .inflate(R.layout.item_dictionary_search, parent, false);
+            return new DictionarySearchViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull DictionarySearchViewHolder holder, int position) {
+            dictionarySearchViewHolderSet.add(holder);
+            holder.setData(dictionaryList.get(position));
+        }
+
+        @Override
+        public int getItemCount() {
+            return dictionaryList.size();
+        }
+
+        public void setDefaultItemBackground() {
+            for (DictionarySearchViewHolder dictionarySearchViewHolder : dictionarySearchViewHolderSet) {
+                dictionarySearchViewHolder.setDictionaryItemBackgroundEnable(false);
+            }
+        }
+
+        public class DictionarySearchViewHolder extends RecyclerView.ViewHolder {
+
+            private View dictionaryItemBackground;
+            private TextView dictionaryItemName;
+            private Dictionary dictionary;
+
+            public DictionarySearchViewHolder(@NonNull View itemView) {
+                super(itemView);
+                findViews(itemView);
+                setOnItemClick(itemView);
+            }
+
+            private void findViews(View itemView) {
+                dictionaryItemBackground = itemView.findViewById(R.id.dictionaryItemBackground);
+                dictionaryItemName = itemView.findViewById(R.id.dictionaryItemName);
+            }
+
+            private void setOnItemClick(@NonNull View itemView) {
+                itemView.setOnClickListener(v -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        dictionarySearchViewHolderSet.stream()
+                                .filter(dictionarySearchViewHolder -> !dictionarySearchViewHolder
+                                        .equals(DictionarySearchAdapter.DictionarySearchViewHolder.this))
+                                .forEach(dictionarySearchViewHolder -> dictionarySearchViewHolder.
+                                        setDictionaryItemBackgroundEnable(false));
+                    }
+                    setDictionaryItemBackgroundEnable(true);
+                    if (dictionary != null) {
+                        Global.threadExecutor().executeUiThread(() -> {
+                            DelayUtil.delayExecuteThread(300);
+                            switchFragment(R.layout.fragment_public_word_groups,
+                                    PUBLIC_DICTIONARY_CONTAINER, dictionary);
+
+                            setSearchImageDrawable(false, dictionarySearchImage);
+                            setSearchTextColor(false, dictionarySearchText);
+                            setViewsVisible(false, dictionarySearchRecycler);
+                            setViewsFocusable(false, dictionarySearchRecycler);
+                        });
+                    }
+                });
+            }
+
+            public void setData(Dictionary dictionary) {
+                this.dictionary = dictionary;
+                dictionaryItemName.setText(dictionary.getTitle());
+            }
+
+            public void setDictionaryItemBackgroundEnable(boolean enable) {
+                Drawable drawable = null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    drawable = enable ?
+                            context.getDrawable(R.drawable.bg_dictionary_item_selected) :
+                            context.getDrawable(R.drawable.bg_dictionary_item_unselected);
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    dictionaryItemBackground.setBackground(drawable);
+                }
+            }
+        }
     }
 }

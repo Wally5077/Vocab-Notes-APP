@@ -32,7 +32,6 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
     private TextInputLayout signUpPasswordConfirmationLayout;
     private Spinner signUpAgeSpinner;
     private SignUpPresenter signUpPresenter;
-    private String passwordSalt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,16 +95,14 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         String passwordConfirmation =
                 signUpPasswordConfirmationLayout.getEditText().getText().toString().trim();
         String age = signUpAgeSpinner.getSelectedItem().toString();
-        passwordSalt = getSalt();
-        signUpPresenter.signUp(firstName, lastName, age, email,
-                password, passwordConfirmation, passwordSalt);
+        signUpPresenter.signUp(firstName, lastName, age,
+                email, password, passwordConfirmation);
     }
 
     @Override
     public void onSignUpSuccessfully(Member member, Token token) {
         startActivity(new Intent(this, DictionaryHomePageActivity.class)
                 .putExtra("user", member));
-        saveSalt(passwordSalt);
         finish();
     }
 

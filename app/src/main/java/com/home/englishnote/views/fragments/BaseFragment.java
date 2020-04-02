@@ -14,7 +14,7 @@ import com.home.englishnote.views.activities.DictionaryHomePageActivity;
 
 import java.io.Serializable;
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
     protected final static int DICTIONARY_HOME_PAGE_CONTAINER = R.id.dictionaryHomePageContainer;
     protected final static int PUBLIC_DICTIONARY_CONTAINER = R.id.publicDictionaryPageContainer;
@@ -41,5 +41,7 @@ public class BaseFragment extends Fragment {
                                   Serializable... serializableArray) {
         dictionaryHomePageActivity.switchFragment(fragmentId, containerId, serializableArray);
     }
+
+    public abstract void updateFragmentData();
 
 }

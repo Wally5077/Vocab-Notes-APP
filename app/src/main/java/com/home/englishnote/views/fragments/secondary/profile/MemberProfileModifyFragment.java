@@ -71,6 +71,11 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
         init();
     }
 
+    @Override
+    public void updateFragmentData() {
+
+    }
+
     private void findViews(View view) {
         // Toolbar
         memberInfoModifyVocabSearch = view.findViewById(R.id.memberInfoModifyVocabSearch);

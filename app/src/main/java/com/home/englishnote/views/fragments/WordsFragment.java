@@ -54,6 +54,11 @@ public class WordsFragment extends BaseFragment implements WordsView {
         init();
     }
 
+    @Override
+    public void updateFragmentData() {
+
+    }
+
     private void findViews(View view) {
         // begin
         wordTitle = view.findViewById(R.id.wordTitle);
