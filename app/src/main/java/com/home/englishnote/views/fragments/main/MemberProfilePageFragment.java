@@ -51,10 +51,15 @@ public class MemberProfilePageFragment extends BaseFragment {
     }
 
     private void init() {
+        setDefaultPage();
         setMemberPhoto();
         setMemberName();
         setMemberProfileEditProfileButtonClick();
         setMemberProfileCreateDictionaryButtonClick();
+    }
+
+    private void setDefaultPage() {
+        switchFragment(R.layout.fragment_own_dictionaries, MEMBER_PROFILE_PAGE_CONTAINER);
     }
 
     private void setMemberPhoto() {
@@ -79,7 +84,7 @@ public class MemberProfilePageFragment extends BaseFragment {
     private void setMemberProfileCreateDictionaryButtonClick() {
         memberProfilePageCreateDictionaryButton.setOnClickListener(
                 v -> switchFragment(
-                        R.layout.fragment_create_own_dictionary, MEMBER_PROFILE_CONTAINER));
+                        R.layout.fragment_create_own_dictionary, MEMBER_PROFILE_PAGE_CONTAINER));
     }
 
 }

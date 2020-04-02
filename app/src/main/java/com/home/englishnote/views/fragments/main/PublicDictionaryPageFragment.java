@@ -24,12 +24,12 @@ import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Dictionary;
+import com.home.englishnote.models.entities.Member;
 import com.home.englishnote.models.entities.Word;
 import com.home.englishnote.presenters.PublicDictionaryPagePresenter;
 import com.home.englishnote.presenters.PublicDictionaryPagePresenter.PublicDictionaryPageView;
 import com.home.englishnote.utils.DelayUtil;
 import com.home.englishnote.utils.Global;
-import com.home.englishnote.views.activities.DictionaryHomePageActivity;
 import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
@@ -56,6 +56,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
     private PublicDictionaryPagePresenter publicDictionaryPagePresenter;
     private RecyclerView dictionarySearchRecycler;
     private DictionarySearchAdapter dictionarySearchAdapter;
+    private View memberProfile;
 
     @Nullable
     @Override
@@ -94,6 +95,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
         dictionarySearchRecycler = view.findViewById(R.id.publicDictionaryPageDictionarySearchRecycler);
 
         // memberProfile
+        memberProfile = view.findViewById(R.id.publicDictionaryPageMemberProfile);
         memberName = view.findViewById(R.id.publicDictionaryPageMemberName);
         memberPhoto = view.findViewById(R.id.publicDictionaryPageMemberPhoto);
     }
@@ -104,11 +106,16 @@ public class PublicDictionaryPageFragment extends BaseFragment
                 Global.wordRepository(), Global.memberRepository(), Global.threadExecutor());
         setDefaultPage();
         setVocabAutoSearch();
-        setOnVocabSearchClick();
         setDictionarySearchRecycler();
+        setOnVocabSearchClick();
         setOnDictionarySearchClick();
+        setMemberProfileClick();
         setMemberPhoto();
         setMemberName();
+    }
+
+    private void setDefaultPage() {
+        switchFragment(R.layout.fragment_public_dictionaries, PUBLIC_DICTIONARY_PAGE_CONTAINER);
     }
 
     private Set<String> wordSet = new HashSet<>();
@@ -188,6 +195,15 @@ public class PublicDictionaryPageFragment extends BaseFragment
         }
     }
 
+    private void setMemberProfileClick() {
+        memberProfile.setOnClickListener(v -> {
+            if (user instanceof Member) {
+                switchFragment(
+                        R.layout.fragment_member_profile_page, DICTIONARY_HOME_PAGE_CONTAINER);
+            }
+        });
+    }
+
     private void setMemberPhoto() {
         Glide.with(this)
                 .asBitmap()
@@ -200,10 +216,6 @@ public class PublicDictionaryPageFragment extends BaseFragment
     private void setMemberName() {
         String memberName = user.getFirstName();
         this.memberName.setText((memberName.isEmpty()) ? "memberName" : memberName);
-    }
-
-    private void setDefaultPage() {
-        switchFragment(R.layout.fragment_public_dictionaries, PUBLIC_DICTIONARY_CONTAINER);
     }
 
     @Override
@@ -302,7 +314,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
                         Global.threadExecutor().executeUiThread(() -> {
                             DelayUtil.delayExecuteThread(300);
                             switchFragment(R.layout.fragment_public_word_groups,
-                                    PUBLIC_DICTIONARY_CONTAINER, dictionary);
+                                    PUBLIC_DICTIONARY_PAGE_CONTAINER, dictionary);
 
                             setSearchImageDrawable(false, dictionarySearchImage);
                             setSearchTextColor(false, dictionarySearchText);

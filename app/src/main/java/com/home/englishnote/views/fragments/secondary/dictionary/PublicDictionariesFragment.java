@@ -1,6 +1,5 @@
 package com.home.englishnote.views.fragments.secondary.dictionary;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +24,6 @@ import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.home.englishnote.presenters.PublicDictionariesPresenter.*;
 
@@ -193,7 +191,7 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
                 exploreButton.setOnClickListener(
                         (v) -> switchFragment(
                                 R.layout.fragment_public_word_groups,
-                                PUBLIC_DICTIONARY_CONTAINER, dictionary));
+                                PUBLIC_DICTIONARY_PAGE_CONTAINER, dictionary));
             }
 
             private void setData(Dictionary dictionary) {

@@ -84,7 +84,7 @@ public class RandomVacabProducer {
         for (int i = 0; i < synonymCount; i++) {
             synonyms.add(randomString(3, 5, false));
         }
-        word.setDescription(randomString(5, 15, false));
+        word.setDescription(randomString(20, 40, false));
         word.setSynonyms(synonyms);
         word.setImageUrl(randomHttpUrl(false));
         return word;

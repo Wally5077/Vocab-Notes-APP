@@ -33,6 +33,9 @@ public class SignInActivity extends BaseActivity implements SignInView {
     private void init() {
         signInPresenter = new SignInPresenter(
                 this, Global.memberRepository(), Global.threadExecutor());
+
+        signInEmailLayout.getEditText().setText("test@gmail.com");
+        signInPasswordLayout.getEditText().setText("password0");
     }
 
     public void onSignUpLinkClick(View view) {
@@ -43,6 +46,7 @@ public class SignInActivity extends BaseActivity implements SignInView {
         // Todo Layout - > TIL
         String email = signInEmailLayout.getEditText().getText().toString().trim();
         String password = signInPasswordLayout.getEditText().getText().toString().trim();
+
         signInPresenter.signIn(email, password);
     }
 

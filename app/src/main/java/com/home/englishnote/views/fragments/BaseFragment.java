@@ -17,8 +17,8 @@ import java.io.Serializable;
 public abstract class BaseFragment extends Fragment {
 
     protected final static int DICTIONARY_HOME_PAGE_CONTAINER = R.id.dictionaryHomePageContainer;
-    protected final static int PUBLIC_DICTIONARY_CONTAINER = R.id.publicDictionaryPageContainer;
-    protected final static int MEMBER_PROFILE_CONTAINER = R.id.memberProfilePageContainer;
+    protected final static int PUBLIC_DICTIONARY_PAGE_CONTAINER = R.id.publicDictionaryPageContainer;
+    protected final static int MEMBER_PROFILE_PAGE_CONTAINER = R.id.memberProfilePageContainer;
 
     protected DictionaryHomePageActivity dictionaryHomePageActivity;
     protected User user;

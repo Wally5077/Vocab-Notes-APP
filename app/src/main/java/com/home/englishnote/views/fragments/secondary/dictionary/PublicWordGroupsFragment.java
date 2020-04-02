@@ -94,9 +94,7 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
         Bundle bundle = getArguments();
         if (bundle != null) {
             dictionary = (Dictionary) bundle.getSerializable("VocabNoteObjects");
-            if (dictionary != null) {
-                publicDictionaryName.setText(dictionary.getTitle());
-            }
+            publicDictionaryName.setText(dictionary.getTitle());
         }
     }
 

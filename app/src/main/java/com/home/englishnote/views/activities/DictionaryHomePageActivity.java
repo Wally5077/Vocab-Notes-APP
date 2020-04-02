@@ -71,7 +71,7 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
 
     private void setMember() {
         user = (User) getIntent().getSerializableExtra("user");
-        user = RandomVacabProducer.randomMember(Role.MEMBER);
+//        user = RandomVacabProducer.randomMember(Role.MEMBER);
     }
 
     public User getUser() {
@@ -103,8 +103,8 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
 
         // Own Dictionary
         containerNameMap.put(R.id.dictionaryHomePageContainer, "DICTIONARY_HOME_PAGE_CONTAINER");
-        containerNameMap.put(R.id.publicDictionaryPageContainer, "PUBLIC_DICTIONARY_CONTAINER");
-        containerNameMap.put(R.id.memberProfilePageContainer, "MEMBER_PROFILE_CONTAINER");
+        containerNameMap.put(R.id.publicDictionaryPageContainer, "PUBLIC_DICTIONARY_PAGE_CONTAINER");
+        containerNameMap.put(R.id.memberProfilePageContainer, "MEMBER_PROFILE_PAGE_CONTAINER");
 
         switchFragment(R.layout.fragment_public_dictionary_page, R.id.dictionaryHomePageContainer);
     }
@@ -185,11 +185,12 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
         BaseFragment nextFragment = fragmentMap.get(fragmentId);
         if (nextFragment != null) {
             // 傳遞參數給其他 Fragment
-            Bundle bundle = new Bundle();
-            Serializable serializable = serializableArray.length > 0 ? serializableArray[0] : null;
-            bundle.putSerializable("VocabNoteObjects", serializable);
-            nextFragment.setArguments(bundle);
-
+            if (serializableArray.length > 0) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("VocabNoteObjects", serializableArray[0]);
+                nextFragment.setArguments(bundle);
+                nextFragment.updateFragmentData();
+            }
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             if (nextFragment.isAdded()) {
                 // fragmentStack.peek() 為當前片段 layout
@@ -204,7 +205,6 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
             }
 //            Log.d(this.getClass().getSimpleName(), getFragmentStackLog());
 //            Log.d(this.getClass().getSimpleName(), getContainerStackLog());
-            nextFragment.updateFragmentData();
             fragmentTransaction.show(nextFragment).commit();
             // 隱藏當前片段 , 顯示下一片段
             dictionaryHomePageDrawer.closeDrawer(GravityCompat.START);
@@ -243,6 +243,8 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
                         || fragmentId == R.layout.fragment_own_dictionary_page) {
                     backLastFragment(fragmentStack.pop());
                 }
+            } else {
+                finish();
             }
         }
     }

@@ -34,9 +34,7 @@ public class SignInPresenter {
     public void signIn(String email, String password) {
         threadExecutor.execute(() -> {
             try {
-                if (!email.equals("test@gmail.com") || !password.equals("password0")) {
-                    verifyUserInfo(email, password);
-                }
+                verifyUserInfo(email, password);
                 Credentials credentials = new Credentials(email, password);
                 Token token = memberRepository.signInToken(credentials);
                 int memberId = token.getMemberId();
