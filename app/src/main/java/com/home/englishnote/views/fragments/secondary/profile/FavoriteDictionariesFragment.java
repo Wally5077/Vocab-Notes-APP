@@ -24,8 +24,10 @@ import com.home.englishnote.views.fragments.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.home.englishnote.presenters.FavoriteDictionariesPresenter.*;
+
 public class FavoriteDictionariesFragment extends BaseFragment
-        implements FavoriteDictionariesPresenter.FavoriteDictionariesView {
+        implements FavoriteDictionariesView {
 
     private FavoriteDictionariesPresenter favoriteDictionariesPresenter;
     private RecyclerView favoriteDictionariesRecycler;
@@ -49,7 +51,8 @@ public class FavoriteDictionariesFragment extends BaseFragment
 
     @Override
     public void updateFragmentData() {
-
+        dictionaryList.clear();
+        queryFavoriteDictionaryList();
     }
 
     private void findViews(View view) {
@@ -59,13 +62,14 @@ public class FavoriteDictionariesFragment extends BaseFragment
     private void init() {
         favoriteDictionariesPresenter = new FavoriteDictionariesPresenter(
                 this, Global.memberRepository(), Global.threadExecutor());
-        setDictionariesRecycler();
-        downloadFavoriteDictionaryList();
+        dictionaryList.clear();
+        initDictionariesRecycler();
+        queryFavoriteDictionaryList();
     }
 
     private List<Dictionary> dictionaryList = new ArrayList<>();
 
-    private void setDictionariesRecycler() {
+    private void initDictionariesRecycler() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
         favoriteDictionariesRecycler.setHasFixedSize(true);
         favoriteDictionariesRecycler.setLayoutManager(linearLayoutManager);
@@ -73,7 +77,7 @@ public class FavoriteDictionariesFragment extends BaseFragment
         favoriteDictionariesRecycler.setAdapter(favoriteDictionariesAdapter);
     }
 
-    private void downloadFavoriteDictionaryList() {
+    private void queryFavoriteDictionaryList() {
         int dictionaryListSize = dictionaryList.size();
         favoriteDictionariesPresenter.getOwnDictionaries(
                 user.getId(), dictionaryListSize, dictionaryListSize + 30);

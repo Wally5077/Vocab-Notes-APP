@@ -195,6 +195,7 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
             if (nextFragment.isAdded()) {
                 // fragmentStack.peek() 為當前片段 layout
                 fragmentTransaction.hide(fragmentMap.get(fragmentStack.peek()));
+                nextFragment.updateFragmentData();
             } else {
                 // 加入新片段進 container (無論 container 內或外)
                 fragmentTransaction

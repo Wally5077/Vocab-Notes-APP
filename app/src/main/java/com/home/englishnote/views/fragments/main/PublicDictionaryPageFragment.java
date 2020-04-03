@@ -64,8 +64,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater
-                .inflate(R.layout.fragment_public_dictionary_page,
-                        container, false);
+                .inflate(R.layout.fragment_public_dictionary_page, container, false);
     }
 
     @Override
@@ -200,6 +199,8 @@ public class PublicDictionaryPageFragment extends BaseFragment
             if (user instanceof Member) {
                 switchFragment(
                         R.layout.fragment_member_profile_page, DICTIONARY_HOME_PAGE_CONTAINER);
+                switchFragment(
+                        R.layout.fragment_own_dictionaries, MEMBER_PROFILE_PAGE_CONTAINER);
             }
         });
     }

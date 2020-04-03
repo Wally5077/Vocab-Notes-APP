@@ -57,7 +57,8 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
 
     @Override
     public void updateFragmentData() {
-
+        dictionaryList.clear();
+        queryDictionaryList();
     }
 
     private void findViews(View view) {
@@ -69,6 +70,7 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
     private void init() {
         ownDictionariesPresenter = new OwnDictionariesPresenter(
                 this, Global.memberRepository(), Global.threadExecutor());
+        dictionaryList.clear();
         initDictionariesSwipeRefreshLayout();
         initDictionariesRecycler();
         initOwnDictionaryQuery();
@@ -97,17 +99,13 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
                 int lastVisibleItemPosition =
                         linearLayoutManager.findLastVisibleItemPosition();
                 if (lastVisibleItemPosition + 1 == ownDictionariesAdapter.getItemCount()) {
-                    queryDictionaryList();
+                    if (!isPullToRefreshTriggered) {
+                        isPullToRefreshTriggered = true;
+                        queryDictionaryList();
+                    }
                 }
             }
         });
-    }
-
-    private void queryDictionaryList() {
-        setDictionariesSwipeRefreshLayoutEnable(true);
-        int dictionaryListSize = dictionaryList.size();
-        ownDictionariesPresenter.getOwnDictionaries(
-                user.getId(), dictionaryListSize, dictionaryListSize + 3);
     }
 
     private void initOwnDictionaryQuery() {
@@ -139,17 +137,28 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
         });
     }
 
-    private void setDictionariesSwipeRefreshLayoutEnable(boolean enable) {
-        ownDictionariesSwipeRefreshLayout.setEnabled(enable);
-        ownDictionariesSwipeRefreshLayout.setRefreshing(enable);
+    private static final int PAGE_LIMIT = 10;
+
+    private void queryDictionaryList() {
+        setDictionariesSwipeRefreshLayoutEnable(true);
+        int dictionaryListSize = dictionaryList.size();
+        ownDictionariesPresenter.getOwnDictionaries(
+                user.getId(), dictionaryListSize, PAGE_LIMIT);
     }
+
+    private boolean isPullToRefreshTriggered = false;
 
     @Override
     public void onGetDictionariesSuccessfully(List<Dictionary> dictionaryList) {
+        isPullToRefreshTriggered = false;
         setDictionariesSwipeRefreshLayoutEnable(false);
-        this.dictionaryList.clear();
         this.dictionaryList.addAll(dictionaryList);
         ownDictionariesAdapter.notifyDataSetChanged();
+    }
+
+    private void setDictionariesSwipeRefreshLayoutEnable(boolean enable) {
+        ownDictionariesSwipeRefreshLayout.setEnabled(enable);
+        ownDictionariesSwipeRefreshLayout.setRefreshing(enable);
     }
 
     public class OwnDictionariesAdapter extends RecyclerView.Adapter<OwnDictionariesAdapter.OwnDictionariesHolder> {

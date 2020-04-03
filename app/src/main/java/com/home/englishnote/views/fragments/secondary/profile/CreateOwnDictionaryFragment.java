@@ -20,8 +20,7 @@ import com.home.englishnote.views.fragments.BaseFragment;
 
 import static com.home.englishnote.presenters.CreateOwnDictionaryPresenter.*;
 
-public class CreateOwnDictionaryFragment extends BaseFragment
-        implements CreateOwnDictionaryView {
+public class CreateOwnDictionaryFragment extends BaseFragment implements CreateOwnDictionaryView {
 
     private EditText ownDictionaryTitle;
     private EditText ownDictionaryDescription;

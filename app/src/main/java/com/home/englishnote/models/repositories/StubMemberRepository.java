@@ -17,6 +17,14 @@ import java.util.Set;
 
 public class StubMemberRepository implements MemberRepository {
 
+    public StubMemberRepository() {
+        for (int addTime = 0; addTime < 20; addTime++) {
+            dictionaryList.add(RandomVacabProducer.randomDictionary(
+                    Type.PUBLIC, 3, 10,
+                    5, 20));
+        }
+    }
+
     @Override
     public Token signUp(Member member, Credentials credentials) {
         DelayUtil.delayExecuteThread(300);
@@ -65,19 +73,24 @@ public class StubMemberRepository implements MemberRepository {
 
     @Override
     public List<Dictionary> getOwnDictionaries(int memberId, int offset, int limit) {
-        DelayUtil.delayExecuteThread(300);
-        return !dictionaryList.isEmpty() ? dictionaryList :
-                getFavoriteDictionaries(memberId, offset, limit);
+        DelayUtil.delayExecuteThread(500);
+        if (offset < dictionaryList.size()) {
+            if (offset > -1) {
+                return dictionaryList.subList(
+                        Math.max(0, offset), Math.min(offset + limit, dictionaryList.size()));
+            }
+        }
+        return dictionaryList;
     }
 
     @Override
     public List<Dictionary> getFavoriteDictionaries(int memberId, int offset, int limit) {
-        DelayUtil.delayExecuteThread(300);
-        List<Dictionary> dictionaryList = new ArrayList<>(10);
-        for (int i = 0; i < 10; i++) {
-            dictionaryList.add(RandomVacabProducer.randomDictionary(
-                    Type.PUBLIC, 3, 10,
-                    5, 20));
+        DelayUtil.delayExecuteThread(500);
+        if (offset < dictionaryList.size()) {
+            if (offset > -1) {
+                return dictionaryList.subList(
+                        Math.max(0, offset), Math.min(offset + limit, dictionaryList.size()));
+            }
         }
         return dictionaryList;
     }

@@ -59,6 +59,13 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         setTextInputLayout(signUpFirstNameLayout, signUpLastNameLayout,
                 signUpEmailLayout, signUpPasswordLayout,
                 signUpPasswordConfirmationLayout);
+
+        signUpFirstNameLayout.getEditText().setText("wally");
+        signUpLastNameLayout.getEditText().setText("chen");
+        signUpEmailLayout.getEditText().setText("w@gmail.com");
+        signUpAgeSpinner.setSelection(1);
+        signUpPasswordLayout.getEditText().setText("w0000000");
+        signUpPasswordConfirmationLayout.getEditText().setText("w0000000");
     }
 
     private List<String> configAgeRange(int ageRange) {

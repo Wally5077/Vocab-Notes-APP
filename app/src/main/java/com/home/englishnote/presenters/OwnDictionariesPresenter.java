@@ -23,11 +23,10 @@ public class OwnDictionariesPresenter {
     public void getOwnDictionaries(int memberId, int offset, int limit) {
         threadExecutor.execute(() -> {
             try {
-                threadExecutor.executeUiThread(() -> {
-                    List<Dictionary> dictionaryList =
-                            memberRepository.getOwnDictionaries(memberId, offset, limit);
-                    ownDictionariesView.onGetDictionariesSuccessfully(dictionaryList);
-                });
+                List<Dictionary> dictionaryList =
+                        memberRepository.getOwnDictionaries(memberId, offset, limit);
+                threadExecutor.executeUiThread(
+                        () -> ownDictionariesView.onGetDictionariesSuccessfully(dictionaryList));
             } catch (Exception err) {
 
             }

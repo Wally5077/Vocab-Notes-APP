@@ -23,11 +23,10 @@ public class FavoriteDictionariesPresenter {
     public void getOwnDictionaries(int memberId, int offset, int limit) {
         threadExecutor.execute(() -> {
             try {
-                threadExecutor.executeUiThread(() -> {
-                    List<Dictionary> dictionaryList =
-                            memberRepository.getFavoriteDictionaries(memberId, offset, limit);
-                    favoriteDictionariesView.onGetDictionariesSuccessfully(dictionaryList);
-                });
+                List<Dictionary> dictionaryList =
+                        memberRepository.getFavoriteDictionaries(memberId, offset, limit);
+                threadExecutor.executeUiThread(
+                        () -> favoriteDictionariesView.onGetDictionariesSuccessfully(dictionaryList));
             } catch (Exception err) {
 
             }
