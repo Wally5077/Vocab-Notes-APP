@@ -1,6 +1,7 @@
 package com.home.englishnote.views.fragments.secondary.profile;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +20,7 @@ import com.home.englishnote.models.entities.WordGroup;
 import com.home.englishnote.presenters.FavoriteDictionariesPresenter;
 import com.home.englishnote.presenters.FavoriteWordGroupsPresenter;
 import com.home.englishnote.presenters.FavoriteWordGroupsPresenter.FavoriteWordGroupsView;
+import com.home.englishnote.utils.CustomDialog;
 import com.home.englishnote.utils.Global;
 import com.home.englishnote.views.fragments.BaseFragment;
 
@@ -130,6 +133,17 @@ public class FavoriteDictionariesFragment extends BaseFragment
             public FavoriteDictionariesHolder(@NonNull View itemView) {
                 super(itemView);
                 findViews(itemView);
+                itemView.setOnLongClickListener(v -> {
+                    CustomDialog customDialog = new CustomDialog(dictionaryHomePageActivity)
+                            .setMessage("Are you sure to unfavorite this dictionary ?")
+                            .setDialogButtonLeft("Yes", view -> {
+                                dictionaryList.remove(dictionary);
+                                notifyDataSetChanged();
+                            })
+                            .setDialogButtonRight("No", null);
+                    customDialog.show();
+                    return true;
+                });
             }
 
             private void findViews(@NonNull View itemView) {

@@ -1,14 +1,17 @@
 package com.home.englishnote.views.activities;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -23,6 +26,7 @@ import com.home.englishnote.models.entities.Guest;
 import com.home.englishnote.models.entities.Role;
 import com.home.englishnote.models.entities.Token;
 import com.home.englishnote.models.entities.User;
+import com.home.englishnote.utils.CustomDialog;
 import com.home.englishnote.utils.RandomVacabProducer;
 import com.home.englishnote.views.fragments.BaseFragment;
 import com.home.englishnote.views.fragments.main.OwnDictionaryPageFragment;
@@ -71,7 +75,7 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
 
     private void setMember() {
         user = (User) getIntent().getSerializableExtra("user");
-//        user = RandomVacabProducer.randomMember(Role.MEMBER);
+        user = RandomVacabProducer.randomMember(Role.MEMBER);
     }
 
     public User getUser() {
@@ -164,7 +168,12 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
                                     R.layout.fragment_own_dictionaries);
                             break;
                         case R.id.drawer_log_out:
-                            finish();
+                            CustomDialog customDialog = new CustomDialog(this)
+                                    .setMessage("Are you sure to log out ?")
+                                    .setDialogButtonLeft("Yes", v -> finish())
+                                    .setDialogButtonRight("No", v ->
+                                            dictionaryHomePageDrawer.closeDrawer(GravityCompat.START));
+                            customDialog.show();
                             break;
                     }
                     return true;
@@ -173,6 +182,9 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
 
     private void setInnerFragmentIntoMemberProfilePage(int innerFragmentId) {
         switchFragment(R.layout.fragment_member_profile_page, R.id.dictionaryHomePageContainer);
+        if (innerFragmentId != R.layout.fragment_own_dictionaries) {
+            switchFragment(R.layout.fragment_own_dictionaries, R.id.memberProfilePageContainer);
+        }
         switchFragment(innerFragmentId, R.id.memberProfilePageContainer);
     }
 
@@ -198,8 +210,7 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
                 nextFragment.updateFragmentData();
             } else {
                 // 加入新片段進 container (無論 container 內或外)
-                fragmentTransaction
-                        .add(containerId, nextFragment);
+                fragmentTransaction.add(containerId, nextFragment);
                 // 換頁記錄
                 fragmentStack.add(fragmentId);
                 containerStack.add(containerId);

@@ -56,7 +56,9 @@ public class WordsFragment extends BaseFragment implements WordsView {
 
     @Override
     public void updateFragmentData() {
-
+        if (word != null) {
+            fetchWordFromBundle();
+        }
     }
 
     private void findViews(View view) {
@@ -85,7 +87,7 @@ public class WordsFragment extends BaseFragment implements WordsView {
     private void init() {
         setDefaultViews();
         setExplanationTrigger();
-        setWord();
+        fetchWordFromBundle();
     }
 
     private void setDefaultViews() {
@@ -93,8 +95,16 @@ public class WordsFragment extends BaseFragment implements WordsView {
     }
 
     private void setExplanationTrigger() {
-        wordImageUp.setOnClickListener(v -> showExplanation(true));
-        wordDescription.setOnClickListener(v -> showExplanation(false));
+        wordImageUp.setOnTouchListener((v, event) -> {
+            showExplanation(true);
+            return true;
+        });
+        wordDescription.setOnTouchListener((v, event) -> {
+            showExplanation(false);
+            return true;
+        });
+//        wordImageUp.setOnClickListener(v -> showExplanation(true));
+//        wordDescription.setOnClickListener(v -> showExplanation(false));
     }
 
     private void showExplanation(boolean enable) {
@@ -104,7 +114,7 @@ public class WordsFragment extends BaseFragment implements WordsView {
         setViewsFocusable(enable, wordDescription);
     }
 
-    private void setWord() {
+    private void fetchWordFromBundle() {
         Bundle bundle = getArguments();
         if (bundle != null) {
             word = (Word) bundle.getSerializable("VocabNoteObjects");

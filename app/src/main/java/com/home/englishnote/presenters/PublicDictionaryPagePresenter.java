@@ -1,5 +1,6 @@
 package com.home.englishnote.presenters;
 
+import com.home.englishnote.exceptions.WordNotFoundException;
 import com.home.englishnote.models.entities.Dictionary;
 import com.home.englishnote.models.entities.Word;
 import com.home.englishnote.models.repositories.DictionaryRepository;
@@ -42,6 +43,18 @@ public class PublicDictionaryPagePresenter {
         });
     }
 
+    public void getWord(String wordName) {
+        threadExecutor.execute(() -> {
+            try {
+                Word word = wordRepository.getWord(wordName);
+                threadExecutor.executeUiThread(() ->
+                        publicDictionaryPageView.onGetWordSuccessfully(word));
+            } catch (WordNotFoundException e) {
+
+            }
+        });
+    }
+
     public void getPossibleWord(String keyword) {
         threadExecutor.execute(() -> {
             try {
@@ -55,7 +68,10 @@ public class PublicDictionaryPagePresenter {
     }
 
     public interface PublicDictionaryPageView {
+
         void onGetPossibleWordSuccessfully(List<Word> wordList);
+
+        void onGetWordSuccessfully(Word word);
 
         void onGetDictionaryListSuccessfully(List<Dictionary> dictionaryList);
     }

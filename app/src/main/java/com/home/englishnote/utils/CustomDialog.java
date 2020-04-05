@@ -10,7 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.home.englishnote.R;
+
+import static com.home.englishnote.utils.ViewEnableUtil.*;
 
 /*
     設定button數量：1
@@ -18,56 +21,105 @@ import com.home.englishnote.R;
 
     設定button數量：2
     使用setButtonFirst();
-       setButtonSecond();
+       setDialogButtonRight();
 */
 
-public class CustomDialog extends Dialog{
+public class CustomDialog extends AlertDialog {
 
-    private TextView contentView;
-    private Button buttonFirst;
-    private Button buttonSecond;
+    private TextView dialogMessage;
+    private Button dialogButtonLeft;
+    private Button dialogButtonMiddle;
+    private Button dialogButtonRight;
+
+    public CustomDialog(Context context) {
+        super(context);
+        setCustomDialog(context);
+    }
+
     private Dialog dialog;
 
-    public CustomDialog(Context context, String content) {
-        super(context);
-        dialog = setCustomDialog(context);
-        this.contentView.setText(content);
+    private void setCustomDialog(Context context) {
+        View view = LayoutInflater.from(context).inflate(R.layout.custom_dialog, null);
+        dialog = new AlertDialog.Builder(context)
+                .setView(view)
+                .create();
+        findViews(view);
+        init();
+    }
+
+    private void findViews(View view) {
+        dialogMessage = view.findViewById(R.id.customDialogMessage);
+        dialogButtonLeft = view.findViewById(R.id.customDialogButtonLeft);
+        dialogButtonMiddle = view.findViewById(R.id.customDialogButtonMiddle);
+        dialogButtonRight = view.findViewById(R.id.customDialogButtonRight);
+    }
+
+    private void init() {
+        setViewsVisible(false, dialogButtonLeft, dialogButtonMiddle, dialogButtonRight);
+        setViewsFocusable(false, dialogButtonLeft, dialogButtonMiddle, dialogButtonRight);
+    }
+
+    public CustomDialog setMessage(String message) {
+        dialogMessage.setText(message);
+        return this;
+    }
+
+    private View.OnClickListener onDialogButtonLeftClickListener;
+
+    public CustomDialog setDialogButtonLeft(CharSequence dialogButtonLeftText,
+                                            View.OnClickListener onClickListener) {
+        onDialogButtonLeftClickListener = onClickListener;
+        dialogButtonLeft.setText(dialogButtonLeftText);
+        dialogButtonLeft.setOnClickListener(v -> {
+            if (onDialogButtonLeftClickListener != null) {
+                onDialogButtonLeftClickListener.onClick(v);
+            }
+            dialog.dismiss();
+        });
+        setViewsVisible(true, dialogButtonLeft);
+        setViewsFocusable(true, dialogButtonLeft);
+        return this;
+    }
+
+    private View.OnClickListener onDialogButtonRightClickListener;
+
+    public CustomDialog setDialogButtonRight(CharSequence dialogButtonRightText,
+                                             View.OnClickListener onClickListener) {
+        onDialogButtonRightClickListener = onClickListener;
+        dialogButtonRight.setText(dialogButtonRightText);
+        dialogButtonRight.setOnClickListener(v -> {
+            if (onDialogButtonRightClickListener != null) {
+                onDialogButtonRightClickListener.onClick(v);
+            }
+            dialog.dismiss();
+        });
+        setViewsVisible(true, dialogButtonRight);
+        setViewsFocusable(true, dialogButtonRight);
+        return this;
+    }
+
+    private View.OnClickListener onDialogButtonMiddleClickListener;
+
+    public CustomDialog setDialogButtonMiddle(CharSequence dialogButtonMiddleText,
+                                              View.OnClickListener onClickListener) {
+        onDialogButtonMiddleClickListener = onClickListener;
+        dialogButtonMiddle.setText(dialogButtonMiddleText);
+        dialogButtonMiddle.setOnClickListener(v -> {
+            if (onDialogButtonMiddleClickListener != null) {
+                onDialogButtonMiddleClickListener.onClick(v);
+            }
+            dialog.dismiss();
+        });
+        setViewsVisible(true, dialogButtonMiddle);
+        setViewsFocusable(true, dialogButtonMiddle);
+        return this;
+    }
+
+    @Override
+    public void show() {
         ColorDrawable background = new ColorDrawable(Color.TRANSPARENT);
-        InsetDrawable insetDrawable = new InsetDrawable(background, 80);
+        InsetDrawable insetDrawable = new InsetDrawable(background, 150);
         dialog.getWindow().setBackgroundDrawable(insetDrawable);
         dialog.show();
     }
-
-    private Dialog setCustomDialog(Context context){
-        View view = LayoutInflater.from(context).inflate(R.layout.custom_dialog, null);
-        Dialog customDialog = new AlertDialog.Builder(context)
-                .setView(view)
-                .setCancelable(true)
-                .create();
-        findView(view);
-        return customDialog;
-    }
-
-    private void findView(View view){
-        contentView = view.findViewById(R.id.dialog_tv_content);
-        buttonFirst = view.findViewById(R.id.dialog_btn_left);
-        buttonSecond = view.findViewById(R.id.dialog_btn_right);
-        buttonSecond.setVisibility(View.GONE);
-        buttonFirst.setVisibility(View.GONE);
-    }
-
-    public CustomDialog setButtonFirst(String buttonFirstMsg, View.OnClickListener clickListener){
-        buttonFirst.setText(buttonFirstMsg);
-        buttonFirst.setOnClickListener(clickListener);
-        buttonFirst.setVisibility(View.VISIBLE);
-        return this;
-    }
-
-    public CustomDialog setButtonSecond(String buttonSecondMsg, View.OnClickListener clickListener){
-        buttonSecond.setText(buttonSecondMsg);
-        buttonSecond.setOnClickListener(clickListener);
-        buttonSecond.setVisibility(View.VISIBLE);
-        return this;
-    }
-
 }

@@ -2,48 +2,77 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="267.5dp"
+    android:layout_height="150dp"
     android:background="@drawable/bg_grey_round_dialog"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/dialog_tv_content"
+        android:id="@+id/customDialogMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="TextView"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/dialog_btn_left"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="32.5dp"
+        android:text="customDialogMessage"
+        android:textAlignment="center"
+        android:textSize="11sp"
+        app:fontFamily="@font/avenirroman"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/dialog_btn_left"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/bg_change_grey_round_button"
-        android:text="Button"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/dialog_btn_right"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_tv_content" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
     <Button
-        android:id="@+id/dialog_btn_right"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:background="@drawable/bg_change_grey_round_button"
-        android:text="Button"
+        android:id="@+id/customDialogButtonLeft"
+        android:layout_width="45dp"
+        android:layout_height="27.5dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_custom_dialog_round_button_left"
+        android:paddingBottom="3dp"
+        android:text="Yes"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="11sp"
+        app:fontFamily="@font/avenirbook"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customDialogMessage" />
+
+    <Button
+        android:id="@+id/customDialogButtonMiddle"
+        android:layout_width="45dp"
+        android:layout_height="27.5dp"
+        android:background="@drawable/bg_custom_dialog_round_button_left"
+        android:paddingBottom="3dp"
+        android:text="Ok"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="11sp"
+        app:fontFamily="@font/avenirbook"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toEndOf="@id/guideline4"
+        app:layout_constraintTop_toTopOf="@id/customDialogButtonLeft" />
+
+    <Button
+        android:id="@+id/customDialogButtonRight"
+        android:layout_width="45dp"
+        android:layout_height="27.5dp"
+        android:background="@drawable/bg_custom_dialog_round_button_right"
+        android:paddingBottom="3dp"
+        android:text="No"
+        android:textAlignment="center"
+        android:textAllCaps="false"
         android:textSize="10sp"
+        app:fontFamily="@font/avenirbook"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dialog_btn_left"
-        app:layout_constraintTop_toTopOf="@+id/dialog_btn_left" />
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/customDialogButtonLeft" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

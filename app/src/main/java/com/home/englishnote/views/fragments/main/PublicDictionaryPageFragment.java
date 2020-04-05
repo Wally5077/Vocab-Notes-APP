@@ -1,5 +1,6 @@
 package com.home.englishnote.views.fragments.main;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -9,7 +10,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -35,7 +36,6 @@ import com.home.englishnote.views.fragments.BaseFragment;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static com.home.englishnote.utils.ViewEnableUtil.setViewsFocusable;
 import static com.home.englishnote.utils.ViewEnableUtil.setViewsVisible;
@@ -104,22 +104,20 @@ public class PublicDictionaryPageFragment extends BaseFragment
                 this, Global.dictionaryRepository(),
                 Global.wordRepository(), Global.memberRepository(), Global.threadExecutor());
         setDefaultPage();
-        setVocabAutoSearch();
-        setDictionarySearchRecycler();
-        setOnVocabSearchClick();
-        setOnDictionarySearchClick();
-        setMemberProfileClick();
-        setMemberPhoto();
-        setMemberName();
+        initVocabAutoSearch();
+        initDictionarySearchRecycler();
+        initOnVocabSearchClick();
+        initOnDictionarySearchClick();
+        initMemberProfileClick();
+        initMemberPhoto();
+        initMemberName();
     }
 
     private void setDefaultPage() {
         switchFragment(R.layout.fragment_public_dictionaries, PUBLIC_DICTIONARY_PAGE_CONTAINER);
     }
 
-    private Set<String> wordSet = new HashSet<>();
-
-    private void setVocabAutoSearch() {
+    private void initVocabAutoSearch() {
         vocabAutoSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -128,11 +126,13 @@ public class PublicDictionaryPageFragment extends BaseFragment
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String keyword = s.toString();
+                String keyword = s.toString().trim();
                 if (keyword.isEmpty()) {
                     vocabAutoSearch.dismissDropDown();
                 } else {
-                    publicDictionaryPagePresenter.getPossibleWord(keyword);
+                    if (!searchWord.equals(keyword)) {
+                        publicDictionaryPagePresenter.getPossibleWord(keyword);
+                    }
                 }
             }
 
@@ -145,19 +145,26 @@ public class PublicDictionaryPageFragment extends BaseFragment
 
     private boolean isVocabSearchClick = false;
 
-    private void setOnVocabSearchClick() {
+    private void initOnVocabSearchClick() {
         vocabSearch.setOnClickListener(v -> {
             isVocabSearchClick = !isVocabSearchClick;
-            setSearchImageDrawable(isVocabSearchClick, vocabSearchImage);
-            setSearchTextColor(isVocabSearchClick, vocabSearchText);
-            setViewsVisible(isVocabSearchClick, vocabSearchFeature);
-            setViewsFocusable(isVocabSearchClick, vocabSearchFeature);
+            setVocabSearchEnable(isVocabSearchClick);
+            if (isVocabSearchClick) {
+                setDictionarySearchClickEnable(false);
+            }
         });
+    }
+
+    private void setVocabSearchEnable(boolean enable) {
+        setSearchImageDrawable(enable, vocabSearchImage);
+        setSearchTextColor(enable, vocabSearchText);
+        setViewsVisible(enable, vocabSearchFeature);
+        setViewsFocusable(enable, vocabSearchFeature);
     }
 
     private List<Dictionary> dictionaryList = new ArrayList<>();
 
-    private void setDictionarySearchRecycler() {
+    private void initDictionarySearchRecycler() {
         LayoutManager layoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
         dictionarySearchRecycler.setHasFixedSize(true);
         dictionarySearchRecycler.setLayoutManager(layoutManager);
@@ -167,15 +174,22 @@ public class PublicDictionaryPageFragment extends BaseFragment
 
     private boolean isDictionarySearchClick = false;
 
-    private void setOnDictionarySearchClick() {
+    private void initOnDictionarySearchClick() {
         dictionarySearch.setOnClickListener(v -> {
             isDictionarySearchClick = !isDictionarySearchClick;
-            setSearchImageDrawable(isDictionarySearchClick, dictionarySearchImage);
-            setSearchTextColor(isDictionarySearchClick, dictionarySearchText);
-            setViewsVisible(isDictionarySearchClick, dictionarySearchRecycler);
-            setViewsFocusable(isDictionarySearchClick, dictionarySearchRecycler);
-            publicDictionaryPagePresenter.getDictionaryList();
+            setDictionarySearchClickEnable(isDictionarySearchClick);
+            if (isDictionarySearchClick) {
+                setVocabSearchEnable(false);
+                publicDictionaryPagePresenter.getDictionaryList();
+            }
         });
+    }
+
+    private void setDictionarySearchClickEnable(boolean enable) {
+        setSearchImageDrawable(enable, dictionarySearchImage);
+        setSearchTextColor(enable, dictionarySearchText);
+        setViewsVisible(enable, dictionarySearchRecycler);
+        setViewsFocusable(enable, dictionarySearchRecycler);
     }
 
     private void setSearchImageDrawable(boolean enable, View view) {
@@ -194,7 +208,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
         }
     }
 
-    private void setMemberProfileClick() {
+    private void initMemberProfileClick() {
         memberProfile.setOnClickListener(v -> {
             if (user instanceof Member) {
                 switchFragment(
@@ -205,7 +219,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
         });
     }
 
-    private void setMemberPhoto() {
+    private void initMemberPhoto() {
         Glide.with(this)
                 .asBitmap()
                 .load(user.getImageURL())
@@ -214,10 +228,12 @@ public class PublicDictionaryPageFragment extends BaseFragment
                 .into(memberPhoto);
     }
 
-    private void setMemberName() {
+    private void initMemberName() {
         String memberName = user.getFirstName();
         this.memberName.setText((memberName.isEmpty()) ? "memberName" : memberName);
     }
+
+    private String searchWord = "";
 
     @Override
     public void onGetPossibleWordSuccessfully(List<Word> wordList) {
@@ -228,20 +244,33 @@ public class PublicDictionaryPageFragment extends BaseFragment
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 getContext(), android.R.layout.simple_list_item_1, possibleWordList);
-        vocabAutoSearch.setAdapter(arrayAdapter);
         if (!wordList.isEmpty()) {
+            vocabAutoSearch.setAdapter(arrayAdapter);
+            arrayAdapter.notifyDataSetChanged();
             vocabAutoSearch.showDropDown();
         }
-        vocabAutoSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                vocabAutoSearch.dismissDropDown();
-            }
+        vocabAutoSearch.setOnItemClickListener((parent, view, position, id) -> {
+            String word = arrayAdapter.getItem(position);
+            searchWord = word;
+            publicDictionaryPagePresenter.getWord(word);
+            vocabAutoSearch.dismissDropDown();
         });
     }
 
     @Override
+    public void onGetWordSuccessfully(Word word) {
+        searchWord = "";
+        vocabAutoSearch.setText(searchWord);
+        setVocabSearchEnable(false);
+        ((InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE))
+                .hideSoftInputFromWindow(getView().getRootView().getWindowToken(), 0);
+        switchFragment(R.layout.fragment_word, R.id.publicDictionaryPageContainer, word);
+    }
+
+    @Override
     public void onGetDictionaryListSuccessfully(List<Dictionary> dictionaryList) {
+        searchWord = "";
+        vocabAutoSearch.setText(searchWord);
         this.dictionaryList.clear();
         this.dictionaryList.addAll(dictionaryList);
         dictionarySearchAdapter.setDefaultItemBackground();

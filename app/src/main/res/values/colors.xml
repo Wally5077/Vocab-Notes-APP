@@ -3,18 +3,23 @@
     <color name="mainColor">#315965</color>
     <color name="secondaryColor">#659663</color>
     <color name="thirdColor">#888888</color>
+
     <color name="mainGrey">#dfe6e8</color>
     <color name="secondaryGrey">#8999a0</color>
     <color name="thirdGrey">#4e585a</color>
     <color name="fourthGrey">#c5ced1</color>
+
     <color name="mainWhite">#ffffff</color>
     <color name="secondaryWhite">#e0d9d9</color>
     <color name="thirdWhite">#99FFFFFF</color>
     <color name="fourthWhite">#26FFFFFF</color>
+
     <color name="ownDictionaryHintColor">#804E585A</color>
     <color name="deleteDictionaryColor">#ce787b</color>
     <color name="mainBlack">#000000</color>
+
     <color name="searchTextGrey">#ABFFFFFF</color>
     <color name="searchTextGreen">#59d880</color>
     <color name="itemWordClicked">#efecec</color>
+    <color name="dialogBackgroundGreen">#5f838e</color>
 </resources>
