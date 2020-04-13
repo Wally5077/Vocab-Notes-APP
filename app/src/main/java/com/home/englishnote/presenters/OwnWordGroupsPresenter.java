@@ -24,7 +24,7 @@ public class OwnWordGroupsPresenter {
         threadExecutor.execute(() -> {
             try {
                 List<WordGroup> groupList = wordGroupRepository
-                        .getWordGroupsFromOwnDictionary(memberId, offset, limit);
+                        .getWordGroupsFromOwnDictionary(memberId, memberId, offset, limit);
                 threadExecutor.executeUiThread(
                         () -> ownWordGroupsView
                                 .onGetWordGroupsSuccessfully(groupList));

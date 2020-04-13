@@ -114,7 +114,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
     }
 
     private void setDefaultPage() {
-        switchFragment(R.layout.fragment_public_dictionaries, PUBLIC_DICTIONARY_PAGE_CONTAINER);
+//        switchFragment(R.layout.fragment_public_dictionaries, PUBLIC_DICTIONARY_PAGE_CONTAINER);
     }
 
     private void initVocabAutoSearch() {

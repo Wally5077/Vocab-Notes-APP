@@ -14,11 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Word;
 import com.home.englishnote.models.entities.WordGroup;
+import com.home.englishnote.utils.OwnWordGroupsAdapter.OwnWordGroupsHolder;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class OwnWordGroupsAdapter extends RecyclerView.Adapter<OwnWordGroupsAdapter.OwnWordGroupsHolder> {
+public class OwnWordGroupsAdapter extends RecyclerView.Adapter<OwnWordGroupsHolder> {
 
     private List<WordGroup> wordGroupsList;
     private Context context;
@@ -55,6 +56,10 @@ public class OwnWordGroupsAdapter extends RecyclerView.Adapter<OwnWordGroupsAdap
         }
     }
 
+    public void updateWordGroupList(List<WordGroup> wordGroupsList) {
+        this.wordGroupsList = wordGroupsList;
+    }
+
     public class OwnWordGroupsHolder extends RecyclerView.ViewHolder {
 
         private TextView ownWordGroupTitle;
@@ -64,6 +69,7 @@ public class OwnWordGroupsAdapter extends RecyclerView.Adapter<OwnWordGroupsAdap
         public OwnWordGroupsHolder(@NonNull View itemView) {
             super(itemView);
             findViews(itemView);
+
         }
 
         private void findViews(View itemView) {

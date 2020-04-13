@@ -33,7 +33,7 @@
         android:id="@+id/ownDictionaryPagePhoto"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="17.5dp"
+        android:layout_marginTop="12.5dp"
         android:layout_marginEnd="7.5dp"
         android:layout_marginRight="7.5dp"
         app:layout_constraintEnd_toStartOf="@+id/ownDictionaryPageMemberName"
@@ -44,7 +44,7 @@
         android:id="@+id/ownDictionaryPageEditButton"
         android:layout_width="77.5dp"
         android:layout_height="22.5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/bg_modify_green_round_button"
         android:drawableStart="@drawable/modify_pen"
         android:drawableLeft="@drawable/modify_pen"
@@ -60,8 +60,7 @@
         android:textSize="7sp"
         app:fontFamily="@font/avenirmedium"
         app:layout_constraintBottom_toBottomOf="@+id/ownDictionaryPageTopBar"
-        app:layout_constraintStart_toStartOf="@id/ownDictionaryPagePhoto"
-        app:layout_constraintTop_toBottomOf="@id/ownDictionaryPagePhoto" />
+        app:layout_constraintStart_toStartOf="@id/ownDictionaryPagePhoto" />
 
     <Button
         android:id="@+id/ownDictionaryPageDeleteButton"
@@ -90,7 +89,7 @@
         android:id="@+id/ownDictionaryPageSaveButton"
         android:layout_width="35dp"
         android:layout_height="17.5dp"
-        android:layout_marginTop="17.5dp"
+        android:layout_marginBottom="12.5dp"
         android:background="@drawable/bg_save_dictionary"
         android:paddingBottom="3dp"
         android:text="@string/save"
@@ -99,9 +98,9 @@
         android:textSize="8sp"
         android:visibility="invisible"
         app:fontFamily="@font/avenirmedium"
+        app:layout_constraintBottom_toBottomOf="@id/ownDictionaryPageTopBar"
         app:layout_constraintEnd_toEndOf="@+id/ownDictionaryPageMemberName"
-        app:layout_constraintStart_toStartOf="@+id/ownDictionaryPageMemberName"
-        app:layout_constraintTop_toTopOf="@+id/ownDictionaryPageWordGroupCount" />
+        app:layout_constraintStart_toStartOf="@+id/ownDictionaryPageMemberName" />
 
     <TextView
         android:id="@+id/ownDictionaryPageMemberName"
@@ -109,6 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="12.5dp"
         android:layout_marginRight="12.5dp"
+        android:maxLength="12"
         android:text="User name"
         android:textAlignment="center"
         android:textColor="@color/mainWhite"
@@ -161,71 +161,32 @@
         app:layout_constraintTop_toTopOf="@+id/ownDictionaryPageEditButton"
         app:lineHeight="14sp" />
 
-    <SearchView
-        android:id="@+id/ownDictionaryPageSearch"
+    <AutoCompleteTextView
+        android:id="@+id/ownDictionaryPageQuery"
         android:layout_width="167.5dp"
         android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/vocab_search_border"
-        android:iconifiedByDefault="false"
-        android:queryHint="@string/Search"
-        android:searchIcon="@android:drawable/ic_search_category_default"
+        android:drawableStart="@drawable/grey_search_button"
+        android:drawableLeft="@drawable/grey_search_button"
+        android:drawablePadding="5dp"
+        android:drawableTint="@color/secondaryGrey"
+        android:hint="@string/Search"
+        android:inputType="textAutoComplete"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="1dp"
+        android:paddingEnd="5dp"
+        android:paddingRight="5dp"
+        android:textColor="@color/secondaryGrey"
+        android:textColorHint="@color/secondaryGrey"
+        android:textSize="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ownDictionaryPageTopBar" />
-
-    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--        android:id="@+id/dictionaryContentSearchView"-->
-    <!--        android:layout_width="167.5dp"-->
-    <!--        android:layout_height="20dp"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        android:background="@drawable/vocab_search_border"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/ownDictionaryPageTopBar">-->
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/imageView2"-->
-    <!--            android:layout_width="10dp"-->
-    <!--            android:layout_height="10dp"-->
-    <!--            android:layout_marginStart="10dp"-->
-    <!--            android:layout_marginLeft="10dp"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toTopOf="parent"-->
-    <!--            app:srcCompat="@android:drawable/ic_search_category_default" />-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/textView10"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="10dp"-->
-    <!--            android:layout_marginStart="2.5dp"-->
-    <!--            android:layout_marginLeft="2.5dp"-->
-    <!--            android:layout_marginBottom="6dp"-->
-    <!--            android:gravity="center"-->
-    <!--            android:text="search"-->
-    <!--            android:textAlignment="center"-->
-    <!--            android:textColor="#948999A0"-->
-    <!--            android:textSize="8sp"-->
-    <!--            android:textStyle="italic"-->
-    <!--            app:fontFamily="@font/avenirbook"-->
-    <!--            app:layout_constraintBottom_toBottomOf="@+id/imageView2"-->
-    <!--            app:layout_constraintStart_toEndOf="@+id/imageView2"-->
-    <!--            app:layout_constraintTop_toTopOf="@+id/imageView2" />-->
-
-    <!--        &lt;!&ndash;        <EditText&ndash;&gt;-->
-    <!--        &lt;!&ndash;            android:id="@+id/dictionaryContentSearch"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            android:layout_height="match_parent"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            android:paddingStart="20dp"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            android:paddingLeft="20dp"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            android:paddingEnd="5dp"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            android:paddingRight="5dp"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-    <!--        &lt;!&ndash;            app:layout_constraintTop_toTopOf="parent" />&ndash;&gt;-->
-    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+        app:layout_constraintTop_toBottomOf="@id/ownDictionaryPageTopBar"
+        app:queryHint="@string/Search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wordGroupRecycler"

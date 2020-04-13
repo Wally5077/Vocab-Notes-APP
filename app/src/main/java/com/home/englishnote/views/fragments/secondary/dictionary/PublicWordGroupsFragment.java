@@ -60,7 +60,7 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
 
     @Override
     public void updateFragmentData() {
-        if (publicWordGroupsAdapter != null) {
+        if (dictionary != null) {
             fetchDictionaryFromBundle();
             wordGroupsList.clear();
             queryWordGroupsList();

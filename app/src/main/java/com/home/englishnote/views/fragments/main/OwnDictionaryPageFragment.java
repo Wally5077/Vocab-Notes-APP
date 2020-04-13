@@ -1,12 +1,15 @@
 package com.home.englishnote.views.fragments.main;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +29,7 @@ import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictionaryPageView {
 
@@ -37,7 +41,7 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
     private ImageView ownDictionaryPageDictionaryNamePen;
     private Button ownDictionaryPageDeleteButton;
     private Button ownDictionaryPageSaveButton;
-    private SearchView ownDictionaryPageSearch;
+    private AutoCompleteTextView ownDictionaryPageQuery;
     private RecyclerView wordGroupsRecycler;
     private OwnWordGroupsAdapter ownWordGroupsAdapter;
     private OwnDictionaryPagePresenter ownDictionaryPagePresenter;
@@ -60,7 +64,11 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
 
     @Override
     public void updateFragmentData() {
-
+        if (dictionary != null) {
+            fetchDictionaryFromBundle();
+            wordGroupsList.clear();
+            queryWordGroupsList();
+        }
     }
 
     private void findViews(View view) {
@@ -72,29 +80,32 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
         ownDictionaryPageDictionaryNamePen = view.findViewById(R.id.ownDictionaryPageDictionaryNamePen);
         ownDictionaryPageDeleteButton = view.findViewById(R.id.ownDictionaryPageDeleteButton);
         ownDictionaryPageSaveButton = view.findViewById(R.id.ownDictionaryPageSaveButton);
-        ownDictionaryPageSearch = view.findViewById(R.id.ownDictionaryPageSearch);
+        ownDictionaryPageQuery = view.findViewById(R.id.ownDictionaryPageQuery);
         wordGroupsRecycler = view.findViewById(R.id.wordGroupRecycler);
     }
 
     private void init() {
         ownDictionaryPagePresenter = new OwnDictionaryPagePresenter(
                 this, Global.wordGroupRepository(), Global.threadExecutor());
-        setDictionary();
-        setMember();
-        setWordGroupsRecycler();
-        downloadWordGroupsList();
-        setEditButton();
+        fetchDictionaryFromBundle();
+        initMember();
+        initWordGroupsRecycler();
+        initEditButton();
+        initOwnDictionarySearchBar();
+        queryWordGroupsList();
     }
 
-    private void setDictionary() {
+    private Dictionary dictionary;
+
+    private void fetchDictionaryFromBundle() {
         Bundle bundle = getArguments();
         if (bundle != null) {
-            Dictionary dictionary = (Dictionary) bundle.getSerializable("VocabNoteObjects");
+            dictionary = (Dictionary) bundle.getSerializable("VocabNoteObjects");
             ownDictionaryPageDictionaryName.setText(dictionary.getTitle());
         }
     }
 
-    private void setMember() {
+    private void initMember() {
         ownDictionaryPageMemberName.setText(user.getFirstName());
         Glide.with(getContext())
                 .asBitmap()
@@ -106,7 +117,7 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
 
     private List<WordGroup> wordGroupsList = new ArrayList<>();
 
-    private void setWordGroupsRecycler() {
+    private void initWordGroupsRecycler() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         wordGroupsRecycler.setHasFixedSize(true);
         wordGroupsRecycler.setLayoutManager(linearLayoutManager);
@@ -114,11 +125,7 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
         wordGroupsRecycler.setAdapter(ownWordGroupsAdapter);
     }
 
-    private void downloadWordGroupsList() {
-        ownDictionaryPagePresenter.getWordGroups(user.getId(), 0, -1);
-    }
-
-    private void setEditButton() {
+    private void initEditButton() {
         setEditButtonEnable(true);
         ownDictionaryPageEditButton.setOnClickListener(v -> setEditButtonEnable(false));
         ownDictionaryPageSaveButton.setOnClickListener(v -> setEditButtonEnable(true));
@@ -150,9 +157,44 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
         }
     }
 
+    private void initOwnDictionarySearchBar() {
+        ownDictionaryPageQuery.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String filterPattern = s.toString().toLowerCase().trim();
+                if (count == 0) {
+                    ownWordGroupsAdapter.updateWordGroupList(wordGroupsList);
+                } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        ownWordGroupsAdapter.updateWordGroupList(wordGroupsList.stream()
+                                .filter(wordGroup -> wordGroup.getTitle().contains(filterPattern))
+                                .collect(Collectors.toList()));
+                    }
+                }
+                ownWordGroupsAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    private static final int WORD_GROUP_LIMIT = 10;
+
+    private void queryWordGroupsList() {
+        ownDictionaryPagePresenter.getWordGroups(
+                user.getId(), dictionary.getId(), wordGroupsList.size(), WORD_GROUP_LIMIT);
+    }
+
     @Override
     public void onGetWordGroupsSuccessfully(List<WordGroup> wordGroupList) {
-        this.wordGroupsList.clear();
         this.wordGroupsList.addAll(wordGroupList);
         ownWordGroupsAdapter.notifyDataSetChanged();
         String wordGroupCount = wordGroupList.size() + " Word groups";

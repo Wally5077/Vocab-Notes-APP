@@ -20,6 +20,8 @@
         android:elevation="1dp"
         android:hint="@string/Search"
         android:inputType="textAutoComplete"
+        android:maxLength="12"
+        android:maxLines="1"
         android:paddingStart="10dp"
         android:paddingLeft="10dp"
         android:paddingTop="1dp"

@@ -24,7 +24,7 @@ public class FavoriteWordGroupsPresenter {
         threadExecutor.execute(() -> {
             try {
                 List<WordGroup> groupList = wordGroupRepository
-                        .getWordGroupsFromOwnDictionary(memberId, offset, limit);
+                        .getWordGroupsFromFavoriteDictionary(memberId, offset, limit);
                 threadExecutor.executeUiThread(
                         () -> favoriteWordGroupsView
                                 .onGetWordGroupsSuccessfully(groupList));

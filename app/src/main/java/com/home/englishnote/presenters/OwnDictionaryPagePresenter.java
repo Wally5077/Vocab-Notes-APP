@@ -20,11 +20,11 @@ public class OwnDictionaryPagePresenter {
         this.threadExecutor = threadExecutor;
     }
 
-    public void getWordGroups(int memberId, int offset, int limit) {
+    public void getWordGroups(int memberId, int dictionaryId, int offset, int limit) {
         threadExecutor.execute(() -> {
             try {
                 List<WordGroup> groupList = wordGroupRepository
-                        .getWordGroupsFromOwnDictionary(memberId, offset, limit);
+                        .getWordGroupsFromOwnDictionary(memberId, dictionaryId, offset, limit);
                 threadExecutor.executeUiThread(
                         () -> ownDictionaryPageView
                                 .onGetWordGroupsSuccessfully(groupList));

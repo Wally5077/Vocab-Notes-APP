@@ -7,9 +7,19 @@ import com.home.englishnote.utils.DelayUtil;
 import com.home.englishnote.utils.Global;
 import com.home.englishnote.utils.RandomVacabProducer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StubWordGroupRepository implements WordGroupRepository {
+
+    private List<WordGroup> wordGroupList;
+
+    public StubWordGroupRepository() {
+        wordGroupList = new ArrayList<>(100);
+        for (int index = 0; index < 100; index++) {
+            wordGroupList.add(RandomVacabProducer.randomWordGroup(3, 9));
+        }
+    }
 
     @Override
     public WordGroup getWordGroup(int wordGroupId) {
@@ -26,11 +36,9 @@ public class StubWordGroupRepository implements WordGroupRepository {
     }
 
     @Override
-    public List<WordGroup> getWordGroupsFromOwnDictionary(int memberId, int offset, int limit) {
+    public List<WordGroup> getWordGroupsFromOwnDictionary(int memberId, int dictionaryId, int offset, int limit) {
         DelayUtil.delayExecuteThread(500);
-        return RandomVacabProducer.randomDictionary(
-                Type.PUBLIC, 1, 3,
-                5, 20).getWordGroups();
+        return Global.memberRepository().getOwnDictionary(memberId, dictionaryId).getWordGroups();
     }
 
     @Override

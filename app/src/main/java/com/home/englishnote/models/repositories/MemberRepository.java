@@ -23,5 +23,7 @@ public interface MemberRepository {
 
     List<Dictionary> getOwnDictionaries(int memberId, int offset, int limit);
 
+    Dictionary getOwnDictionary(int memberId, int dictionaryId);
+
     List<Dictionary> getFavoriteDictionaries(int memberId, int offset, int limit);
 }

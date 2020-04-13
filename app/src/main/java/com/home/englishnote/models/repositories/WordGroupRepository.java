@@ -9,7 +9,7 @@ public interface WordGroupRepository {
 
     List<WordGroup> getWordGroupsFromPublicDictionary(int dictionaryId, int offset, int limit);
 
-    List<WordGroup> getWordGroupsFromOwnDictionary(int memberId, int offset, int limit);
+    List<WordGroup> getWordGroupsFromOwnDictionary(int memberId, int dictionaryId, int offset, int limit);
 
     List<WordGroup> getWordGroupsFromFavoriteDictionary(int memberId, int offset, int limit);
 }

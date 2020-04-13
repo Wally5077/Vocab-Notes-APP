@@ -1,6 +1,7 @@
 package com.home.englishnote.utils;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Word;
+import com.home.englishnote.views.activities.DictionaryHomePageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +63,7 @@ public class OwnWordsAdapter extends RecyclerView.Adapter<OwnWordsAdapter.OwnWor
         private ImageView wordItemImage;
         private TextView wordItemName;
         private TextView wordItemSynonym;
+        private View wordItem;
 
         public OwnWordsHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +80,7 @@ public class OwnWordsAdapter extends RecyclerView.Adapter<OwnWordsAdapter.OwnWor
         }
 
         private void findViews(View view) {
+            wordItem = view.findViewById(R.id.wordItem);
             wordItemImage = view.findViewById(R.id.wordItemImage);
             wordItemName = view.findViewById(R.id.wordItemName);
             wordItemSynonym = view.findViewById(R.id.wordItemSynonym);
@@ -89,8 +93,29 @@ public class OwnWordsAdapter extends RecyclerView.Adapter<OwnWordsAdapter.OwnWor
                     .error(R.drawable.apple)
                     .into(wordItemImage);
             wordItemName.setText(word.getName());
-            String wordSynonyms = "( " + word.getSynonyms() + " )";
+            String wordSynonyms = "( " + word.getSynonyms().get(0) + " )";
             wordItemSynonym.setText(wordSynonyms);
+            wordItemImage.setOnClickListener(v -> {
+                setWordItemImageEnable(false);
+                Global.threadExecutor().executeUiThread(() -> {
+                    DelayUtil.delayExecuteThread(200);
+                    setWordItemImageEnable(true);
+                    DictionaryHomePageActivity dictionaryHomePageActivity = ((DictionaryHomePageActivity) context);
+                    dictionaryHomePageActivity.switchFragment(
+                            R.layout.fragment_public_dictionary_page,
+                            R.id.dictionaryHomePageContainer);
+                    dictionaryHomePageActivity.switchFragment(
+                            R.layout.fragment_word, R.id.publicDictionaryPageContainer, word);
+                });
+            });
+        }
+
+        private void setWordItemImageEnable(boolean enable) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                wordItem.setBackgroundColor(enable ?
+                        context.getResources().getColor(R.color.mainWhite) :
+                        context.getResources().getColor(R.color.itemWordClicked));
+            }
         }
     }
 

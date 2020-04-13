@@ -48,6 +48,7 @@
         android:layout_marginStart="7.5dp"
         android:layout_marginLeft="7.5dp"
         android:background="@drawable/create_own_dictionary_pen"
+        android:maxLength="80"
         app:layout_constraintBottom_toBottomOf="@+id/ownDictionaryTitle"
         app:layout_constraintStart_toEndOf="@+id/ownDictionaryTitle"
         app:layout_constraintTop_toTopOf="@+id/ownDictionaryTitle" />

@@ -75,7 +75,7 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
 
     private void setMember() {
         user = (User) getIntent().getSerializableExtra("user");
-        user = RandomVacabProducer.randomMember(Role.MEMBER);
+//        user = RandomVacabProducer.randomMember(Role.MEMBER);
     }
 
     public User getUser() {
@@ -111,6 +111,7 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
         containerNameMap.put(R.id.memberProfilePageContainer, "MEMBER_PROFILE_PAGE_CONTAINER");
 
         switchFragment(R.layout.fragment_public_dictionary_page, R.id.dictionaryHomePageContainer);
+        switchFragment(R.layout.fragment_public_dictionaries, R.id.publicDictionaryPageContainer);
     }
 
     private DrawerLayout dictionaryHomePageDrawer;
