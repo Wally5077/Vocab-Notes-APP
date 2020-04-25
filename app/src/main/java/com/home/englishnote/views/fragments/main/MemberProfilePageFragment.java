@@ -38,11 +38,6 @@ public class MemberProfilePageFragment extends BaseFragment {
         init();
     }
 
-    @Override
-    public void updateFragmentData() {
-
-    }
-
     private void findViews(View view) {
         memberProfilePagePhoto = view.findViewById(R.id.memberProfilePagePhoto);
         memberProfilePageName = view.findViewById(R.id.memberProfilePageName);
@@ -51,13 +46,13 @@ public class MemberProfilePageFragment extends BaseFragment {
     }
 
     private void init() {
-        setMemberPhoto();
-        setMemberName();
-        setMemberProfileEditProfileButtonClick();
-        setMemberProfileCreateDictionaryButtonClick();
+        setUpMemberPhoto();
+        setUpMemberName();
+        setUpMemberProfileEditProfileButtonClick();
+        setUpMemberProfileCreateDictionaryButtonClick();
     }
 
-    private void setMemberPhoto() {
+    private void setUpMemberPhoto() {
         Glide.with(getContext())
                 .asBitmap()
                 .load(user.getImageURL())
@@ -66,20 +61,18 @@ public class MemberProfilePageFragment extends BaseFragment {
                 .into(memberProfilePagePhoto);
     }
 
-    private void setMemberName() {
+    private void setUpMemberName() {
         memberProfilePageName.setText(user.getFirstName());
     }
 
-    private void setMemberProfileEditProfileButtonClick() {
+    private void setUpMemberProfileEditProfileButtonClick() {
         memberProfilePageEditProfileButton.setOnClickListener(
-                v -> switchFragment(
-                        R.layout.fragment_member_profile_modify, DICTIONARY_HOME_PAGE_CONTAINER));
+                v -> switchFragment(R.layout.fragment_member_profile_modify));
     }
 
-    private void setMemberProfileCreateDictionaryButtonClick() {
+    private void setUpMemberProfileCreateDictionaryButtonClick() {
         memberProfilePageCreateDictionaryButton.setOnClickListener(
-                v -> switchFragment(
-                        R.layout.fragment_create_own_dictionary, MEMBER_PROFILE_PAGE_CONTAINER));
+                v -> switchFragment(R.layout.fragment_create_own_dictionary));
     }
 
 }

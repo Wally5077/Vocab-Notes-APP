@@ -45,11 +45,6 @@ public class CreateOwnDictionaryFragment extends BaseFragment implements CreateO
     }
 
     @Override
-    public void updateFragmentData() {
-
-    }
-
-    @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         ownDictionaryTitle.setText("");
@@ -66,13 +61,13 @@ public class CreateOwnDictionaryFragment extends BaseFragment implements CreateO
     private void init() {
         createOwnDictionaryPresenter = new CreateOwnDictionaryPresenter(
                 this, Global.memberRepository(), Global.threadExecutor());
-        setOwnDictionaryTitle();
-        setOwnDictionaryDescription();
-        setSaveOwnDictionaryButton();
-        setCancelOwnDictionaryButton();
+        setUpOwnDictionaryTitle();
+        setUpOwnDictionaryDescription();
+        setUpSaveOwnDictionaryButton();
+        setUpCancelOwnDictionaryButton();
     }
 
-    private void setOwnDictionaryTitle() {
+    private void setUpOwnDictionaryTitle() {
         ownDictionaryTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -97,7 +92,7 @@ public class CreateOwnDictionaryFragment extends BaseFragment implements CreateO
         });
     }
 
-    private void setOwnDictionaryDescription() {
+    private void setUpOwnDictionaryDescription() {
         ownDictionaryDescription.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -123,19 +118,18 @@ public class CreateOwnDictionaryFragment extends BaseFragment implements CreateO
         }
     }
 
-    private void setSaveOwnDictionaryButton() {
+    private void setUpSaveOwnDictionaryButton() {
         saveOwnDictionaryButton.setOnClickListener(
                 v -> createOwnDictionaryPresenter.createOwnDictionary(
                         token, user.getId(), ownDictionaryTitle.getText().toString(),
                         ownDictionaryDescription.getText().toString()));
     }
 
-    private void setCancelOwnDictionaryButton() {
-        cancelOwnDictionaryButton.setOnClickListener(
-                v -> {
-                    clearText(ownDictionaryTitle, ownDictionaryDescription);
-                    backLastFragment();
-                });
+    private void setUpCancelOwnDictionaryButton() {
+        cancelOwnDictionaryButton.setOnClickListener(v -> {
+            clearText(ownDictionaryTitle, ownDictionaryDescription);
+            backLastFragment();
+        });
     }
 
     @Override

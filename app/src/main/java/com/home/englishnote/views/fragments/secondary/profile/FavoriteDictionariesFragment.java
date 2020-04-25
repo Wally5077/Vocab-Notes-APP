@@ -1,16 +1,15 @@
 package com.home.englishnote.views.fragments.secondary.profile;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,12 +51,6 @@ public class FavoriteDictionariesFragment extends BaseFragment
         init();
     }
 
-    @Override
-    public void updateFragmentData() {
-        dictionaryList.clear();
-        queryFavoriteDictionaryList();
-    }
-
     private void findViews(View view) {
         favoriteDictionariesRecycler = view.findViewById(R.id.favoriteDictionariesRecycler);
     }
@@ -65,19 +58,23 @@ public class FavoriteDictionariesFragment extends BaseFragment
     private void init() {
         favoriteDictionariesPresenter = new FavoriteDictionariesPresenter(
                 this, Global.memberRepository(), Global.threadExecutor());
-        dictionaryList.clear();
-        initDictionariesRecycler();
-        queryFavoriteDictionaryList();
+        setUpDictionariesRecycler();
     }
 
     private List<Dictionary> dictionaryList = new ArrayList<>();
 
-    private void initDictionariesRecycler() {
+    private void setUpDictionariesRecycler() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
         favoriteDictionariesRecycler.setHasFixedSize(true);
         favoriteDictionariesRecycler.setLayoutManager(linearLayoutManager);
         favoriteDictionariesAdapter = new FavoriteDictionariesAdapter(dictionaryList);
         favoriteDictionariesRecycler.setAdapter(favoriteDictionariesAdapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        queryFavoriteDictionaryList();
     }
 
     private void queryFavoriteDictionaryList() {
@@ -136,9 +133,10 @@ public class FavoriteDictionariesFragment extends BaseFragment
                 itemView.setOnLongClickListener(v -> {
                     CustomDialog customDialog = new CustomDialog(dictionaryHomePageActivity)
                             .setMessage("Are you sure to unfavorite this dictionary ?")
-                            .setDialogButtonLeft("Yes", view -> {
+                            .setDialogButtonLeft("Yes", (view, event) -> {
                                 dictionaryList.remove(dictionary);
                                 notifyDataSetChanged();
+                                return true;
                             })
                             .setDialogButtonRight("No", null);
                     customDialog.show();

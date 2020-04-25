@@ -74,11 +74,6 @@ public class PublicDictionaryPageFragment extends BaseFragment
         init();
     }
 
-    @Override
-    public void updateFragmentData() {
-
-    }
-
     private void findViews(View view) {
         // vocabSearch
         vocabSearch = view.findViewById(R.id.publicDictionaryPageVocabSearch);
@@ -103,21 +98,16 @@ public class PublicDictionaryPageFragment extends BaseFragment
         publicDictionaryPagePresenter = new PublicDictionaryPagePresenter(
                 this, Global.dictionaryRepository(),
                 Global.wordRepository(), Global.memberRepository(), Global.threadExecutor());
-        setDefaultPage();
-        initVocabAutoSearch();
-        initDictionarySearchRecycler();
-        initOnVocabSearchClick();
-        initOnDictionarySearchClick();
-        initMemberProfileClick();
-        initMemberPhoto();
-        initMemberName();
+        setUpVocabAutoSearch();
+        setUpDictionarySearchRecycler();
+        setUpOnVocabSearchClick();
+        setUpOnDictionarySearchClick();
+        setUpMemberProfileClick();
+        setUpMemberPhoto();
+        setUpMemberName();
     }
 
-    private void setDefaultPage() {
-//        switchFragment(R.layout.fragment_public_dictionaries, PUBLIC_DICTIONARY_PAGE_CONTAINER);
-    }
-
-    private void initVocabAutoSearch() {
+    private void setUpVocabAutoSearch() {
         vocabAutoSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -145,7 +135,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
 
     private boolean isVocabSearchClick = false;
 
-    private void initOnVocabSearchClick() {
+    private void setUpOnVocabSearchClick() {
         vocabSearch.setOnClickListener(v -> {
             isVocabSearchClick = !isVocabSearchClick;
             setVocabSearchEnable(isVocabSearchClick);
@@ -164,7 +154,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
 
     private List<Dictionary> dictionaryList = new ArrayList<>();
 
-    private void initDictionarySearchRecycler() {
+    private void setUpDictionarySearchRecycler() {
         LayoutManager layoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
         dictionarySearchRecycler.setHasFixedSize(true);
         dictionarySearchRecycler.setLayoutManager(layoutManager);
@@ -174,7 +164,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
 
     private boolean isDictionarySearchClick = false;
 
-    private void initOnDictionarySearchClick() {
+    private void setUpOnDictionarySearchClick() {
         dictionarySearch.setOnClickListener(v -> {
             isDictionarySearchClick = !isDictionarySearchClick;
             setDictionarySearchClickEnable(isDictionarySearchClick);
@@ -208,18 +198,16 @@ public class PublicDictionaryPageFragment extends BaseFragment
         }
     }
 
-    private void initMemberProfileClick() {
+    private void setUpMemberProfileClick() {
         memberProfile.setOnClickListener(v -> {
             if (user instanceof Member) {
-                switchFragment(
-                        R.layout.fragment_member_profile_page, DICTIONARY_HOME_PAGE_CONTAINER);
-                switchFragment(
-                        R.layout.fragment_own_dictionaries, MEMBER_PROFILE_PAGE_CONTAINER);
+                switchFragment(R.layout.fragment_member_profile_page);
+                switchFragment(R.layout.fragment_own_dictionaries);
             }
         });
     }
 
-    private void initMemberPhoto() {
+    private void setUpMemberPhoto() {
         Glide.with(this)
                 .asBitmap()
                 .load(user.getImageURL())
@@ -228,7 +216,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
                 .into(memberPhoto);
     }
 
-    private void initMemberName() {
+    private void setUpMemberName() {
         String memberName = user.getFirstName();
         this.memberName.setText((memberName.isEmpty()) ? "memberName" : memberName);
     }
@@ -264,7 +252,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
         setVocabSearchEnable(false);
         ((InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE))
                 .hideSoftInputFromWindow(getView().getRootView().getWindowToken(), 0);
-        switchFragment(R.layout.fragment_word, R.id.publicDictionaryPageContainer, word);
+        switchFragment(R.layout.fragment_word, word);
     }
 
     @Override
@@ -343,8 +331,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
                     if (dictionary != null) {
                         Global.threadExecutor().executeUiThread(() -> {
                             DelayUtil.delayExecuteThread(300);
-                            switchFragment(R.layout.fragment_public_word_groups,
-                                    PUBLIC_DICTIONARY_PAGE_CONTAINER, dictionary);
+                            switchFragment(R.layout.fragment_public_word_groups, dictionary);
 
                             setSearchImageDrawable(false, dictionarySearchImage);
                             setSearchTextColor(false, dictionarySearchText);

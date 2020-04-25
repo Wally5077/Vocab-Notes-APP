@@ -62,15 +62,6 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
         init();
     }
 
-    @Override
-    public void updateFragmentData() {
-        if (dictionary != null) {
-            fetchDictionaryFromBundle();
-            wordGroupsList.clear();
-            queryWordGroupsList();
-        }
-    }
-
     private void findViews(View view) {
         ownDictionaryPageDictionaryName = view.findViewById(R.id.ownDictionaryPageDictionaryName);
         ownDictionaryPageWordGroupCount = view.findViewById(R.id.ownDictionaryPageWordGroupCount);
@@ -87,25 +78,13 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
     private void init() {
         ownDictionaryPagePresenter = new OwnDictionaryPagePresenter(
                 this, Global.wordGroupRepository(), Global.threadExecutor());
-        fetchDictionaryFromBundle();
-        initMember();
-        initWordGroupsRecycler();
-        initEditButton();
-        initOwnDictionarySearchBar();
-        queryWordGroupsList();
+        setUpMember();
+        setUpWordGroupsRecycler();
+        setUpEditButton();
+        setUpOwnDictionarySearchBar();
     }
 
-    private Dictionary dictionary;
-
-    private void fetchDictionaryFromBundle() {
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            dictionary = (Dictionary) bundle.getSerializable("VocabNoteObjects");
-            ownDictionaryPageDictionaryName.setText(dictionary.getTitle());
-        }
-    }
-
-    private void initMember() {
+    private void setUpMember() {
         ownDictionaryPageMemberName.setText(user.getFirstName());
         Glide.with(getContext())
                 .asBitmap()
@@ -117,7 +96,7 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
 
     private List<WordGroup> wordGroupsList = new ArrayList<>();
 
-    private void initWordGroupsRecycler() {
+    private void setUpWordGroupsRecycler() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         wordGroupsRecycler.setHasFixedSize(true);
         wordGroupsRecycler.setLayoutManager(linearLayoutManager);
@@ -125,7 +104,7 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
         wordGroupsRecycler.setAdapter(ownWordGroupsAdapter);
     }
 
-    private void initEditButton() {
+    private void setUpEditButton() {
         setEditButtonEnable(true);
         ownDictionaryPageEditButton.setOnClickListener(v -> setEditButtonEnable(false));
         ownDictionaryPageSaveButton.setOnClickListener(v -> setEditButtonEnable(true));
@@ -157,7 +136,7 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
         }
     }
 
-    private void initOwnDictionarySearchBar() {
+    private void setUpOwnDictionarySearchBar() {
         ownDictionaryPageQuery.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -172,7 +151,8 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
                 } else {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         ownWordGroupsAdapter.updateWordGroupList(wordGroupsList.stream()
-                                .filter(wordGroup -> wordGroup.getTitle().contains(filterPattern))
+                                .filter(wordGroup ->
+                                        wordGroup.getTitle().contains(filterPattern))
                                 .collect(Collectors.toList()));
                     }
                 }
@@ -184,6 +164,23 @@ public class OwnDictionaryPageFragment extends BaseFragment implements OwnDictio
 
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        fetchDictionaryFromBundle();
+        queryWordGroupsList();
+    }
+
+    private Dictionary dictionary;
+
+    private void fetchDictionaryFromBundle() {
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            dictionary = (Dictionary) bundle.getSerializable("VocabNoteObjects");
+            ownDictionaryPageDictionaryName.setText(dictionary.getTitle());
+        }
     }
 
     private static final int WORD_GROUP_LIMIT = 10;

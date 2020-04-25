@@ -50,19 +50,6 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
         init();
     }
 
-    @Override
-    public void updateFragmentData() {
-        fetchDictionaryFromBundle();
-    }
-
-
-    private void fetchDictionaryFromBundle() {
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            Dictionary dictionary = (Dictionary) bundle.getSerializable("VocabNoteObjects");
-        }
-    }
-
     private void findViews(View view) {
         publicDictionariesSwipeRefreshLayout = view.findViewById(R.id.publicDictionariesSwipeRefreshLayout);
         publicDictionariesRecycler = view.findViewById(R.id.publicDictionariesRecycler);
@@ -71,15 +58,20 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
     private void init() {
         publicDictionariesPresenter = new PublicDictionariesPresenter(
                 this, Global.dictionaryRepository(), Global.threadExecutor());
+        setUpDictionariesRecycler();
+        setUpDictionariesSwipeRefreshLayout();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         dictionaryList.clear();
-        initDictionariesRecycler();
-        initDictionariesSwipeRefreshLayout();
         queryDictionaryList();
     }
 
     private List<Dictionary> dictionaryList = new ArrayList<>();
 
-    private void initDictionariesRecycler() {
+    private void setUpDictionariesRecycler() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
         publicDictionariesRecycler.setHasFixedSize(true);
         publicDictionariesRecycler.setLayoutManager(linearLayoutManager);
@@ -102,7 +94,7 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
         });
     }
 
-    private void initDictionariesSwipeRefreshLayout() {
+    private void setUpDictionariesSwipeRefreshLayout() {
         publicDictionariesSwipeRefreshLayout.measure(0, 0);
         publicDictionariesSwipeRefreshLayout.setProgressViewOffset(true, 80, 90);
         publicDictionariesSwipeRefreshLayout.setOnRefreshListener(this::queryDictionaryList);
@@ -189,9 +181,7 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
 
             private void setExploreButtonClick(Dictionary dictionary) {
                 exploreButton.setOnClickListener(
-                        (v) -> switchFragment(
-                                R.layout.fragment_public_word_groups,
-                                PUBLIC_DICTIONARY_PAGE_CONTAINER, dictionary));
+                        (v) -> switchFragment(R.layout.fragment_public_word_groups, dictionary));
             }
 
             private void setData(Dictionary dictionary) {

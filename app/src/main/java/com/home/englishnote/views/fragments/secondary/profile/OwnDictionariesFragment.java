@@ -55,12 +55,6 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
         init();
     }
 
-    @Override
-    public void updateFragmentData() {
-        dictionaryList.clear();
-        queryDictionaryList();
-    }
-
     private void findViews(View view) {
         ownDictionariesSwipeRefreshLayout = view.findViewById(R.id.ownDictionariesSwipeRefreshLayout);
         ownDictionariesRecycler = view.findViewById(R.id.ownDictionariesRecycler);
@@ -70,14 +64,12 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
     private void init() {
         ownDictionariesPresenter = new OwnDictionariesPresenter(
                 this, Global.memberRepository(), Global.threadExecutor());
-        dictionaryList.clear();
-        initDictionariesSwipeRefreshLayout();
-        initDictionariesRecycler();
-        initOwnDictionaryQuery();
-        queryDictionaryList();
+        setUpDictionariesSwipeRefreshLayout();
+        setUpDictionariesRecycler();
+        setUpOwnDictionaryQuery();
     }
 
-    private void initDictionariesSwipeRefreshLayout() {
+    private void setUpDictionariesSwipeRefreshLayout() {
         ownDictionariesSwipeRefreshLayout.measure(0, 0);
         ownDictionariesSwipeRefreshLayout.setProgressViewOffset(true, 80, 90);
         ownDictionariesSwipeRefreshLayout.setOnRefreshListener(this::queryDictionaryList);
@@ -85,7 +77,7 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
 
     private List<Dictionary> dictionaryList = new ArrayList<>();
 
-    private void initDictionariesRecycler() {
+    private void setUpDictionariesRecycler() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
         ownDictionariesRecycler.setHasFixedSize(true);
         ownDictionariesRecycler.setLayoutManager(linearLayoutManager);
@@ -108,7 +100,7 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
         });
     }
 
-    private void initOwnDictionaryQuery() {
+    private void setUpOwnDictionaryQuery() {
         ownDictionariesQuery.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -135,6 +127,12 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
 
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        queryDictionaryList();
     }
 
     private static final int PAGE_LIMIT = 10;
@@ -206,7 +204,8 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
             public OwnDictionariesHolder(@NonNull View itemView) {
                 super(itemView);
                 findViews(itemView);
-                itemView.setOnClickListener(this::switchOwnDictionaryPage);
+                itemView.setOnClickListener(
+                        v -> switchFragment(R.layout.fragment_own_dictionary_page, dictionary));
             }
 
             private void findViews(View view) {
@@ -219,11 +218,6 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
             public void setData(Dictionary dictionary) {
                 this.dictionary = dictionary;
                 ownDictionaryName.setText(dictionary.getTitle());
-            }
-
-            private void switchOwnDictionaryPage(View v) {
-                switchFragment(R.layout.fragment_own_dictionary_page,
-                        R.id.dictionaryHomePageContainer, dictionary);
             }
 
             @Override

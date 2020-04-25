@@ -64,51 +64,54 @@ public class CustomDialog extends AlertDialog {
         return this;
     }
 
-    private View.OnClickListener onDialogButtonLeftClickListener;
+    private View.OnTouchListener onDialogButtonLeftTouchListener;
 
     public CustomDialog setDialogButtonLeft(CharSequence dialogButtonLeftText,
-                                            View.OnClickListener onClickListener) {
-        onDialogButtonLeftClickListener = onClickListener;
+                                            View.OnTouchListener onTouchListener) {
+        onDialogButtonLeftTouchListener = onTouchListener;
         dialogButtonLeft.setText(dialogButtonLeftText);
-        dialogButtonLeft.setOnClickListener(v -> {
-            if (onDialogButtonLeftClickListener != null) {
-                onDialogButtonLeftClickListener.onClick(v);
+        dialogButtonLeft.setOnTouchListener((v, event) -> {
+            if (onDialogButtonLeftTouchListener != null) {
+                onDialogButtonLeftTouchListener.onTouch(v, event);
             }
             dialog.dismiss();
+            return true;
         });
         setViewsVisible(true, dialogButtonLeft);
         setViewsFocusable(true, dialogButtonLeft);
         return this;
     }
 
-    private View.OnClickListener onDialogButtonRightClickListener;
+    private View.OnTouchListener onDialogButtonRightTouchListener;
 
     public CustomDialog setDialogButtonRight(CharSequence dialogButtonRightText,
-                                             View.OnClickListener onClickListener) {
-        onDialogButtonRightClickListener = onClickListener;
+                                             View.OnTouchListener onTouchListener) {
+        onDialogButtonRightTouchListener = onTouchListener;
         dialogButtonRight.setText(dialogButtonRightText);
-        dialogButtonRight.setOnClickListener(v -> {
-            if (onDialogButtonRightClickListener != null) {
-                onDialogButtonRightClickListener.onClick(v);
+        dialogButtonRight.setOnTouchListener((v, event) -> {
+            if (onDialogButtonRightTouchListener != null) {
+                onDialogButtonRightTouchListener.onTouch(v, event);
             }
             dialog.dismiss();
+            return true;
         });
         setViewsVisible(true, dialogButtonRight);
         setViewsFocusable(true, dialogButtonRight);
         return this;
     }
 
-    private View.OnClickListener onDialogButtonMiddleClickListener;
+    private View.OnTouchListener onDialogButtonMiddleTouchListener;
 
     public CustomDialog setDialogButtonMiddle(CharSequence dialogButtonMiddleText,
-                                              View.OnClickListener onClickListener) {
-        onDialogButtonMiddleClickListener = onClickListener;
+                                              View.OnTouchListener onTouchListener) {
+        onDialogButtonMiddleTouchListener = onTouchListener;
         dialogButtonMiddle.setText(dialogButtonMiddleText);
-        dialogButtonMiddle.setOnClickListener(v -> {
-            if (onDialogButtonMiddleClickListener != null) {
-                onDialogButtonMiddleClickListener.onClick(v);
+        dialogButtonMiddle.setOnTouchListener((v, event) -> {
+            if (onDialogButtonMiddleTouchListener != null) {
+                onDialogButtonMiddleTouchListener.onTouch(v, event);
             }
             dialog.dismiss();
+            return true;
         });
         setViewsVisible(true, dialogButtonMiddle);
         setViewsFocusable(true, dialogButtonMiddle);

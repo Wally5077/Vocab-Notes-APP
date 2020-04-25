@@ -54,13 +54,6 @@ public class WordsFragment extends BaseFragment implements WordsView {
         init();
     }
 
-    @Override
-    public void updateFragmentData() {
-        if (word != null) {
-            fetchWordFromBundle();
-        }
-    }
-
     private void findViews(View view) {
         // begin
         wordTitle = view.findViewById(R.id.wordTitle);
@@ -85,16 +78,15 @@ public class WordsFragment extends BaseFragment implements WordsView {
     }
 
     private void init() {
-        setDefaultViews();
-        setExplanationTrigger();
-        fetchWordFromBundle();
+        setUpDefaultViews();
+        setUpExplanationTrigger();
     }
 
-    private void setDefaultViews() {
+    private void setUpDefaultViews() {
         showExplanation(false);
     }
 
-    private void setExplanationTrigger() {
+    private void setUpExplanationTrigger() {
         wordImageUp.setOnTouchListener((v, event) -> {
             showExplanation(true);
             return true;
@@ -112,6 +104,12 @@ public class WordsFragment extends BaseFragment implements WordsView {
         setViewsVisible(!enable, wordContentDown, wordImageUp);
         setViewsFocusable(!enable, wordImageUp);
         setViewsFocusable(enable, wordDescription);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        fetchWordFromBundle();
     }
 
     private void fetchWordFromBundle() {

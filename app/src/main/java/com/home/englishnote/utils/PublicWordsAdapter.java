@@ -101,8 +101,7 @@ public class PublicWordsAdapter extends RecyclerView.Adapter<PublicWordsAdapter.
                     DelayUtil.delayExecuteThread(200);
                     setWordItemImageEnable(true);
                     ((DictionaryHomePageActivity) context)
-                            .switchFragment(R.layout.fragment_word,
-                                    R.id.publicDictionaryPageContainer, word);
+                            .switchFragment(R.layout.fragment_word, word);
                 });
             });
         }

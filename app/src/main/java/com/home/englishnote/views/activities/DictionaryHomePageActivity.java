@@ -1,17 +1,14 @@
 package com.home.englishnote.views.activities;
 
 
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -22,30 +19,23 @@ import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.home.englishnote.R;
+import com.home.englishnote.exceptions.FragmnetClassNotCreateException;
 import com.home.englishnote.models.entities.Guest;
 import com.home.englishnote.models.entities.Role;
 import com.home.englishnote.models.entities.Token;
 import com.home.englishnote.models.entities.User;
+import com.home.englishnote.utils.BaseFragmentCreator;
 import com.home.englishnote.utils.CustomDialog;
 import com.home.englishnote.utils.RandomVacabProducer;
 import com.home.englishnote.views.fragments.BaseFragment;
-import com.home.englishnote.views.fragments.main.OwnDictionaryPageFragment;
-import com.home.englishnote.views.fragments.main.PublicDictionaryPageFragment;
 import com.home.englishnote.views.fragments.main.MemberProfilePageFragment;
-import com.home.englishnote.views.fragments.WordsFragment;
-import com.home.englishnote.views.fragments.secondary.dictionary.PublicDictionariesFragment;
-import com.home.englishnote.views.fragments.secondary.profile.CreateOwnDictionaryFragment;
-import com.home.englishnote.views.fragments.secondary.profile.FavoriteDictionariesFragment;
-import com.home.englishnote.views.fragments.secondary.profile.MemberProfileModifyFragment;
-import com.home.englishnote.views.fragments.secondary.dictionary.PublicWordGroupsFragment;
-import com.home.englishnote.views.fragments.secondary.profile.OwnDictionariesFragment;
+import com.home.englishnote.views.fragments.main.PublicDictionaryPageFragment;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 public class DictionaryHomePageActivity extends AppCompatActivity {
 
@@ -68,14 +58,14 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         setMember();
         setNavigationView();
-        setFragmentMap();
+        setContainerMap();
     }
 
     private User user;
 
     private void setMember() {
         user = (User) getIntent().getSerializableExtra("user");
-//        user = RandomVacabProducer.randomMember(Role.MEMBER);
+        user = RandomVacabProducer.randomMember(Role.MEMBER);
     }
 
     public User getUser() {
@@ -86,32 +76,28 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
         return user.getToken();
     }
 
-    private Map<Integer, BaseFragment> fragmentMap = new HashMap<>();
+    private Map<Integer, Integer> containerMap = new HashMap<>();
 
-    private void setFragmentMap() {
-        // DictionaryHomePageContainer
-        fragmentMap.put(R.layout.fragment_public_dictionary_page, new PublicDictionaryPageFragment());
-        fragmentMap.put(R.layout.fragment_member_profile_page, new MemberProfilePageFragment());
-        fragmentMap.put(R.layout.fragment_own_dictionary_page, new OwnDictionaryPageFragment());
+    private void setContainerMap() {
+        containerMap.put(R.layout.fragment_public_dictionary_page, R.id.dictionaryHomePageContainer);
+        containerMap.put(R.layout.fragment_member_profile_page, R.id.dictionaryHomePageContainer);
+        containerMap.put(R.layout.fragment_own_dictionary_page, R.id.dictionaryHomePageContainer);
+        containerMap.put(R.layout.fragment_member_profile_modify, R.id.dictionaryHomePageContainer);
 
-        // Public Dictionary
-        fragmentMap.put(R.layout.fragment_public_dictionaries, new PublicDictionariesFragment());
-        fragmentMap.put(R.layout.fragment_public_word_groups, new PublicWordGroupsFragment());
-        fragmentMap.put(R.layout.fragment_word, new WordsFragment());
+        containerMap.put(R.layout.fragment_public_dictionaries, R.id.publicDictionaryPageContainer);
+        containerMap.put(R.layout.fragment_public_word_groups, R.id.publicDictionaryPageContainer);
+        containerMap.put(R.layout.fragment_word, R.id.publicDictionaryPageContainer);
 
-        // Profile
-        fragmentMap.put(R.layout.fragment_own_dictionaries, new OwnDictionariesFragment());
-        fragmentMap.put(R.layout.fragment_favorite_dictionaries, new FavoriteDictionariesFragment());
-        fragmentMap.put(R.layout.fragment_create_own_dictionary, new CreateOwnDictionaryFragment());
-        fragmentMap.put(R.layout.fragment_member_profile_modify, new MemberProfileModifyFragment());
+        containerMap.put(R.layout.fragment_own_dictionaries, R.id.memberProfilePageContainer);
+        containerMap.put(R.layout.fragment_favorite_dictionaries, R.id.memberProfilePageContainer);
+        containerMap.put(R.layout.fragment_create_own_dictionary, R.id.memberProfilePageContainer);
+    }
 
-        // Own Dictionary
-        containerNameMap.put(R.id.dictionaryHomePageContainer, "DICTIONARY_HOME_PAGE_CONTAINER");
-        containerNameMap.put(R.id.publicDictionaryPageContainer, "PUBLIC_DICTIONARY_PAGE_CONTAINER");
-        containerNameMap.put(R.id.memberProfilePageContainer, "MEMBER_PROFILE_PAGE_CONTAINER");
-
-        switchFragment(R.layout.fragment_public_dictionary_page, R.id.dictionaryHomePageContainer);
-        switchFragment(R.layout.fragment_public_dictionaries, R.id.publicDictionaryPageContainer);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        switchFragment(R.layout.fragment_public_dictionary_page);
+        switchFragment(R.layout.fragment_public_dictionaries);
     }
 
     private DrawerLayout dictionaryHomePageDrawer;
@@ -169,12 +155,7 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
                                     R.layout.fragment_own_dictionaries);
                             break;
                         case R.id.drawer_log_out:
-                            CustomDialog customDialog = new CustomDialog(this)
-                                    .setMessage("Are you sure to log out ?")
-                                    .setDialogButtonLeft("Yes", v -> finish())
-                                    .setDialogButtonRight("No", v ->
-                                            dictionaryHomePageDrawer.closeDrawer(GravityCompat.START));
-                            customDialog.show();
+                            createDialogAskForLogOut();
                             break;
                     }
                     return true;
@@ -182,64 +163,57 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
     }
 
     private void setInnerFragmentIntoMemberProfilePage(int innerFragmentId) {
-        switchFragment(R.layout.fragment_member_profile_page, R.id.dictionaryHomePageContainer);
+        switchFragment(R.layout.fragment_member_profile_page);
         if (innerFragmentId != R.layout.fragment_own_dictionaries) {
-            switchFragment(R.layout.fragment_own_dictionaries, R.id.memberProfilePageContainer);
+            switchFragment(R.layout.fragment_own_dictionaries);
         }
-        switchFragment(innerFragmentId, R.id.memberProfilePageContainer);
+        switchFragment(innerFragmentId);
     }
 
-    private Stack<Integer> containerStack = new Stack<>();
-    private Stack<Integer> fragmentStack = new Stack<>();
-    private Map<Integer, String> containerNameMap = new HashMap<>();
+    private void createDialogAskForLogOut() {
+        CustomDialog customDialog = new CustomDialog(this)
+                .setMessage("Are you sure to log out ?")
+                .setDialogButtonLeft("Yes", (v, event) -> {
+                    finish();
+                    return true;
+                })
+                .setDialogButtonRight("No", (v, event) -> {
+                    dictionaryHomePageDrawer.closeDrawer(GravityCompat.START);
+                    return true;
+                });
+        customDialog.show();
+    }
 
-    public void switchFragment(int fragmentId, int containerId,
-                               Serializable... serializableArray) {
-        BaseFragment nextFragment = fragmentMap.get(fragmentId);
-        if (nextFragment != null) {
-            // 傳遞參數給其他 Fragment
+    private BaseFragmentCreator baseFragmentCreator = new BaseFragmentCreator();
+    private List<String> fragmentTagList = new ArrayList<>(10);
+
+    public void switchFragment(int fragmentId, Serializable... serializableArray) {
+        try {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//            int containerId = containerMap.get(fragmentId);
+//            if (containerId == R.id.publicDictionaryPageContainer) {
+//                switchFragment(R.layout.fragment_public_dictionary_page);
+//            } else if (containerId == R.id.memberProfilePageContainer) {
+//                switchFragment(R.layout.fragment_member_profile_page);
+//            }
+            BaseFragment nextFragment = baseFragmentCreator
+                    .createBaseFragmentInstance(fragmentId);
             if (serializableArray.length > 0) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("VocabNoteObjects", serializableArray[0]);
                 nextFragment.setArguments(bundle);
-                nextFragment.updateFragmentData();
             }
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            if (nextFragment.isAdded()) {
-                // fragmentStack.peek() 為當前片段 layout
-                fragmentTransaction.hide(fragmentMap.get(fragmentStack.peek()));
-                nextFragment.updateFragmentData();
-            } else {
-                // 加入新片段進 container (無論 container 內或外)
-                fragmentTransaction.add(containerId, nextFragment);
-                // 換頁記錄
-                fragmentStack.add(fragmentId);
-                containerStack.add(containerId);
-            }
-//            Log.d(this.getClass().getSimpleName(), getFragmentStackLog());
-//            Log.d(this.getClass().getSimpleName(), getContainerStackLog());
-            fragmentTransaction.show(nextFragment).commit();
-            // 隱藏當前片段 , 顯示下一片段
+            String nextFragmentTag = nextFragment.getClass().getSimpleName();
+            fragmentTransaction
+                    .replace(containerMap.get(fragmentId), nextFragment, nextFragmentTag)
+                    .addToBackStack(nextFragmentTag)
+                    .commit();
+            fragmentTagList.add(nextFragmentTag);
+            logd();
             dictionaryHomePageDrawer.closeDrawer(GravityCompat.START);
+        } catch (FragmnetClassNotCreateException err) {
+            Log.d(this.getClass().getSimpleName(), err.getMessage());
         }
-    }
-
-    private String getFragmentStackLog() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Integer fragmentId : fragmentStack) {
-            Fragment fragment = fragmentMap.get(fragmentId);
-            stringBuilder.append(fragment.getClass().getSimpleName()).append("\n");
-        }
-        return stringBuilder.toString();
-    }
-
-    private String getContainerStackLog() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Integer containerId : containerStack) {
-            String containerName = containerNameMap.get(containerId);
-            stringBuilder.append(containerName).append("\n");
-        }
-        return stringBuilder.toString();
     }
 
     @Override
@@ -247,25 +221,36 @@ public class DictionaryHomePageActivity extends AppCompatActivity {
         if (dictionaryHomePageDrawer.isDrawerOpen(GravityCompat.START)) {
             dictionaryHomePageDrawer.closeDrawer(GravityCompat.START);
         } else {
-            if (fragmentStack.size() > 2) {
-                int fragmentId = fragmentStack.pop();
-                backLastFragment(fragmentId);
-                fragmentId = fragmentStack.peek();
-                if (fragmentId == R.layout.fragment_public_dictionary_page
-                        || fragmentId == R.layout.fragment_member_profile_page
-                        || fragmentId == R.layout.fragment_own_dictionary_page) {
-                    backLastFragment(fragmentStack.pop());
+            int fragmentCount = fragmentManager.getBackStackEntryCount();
+            if (fragmentCount > 2) {
+                fragmentManager.popBackStack();
+                fragmentCount--;
+                String fragmentTag = fragmentManager
+                        .getBackStackEntryAt(fragmentCount - 1).getName();
+                Fragment fragment = fragmentManager.findFragmentByTag(fragmentTag);
+                fragmentTagList.remove(fragmentCount - 1);
+                logd();
+                if (fragment instanceof PublicDictionaryPageFragment
+                        || fragment instanceof MemberProfilePageFragment) {
+                    fragmentManager.popBackStack();
+                    fragmentTagList.remove(fragmentTagList.size() - 1);
+                    logd();
                 }
             } else {
-                finish();
+//                fragmentManager.popBackStack();
+//                fragmentManager.popBackStack();
+//                switchFragment(R.layout.fragment_public_dictionary_page);
+//                switchFragment(R.layout.fragment_public_dictionaries);
+                createDialogAskForLogOut();
             }
         }
     }
 
-    private void backLastFragment(int fragmentId) {
-        Fragment fragment = fragmentMap.get(fragmentId);
-        containerStack.pop();
-        fragmentManager.beginTransaction().remove(fragment).commit();
-        switchFragment(fragmentStack.peek(), containerStack.peek());
+    private void logd() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String s : fragmentTagList) {
+            stringBuilder.append(s).append(" \n");
+        }
+        Log.d("TEST", stringBuilder.substring(0, stringBuilder.length() - 2));
     }
 }

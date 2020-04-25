@@ -71,11 +71,6 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
         init();
     }
 
-    @Override
-    public void updateFragmentData() {
-
-    }
-
     private void findViews(View view) {
         // Toolbar
         memberInfoModifyVocabSearch = view.findViewById(R.id.memberInfoModifyVocabSearch);
@@ -109,16 +104,13 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
     private void init() {
         memberProfileModifyPresenter = new MemberProfileModifyPresenter(
                 this, Global.memberRepository(), Global.threadExecutor());
-        setMember();
-        setProfileEnable(false);
-        setEmailAddressEnable(false);
-        setPasswordEnable(false);
-        setAgeSpinner();
-        setMemberPhoto();
-        setModifyButtons();
+        setUpMember();
+        setUpAgeSpinner();
+        setUpMemberPhoto();
+        setUpModifyButtons();
     }
 
-    private void setMember() {
+    private void setUpMember() {
         Glide.with(this)
                 .asBitmap()
                 .load(user.getImageURL())
@@ -129,37 +121,7 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
         memberInfoModifyMemberName.setText((memberName.isEmpty()) ? "memberName" : memberName);
     }
 
-    private void setProfileEnable(boolean enable) {
-        setViewsVisible(enable, ageModifySpinner);
-        setViewsFocusable(enable, firstNameContent, lastNameContent, ageModifySpinner);
-        setViewBackground(enable, firstNameContent, lastNameContent);
-    }
-
-    private void setEmailAddressEnable(boolean enable) {
-        setViewsVisible(enable, newEmailAddress, newEmailAddressContent);
-        setViewsFocusable(enable, newEmailAddressContent);
-        setViewBackground(enable, newEmailAddressContent);
-    }
-
-    private void setPasswordEnable(boolean enable) {
-        setViewsVisible(enable, newPassword, newPasswordContent,
-                confirmNewPassword, newConfirmPasswordContent);
-        setViewsVisible(!enable, passwordModifyPrompt);
-        setViewsFocusable(enable, newPasswordContent, newConfirmPasswordContent);
-        setViewBackground(enable, newPasswordContent, newConfirmPasswordContent);
-    }
-
-    private void setViewBackground(boolean enable, View... views) {
-        for (View view : views) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                view.setBackground(enable ?
-                        getResources().getDrawable(R.drawable.modify_border) :
-                        getResources().getDrawable(R.color.mainWhite));
-            }
-        }
-    }
-
-    private void setAgeSpinner() {
+    private void setUpAgeSpinner() {
         ageModifySpinner.setAdapter(new ArrayAdapter<>(dictionaryHomePageActivity,
                 android.R.layout.simple_spinner_dropdown_item,
                 configAgeRange(150)));
@@ -173,7 +135,7 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
         return ageList;
     }
 
-    private void setMemberPhoto() {
+    private void setUpMemberPhoto() {
         memberModifyPhoto.setOnClickListener(v -> {
             if (isProfileModifyButtonClick) {
                 uploadPhoto();
@@ -233,7 +195,7 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
     private boolean isPasswordModifyButtonClick = false;
     private Bitmap photoBitmap;
 
-    private void setModifyButtons() {
+    private void setUpModifyButtons() {
         setMemberInfoEditable(isProfileModifyButtonClick, profileModifyButton);
         setMemberInfoEditable(isEmailAddressModifyButtonClick, emailAddressModifyButton);
         setMemberInfoEditable(isPasswordModifyButtonClick, passwordModifyButton);
@@ -271,6 +233,45 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
         modifyButton.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
         modifyButton.setText(editable ?
                 getString(R.string.modifyButtonSaveText) : getString(R.string.modifyButtonChangeText));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setProfileEnable(false);
+        setEmailAddressEnable(false);
+        setPasswordEnable(false);
+    }
+
+
+    private void setProfileEnable(boolean enable) {
+        setViewsVisible(enable, ageModifySpinner);
+        setViewsFocusable(enable, firstNameContent, lastNameContent, ageModifySpinner);
+        setViewBackground(enable, firstNameContent, lastNameContent);
+    }
+
+    private void setEmailAddressEnable(boolean enable) {
+        setViewsVisible(enable, newEmailAddress, newEmailAddressContent);
+        setViewsFocusable(enable, newEmailAddressContent);
+        setViewBackground(enable, newEmailAddressContent);
+    }
+
+    private void setPasswordEnable(boolean enable) {
+        setViewsVisible(enable, newPassword, newPasswordContent,
+                confirmNewPassword, newConfirmPasswordContent);
+        setViewsVisible(!enable, passwordModifyPrompt);
+        setViewsFocusable(enable, newPasswordContent, newConfirmPasswordContent);
+        setViewBackground(enable, newPasswordContent, newConfirmPasswordContent);
+    }
+
+    private void setViewBackground(boolean enable, View... views) {
+        for (View view : views) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                view.setBackground(enable ?
+                        getResources().getDrawable(R.drawable.modify_border) :
+                        getResources().getDrawable(R.color.mainWhite));
+            }
+        }
     }
 
     @Override

@@ -7,18 +7,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Token;
 import com.home.englishnote.models.entities.User;
 import com.home.englishnote.views.activities.DictionaryHomePageActivity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 
-public abstract class BaseFragment extends Fragment {
-
-    protected final static int DICTIONARY_HOME_PAGE_CONTAINER = R.id.dictionaryHomePageContainer;
-    protected final static int PUBLIC_DICTIONARY_PAGE_CONTAINER = R.id.publicDictionaryPageContainer;
-    protected final static int MEMBER_PROFILE_PAGE_CONTAINER = R.id.memberProfilePageContainer;
+public abstract class BaseFragment extends Fragment implements Cloneable {
 
     protected DictionaryHomePageActivity dictionaryHomePageActivity;
     protected User user;
@@ -37,11 +34,18 @@ public abstract class BaseFragment extends Fragment {
         dictionaryHomePageActivity.onBackPressed();
     }
 
-    protected void switchFragment(int fragmentId, int containerId,
-                                  Serializable... serializableArray) {
-        dictionaryHomePageActivity.switchFragment(fragmentId, containerId, serializableArray);
+    protected void switchFragment(int fragmentId, Serializable... serializableArray) {
+        dictionaryHomePageActivity.switchFragment(fragmentId, serializableArray);
     }
 
-    public abstract void updateFragmentData();
-
+    @NotNull
+    public BaseFragment clone() {
+        BaseFragment baseFragment = null;
+        try {
+            baseFragment = (BaseFragment) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return baseFragment;
+    }
 }

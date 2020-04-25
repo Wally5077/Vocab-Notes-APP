@@ -100,12 +100,11 @@ public class OwnWordsAdapter extends RecyclerView.Adapter<OwnWordsAdapter.OwnWor
                 Global.threadExecutor().executeUiThread(() -> {
                     DelayUtil.delayExecuteThread(200);
                     setWordItemImageEnable(true);
-                    DictionaryHomePageActivity dictionaryHomePageActivity = ((DictionaryHomePageActivity) context);
-                    dictionaryHomePageActivity.switchFragment(
-                            R.layout.fragment_public_dictionary_page,
-                            R.id.dictionaryHomePageContainer);
-                    dictionaryHomePageActivity.switchFragment(
-                            R.layout.fragment_word, R.id.publicDictionaryPageContainer, word);
+                    DictionaryHomePageActivity dictionaryHomePageActivity =
+                            ((DictionaryHomePageActivity) context);
+                    dictionaryHomePageActivity
+                            .switchFragment(R.layout.fragment_public_dictionary_page);
+                    dictionaryHomePageActivity.switchFragment(R.layout.fragment_word, word);
                 });
             });
         }

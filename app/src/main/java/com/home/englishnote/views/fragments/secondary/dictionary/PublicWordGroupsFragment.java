@@ -4,7 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,15 +57,6 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
         init();
     }
 
-    @Override
-    public void updateFragmentData() {
-        if (dictionary != null) {
-            fetchDictionaryFromBundle();
-            wordGroupsList.clear();
-            queryWordGroupsList();
-        }
-    }
-
     private void findViews(View view) {
         // Todo need a searchView
         publicDictionaryQuery = view.findViewById(R.id.publicDictionaryQuery);
@@ -79,12 +69,17 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
     private void init() {
         publicWordGroupsPresenter = new PublicWordGroupsPresenter(this,
                 Global.memberRepository(), Global.wordGroupRepository(), Global.threadExecutor());
-        wordGroupsList.clear();
         publicDictionaryFavoriteButton.setOnClickListener(this::onFavoriteButtonClick);
+        setUpWordGroupsRecycler();
+        setUpWordGroupsSwipeRefreshLayout();
+        setUpPublicDictionarySearchBar();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        wordGroupsList.clear();
         fetchDictionaryFromBundle();
-        initWordGroupsRecycler();
-        initWordGroupsSwipeRefreshLayout();
-        initPublicDictionarySearchBar();
         queryWordGroupsList();
     }
 
@@ -105,7 +100,7 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
 
     private List<WordGroup> wordGroupsList = new ArrayList<>();
 
-    private void initWordGroupsRecycler() {
+    private void setUpWordGroupsRecycler() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
         wordGroupsRecycler.setHasFixedSize(true);
         wordGroupsRecycler.setLayoutManager(linearLayoutManager);
@@ -125,7 +120,7 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
         });
     }
 
-    private void initWordGroupsSwipeRefreshLayout() {
+    private void setUpWordGroupsSwipeRefreshLayout() {
         wordGroupsSwipeRefreshLayout.measure(0, 0);
         wordGroupsSwipeRefreshLayout.setProgressViewOffset(true, 80, 90);
         wordGroupsSwipeRefreshLayout.setOnRefreshListener(this::queryWordGroupsList);
@@ -139,7 +134,7 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
                 dictionary.getId(), wordGroupsList.size(), WORD_GROUP_LIMIT);
     }
 
-    private void initPublicDictionarySearchBar() {
+    private void setUpPublicDictionarySearchBar() {
         publicDictionaryQuery.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -154,7 +149,8 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
                 } else {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         publicWordGroupsAdapter.updateWordGroupList(wordGroupsList.stream()
-                                .filter(wordGroup -> wordGroup.getTitle().contains(filterPattern))
+                                .filter(wordGroup ->
+                                        wordGroup.getTitle().contains(filterPattern))
                                 .collect(Collectors.toList()));
                     }
                 }
