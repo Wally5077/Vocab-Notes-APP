@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -73,10 +74,6 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
 
     private void findViews(View view) {
         // Toolbar
-        memberInfoModifyVocabSearch = view.findViewById(R.id.memberInfoModifyVocabSearch);
-        memberInfoModifyDictionarySearch = view.findViewById(R.id.memberInfoModifyDictionarySearch);
-        memberInfoModifyMemberPhoto = view.findViewById(R.id.memberInfoModifyMemberPhoto);
-        memberInfoModifyMemberName = view.findViewById(R.id.memberInfoModifyMemberName);
 
         // MyProfile
         firstNameContent = view.findViewById(R.id.userModifyPageFirstNameContent);
@@ -111,25 +108,35 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
     }
 
     private void setUpMember() {
-        Glide.with(this)
-                .asBitmap()
-                .load(user.getImageURL())
-                .circleCrop()
-                .error(R.drawable.small_user_pic)
-                .into(memberInfoModifyMemberPhoto);
+//        Glide.with(this)
+//                .asBitmap()
+//                .load(user.getImageURL())
+//                .circleCrop()
+//                .error(R.drawable.small_user_pic)
+//                .into(memberInfoModifyMemberPhoto);
         String memberName = user.getFirstName();
-        memberInfoModifyMemberName.setText((memberName.isEmpty()) ? "memberName" : memberName);
+//        memberInfoModifyMemberName.setText((memberName.isEmpty()) ? "memberName" : memberName);
     }
 
     private void setUpAgeSpinner() {
-        ageModifySpinner.setAdapter(new ArrayAdapter<>(dictionaryHomePageActivity,
-                android.R.layout.simple_spinner_dropdown_item,
-                configAgeRange(150)));
+        ageModifySpinner.setAdapter(new ArrayAdapter<>(homePageActivity,
+                android.R.layout.simple_spinner_dropdown_item, configAgeRange(150)));
+        ageModifySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ageContent.setText(ageModifySpinner.getItemAtPosition(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private List<Integer> configAgeRange(int ageRange) {
         List<Integer> ageList = new ArrayList<>(ageRange);
-        for (int age = 0; age <= ageRange; age++) {
+        for (int age = 1; age <= ageRange; age++) {
             ageList.add(age);
         }
         return ageList;
@@ -176,10 +183,6 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
 //                            }
                                 photoBitmap = BitmapFactory
                                         .decodeStream(contentResolver.openInputStream(uri));
-                                if (!isProfileModifyButtonClick) {
-                                    memberProfileModifyPresenter
-                                            .uploadPhoto(token, user.getId(), photoBitmap);
-                                }
                             }
                         } catch (FileNotFoundException err) {
                             Log.e("FileNotFoundException", err.getMessage(), err);
@@ -229,8 +232,8 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
                     getResources().getDrawable(R.drawable.bg_modify_grey_round_button) :
                     getResources().getDrawable(R.drawable.bg_modify_green_round_button));
         }
-        Drawable img = (editable) ? null : getResources().getDrawable(R.drawable.modify_pen);
-        modifyButton.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+        Drawable pen = (editable) ? null : getResources().getDrawable(R.drawable.modify_pen);
+        modifyButton.setCompoundDrawablesWithIntrinsicBounds(pen, null, null, null);
         modifyButton.setText(editable ?
                 getString(R.string.modifyButtonSaveText) : getString(R.string.modifyButtonChangeText));
     }
@@ -247,7 +250,7 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
     private void setProfileEnable(boolean enable) {
         setViewsVisible(enable, ageModifySpinner);
         setViewsFocusable(enable, firstNameContent, lastNameContent, ageModifySpinner);
-        setViewBackground(enable, firstNameContent, lastNameContent);
+        setViewBackground(enable, firstNameContent, lastNameContent, ageModifySpinner);
     }
 
     private void setEmailAddressEnable(boolean enable) {
@@ -276,12 +279,12 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
 
     @Override
     public void onUploadMemberPhotoSuccessfully(Bitmap photoBitmap) {
-        Glide.with(this)
-                .asBitmap()
-                .load(photoBitmap)
-                .error(R.drawable.small_user_pic)
-                .circleCrop()
-                .into(memberInfoModifyMemberPhoto);
+//        Glide.with(this)
+//                .asBitmap()
+//                .load(photoBitmap)
+//                .error(R.drawable.small_user_pic)
+//                .circleCrop()
+//                .into(memberInfoModifyMemberPhoto);
         Glide.with(this)
                 .asBitmap()
                 .load(photoBitmap)

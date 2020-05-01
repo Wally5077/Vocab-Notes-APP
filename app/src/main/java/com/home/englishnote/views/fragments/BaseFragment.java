@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import com.home.englishnote.models.entities.Token;
 import com.home.englishnote.models.entities.User;
-import com.home.englishnote.views.activities.DictionaryHomePageActivity;
+import com.home.englishnote.views.activities.HomePageActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -17,25 +17,29 @@ import java.io.Serializable;
 
 public abstract class BaseFragment extends Fragment implements Cloneable {
 
-    protected DictionaryHomePageActivity dictionaryHomePageActivity;
+    protected HomePageActivity homePageActivity;
     protected User user;
     protected Token token;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dictionaryHomePageActivity = (DictionaryHomePageActivity) getActivity();
+        homePageActivity = (HomePageActivity) getActivity();
         // Todo
-        user = dictionaryHomePageActivity.getUser();
-        token = dictionaryHomePageActivity.getToken();
+        user = homePageActivity.getUser();
+        token = homePageActivity.getToken();
     }
 
-    protected void backLastFragment() {
-        dictionaryHomePageActivity.onBackPressed();
+    protected void onBackPressed() {
+        homePageActivity.onBackPressed();
     }
 
-    protected void switchFragment(int fragmentId, Serializable... serializableArray) {
-        dictionaryHomePageActivity.switchFragment(fragmentId, serializableArray);
+    protected Fragment switchMainFragment(int fragmentId, Serializable... serializableArray) {
+        return homePageActivity.switchMainFragment(fragmentId, serializableArray);
+    }
+
+    protected void switchSecondaryFragment(Fragment mainFragment, int fragmentId, Serializable... serializableArray) {
+        homePageActivity.switchSecondaryFragment(mainFragment, fragmentId, serializableArray);
     }
 
     @NotNull

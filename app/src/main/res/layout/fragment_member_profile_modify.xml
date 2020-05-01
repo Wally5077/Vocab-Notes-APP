@@ -9,148 +9,6 @@
     android:elevation="2dp"
     android:fitsSystemWindows="true">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/memberInfoModifyTopToolBar"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1375" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/memberInfoModifyVocabSearch"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/memberInfoModifyTopToolBar"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/memberInfoModifySearch1"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@drawable/grey_search_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/memberInfoModifyVocabSearch1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2.5dp"
-            android:layout_marginLeft="2.5dp"
-            android:text="Look Up"
-            android:textAlignment="center"
-            android:textColor="#ABFFFFFF"
-            android:textSize="12sp"
-            app:fontFamily="@font/avenirheavy"
-            app:layout_constraintBottom_toBottomOf="@+id/memberInfoModifySearch1"
-            app:layout_constraintStart_toEndOf="@+id/memberInfoModifySearch1"
-            app:layout_constraintTop_toTopOf="@+id/memberInfoModifySearch1"
-            app:lineHeight="14sp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.3375" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/memberInfoModifyDictionarySearch"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/memberInfoModifyTopToolBar"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/memberInfoModifySearch2"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@drawable/grey_search_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/memberInfoModifyDictionaryListSearch2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2.5dp"
-            android:layout_marginLeft="2.5dp"
-            android:text="Dictionary List"
-            android:textAlignment="center"
-            android:textColor="#ABFFFFFF"
-            android:textSize="12sp"
-            app:fontFamily="@font/avenirheavy"
-            app:layout_constraintBottom_toBottomOf="@+id/memberInfoModifySearch2"
-            app:layout_constraintStart_toEndOf="@+id/memberInfoModifySearch2"
-            app:layout_constraintTop_toTopOf="@+id/memberInfoModifySearch2"
-            app:lineHeight="14sp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.675" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/publicDictionaryPageMemberProfile"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/memberInfoModifyTopToolBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/guideline3"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/memberInfoModifyMemberPhoto"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/small_user_pic" />
-
-        <TextView
-            android:id="@+id/memberInfoModifyMemberName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="7.5dp"
-            android:layout_marginLeft="7.5dp"
-            android:maxLines="1"
-            android:text="user name"
-            android:textAlignment="center"
-            android:textColor="@color/mainWhite"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            app:fontFamily="@font/avenirbook"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/memberInfoModifyMemberPhoto"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lineHeight="12sp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     <TextView
         android:id="@+id/userModifyMyProfile"
         android:layout_width="wrap_content"
@@ -193,7 +51,7 @@
         android:textSize="12sp"
         app:fontFamily="@font/avenirmedium"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/memberInfoModifyTopToolBar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/profileLine"
@@ -301,19 +159,22 @@
         app:layout_constraintTop_toBottomOf="@+id/textView11"
         app:lineHeight="15sp" />
 
-    <Spinner
+    <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/userModifyPageAgeSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
+        android:layout_width="62.5dp"
+        android:layout_height="20dp"
+        android:dropDownWidth="62.5dp"
+        android:dropDownVerticalOffset="47.5dp"
+        android:overlapAnchor="false"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="@+id/age"
         app:layout_constraintStart_toEndOf="@+id/age"
         app:layout_constraintTop_toTopOf="@+id/age" />
 
     <TextView
         android:id="@+id/userModifyPageAgeContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="62.5dp"
+        android:layout_height="20dp"
         android:paddingStart="2.5dp"
         android:paddingLeft="2.5dp"
         android:paddingEnd="0dp"
@@ -406,7 +267,6 @@
         android:paddingLeft="2.5dp"
         android:paddingEnd="0dp"
         android:paddingRight="0dp"
-
         android:text="12345678@gmail.com"
         android:textColor="@color/mainColor"
         android:textSize="13sp"

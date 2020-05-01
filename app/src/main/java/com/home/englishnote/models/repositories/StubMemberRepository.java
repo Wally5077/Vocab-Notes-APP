@@ -8,7 +8,7 @@ import com.home.englishnote.models.entities.Role;
 import com.home.englishnote.models.entities.Token;
 import com.home.englishnote.models.entities.Type;
 import com.home.englishnote.utils.DelayUtil;
-import com.home.englishnote.utils.RandomVacabProducer;
+import com.home.englishnote.utils.RandomVacabGenerator;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class StubMemberRepository implements MemberRepository {
     public StubMemberRepository() {
         dictionaryList = new LinkedList<>();
         for (int addTime = 0; addTime < 20; addTime++) {
-            dictionaryList.add(RandomVacabProducer.randomDictionary(
+            dictionaryList.add(RandomVacabGenerator.randomDictionary(
                     Type.PUBLIC, 4, 6,
                     3, 9));
         }
@@ -39,7 +39,7 @@ public class StubMemberRepository implements MemberRepository {
     @Override
     public Member getMember(int memberId) {
         DelayUtil.delayExecuteThread(300);
-        return RandomVacabProducer.randomMember(Role.MEMBER);
+        return RandomVacabGenerator.randomMember(Role.MEMBER);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class StubMemberRepository implements MemberRepository {
     @Override
     public void createOwnDictionary(Token token, int memberId, String title, String description) {
         DelayUtil.delayExecuteThread(300);
-        Dictionary dictionary = RandomVacabProducer.randomDictionary(
+        Dictionary dictionary = RandomVacabGenerator.randomDictionary(
                 Type.PUBLIC, 5, 10,
                 5, 20);
         dictionary.setTitle(title);

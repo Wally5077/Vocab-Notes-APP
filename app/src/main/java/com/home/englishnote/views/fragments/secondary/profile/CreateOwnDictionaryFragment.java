@@ -128,13 +128,13 @@ public class CreateOwnDictionaryFragment extends BaseFragment implements CreateO
     private void setUpCancelOwnDictionaryButton() {
         cancelOwnDictionaryButton.setOnClickListener(v -> {
             clearText(ownDictionaryTitle, ownDictionaryDescription);
-            backLastFragment();
+            onBackPressed();
         });
     }
 
     @Override
     public void createOwnDictionarySuccessfully() {
         clearText(ownDictionaryTitle, ownDictionaryDescription);
-        backLastFragment();
+        onBackPressed();
     }
 }

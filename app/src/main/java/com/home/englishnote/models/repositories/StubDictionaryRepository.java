@@ -5,7 +5,7 @@ import com.home.englishnote.exceptions.DictionaryNotFoundException;
 import com.home.englishnote.models.entities.Dictionary;
 import com.home.englishnote.models.entities.Type;
 import com.home.englishnote.utils.DelayUtil;
-import com.home.englishnote.utils.RandomVacabProducer;
+import com.home.englishnote.utils.RandomVacabGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class StubDictionaryRepository implements DictionaryRepository {
     public StubDictionaryRepository() {
         dictionaryList = new ArrayList<>(100);
         for (int index = 0; index < 100; index++) {
-            dictionaryList.add(RandomVacabProducer.randomDictionary(Type.PUBLIC,
+            dictionaryList.add(RandomVacabGenerator.randomDictionary(Type.PUBLIC,
                     3, 9, 5, 20));
         }
     }

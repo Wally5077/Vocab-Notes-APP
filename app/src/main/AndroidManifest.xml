@@ -15,12 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".views.activities.BaseActivity" />
-        <activity android:name=".views.activities.DictionaryHomePageActivity" />
+        <activity android:name=".views.activities.MainActivity" />
         <activity android:name=".views.activities.SignUpActivity" />
         <activity android:name=".views.activities.SignInActivity" />
         <activity android:name=".views.activities.TestActivity" />
         <activity
-            android:name=".views.activities.MainActivity"
+            android:name=".views.activities.HomePageActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

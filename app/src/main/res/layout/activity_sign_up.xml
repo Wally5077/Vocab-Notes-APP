@@ -110,13 +110,16 @@
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Spinner
+    <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/signUpAge"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
         android:dropDownWidth="82.5dp"
+        android:dropDownVerticalOffset="37.5dp"
+        android:overlapAnchor="false"
+        android:spinnerMode="dropdown"
         app:layout_constraintStart_toStartOf="@id/SignUpBorder"
         app:layout_constraintTop_toBottomOf="@+id/signUpLastNameLayout" />
 

@@ -51,7 +51,6 @@ public class WordsFragment extends BaseFragment implements WordsView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViews(view);
-        init();
     }
 
     private void findViews(View view) {
@@ -75,6 +74,12 @@ public class WordsFragment extends BaseFragment implements WordsView {
         // change
         wordImageDown = view.findViewById(R.id.wordImageDown);
         wordContentUp = view.findViewById(R.id.wordContentUp);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        init();
     }
 
     private void init() {

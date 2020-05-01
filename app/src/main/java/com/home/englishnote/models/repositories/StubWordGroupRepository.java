@@ -5,7 +5,7 @@ import com.home.englishnote.models.entities.Type;
 import com.home.englishnote.models.entities.WordGroup;
 import com.home.englishnote.utils.DelayUtil;
 import com.home.englishnote.utils.Global;
-import com.home.englishnote.utils.RandomVacabProducer;
+import com.home.englishnote.utils.RandomVacabGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +17,14 @@ public class StubWordGroupRepository implements WordGroupRepository {
     public StubWordGroupRepository() {
         wordGroupList = new ArrayList<>(100);
         for (int index = 0; index < 100; index++) {
-            wordGroupList.add(RandomVacabProducer.randomWordGroup(3, 9));
+            wordGroupList.add(RandomVacabGenerator.randomWordGroup(3, 9));
         }
     }
 
     @Override
     public WordGroup getWordGroup(int wordGroupId) {
         DelayUtil.delayExecuteThread(500);
-        return RandomVacabProducer.randomDictionary(
+        return RandomVacabGenerator.randomDictionary(
                 Type.PUBLIC, 3, 10,
                 5, 20).getWordGroups().get(0);
     }
@@ -44,7 +44,7 @@ public class StubWordGroupRepository implements WordGroupRepository {
     @Override
     public List<WordGroup> getWordGroupsFromFavoriteDictionary(int memberId, int offset, int limit) {
         DelayUtil.delayExecuteThread(500);
-        return RandomVacabProducer.randomDictionary(
+        return RandomVacabGenerator.randomDictionary(
                 Type.PUBLIC, 1, 3,
                 5, 20).getWordGroups();
     }

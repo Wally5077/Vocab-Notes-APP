@@ -18,7 +18,7 @@ import java.util.Set;
 import static com.home.englishnote.utils.RandomGenerator.randomHttpUrl;
 import static com.home.englishnote.utils.RandomGenerator.randomString;
 
-public class RandomVacabProducer {
+public class RandomVacabGenerator {
 
     private final static Random RANDOM = new Random();
     private static Set<String> wordGroupTitles = Collections.synchronizedSet(new HashSet<>());

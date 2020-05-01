@@ -65,16 +65,16 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
     @Override
     public void onResume() {
         super.onResume();
-        dictionaryList.clear();
         queryDictionaryList();
     }
 
-    private List<Dictionary> dictionaryList = new ArrayList<>();
+    private List<Dictionary> dictionaryList;
 
     private void setUpDictionariesRecycler() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(homePageActivity);
         publicDictionariesRecycler.setHasFixedSize(true);
         publicDictionariesRecycler.setLayoutManager(linearLayoutManager);
+        dictionaryList = new ArrayList<>();
         publicDictionariesAdapter = new PublicDictionariesAdapter(dictionaryList);
         publicDictionariesRecycler.setAdapter(publicDictionariesAdapter);
         publicDictionariesRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -124,11 +124,11 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
     }
 
     public void onVocabSearchClick(View view) {
-        // Todo show vocabSearch
+        // Todo showDialog vocabSearch
     }
 
     public void onDictionaryListSearchClick(View view) {
-        // Todo show dictionaryListSearch
+        // Todo showDialog dictionaryListSearch
     }
 
     public class PublicDictionariesAdapter extends Adapter<PublicDictionariesAdapter.PublicDictionariesHolder> {
@@ -181,7 +181,8 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
 
             private void setExploreButtonClick(Dictionary dictionary) {
                 exploreButton.setOnClickListener(
-                        (v) -> switchFragment(R.layout.fragment_public_word_groups, dictionary));
+                        v -> switchSecondaryFragment(null,
+                                R.layout.fragment_public_word_groups, dictionary));
             }
 
             private void setData(Dictionary dictionary) {

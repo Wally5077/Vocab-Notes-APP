@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
@@ -35,7 +36,6 @@ public class MemberProfilePageFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViews(view);
-        init();
     }
 
     private void findViews(View view) {
@@ -43,6 +43,12 @@ public class MemberProfilePageFragment extends BaseFragment {
         memberProfilePageName = view.findViewById(R.id.memberProfilePageName);
         memberProfilePageEditProfileButton = view.findViewById(R.id.memberProfilePageEditProfileButton);
         memberProfilePageCreateDictionaryButton = view.findViewById(R.id.memberProfilePageCreateDictionaryButton);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        init();
     }
 
     private void init() {
@@ -66,13 +72,16 @@ public class MemberProfilePageFragment extends BaseFragment {
     }
 
     private void setUpMemberProfileEditProfileButtonClick() {
-        memberProfilePageEditProfileButton.setOnClickListener(
-                v -> switchFragment(R.layout.fragment_member_profile_modify));
+        memberProfilePageEditProfileButton.setOnClickListener(v -> {
+            Fragment mainFragment = switchMainFragment(R.layout.fragment_public_dictionary_page);
+            switchSecondaryFragment(mainFragment, R.layout.fragment_member_profile_modify);
+        });
     }
 
     private void setUpMemberProfileCreateDictionaryButtonClick() {
         memberProfilePageCreateDictionaryButton.setOnClickListener(
-                v -> switchFragment(R.layout.fragment_create_own_dictionary));
+                v -> switchSecondaryFragment(null,
+                        R.layout.fragment_create_own_dictionary));
     }
 
 }

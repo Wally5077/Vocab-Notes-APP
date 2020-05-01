@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
@@ -29,7 +30,6 @@ import com.home.englishnote.models.entities.Member;
 import com.home.englishnote.models.entities.Word;
 import com.home.englishnote.presenters.PublicDictionaryPagePresenter;
 import com.home.englishnote.presenters.PublicDictionaryPagePresenter.PublicDictionaryPageView;
-import com.home.englishnote.utils.DelayUtil;
 import com.home.englishnote.utils.Global;
 import com.home.englishnote.views.fragments.BaseFragment;
 
@@ -45,9 +45,9 @@ public class PublicDictionaryPageFragment extends BaseFragment
 
     private TextView memberName;
     private ImageView memberPhoto;
-    private View vocabSearch;
-    private View dictionarySearch;
-    private View vocabSearchFeature;
+    private ViewGroup vocabSearch;
+    private ViewGroup dictionarySearch;
+    private ViewGroup vocabSearchFeature;
     private AutoCompleteTextView vocabAutoSearch;
     private ImageView vocabSearchImage;
     private TextView vocabSearchText;
@@ -56,7 +56,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
     private PublicDictionaryPagePresenter publicDictionaryPagePresenter;
     private RecyclerView dictionarySearchRecycler;
     private DictionarySearchAdapter dictionarySearchAdapter;
-    private View memberProfile;
+    private ViewGroup memberProfile;
 
     @Nullable
     @Override
@@ -71,7 +71,6 @@ public class PublicDictionaryPageFragment extends BaseFragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViews(view);
-        init();
     }
 
     private void findViews(View view) {
@@ -92,6 +91,12 @@ public class PublicDictionaryPageFragment extends BaseFragment
         memberProfile = view.findViewById(R.id.publicDictionaryPageMemberProfile);
         memberName = view.findViewById(R.id.publicDictionaryPageMemberName);
         memberPhoto = view.findViewById(R.id.publicDictionaryPageMemberPhoto);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        init();
     }
 
     private void init() {
@@ -152,12 +157,13 @@ public class PublicDictionaryPageFragment extends BaseFragment
         setViewsFocusable(enable, vocabSearchFeature);
     }
 
-    private List<Dictionary> dictionaryList = new ArrayList<>();
+    private List<Dictionary> dictionaryList;
 
     private void setUpDictionarySearchRecycler() {
-        LayoutManager layoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
+        LayoutManager layoutManager = new LinearLayoutManager(homePageActivity);
         dictionarySearchRecycler.setHasFixedSize(true);
         dictionarySearchRecycler.setLayoutManager(layoutManager);
+        dictionaryList = new ArrayList<>();
         dictionarySearchAdapter = new DictionarySearchAdapter(dictionaryList);
         dictionarySearchRecycler.setAdapter(dictionarySearchAdapter);
     }
@@ -201,8 +207,8 @@ public class PublicDictionaryPageFragment extends BaseFragment
     private void setUpMemberProfileClick() {
         memberProfile.setOnClickListener(v -> {
             if (user instanceof Member) {
-                switchFragment(R.layout.fragment_member_profile_page);
-                switchFragment(R.layout.fragment_own_dictionaries);
+                Fragment mainFragment = switchMainFragment(R.layout.fragment_member_profile_page);
+                switchSecondaryFragment(mainFragment, R.layout.fragment_own_dictionaries);
             }
         });
     }
@@ -252,7 +258,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
         setVocabSearchEnable(false);
         ((InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE))
                 .hideSoftInputFromWindow(getView().getRootView().getWindowToken(), 0);
-        switchFragment(R.layout.fragment_word, word);
+        switchSecondaryFragment(null, R.layout.fragment_word, word);
     }
 
     @Override
@@ -330,8 +336,8 @@ public class PublicDictionaryPageFragment extends BaseFragment
                     setDictionaryItemBackgroundEnable(true);
                     if (dictionary != null) {
                         Global.threadExecutor().executeUiThread(() -> {
-                            DelayUtil.delayExecuteThread(300);
-                            switchFragment(R.layout.fragment_public_word_groups, dictionary);
+                            switchSecondaryFragment(
+                                    null, R.layout.fragment_public_word_groups, dictionary);
 
                             setSearchImageDrawable(false, dictionarySearchImage);
                             setSearchTextColor(false, dictionarySearchText);

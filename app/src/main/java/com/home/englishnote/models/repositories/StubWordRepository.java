@@ -4,7 +4,7 @@ package com.home.englishnote.models.repositories;
 import com.home.englishnote.exceptions.WordNotFoundException;
 import com.home.englishnote.models.entities.Word;
 import com.home.englishnote.utils.DelayUtil;
-import com.home.englishnote.utils.RandomVacabProducer;
+import com.home.englishnote.utils.RandomVacabGenerator;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +14,7 @@ public class StubWordRepository implements WordRepository {
     private List<Word> wordList;
 
     public StubWordRepository() {
-        wordList = RandomVacabProducer.randomWordGroup(999, 1000).getWords();
+        wordList = RandomVacabGenerator.randomWordGroup(999, 1000).getWords();
     }
 
     @Override

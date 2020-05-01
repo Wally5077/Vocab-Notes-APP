@@ -9,12 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.home.englishnote.R;
 import com.home.englishnote.models.entities.Word;
-import com.home.englishnote.views.activities.DictionaryHomePageActivity;
+import com.home.englishnote.views.activities.HomePageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,11 +101,12 @@ public class OwnWordsAdapter extends RecyclerView.Adapter<OwnWordsAdapter.OwnWor
                 Global.threadExecutor().executeUiThread(() -> {
                     DelayUtil.delayExecuteThread(200);
                     setWordItemImageEnable(true);
-                    DictionaryHomePageActivity dictionaryHomePageActivity =
-                            ((DictionaryHomePageActivity) context);
-                    dictionaryHomePageActivity
-                            .switchFragment(R.layout.fragment_public_dictionary_page);
-                    dictionaryHomePageActivity.switchFragment(R.layout.fragment_word, word);
+                    HomePageActivity homePageActivity =
+                            ((HomePageActivity) context);
+                    Fragment mainFragment = homePageActivity.switchMainFragment(
+                            R.layout.fragment_public_dictionary_page);
+                    homePageActivity.switchSecondaryFragment(
+                            mainFragment, R.layout.fragment_word, word);
                 });
             });
         }

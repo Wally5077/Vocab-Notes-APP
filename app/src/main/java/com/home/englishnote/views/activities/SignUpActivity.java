@@ -1,7 +1,6 @@
 package com.home.englishnote.views.activities;
 
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -51,25 +50,27 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
     }
 
     private void init() {
-        signUpAgeSpinner.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                configAgeRange(150)));
         signUpPresenter = new SignUpPresenter(
                 this, Global.memberRepository(), Global.threadExecutor());
         setTextInputLayout(signUpFirstNameLayout, signUpLastNameLayout,
-                signUpEmailLayout, signUpPasswordLayout,
-                signUpPasswordConfirmationLayout);
+                signUpEmailLayout, signUpPasswordLayout, signUpPasswordConfirmationLayout);
+        setUpAgeSpinner();
 
         signUpFirstNameLayout.getEditText().setText("wally");
         signUpLastNameLayout.getEditText().setText("chen");
         signUpEmailLayout.getEditText().setText("w@gmail.com");
-        signUpAgeSpinner.setSelection(1);
         signUpPasswordLayout.getEditText().setText("w0000000");
         signUpPasswordConfirmationLayout.getEditText().setText("w0000000");
     }
 
+    private void setUpAgeSpinner() {
+        signUpAgeSpinner.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, configAgeRange(150)));
+        signUpAgeSpinner.setSelection(0, true);
+    }
+
     private List<String> configAgeRange(int ageRange) {
-        List<String> ageList = new ArrayList<>(ageRange);
+        List<String> ageList = new ArrayList<>(ageRange + 1);
         ageList.add(VocabularyNoteKeyword.DEFAULT_SPINNER_WORD);
         for (int age = 1; age <= ageRange; age++) {
             ageList.add(String.valueOf(age));
@@ -77,13 +78,12 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         return ageList;
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     private void setTextInputLayout(TextInputLayout... textInputLayouts) {
         for (TextInputLayout textInputLayout : textInputLayouts) {
             TextView textView = textInputLayout.getEditText();
             textView.setOnTouchListener((v, event) -> {
                 ((TextView) v).setText("");
-                return false;
+                return true;
             });
             clearTextViewContent(textView);
         }
@@ -93,7 +93,6 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         startActivity(new Intent(this, SignInActivity.class));
     }
 
-    @SuppressWarnings("ConstantConditions")
     public void onSubmitButtonClick(View view) {
         String firstName = signUpFirstNameLayout.getEditText().getText().toString().trim();
         String lastName = signUpLastNameLayout.getEditText().getText().toString().trim();
@@ -108,7 +107,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
 
     @Override
     public void onSignUpSuccessfully(Member member, Token token) {
-        startActivity(new Intent(this, DictionaryHomePageActivity.class)
+        startActivity(new Intent(this, HomePageActivity.class)
                 .putExtra("user", member));
         finish();
     }

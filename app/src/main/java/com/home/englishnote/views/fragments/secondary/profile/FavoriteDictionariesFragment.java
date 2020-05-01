@@ -3,7 +3,6 @@ package com.home.englishnote.views.fragments.secondary.profile;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -64,7 +63,7 @@ public class FavoriteDictionariesFragment extends BaseFragment
     private List<Dictionary> dictionaryList = new ArrayList<>();
 
     private void setUpDictionariesRecycler() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(homePageActivity);
         favoriteDictionariesRecycler.setHasFixedSize(true);
         favoriteDictionariesRecycler.setLayoutManager(linearLayoutManager);
         favoriteDictionariesAdapter = new FavoriteDictionariesAdapter(dictionaryList);
@@ -131,15 +130,15 @@ public class FavoriteDictionariesFragment extends BaseFragment
                 super(itemView);
                 findViews(itemView);
                 itemView.setOnLongClickListener(v -> {
-                    CustomDialog customDialog = new CustomDialog(dictionaryHomePageActivity)
+                    new CustomDialog(homePageActivity)
                             .setMessage("Are you sure to unfavorite this dictionary ?")
                             .setDialogButtonLeft("Yes", (view, event) -> {
                                 dictionaryList.remove(dictionary);
                                 notifyDataSetChanged();
                                 return true;
                             })
-                            .setDialogButtonRight("No", null);
-                    customDialog.show();
+                            .setDialogButtonRight("No", null)
+                            .showDialog();
                     return true;
                 });
             }

@@ -78,7 +78,7 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
     private List<Dictionary> dictionaryList = new ArrayList<>();
 
     private void setUpDictionariesRecycler() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(homePageActivity);
         ownDictionariesRecycler.setHasFixedSize(true);
         ownDictionariesRecycler.setLayoutManager(linearLayoutManager);
         ownDictionariesAdapter = new OwnDictionariesAdapter(dictionaryList);
@@ -205,7 +205,7 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
                 super(itemView);
                 findViews(itemView);
                 itemView.setOnClickListener(
-                        v -> switchFragment(R.layout.fragment_own_dictionary_page, dictionary));
+                        v -> switchMainFragment(R.layout.fragment_own_dictionary_page, dictionary));
             }
 
             private void findViews(View view) {

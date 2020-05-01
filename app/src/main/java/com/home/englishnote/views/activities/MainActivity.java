@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onGuestSignInClick(View view) {
         // Todo Needs a Guest Object which is a Member
-        startActivity(new Intent(this, DictionaryHomePageActivity.class)
+        startActivity(new Intent(this, HomePageActivity.class)
                 .putExtra("user", Global.user()));
     }
 }

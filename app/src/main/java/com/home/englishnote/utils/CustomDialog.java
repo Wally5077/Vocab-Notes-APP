@@ -118,11 +118,11 @@ public class CustomDialog extends AlertDialog {
         return this;
     }
 
-    @Override
-    public void show() {
+    public CustomDialog showDialog() {
         ColorDrawable background = new ColorDrawable(Color.TRANSPARENT);
         InsetDrawable insetDrawable = new InsetDrawable(background, 150);
         dialog.getWindow().setBackgroundDrawable(insetDrawable);
         dialog.show();
+        return this;
     }
 }

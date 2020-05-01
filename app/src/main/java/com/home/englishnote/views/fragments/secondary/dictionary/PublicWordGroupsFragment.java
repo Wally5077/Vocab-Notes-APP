@@ -1,5 +1,6 @@
 package com.home.englishnote.views.fragments.secondary.dictionary;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -27,6 +28,7 @@ import com.home.englishnote.utils.Global;
 import com.home.englishnote.utils.PublicWordGroupsAdapter;
 import com.home.englishnote.views.fragments.BaseFragment;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,7 +56,6 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViews(view);
-        init();
     }
 
     private void findViews(View view) {
@@ -66,20 +67,20 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
         wordGroupsRecycler = view.findViewById(R.id.publicWordGroupsRecycler);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        init();
+    }
+
     private void init() {
         publicWordGroupsPresenter = new PublicWordGroupsPresenter(this,
                 Global.memberRepository(), Global.wordGroupRepository(), Global.threadExecutor());
         publicDictionaryFavoriteButton.setOnClickListener(this::onFavoriteButtonClick);
+        fetchDictionaryFromBundle();
         setUpWordGroupsRecycler();
         setUpWordGroupsSwipeRefreshLayout();
         setUpPublicDictionarySearchBar();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        wordGroupsList.clear();
-        fetchDictionaryFromBundle();
         queryWordGroupsList();
     }
 
@@ -87,10 +88,8 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
 
     private void fetchDictionaryFromBundle() {
         Bundle bundle = getArguments();
-        if (bundle != null) {
-            dictionary = (Dictionary) bundle.getSerializable("VocabNoteObjects");
-            publicDictionaryName.setText(dictionary.getTitle());
-        }
+        dictionary = (Dictionary) bundle.getSerializable("VocabNoteObjects");
+        publicDictionaryName.setText(dictionary.getTitle());
     }
 
     private void onFavoriteButtonClick(View view) {
@@ -98,12 +97,13 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
         publicWordGroupsPresenter.addFavoriteDictionaryList(dictionary.getId(), user.getId());
     }
 
-    private List<WordGroup> wordGroupsList = new ArrayList<>();
+    private List<WordGroup> wordGroupsList;
 
     private void setUpWordGroupsRecycler() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(dictionaryHomePageActivity);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(homePageActivity);
         wordGroupsRecycler.setHasFixedSize(true);
         wordGroupsRecycler.setLayoutManager(linearLayoutManager);
+        wordGroupsList = new ArrayList<>();
         publicWordGroupsAdapter = new PublicWordGroupsAdapter(wordGroupsList);
         wordGroupsRecycler.setAdapter(publicWordGroupsAdapter);
         wordGroupsRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
