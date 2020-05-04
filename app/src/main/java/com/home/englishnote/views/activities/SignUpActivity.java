@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.home.englishnote.presenters.SignUpPresenter.*;
+import static com.home.englishnote.utils.UserInfoHandleUtil.*;
 
 public class SignUpActivity extends BaseActivity implements SignUpView {
 
@@ -37,7 +38,6 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         findViews();
-        init();
     }
 
     private void findViews() {
@@ -47,6 +47,12 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         signUpPasswordLayout = findViewById(R.id.signUpPasswordLayout);
         signUpPasswordConfirmationLayout = findViewById(R.id.signUpPasswordConfirmationLayout);
         signUpAgeSpinner = findViewById(R.id.signUpAge);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        init();
     }
 
     private void init() {

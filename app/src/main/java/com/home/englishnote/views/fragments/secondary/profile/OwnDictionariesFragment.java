@@ -52,13 +52,19 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViews(view);
-        init();
     }
 
     private void findViews(View view) {
         ownDictionariesSwipeRefreshLayout = view.findViewById(R.id.ownDictionariesSwipeRefreshLayout);
         ownDictionariesRecycler = view.findViewById(R.id.ownDictionariesRecycler);
         ownDictionariesQuery = view.findViewById(R.id.ownDictionariesQuery);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        init();
+        queryDictionaryList();
     }
 
     private void init() {
@@ -90,7 +96,8 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
                 super.onScrollStateChanged(recyclerView, newState);
                 int lastVisibleItemPosition =
                         linearLayoutManager.findLastVisibleItemPosition();
-                if (lastVisibleItemPosition + 1 == ownDictionariesAdapter.getItemCount()) {
+                if (lastVisibleItemPosition + PAGE_LIMIT / 3
+                        >= ownDictionariesAdapter.getItemCount()) {
                     if (!isPullToRefreshTriggered) {
                         isPullToRefreshTriggered = true;
                         queryDictionaryList();
@@ -129,12 +136,6 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
         });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        queryDictionaryList();
-    }
-
     private static final int PAGE_LIMIT = 10;
 
     private void queryDictionaryList() {
@@ -150,8 +151,10 @@ public class OwnDictionariesFragment extends BaseFragment implements OwnDictiona
     public void onGetDictionariesSuccessfully(List<Dictionary> dictionaryList) {
         isPullToRefreshTriggered = false;
         setDictionariesSwipeRefreshLayoutEnable(false);
+        int originalDictionaryListSize = this.dictionaryList.size();
         this.dictionaryList.addAll(dictionaryList);
-        ownDictionariesAdapter.notifyDataSetChanged();
+        ownDictionariesAdapter.notifyItemRangeChanged(
+                originalDictionaryListSize, this.dictionaryList.size());
     }
 
     private void setDictionariesSwipeRefreshLayoutEnable(boolean enable) {

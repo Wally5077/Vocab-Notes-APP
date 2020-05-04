@@ -41,14 +41,6 @@ public class CreateOwnDictionaryFragment extends BaseFragment implements CreateO
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViews(view);
-        init();
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        ownDictionaryTitle.setText("");
-        ownDictionaryDescription.setText("");
     }
 
     private void findViews(View view) {
@@ -56,6 +48,12 @@ public class CreateOwnDictionaryFragment extends BaseFragment implements CreateO
         ownDictionaryDescription = view.findViewById(R.id.ownDictionaryDescription);
         saveOwnDictionaryButton = view.findViewById(R.id.saveOwnDictionaryButton);
         cancelOwnDictionaryButton = view.findViewById(R.id.cancelOwnDictionaryButton);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        init();
     }
 
     private void init() {

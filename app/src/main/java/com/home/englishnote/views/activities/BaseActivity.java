@@ -11,12 +11,11 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.home.englishnote.R;
 import com.home.englishnote.utils.DelayUtil;
 import com.home.englishnote.utils.Global;
-import com.home.englishnote.utils.HashUtil;
 import com.home.englishnote.utils.VocabularyNoteKeyword;
 
 public class BaseActivity extends AppCompatActivity {
 
-    private SharedPreferences sharedPreferences;
+    protected SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,34 +24,4 @@ public class BaseActivity extends AppCompatActivity {
                 getSharedPreferences(VocabularyNoteKeyword.SP_NAME, MODE_PRIVATE);
     }
 
-    // Todo refactor to utils class
-
-    protected void showErrorMessage(String errMessage, TextInputLayout... textInputLayouts) {
-        for (TextInputLayout textInputLayout : textInputLayouts) {
-            textInputLayout.setErrorEnabled(true);
-            TextView textView = textInputLayout.getEditText();
-            boolean isTextContentEmpty = textView.getText().toString().isEmpty();
-            if (isTextContentEmpty) {
-                textInputLayout.setError(getString(R.string.inputEmpty));
-            } else {
-                clearTextViewContent(textView);
-                textInputLayout.setError(errMessage);
-            }
-        }
-        clearAllTextInputLayoutError(textInputLayouts);
-    }
-
-    protected void clearTextViewContent(TextView textView) {
-        textView.setText("");
-    }
-
-    private void clearAllTextInputLayoutError(TextInputLayout[] textInputLayouts) {
-        Global.threadExecutor().executeUiThread(() -> {
-            DelayUtil.delayExecuteThread(1500);
-            for (TextInputLayout textInputLayout : textInputLayouts) {
-                textInputLayout.setError("");
-                textInputLayout.setErrorEnabled(false);
-            }
-        });
-    }
 }

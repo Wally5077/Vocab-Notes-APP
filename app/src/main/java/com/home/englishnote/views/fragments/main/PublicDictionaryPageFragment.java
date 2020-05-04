@@ -19,6 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
@@ -121,7 +122,7 @@ public class PublicDictionaryPageFragment extends BaseFragment
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String keyword = s.toString().trim();
+                String keyword = s.toString().toLowerCase().trim();
                 if (keyword.isEmpty()) {
                     vocabAutoSearch.dismissDropDown();
                 } else {
@@ -207,8 +208,14 @@ public class PublicDictionaryPageFragment extends BaseFragment
     private void setUpMemberProfileClick() {
         memberProfile.setOnClickListener(v -> {
             if (user instanceof Member) {
-                Fragment mainFragment = switchMainFragment(R.layout.fragment_member_profile_page);
-                switchSecondaryFragment(mainFragment, R.layout.fragment_own_dictionaries);
+                String fragmentTag = getChildFragmentManager()
+                        .getBackStackEntryAt(0).getName();
+                if ("MemberProfileModifyFragment".equals(fragmentTag)) {
+                    homePageActivity.onBackPressed();
+                } else {
+                    Fragment mainFragment = switchMainFragment(R.layout.fragment_member_profile_page);
+                    switchSecondaryFragment(mainFragment, R.layout.fragment_own_dictionaries);
+                }
             }
         });
     }
@@ -336,8 +343,8 @@ public class PublicDictionaryPageFragment extends BaseFragment
                     setDictionaryItemBackgroundEnable(true);
                     if (dictionary != null) {
                         Global.threadExecutor().executeUiThread(() -> {
-                            switchSecondaryFragment(
-                                    null, R.layout.fragment_public_word_groups, dictionary);
+                            switchSecondaryFragment(null,
+                                    R.layout.fragment_public_word_groups, dictionary);
 
                             setSearchImageDrawable(false, dictionarySearchImage);
                             setSearchTextColor(false, dictionarySearchText);

@@ -1,10 +1,14 @@
 package com.home.englishnote.views.fragments.secondary.profile;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +28,7 @@ import com.home.englishnote.views.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.home.englishnote.presenters.FavoriteDictionariesPresenter.*;
 
@@ -33,6 +38,7 @@ public class FavoriteDictionariesFragment extends BaseFragment
     private FavoriteDictionariesPresenter favoriteDictionariesPresenter;
     private RecyclerView favoriteDictionariesRecycler;
     private FavoriteDictionariesAdapter favoriteDictionariesAdapter;
+    private AutoCompleteTextView favoriteDictionariesQuery;
 
     @Nullable
     @Override
@@ -47,33 +53,65 @@ public class FavoriteDictionariesFragment extends BaseFragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViews(view);
-        init();
     }
 
     private void findViews(View view) {
         favoriteDictionariesRecycler = view.findViewById(R.id.favoriteDictionariesRecycler);
+        favoriteDictionariesQuery = view.findViewById(R.id.favoriteDictionariesQuery);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        init();
+        queryFavoriteDictionaryList();
     }
 
     private void init() {
         favoriteDictionariesPresenter = new FavoriteDictionariesPresenter(
                 this, Global.memberRepository(), Global.threadExecutor());
         setUpDictionariesRecycler();
+        setUpOwnDictionaryQuery();
     }
 
-    private List<Dictionary> dictionaryList = new ArrayList<>();
+    private List<Dictionary> dictionaryList;
 
     private void setUpDictionariesRecycler() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(homePageActivity);
         favoriteDictionariesRecycler.setHasFixedSize(true);
         favoriteDictionariesRecycler.setLayoutManager(linearLayoutManager);
+        dictionaryList = new ArrayList<>();
         favoriteDictionariesAdapter = new FavoriteDictionariesAdapter(dictionaryList);
         favoriteDictionariesRecycler.setAdapter(favoriteDictionariesAdapter);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        queryFavoriteDictionaryList();
+    private void setUpOwnDictionaryQuery() {
+        favoriteDictionariesQuery.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String filterPattern = s.toString().toLowerCase().trim();
+                if (count == 0) {
+                    favoriteDictionariesAdapter.updateDictionaryList(dictionaryList);
+                } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        favoriteDictionariesAdapter.updateDictionaryList(dictionaryList.stream()
+                                .filter(dictionary -> dictionary.getTitle().contains(filterPattern))
+                                .collect(Collectors.toList()));
+                    }
+                }
+                favoriteDictionariesAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void queryFavoriteDictionaryList() {
@@ -118,6 +156,10 @@ public class FavoriteDictionariesFragment extends BaseFragment
         @Override
         public int getItemCount() {
             return dictionaryList.size();
+        }
+
+        public void updateDictionaryList(List<Dictionary> dictionaryList) {
+            this.dictionaryList = dictionaryList;
         }
 
         public class FavoriteDictionariesHolder extends RecyclerView.ViewHolder

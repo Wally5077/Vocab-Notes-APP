@@ -1,6 +1,5 @@
 package com.home.englishnote.views.fragments.secondary.dictionary;
 
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -28,7 +27,6 @@ import com.home.englishnote.utils.Global;
 import com.home.englishnote.utils.PublicWordGroupsAdapter;
 import com.home.englishnote.views.fragments.BaseFragment;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -113,7 +111,8 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
                 super.onScrollStateChanged(recyclerView, newState);
                 int lastVisibleItemPosition =
                         linearLayoutManager.findLastVisibleItemPosition();
-                if (lastVisibleItemPosition + 1 == publicWordGroupsAdapter.getItemCount()) {
+                if (lastVisibleItemPosition + WORD_GROUP_LIMIT / 3
+                        >= publicWordGroupsAdapter.getItemCount()) {
                     queryWordGroupsList();
                 }
             }
@@ -165,10 +164,17 @@ public class PublicWordGroupsFragment extends BaseFragment implements PublicWord
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public void onGetWordGroupsSuccessfully(List<WordGroup> wordGroupList) {
         setWordGroupSwipeRefreshLayoutEnable(false);
+        int originalWordGroupsListSize = this.wordGroupsList.size();
         this.wordGroupsList.addAll(wordGroupList);
-        publicWordGroupsAdapter.notifyDataSetChanged();
+        publicWordGroupsAdapter.notifyItemRangeChanged(
+                originalWordGroupsListSize, this.wordGroupsList.size());
     }
 
     private void setWordGroupSwipeRefreshLayoutEnable(boolean enable) {

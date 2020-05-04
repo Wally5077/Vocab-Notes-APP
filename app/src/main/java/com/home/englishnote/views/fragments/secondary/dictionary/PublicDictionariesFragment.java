@@ -47,7 +47,6 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViews(view);
-        init();
     }
 
     private void findViews(View view) {
@@ -55,17 +54,18 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
         publicDictionariesRecycler = view.findViewById(R.id.publicDictionariesRecycler);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        init();
+        queryDictionaryList();
+    }
+
     private void init() {
         publicDictionariesPresenter = new PublicDictionariesPresenter(
                 this, Global.dictionaryRepository(), Global.threadExecutor());
         setUpDictionariesRecycler();
         setUpDictionariesSwipeRefreshLayout();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        queryDictionaryList();
     }
 
     private List<Dictionary> dictionaryList;
@@ -84,7 +84,8 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
                 super.onScrollStateChanged(recyclerView, newState);
                 int lastVisibleItemPosition =
                         linearLayoutManager.findLastVisibleItemPosition();
-                if (lastVisibleItemPosition + 1 == publicDictionariesAdapter.getItemCount()) {
+                if (lastVisibleItemPosition + PAGE_LIMIT / 3
+                        >= publicDictionariesAdapter.getItemCount()) {
                     if (!isPullToRefreshTriggered) {
                         isPullToRefreshTriggered = true;
                         queryDictionaryList();
@@ -114,21 +115,15 @@ public class PublicDictionariesFragment extends BaseFragment implements PublicDi
     public void onGetDictionariesSuccessfully(List<Dictionary> dictionaryList) {
         isPullToRefreshTriggered = false;
         setDictionariesSwipeRefreshLayoutEnable(false);
+        int originalDictionaryListSize = this.dictionaryList.size();
         this.dictionaryList.addAll(dictionaryList);
-        publicDictionariesAdapter.notifyDataSetChanged();
+        publicDictionariesAdapter.notifyItemRangeChanged(
+                originalDictionaryListSize, this.dictionaryList.size());
     }
 
     private void setDictionariesSwipeRefreshLayoutEnable(boolean enable) {
         publicDictionariesSwipeRefreshLayout.setEnabled(enable);
         publicDictionariesSwipeRefreshLayout.setRefreshing(enable);
-    }
-
-    public void onVocabSearchClick(View view) {
-        // Todo showDialog vocabSearch
-    }
-
-    public void onDictionaryListSearchClick(View view) {
-        // Todo showDialog dictionaryListSearch
     }
 
     public class PublicDictionariesAdapter extends Adapter<PublicDictionariesAdapter.PublicDictionariesHolder> {

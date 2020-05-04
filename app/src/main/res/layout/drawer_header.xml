@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12.5dp"
         android:layout_marginLeft="12.5dp"
-        android:text="User name"
+        android:text="Guest"
         android:textColor="@color/mainWhite"
         android:textSize="15sp"
         app:fontFamily="@font/avenirmedium"

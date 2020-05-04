@@ -26,12 +26,12 @@ public class Guest implements User {
 
     @Override
     public String getFirstName() {
-        return "firstName";
+        return "Guest";
     }
 
     @Override
     public String getLastName() {
-        return "lastName";
+        return "Guest";
     }
 
     @Override

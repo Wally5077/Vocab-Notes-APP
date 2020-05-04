@@ -29,14 +29,19 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.075" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
     <ImageView
         android:id="@+id/ownDictionaryPagePhoto"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="42.5dp"
+        android:layout_height="42.5dp"
         android:layout_marginTop="12.5dp"
-        android:layout_marginEnd="7.5dp"
-        android:layout_marginRight="7.5dp"
-        app:layout_constraintEnd_toStartOf="@+id/ownDictionaryPageMemberName"
+        app:layout_constraintStart_toEndOf="@id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/big_user_pic" />
 
@@ -44,7 +49,9 @@
         android:id="@+id/ownDictionaryPageEditButton"
         android:layout_width="77.5dp"
         android:layout_height="22.5dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="27.5dp"
         android:background="@drawable/bg_modify_green_round_button"
         android:drawableStart="@drawable/modify_pen"
         android:drawableLeft="@drawable/modify_pen"
@@ -60,12 +67,12 @@
         android:textSize="7sp"
         app:fontFamily="@font/avenirmedium"
         app:layout_constraintBottom_toBottomOf="@+id/ownDictionaryPageTopBar"
-        app:layout_constraintStart_toStartOf="@id/ownDictionaryPagePhoto" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/ownDictionaryPageDeleteButton"
         android:layout_width="102.5dp"
-        android:layout_height="17.5dp"
+        android:layout_height="22.5dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/bg_delete_dictionary"
@@ -88,34 +95,33 @@
     <Button
         android:id="@+id/ownDictionaryPageSaveButton"
         android:layout_width="35dp"
-        android:layout_height="17.5dp"
-        android:layout_marginBottom="12.5dp"
+        android:layout_height="22.5dp"
+        android:layout_marginStart="47.5dp"
+        android:layout_marginLeft="47.5dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/bg_save_dictionary"
         android:paddingBottom="3dp"
         android:text="@string/save"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textSize="8sp"
+        android:textSize="12sp"
         android:visibility="invisible"
         app:fontFamily="@font/avenirmedium"
         app:layout_constraintBottom_toBottomOf="@id/ownDictionaryPageTopBar"
-        app:layout_constraintEnd_toEndOf="@+id/ownDictionaryPageMemberName"
-        app:layout_constraintStart_toStartOf="@+id/ownDictionaryPageMemberName" />
+        app:layout_constraintStart_toStartOf="@+id/ownDictionaryPageEditButton" />
 
     <TextView
         android:id="@+id/ownDictionaryPageMemberName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12.5dp"
-        android:layout_marginRight="12.5dp"
-        android:maxLength="12"
-        android:text="User name"
+        android:maxLength="15"
+        android:text="User Name"
         android:textAlignment="center"
         android:textColor="@color/mainWhite"
         android:textSize="8sp"
         app:fontFamily="@font/avenirmedium"
         app:layout_constraintBottom_toBottomOf="@id/ownDictionaryPagePhoto"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ownDictionaryPagePhoto"
         app:layout_constraintTop_toTopOf="@id/ownDictionaryPagePhoto"
         app:lineHeight="11sp" />
 

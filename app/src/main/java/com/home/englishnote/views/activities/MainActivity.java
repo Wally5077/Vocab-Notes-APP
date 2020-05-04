@@ -1,7 +1,6 @@
 package com.home.englishnote.views.activities;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -15,11 +14,10 @@ import android.view.View;
 import com.home.englishnote.R;
 import com.home.englishnote.presenters.MainPresenter;
 import com.home.englishnote.utils.Global;
-import com.home.englishnote.utils.VocabularyNoteKeyword;
 
 import static com.home.englishnote.utils.VocabularyNoteKeyword.REQUEST_CODE_CAMERA;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         MainPresenter mainPresenter = new MainPresenter(this);
-        SharedPreferences sharedPreferences =
-                getSharedPreferences(VocabularyNoteKeyword.SP_NAME, MODE_PRIVATE);
 //        Todo DailyVocabNotification
 //        if (sharedPreferences
 //                .getBoolean(VocabularyNoteKeyword.NOTIFICATION_SWITCH, true)) {

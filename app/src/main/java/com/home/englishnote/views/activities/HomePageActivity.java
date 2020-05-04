@@ -15,19 +15,19 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.home.englishnote.R;
 import com.home.englishnote.exceptions.FragmentClassNotCreateException;
 import com.home.englishnote.models.entities.Guest;
-import com.home.englishnote.models.entities.Role;
+import com.home.englishnote.models.entities.Member;
 import com.home.englishnote.models.entities.Token;
 import com.home.englishnote.models.entities.User;
 import com.home.englishnote.utils.BaseFragmentGenerator;
 import com.home.englishnote.utils.CustomDialog;
 import com.home.englishnote.utils.Global;
-import com.home.englishnote.utils.RandomVacabGenerator;
 import com.home.englishnote.utils.ThreadExecutor;
 import com.home.englishnote.views.fragments.BaseFragment;
 
@@ -42,7 +42,6 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         findViews();
-        init();
     }
 
     private void findViews() {
@@ -50,20 +49,33 @@ public class HomePageActivity extends AppCompatActivity {
         dictionaryHomePageNavigationView = findViewById(R.id.dictionaryHomePageNavigationView);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        init();
+        setUpDefaultPage();
+    }
+
+    private void setUpDefaultPage() {
+        if (fragmentManager.getBackStackEntryCount() < 1) {
+            Fragment mainFragment = switchMainFragment(R.layout.fragment_public_dictionary_page);
+            switchSecondaryFragment(mainFragment, R.layout.fragment_public_dictionaries);
+        }
+    }
+
     private FragmentManager fragmentManager;
 
     private void init() {
         fragmentManager = getSupportFragmentManager();
-        setMember();
-        setNavigationView();
-        setContainerMap();
+        setUpMember();
+        setUpNavigationView();
+        setUpContainerSparseIntArray();
     }
 
     private User user;
 
-    private void setMember() {
+    private void setUpMember() {
         user = (User) getIntent().getSerializableExtra("user");
-        user = RandomVacabGenerator.randomMember(Role.MEMBER);
     }
 
     public User getUser() {
@@ -76,7 +88,7 @@ public class HomePageActivity extends AppCompatActivity {
 
     private SparseIntArray containerSparseArray;
 
-    private void setContainerMap() {
+    private void setUpContainerSparseIntArray() {
         containerSparseArray = new SparseIntArray();
         containerSparseArray.put(R.layout.fragment_public_dictionary_page, R.id.dictionaryHomePageContainer);
         containerSparseArray.put(R.layout.fragment_member_profile_page, R.id.dictionaryHomePageContainer);
@@ -90,13 +102,6 @@ public class HomePageActivity extends AppCompatActivity {
         containerSparseArray.put(R.layout.fragment_own_dictionaries, R.id.memberProfilePageContainer);
         containerSparseArray.put(R.layout.fragment_favorite_dictionaries, R.id.memberProfilePageContainer);
         containerSparseArray.put(R.layout.fragment_create_own_dictionary, R.id.memberProfilePageContainer);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Fragment mainFragment = switchMainFragment(R.layout.fragment_public_dictionary_page);
-        switchSecondaryFragment(mainFragment, R.layout.fragment_public_dictionaries);
     }
 
     private DrawerLayout dictionaryHomePageDrawer;
@@ -119,12 +124,12 @@ public class HomePageActivity extends AppCompatActivity {
         }
     }
 
-    private void setNavigationView() {
-        setHeaderView();
-        setOnDictionaryHomePageNavigationItemSelected();
+    private void setUpNavigationView() {
+        setUpHeaderView();
+        setUpOnDictionaryHomePageNavigationItemSelected();
     }
 
-    private void setHeaderView() {
+    private void setUpHeaderView() {
         View headerView = dictionaryHomePageNavigationView.getHeaderView(0);
         ImageView userPhoto = headerView.findViewById(R.id.headViewMemberPhoto);
         TextView userName = headerView.findViewById(R.id.headViewMemberName);
@@ -137,7 +142,7 @@ public class HomePageActivity extends AppCompatActivity {
         userName.setText(user.getFirstName());
     }
 
-    private void setOnDictionaryHomePageNavigationItemSelected() {
+    private void setUpOnDictionaryHomePageNavigationItemSelected() {
         dictionaryHomePageNavigationView.setNavigationItemSelectedListener(
                 menuItem -> {
                     switch (menuItem.getItemId()) {
@@ -154,7 +159,7 @@ public class HomePageActivity extends AppCompatActivity {
                                     R.layout.fragment_own_dictionaries);
                             break;
                         case R.id.drawer_log_out:
-                            createDialogAskForLogOut();
+                            userLogOutChecking();
                             break;
                     }
                     return true;
@@ -163,28 +168,15 @@ public class HomePageActivity extends AppCompatActivity {
 
     boolean hasBeenMemberPage = false;
 
-    public void setDrawerFragment(int innerFragmentId) {
+    public void setDrawerFragment(int secondaryFragmentId) {
         Fragment mainFragment = null;
         if (!hasBeenMemberPage) {
             mainFragment = switchMainFragment(R.layout.fragment_member_profile_page);
-            if (innerFragmentId != R.layout.fragment_own_dictionaries) {
+            if (secondaryFragmentId != R.layout.fragment_own_dictionaries) {
                 switchSecondaryFragment(mainFragment, R.layout.fragment_own_dictionaries);
             }
         }
-        switchSecondaryFragment(mainFragment, innerFragmentId);
-    }
-
-    private void createDialogAskForLogOut() {
-        new CustomDialog(this)
-                .setMessage("Are you sure to log out ?")
-                .setDialogButtonLeft("Yes", (v, event) -> {
-                    finish();
-                    return true;
-                })
-                .setDialogButtonRight("No", (v, event) -> {
-                    dictionaryHomePageDrawer.closeDrawer(GravityCompat.START);
-                    return true;
-                }).showDialog();
+        switchSecondaryFragment(mainFragment, secondaryFragmentId);
     }
 
     public Fragment switchMainFragment(int fragmentId, Serializable... serializableArray) {
@@ -227,14 +219,17 @@ public class HomePageActivity extends AppCompatActivity {
                 ThreadExecutor threadExecutor = Global.threadExecutor();
                 if (mainFragment == null) {
                     int fragmentCount = fragmentManager.getBackStackEntryCount();
-                    String mainFragmentTag = fragmentManager.getBackStackEntryAt(fragmentCount - 1).getName();
+                    String mainFragmentTag = fragmentManager
+                            .getBackStackEntryAt(fragmentCount - 1).getName();
                     mainFragment = fragmentManager.findFragmentByTag(mainFragmentTag);
                 }
                 Fragment finalMainFragment = mainFragment;
                 threadExecutor.execute(() -> {
-                    while (true) {
-                        if (finalMainFragment.isAdded()) {
-                            break;
+                    synchronized (finalMainFragment) {
+                        while (true) {
+                            if (finalMainFragment.isAdded()) {
+                                break;
+                            }
                         }
                     }
                     threadExecutor.executeUiThread(() -> {
@@ -248,7 +243,6 @@ public class HomePageActivity extends AppCompatActivity {
                     });
                 });
             }
-            bundle.putInt("fragmentId", fragmentId);
             nextFragment.setArguments(bundle);
             checkParticularEventPageByFragmentTag(nextFragmentTag);
             dictionaryHomePageDrawer.closeDrawer(GravityCompat.START);
@@ -287,15 +281,32 @@ public class HomePageActivity extends AppCompatActivity {
                     } else {
                         hasBeenMemberPage = false;
                         if (mainFragmentCount == 1) {
-                            createDialogAskForLogOut();
+                            userLogOutChecking();
                         } else {
                             fragmentManager.popBackStack();
                         }
                     }
                 }
             } else {
-                createDialogAskForLogOut();
+                userLogOutChecking();
             }
+        }
+    }
+
+    private void userLogOutChecking() {
+        if (user instanceof Member) {
+            new CustomDialog(this)
+                    .setMessage("Are you sure to log out ?")
+                    .setDialogButtonLeft("Yes", (v, event) -> {
+                        finish();
+                        return true;
+                    })
+                    .setDialogButtonRight("No", (v, event) -> {
+                        dictionaryHomePageDrawer.closeDrawer(GravityCompat.START);
+                        return true;
+                    }).showDialog();
+        } else {
+            finish();
         }
     }
 

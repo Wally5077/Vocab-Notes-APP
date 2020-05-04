@@ -1,4 +1,4 @@
-package com.home.englishnote.views.fragments.secondary.profile;
+package com.home.englishnote.views.fragments.secondary.dictionary;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -46,10 +46,6 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
     private TextView ageContent;
     private EditText firstNameContent, lastNameContent;
     private EditText newEmailAddressContent, newPasswordContent, newConfirmPasswordContent;
-    private View memberInfoModifyVocabSearch;
-    private View memberInfoModifyDictionarySearch;
-    private ImageView memberInfoModifyMemberPhoto;
-    private TextView memberInfoModifyMemberName;
     private TextView userModifyPageCurrentEmailAddressContent;
     private MemberProfileModifyPresenter memberProfileModifyPresenter;
     private ImageView memberModifyPhoto;
@@ -69,7 +65,6 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         findViews(view);
-        init();
     }
 
     private void findViews(View view) {
@@ -98,24 +93,18 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
         passwordModifyButton = view.findViewById(R.id.passwordModifyButton);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        init();
+    }
+
     private void init() {
         memberProfileModifyPresenter = new MemberProfileModifyPresenter(
                 this, Global.memberRepository(), Global.threadExecutor());
-        setUpMember();
         setUpAgeSpinner();
         setUpMemberPhoto();
         setUpModifyButtons();
-    }
-
-    private void setUpMember() {
-//        Glide.with(this)
-//                .asBitmap()
-//                .load(user.getImageURL())
-//                .circleCrop()
-//                .error(R.drawable.small_user_pic)
-//                .into(memberInfoModifyMemberPhoto);
-        String memberName = user.getFirstName();
-//        memberInfoModifyMemberName.setText((memberName.isEmpty()) ? "memberName" : memberName);
     }
 
     private void setUpAgeSpinner() {
@@ -173,14 +162,6 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
                             ContentResolver contentResolver = getActivity().getContentResolver();
                             if (contentResolver != null) {
                                 //開啟檔案路徑, 讀取檔案, 轉成inputStream(輸入串流)型態
-//                            Glide.get(getContext()).clearMemory();
-//                            Thread thread = new Thread(() -> Glide.get(getContext()).clearDiskCache());
-//                            thread.start();
-//                            try {
-//                                thread.join();
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
                                 photoBitmap = BitmapFactory
                                         .decodeStream(contentResolver.openInputStream(uri));
                             }
@@ -210,7 +191,7 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
             if (!isProfileModifyButtonClick) {
                 if (photoBitmap != null) {
                     memberProfileModifyPresenter
-                            .uploadPhoto(token, user.getId(), photoBitmap);
+                            .uploadPhoto(user.getToken(), user.getId(), photoBitmap);
                 }
             }
         });
@@ -279,12 +260,6 @@ public class MemberProfileModifyFragment extends BaseFragment implements MemberP
 
     @Override
     public void onUploadMemberPhotoSuccessfully(Bitmap photoBitmap) {
-//        Glide.with(this)
-//                .asBitmap()
-//                .load(photoBitmap)
-//                .error(R.drawable.small_user_pic)
-//                .circleCrop()
-//                .into(memberInfoModifyMemberPhoto);
         Glide.with(this)
                 .asBitmap()
                 .load(photoBitmap)

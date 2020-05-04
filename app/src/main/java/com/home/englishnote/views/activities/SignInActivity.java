@@ -11,6 +11,8 @@ import com.home.englishnote.presenters.SignInPresenter;
 import com.home.englishnote.presenters.SignInPresenter.SignInView;
 import com.home.englishnote.utils.Global;
 
+import static com.home.englishnote.utils.UserInfoHandleUtil.showErrorMessage;
+
 public class SignInActivity extends BaseActivity implements SignInView {
 
     private TextInputLayout signInEmailLayout;
@@ -22,12 +24,17 @@ public class SignInActivity extends BaseActivity implements SignInView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         findViews();
-        init();
     }
 
     private void findViews() {
         signInEmailLayout = findViewById(R.id.signInEmailLayout);
         signInPasswordLayout = findViewById(R.id.signInPasswordLayout);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        init();
     }
 
     private void init() {
