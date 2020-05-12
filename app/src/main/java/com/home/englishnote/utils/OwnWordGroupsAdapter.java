@@ -23,10 +23,11 @@ public class OwnWordGroupsAdapter extends RecyclerView.Adapter<OwnWordGroupsHold
 
     private List<WordGroup> wordGroupsList;
     private Context context;
-    private List<OwnWordGroupsHolder> ownWordGroupsHolderList = new LinkedList<>();
+    private List<OwnWordGroupsHolder> ownWordGroupsHolderList;
 
     public OwnWordGroupsAdapter(List<WordGroup> wordGroupsList) {
         this.wordGroupsList = wordGroupsList;
+        ownWordGroupsHolderList = new LinkedList<>();
     }
 
     @NonNull

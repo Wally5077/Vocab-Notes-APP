@@ -111,7 +111,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/signUpAge"
+        android:id="@+id/signUpAgeSpinner"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
@@ -122,6 +122,23 @@
         android:spinnerMode="dropdown"
         app:layout_constraintStart_toStartOf="@id/SignUpBorder"
         app:layout_constraintTop_toBottomOf="@+id/signUpLastNameLayout" />
+
+    <TextView
+        android:id="@+id/signUpAgeErrMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:visibility="invisible"
+        android:focusable="false"
+        android:text="@string/ageErrMessage"
+        android:textColor="@color/ageErrMessage"
+        android:textSize="12sp"
+        app:fontFamily="@font/avenirmedium"
+        app:layout_constraintBottom_toBottomOf="@+id/signUpAgeSpinner"
+        app:layout_constraintStart_toEndOf="@+id/signUpAgeSpinner"
+        app:layout_constraintTop_toTopOf="@+id/signUpAgeSpinner" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signUpEmailLayout"
@@ -136,7 +153,7 @@
         app:counterMaxLength="30"
         app:errorEnabled="true"
         app:layout_constraintStart_toStartOf="@+id/SignUpBorder"
-        app:layout_constraintTop_toTopOf="@+id/signUpAge">
+        app:layout_constraintTop_toTopOf="@+id/signUpAgeSpinner">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/signUpEmail"
@@ -234,9 +251,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="18dp"
+        android:maxLines="1"
         android:onClick="onSignInLinkClick"
         android:text="@string/signUpPageSignIn"
-        android:maxLines="1"
         android:textColor="#fcf9f9"
         android:textSize="16sp"
         app:fontFamily="@font/avenirmedium"

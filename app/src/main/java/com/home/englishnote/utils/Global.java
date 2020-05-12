@@ -59,9 +59,9 @@ public final class Global {
                 new AndroidThreadExecutor() : threadExecutor;
     }
 
-    private static User user = new Guest();
+    private static User user;
 
     public static User user() {
-        return user;
+        return user = (user == null) ? new Guest() : user;
     }
 }

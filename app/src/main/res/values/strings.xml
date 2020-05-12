@@ -44,5 +44,6 @@
 description Excepteur sint occaecat cupidatat non proident description Excepteur sint occaecat cupidatat non proident…  </string>
 
     <string name="publicDictionaryPageVocabAutoSearchHint">搜尋單字 <i>look up…</i></string>
+    <string name="ageErrMessage">請選擇年齡</string>
 
 </resources>

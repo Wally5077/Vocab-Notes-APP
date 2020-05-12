@@ -22,10 +22,9 @@ public abstract class BaseFragment extends Fragment implements Cloneable {
     protected Token token;
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         homePageActivity = (HomePageActivity) getActivity();
-        // Todo
         user = homePageActivity.getUser();
         token = homePageActivity.getToken();
     }

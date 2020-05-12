@@ -11,6 +11,13 @@ import java.util.regex.Pattern;
 
 public final class VerifyInputFormatUtil {
 
+    private static final String EMAIL_ADDRESS = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+            "\\@" +
+            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+            "(" +
+            "\\." +
+            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+            ")+";
     private static final String PASSWORD_PATTERN = "[a-zA-Z0-9]{1,}";
     private static final String INPUT_EMPTY_PATTERN = "[ \\t\\r\\n\\v\\f]{1,}";
 
@@ -25,7 +32,7 @@ public final class VerifyInputFormatUtil {
     }
 
     public static void verifyEmailFormat(String email) {
-        Matcher matcher = Patterns.EMAIL_ADDRESS.matcher(email);
+        Matcher matcher = Pattern.compile(EMAIL_ADDRESS).matcher(email);
         if (!matcher.matches()) {
             throw new EmailFormatInvalidException();
         }

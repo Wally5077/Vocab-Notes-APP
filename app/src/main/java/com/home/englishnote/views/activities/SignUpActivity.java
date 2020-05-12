@@ -21,7 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.home.englishnote.presenters.SignUpPresenter.*;
-import static com.home.englishnote.utils.UserInfoHandleUtil.*;
+import static com.home.englishnote.utils.TextViewUtil.*;
+import static com.home.englishnote.utils.ViewEnableUtil.*;
 
 public class SignUpActivity extends BaseActivity implements SignUpView {
 
@@ -31,6 +32,7 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
     private TextInputLayout signUpPasswordLayout;
     private TextInputLayout signUpPasswordConfirmationLayout;
     private Spinner signUpAgeSpinner;
+    private TextView signUpAgeErrMessage;
     private SignUpPresenter signUpPresenter;
 
     @Override
@@ -46,7 +48,8 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         signUpEmailLayout = findViewById(R.id.signUpEmailLayout);
         signUpPasswordLayout = findViewById(R.id.signUpPasswordLayout);
         signUpPasswordConfirmationLayout = findViewById(R.id.signUpPasswordConfirmationLayout);
-        signUpAgeSpinner = findViewById(R.id.signUpAge);
+        signUpAgeSpinner = findViewById(R.id.signUpAgeSpinner);
+        signUpAgeErrMessage = findViewById(R.id.signUpAgeErrMessage);
     }
 
     @Override
@@ -58,9 +61,8 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
     private void init() {
         signUpPresenter = new SignUpPresenter(
                 this, Global.memberRepository(), Global.threadExecutor());
-        setTextInputLayout(signUpFirstNameLayout, signUpLastNameLayout,
-                signUpEmailLayout, signUpPasswordLayout, signUpPasswordConfirmationLayout);
         setUpAgeSpinner();
+        setUpSignUpAgeErrMessage();
 
         signUpFirstNameLayout.getEditText().setText("wally");
         signUpLastNameLayout.getEditText().setText("chen");
@@ -75,6 +77,11 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
         signUpAgeSpinner.setSelection(0, true);
     }
 
+    private void setUpSignUpAgeErrMessage() {
+        setViewsVisible(false, signUpAgeErrMessage);
+        setViewsFocusable(false, signUpAgeErrMessage);
+    }
+
     private List<String> configAgeRange(int ageRange) {
         List<String> ageList = new ArrayList<>(ageRange + 1);
         ageList.add(VocabularyNoteKeyword.DEFAULT_SPINNER_WORD);
@@ -82,17 +89,6 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
             ageList.add(String.valueOf(age));
         }
         return ageList;
-    }
-
-    private void setTextInputLayout(TextInputLayout... textInputLayouts) {
-        for (TextInputLayout textInputLayout : textInputLayouts) {
-            TextView textView = textInputLayout.getEditText();
-            textView.setOnTouchListener((v, event) -> {
-                ((TextView) v).setText("");
-                return true;
-            });
-            clearTextViewContent(textView);
-        }
     }
 
     public void onSignInLinkClick(View view) {
@@ -120,6 +116,10 @@ public class SignUpActivity extends BaseActivity implements SignUpView {
 
     @Override
     public void onUserInputEmpty() {
+        String selectedAge = signUpAgeSpinner.getSelectedItem().toString();
+        if (VocabularyNoteKeyword.DEFAULT_SPINNER_WORD.equals(selectedAge)) {
+            showAgeSpinnerError(signUpAgeErrMessage);
+        }
         showErrorMessage(
                 getString(R.string.inputEmpty), signUpFirstNameLayout, signUpLastNameLayout,
                 signUpEmailLayout, signUpPasswordLayout, signUpPasswordConfirmationLayout);

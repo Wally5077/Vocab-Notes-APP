@@ -2,11 +2,12 @@ package com.home.englishnote.models.entities;
 
 public class Guest implements User {
 
-    private Credentials credentials = new Credentials(getEmail(), getPassword());
+    private Credentials credentials;
 
     @Override
     public Credentials getCredentials() {
-        return credentials;
+        return credentials = (credentials == null) ?
+                new Credentials(getEmail(), getPassword()) : credentials;
     }
 
     @Override
@@ -16,7 +17,7 @@ public class Guest implements User {
 
     @Override
     public int getAge() {
-        return 0;
+        return 30;
     }
 
     @Override
@@ -36,12 +37,12 @@ public class Guest implements User {
 
     @Override
     public String getEmail() {
-        return "email";
+        return "w@gmail.com";
     }
 
     @Override
     public String getPassword() {
-        return "password";
+        return "w0000000";
     }
 
     @Override

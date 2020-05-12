@@ -22,4 +22,6 @@
     <color name="searchTextGreen">#59d880</color>
     <color name="itemWordClicked">#efecec</color>
     <color name="dialogBackgroundGreen">#5f838e</color>
+
+    <color name="ageErrMessage">#E87850</color>
 </resources>

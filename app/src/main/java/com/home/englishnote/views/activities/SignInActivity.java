@@ -11,7 +11,7 @@ import com.home.englishnote.presenters.SignInPresenter;
 import com.home.englishnote.presenters.SignInPresenter.SignInView;
 import com.home.englishnote.utils.Global;
 
-import static com.home.englishnote.utils.UserInfoHandleUtil.showErrorMessage;
+import static com.home.englishnote.utils.TextViewUtil.showErrorMessage;
 
 public class SignInActivity extends BaseActivity implements SignInView {
 
